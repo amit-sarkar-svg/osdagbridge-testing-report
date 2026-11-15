@@ -37,6 +37,7 @@ Headless design pipeline (probe) & Complete --- full \texttt{design()} OK in 60.
 Issue \#96 (new, filed) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/96} \\
 Issue \#97 (new, filed, T3 static) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/97} \\
 Issue \#98 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/98} \\
+Issue \#99 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/99} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -106,6 +107,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} remove \texttt{sqlite} from \texttt{osdag\_core} \texttt{Requires-Dist} (stdlib \texttt{sqlite3} needs no pip dependency) or reference a corrected build in OsdagBridge setup.
 
+\subsection{New issue filed: \#99 --- \texttt{pyproject.toml} runtime dependencies omit required packages and declare unused \texttt{pydantic} (T5)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/99}
+
+\textbf{Statement.} \texttt{pyproject.toml} declares \texttt{[scipy,fiona,shapely,pydantic,matplotlib,openseespy,opsvis,xarray]} but omits packages directly imported/used in source (e.g.\ \texttt{PySide6}, \texttt{numpy}, \texttt{osdag\_core}, \texttt{yaml} usage at \texttt{template\_page.py:812,839}, \texttt{navcube}, \texttt{OCC}, \texttt{plotly}, \texttt{ifcopenshell}, \texttt{openpyxl}, \texttt{pandas}), while \texttt{pydantic} has no observed imports in \texttt{src}. With \texttt{README} instructing \texttt{pip install -e .}, affected features can fail in fresh installs.
+
+\textbf{Evidence.} Import/usage proof in \texttt{evidence/logs/phase1\_imports\_clean.txt} and \texttt{evidence/logs/phase1\_p1\_002\_proof.txt}; \texttt{tests/test\_phase1\_packaging.py::test\_pyproject\_missing\_key\_runtime\_deps}.
+
+\textbf{Suggested fix (posted in the issue).} add missing runtime deps and/or optional extras to match actual requirements, reconcile \texttt{pydantic}, and align manifests/README.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -132,6 +142,7 @@ PYT-05 & OSI round trip & dict $\rightarrow$ \texttt{yaml.dump} $\rightarrow$ \t
 F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader vs.\ the dialog check & \textbf{BUG} $\rightarrow$ \#96 & \texttt{evidence/analyze/osi\_material\_bypass.txt} \\
 P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static: \texttt{input\_dock.py:856--859}, lazy \texttt{template\_page.py:124,440--447}) & \textbf{ISSUE (T3)} $\rightarrow$ \#97 & \texttt{notes/issue\_drafts/01...} \\
 P1-001 & packaging/metadata & \texttt{osdag\_core 0.0.0} \texttt{Requires-Dist} includes bogus \texttt{sqlite} (not installable; stdlib is \texttt{sqlite3}) & \textbf{ISSUE (T5)} $\rightarrow$ \#98 & \texttt{evidence/logs/phase1\_installed\_meta.txt} \\
+P1-002 & packaging/pyproject & missing runtime deps (e.g.\ \texttt{PySide6}, \texttt{numpy}, \texttt{osdag\_core}, \texttt{yaml}, \texttt{OCC}) and unused \texttt{pydantic} vs \texttt{src} imports & \textbf{ISSUE (T5)} $\rightarrow$ \#99 & \texttt{evidence/logs/phase1\_p1\_002\_proof.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
