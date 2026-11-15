@@ -1,0 +1,27 @@
+Evidence for F3: OSI load path never validates material.* keys
+Run: 2026-11-15, conda env osdagbridge-env, dev @ d74f56d
+Command:
+  python3 -c "... validate_osi_inputs({'material.girder.fy': 99999.0,
+      'material.girder.density': 5.0, 'material.deck.fck': -3.0})"
+
+Output:
+OSI load validation of fy=99999, density=5, fck=-3:
+  is_valid = True
+  errors   = []
+
+Same values through validate_material_inputs (the check the loader never calls):
+  fy 99999  -> (1200.0, 'Yield Strength, Fy must be between 100.0 and 1200.0 MPa.')
+  density 5 -> (50.0, 'Weight Density must be between 50.0 and 120.0 kN/m³.')
+  fck -3    -> (10.0, 'Characteristic Compressive Strength, fck must be between 10.0 and 80.0 MPa.')
+
+Static root cause:
+  osdagbridge/core/utils/osi_validator.py
+    - _BASIC_KEYS   (L82-86): only span / carriageway / skew
+    - _ADDITIONAL_KEYS (L89-111): no material.* keys at all
+    - validate() L142-157 iterates only those two lists, so
+      BridgeInputValidator.validate_material_inputs is unreachable from the
+      .osi load path (template_page.py loadOSI_inputs L847).
+  osdagbridge/desktop/ui/dialogs/material_properties.py
+    - the live dialog DOES enforce the same limits via
+      _on_material_field_edited -> validate_material_inputs, so hand-edited
+      .osi files bypass limits the UI enforces.

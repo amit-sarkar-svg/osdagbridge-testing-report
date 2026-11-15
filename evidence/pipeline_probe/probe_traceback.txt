@@ -1,0 +1,59 @@
+Traceback (most recent call last):
+  File "/Users/macbook/Projects/osdagbridge-testing-report/scripts/pipeline_probe.py", line 35, in <module>
+    b.design()
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py", line 775, in design
+    self.crossbracing_design_results = self._run_stage("7", self._stage_transverse_design)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py", line 595, in _run_stage
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py", line 656, in _stage_transverse_design
+    self.crossbracing_design_results = self._design_cross_bracing_members()
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py", line 2343, in _design_cross_bracing_members
+    pair_designs = cb.run_member_designs(forces_dict)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/crossbracingforces.py", line 651, in run_member_designs
+    executor.submit(run_calculation, j[3]): j
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/concurrent/futures/process.py", line 822, in submit
+    self._adjust_process_count()
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/concurrent/futures/process.py", line 781, in _adjust_process_count
+    self._spawn_process()
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/concurrent/futures/process.py", line 799, in _spawn_process
+    p.start()
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+                  ^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/context.py", line 301, in _Popen
+    return Popen(process_obj)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/popen_forkserver.py", line 35, in __init__
+    super().__init__(process_obj)
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/popen_forkserver.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/spawn.py", line 164, in get_preparation_data
+    _check_not_importing_main()
+  File "/Users/macbook/miniconda3/envs/osdagbridge-env/lib/python3.12/multiprocessing/spawn.py", line 140, in _check_not_importing_main
+    raise RuntimeError('''
+RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The "freeze_support()" line can be omitted if the program
+        is not going to be frozen to produce an executable.
+
+        To fix this issue, refer to the "Safe importing of main module"
+        section in https://docs.python.org/3/library/multiprocessing.html
+        

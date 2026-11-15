@@ -3,23 +3,32 @@
 ## Setup
 - [x] Fork, clone, dev branch
 - [x] Conda env and app launches (workarounds in notes/setup_log.md)
-## Testing
-- [ ] Default run (TC01)
-- [ ] Basic input variations
-- [ ] Additional input variations
-- [ ] Custom steel (girder, cross-bracing, end diaphragm, stiffeners)
-- [ ] Custom concrete deck
-- [ ] 3+ consecutive runs (unlock, edit, re-run)
-- [ ] Input dictionary vs UI
-- [ ] Output dictionary vs report and docks
-- [ ] 3D CAD and plots
-## Bugs
-- [ ] Review existing issues (notes/existing_issues.md)
-- [ ] File issues, add links to README.md
-## Submission
-- [ ] PDF report
-- [ ] Video link
-- [ ] ZIP
-- [ ] Resume
-- [ ] Collaborator added
-- [ ] Form submitted
+- [x] Env check: `import osdagbridge, osdag_core` OK (headless smoke OK, scripts/smoke_core.py)
+- [x] Duplicate check: scripts/fetch_issues.py → notes/issues_raw.json + notes/existing_issues.md (39 issues, no PRs)
+
+## Step 0: Code study
+- [x] plategirderbridge.py, defaults.py, validator.py, osi_validator.py, common.py
+- [x] template_page.py (Design/Save/Load flow), input_dock.py + material_properties.py (Custom material keys)
+- [x] Limits verified vs source → notes/step0_code_study.md
+- [x] Baseline check: test_cases/baseline.osi MISSING → asked user → user saves from GUI (blocker for gen_cases/run)
+- [ ] Baseline received
+
+## Step 1: Build
+- [x] scripts/gen_cases.py (ready; waits for baseline)
+- [x] scripts/case_runner.py + scripts/run_headless.py + scripts/ui_emulation.py (ready)
+- [x] scripts/state_runner.py, scripts/analyze.py, scripts/make_log_rows.py (ready)
+- [x] scripts/pipeline_probe.py — run 1: design_error (missing priming, probe artifact); run 2 with priming: in progress
+- [x] pytest tests/ — 18 passed, 1 failed (NaN detector PYT-04), 1 skipped (waits for baseline)
+- [ ] test_cases/generated/*.osi + manifest.json (blocked on baseline)
+- [ ] dry-run 3 cases → full sequential run
+- [ ] analyze + state check + log rows
+
+## Step 2: Report
+- [ ] notes/findings.md (candidate bugs w/ evidence + duplicate check)
+- [ ] PASS/FAIL table + manual GUI checklist
+
+## Currently waiting on
+- User: save baseline from GUI (project location filled, defaults) → test_cases/baseline.osi
+
+## Honest status
+- Nothing has been "run" yet for design cases; only import/validator smoke tests executed (see scripts/smoke_core.py output in notes).

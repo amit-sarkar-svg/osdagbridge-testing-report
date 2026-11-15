@@ -1,0 +1,129 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!60!black}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{OsdagBridge Testing Report}
+\fancyhead[R]{\thepage}
+
+\title{\textbf{Comprehensive Testing Report:\\ Short-Span Steel Plate Girder Bridge Module\\ of OsdagBridge}\\[6pt]
+\large FOSSEE Winter Internship Screening Task --- IIT Bombay}
+\author{}
+\date{Compiled \today\ (work in progress --- final version after the full automated run)}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\section*{Status summary}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Component & Status \\
+\midrule
+Environment setup (conda, headless pipeline) & Complete \\
+Duplicate check (all 39 open+closed issues fetched) & Complete \\
+Code study (file:line references) & Complete \\
+Validator-boundary pytest suite (31 checks) & Complete --- 18 pass / 1 confirmed bug / skips pending baseline \\
+Headless design pipeline (probe) & Complete --- full \texttt{design()} OK in 60.5\,s \\
+Issue \#96 (new, filed) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/96} \\
+52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
+UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
+\bottomrule
+\end{tabular}
+
+\section{Introduction and scope}
+The short-span steel plate girder bridge module of OsdagBridge (\texttt{dev} branch, commit \texttt{d74f56d}, 2026-07-26) was tested on macOS (Intel) inside the provided \texttt{osdagbridge-env} conda environment. The OsdagBridge source tree was treated as strictly read-only; every script, output and note lives in the separate testing repository. The goals were:
+
+\begin{enumerate}[nosep]
+  \item verify documented input limits against the actual source;
+  \item exercise the module headlessly with boundary, combination, custom-material and malformed inputs;
+  \item separate \emph{correct rejection} (PASS) from \emph{bad input accepted / value silently ignored} (candidate bug);
+  \item check every candidate against all 39 existing GitHub issues before reporting;
+  \item record every executed case with exact parameters, expected vs.\ actual, and evidence.
+\end{enumerate}
+
+\section{Environment and methodology}
+\begin{itemize}[nosep]
+  \item macOS (Intel), Miniconda, env \texttt{osdagbridge-env}: Python 3.12.16, PySide6 6.11.3 (pip), \texttt{osdag-core} installed editable (\texttt{--no-deps}, see \texttt{notes/setup\_log.md}).
+  \item UI--core flow verified in \texttt{template\_page.py}: \textbf{Design} = \texttt{\_prime\_material\_inputs()} $\rightarrow$ \texttt{set\_input()} $\rightarrow$ \texttt{design()}; \textbf{Save} = \texttt{solve\_extend\_basic\_input\_dict()} $\rightarrow$ \texttt{yaml.dump}; \textbf{Load} = \texttt{yaml.safe\_load} $\rightarrow$ \texttt{validate\_osi\_inputs()} $\rightarrow$ populate.
+  \item Headless fidelity: the UI's material-priming step was reproduced without Qt (\texttt{scripts/ui\_emulation.py}) by reusing the dialog's pure methods; the headless probe then completed a full \texttt{design()} (60.5\,s), proving pipeline equivalence.
+  \item Every test case runs in its own subprocess with a 600\,s timeout and an isolated log, so one hang cannot block the suite (\texttt{scripts/run\_headless.py}).
+\end{itemize}
+
+\section{Duplicate check}
+All issues (open + closed, PRs excluded) were fetched from the API on 2026-11-15: 95 items on page~1, 56 pull requests skipped, \textbf{39 issues} remain (\texttt{notes/issues\_raw.json}, readable index \texttt{notes/existing\_issues.md}). Every candidate finding was searched against that file before being called new.
+
+\section{Findings}
+\subsection{New issue filed: \#96 --- .osi loader skips all custom-material validation}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/96}
+
+\textbf{Statement.} The \texttt{.osi} load path validates geometry and additional inputs, but no \texttt{material.*} key is ever validated, so a hand-edited file can carry e.g.\ \texttt{Fy\,=\,99999\,MPa} and load with ``Loaded OSI Successfully!''.
+
+\textbf{Evidence (executed 2026-11-15, twice).}
+\begin{verbatim}
+validate_osi_inputs({'material.girder.fy': 99999.0,
+                     'material.girder.density': 5.0,
+                     'material.deck.fck': -3.0})
+  -> is_valid = True, errors = []
+
+BridgeInputValidator.validate_material_inputs (the check the
+loader never calls) rejects all three:
+  fy 99999  -> corrected to 1200.0
+  density 5 -> corrected to 50.0
+  fck -3    -> corrected to 10.0
+\end{verbatim}
+
+\textbf{Root cause.} \texttt{osi\_validator.py}: \texttt{\_BASIC\_KEYS} (L82--86) holds only span/carriageway/skew; \texttt{\_ADDITIONAL\_KEYS} (L89--111) holds many numeric limits but no \texttt{material.*} keys; \texttt{validate()} (L142--157) iterates only those lists, so \texttt{validate\_material\_inputs} --- the check the live Material Properties dialog enforces --- is unreachable from the load path (\texttt{template\_page.py} \texttt{loadOSI\_inputs} L847).
+
+\textbf{Suggested fix (diff posted in the issue).} add the material keys to the OSI validation loop and route them through \texttt{validate\_material\_inputs} in \texttt{validate()}.
+
+\subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
+\begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
+\toprule
+Finding & Statement & Existing issue & Root cause located \\
+\midrule
+F1 & NaN span accepted by validator & \#88 & \texttt{\_to\_float} (validator.py L1094) returns NaN unchecked; both boundary comparisons (L32--35) are False for NaN \\
+F2 & custom steel density never read by design pipeline & \#20 & \texttt{\_build\_material\_props} (plategirderbridge.py L1177) falls back to 78500\,N/m$^3$; key only read by the PDF report (chap3.py L280) \\
+F4 & custom material values wiped at Design after OSI load & \#19 & priming with empty \texttt{\_material\_custom\_fields} re-exports empty fields; \texttt{\_update\_input\_dict} (input\_dock.py L1029) stores \texttt{None} \\
+--- & default grade E 350A crashes at Stage 5 (``Gs not set'') & \#42 & \texttt{BridgeConfig.from\_plate\_girder\_bridge} (designer.py L309--315) reads \texttt{material.girder.g} which priming fills only for grades found in the DB \\
+--- & missing \texttt{thermal\_load} case warnings during load combinations & \#92 & analyser.py L2576 warnings observed in the headless probe log \\
+\bottomrule
+\end{longtable}
+
+\section{Test log (executed so far)}
+\begin{longtable}{@{}p{1.4cm}p{3.0cm}p{6.2cm}p{2.6cm}p{2.0cm}@{}}
+\toprule
+ID & Area & Parameters (exact) & Result & Evidence \\
+\midrule
+PYT-01 & validator steel & density 49.9/50/120/120.1; fy 99.9/100/1200/1200.1; fu, E, G, Poisson, thermal at both boundaries & PASS (7 params) & \texttt{tests/test\_validator\_limits.py} \\
+PYT-02 & validator deck & density, fck, fctm, Ecm, thermal at both boundaries & PASS (5 params) & same \\
+PYT-03 & validator geometry & span 19.9/45.1 corrected; carriageway 4.25/23.6 pass, 23.7 corrected; median+5.0 $\rightarrow$ 7.5; skew $\pm$15.1 corrected & PASS & same \\
+PYT-04 & validator NaN & span = NaN & \textbf{NaN accepted} (dup \#88) & pytest failure + root cause \\
+PYT-05 & OSI round trip & dict $\rightarrow$ \texttt{yaml.dump} $\rightarrow$ \texttt{safe\_load} $\rightarrow$ equality + validation & PASS & \texttt{tests/test\_osi\_round\_trip.py} \\
+F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader vs.\ the dialog check & \textbf{BUG} $\rightarrow$ \#96 & \texttt{evidence/analyze/osi\_material\_bypass.txt} \\
+\bottomrule
+\end{longtable}
+(52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
+
+\section{What cannot be automated (manual GUI checklist for the screencast)}
+\begin{enumerate}[nosep]
+  \item Save a real \texttt{baseline.osi} (project location filled) --- feeds the automated suite.
+  \item Custom material input run via the dialog (create custom steel + custom concrete, run Design).
+  \item Consecutive multi-run sequence: Design $\rightarrow$ unlock $\rightarrow$ modify input $\rightarrow$ re-run (3+ cycles), checking 3D CAD survives re-render.
+  \item 3D CAD and plots after each design (SFD/BMD/deflection/grillage).
+  \item UI inputs vs.\ input dictionary side-by-side; output dictionary vs.\ output dock vs.\ report PDF.
+\end{enumerate}
+
+\section{Repository layout}
+\texttt{scripts/} (fetch\_issues, gen\_cases, run\_headless, case\_runner, ui\_emulation, analyze, state\_runner, make\_log\_rows, pipeline\_probe, smoke\_core) $\cdot$ \texttt{tests/} (pytest) $\cdot$ \texttt{test\_cases/} (baseline + generated + manifest) $\cdot$ \texttt{dictionaries/} (per-case input/output dumps) $\cdot$ \texttt{evidence/} $\cdot$ \texttt{notes/} (code study, findings, run history, existing issues) $\cdot$ \texttt{test\_log.md} $\cdot$ \texttt{PROGRESS.md}.
+
+\end{document}
