@@ -3,6 +3,8 @@
 **Target:** https://github.com/Nidhikhare12/OsdagBridge/issues/20 (duplicate/extra detail; not a new issue)  
 **Audit ref:** P2-003 (T4) — OsdagBridge `dev @ d74f56d`, testing repo `osdagbridge-testing-report`
 
+**Status:** Comment draft prepared (2026-11-15). Upstream posting on target issue: pending confirmation.
+
 ## Suggested comment (copy/paste)
 
 Extra detail (static audit, read-only on `dev @ d74f56d`) confirming the custom-girder-density gap and showing the UI/validation/report side also references the key:

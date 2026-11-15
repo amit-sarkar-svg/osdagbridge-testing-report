@@ -24,7 +24,17 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 97 | Toggling input lock can crash when Additional Inputs dialog was never opened (`_additional_inputs_dialog` is None) | https://github.com/Nidhikhare12/OsdagBridge/issues/97 | open (T3 static) |
 | 98 | `osdag_core` dependency metadata declares bogus `sqlite` package (breaks clean dependency resolution) | https://github.com/Nidhikhare12/OsdagBridge/issues/98 | open (T5) |
 
-(older duplicates / extra-evidence comments to #88, #19, #20, #42, #92 are documented in notes/findings.md)
+## Duplicate-issue comment drafts (extra evidence)
+Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.
+
+| Target issue | Audit ref | Draft | Status |
+|---|---|---|---|
+| [#43](https://github.com/Nidhikhare12/OsdagBridge/issues/43) CB/end-diaphragm custom grades stored but unused | P2-002 (T4) | [02_comment_43_cb_ed_custom_material_unused.md](notes/issue_drafts/02_comment_43_cb_ed_custom_material_unused.md) | Prepared 2026-11-15; upstream posting pending confirmation |
+| [#20](https://github.com/Nidhikhare12/OsdagBridge/issues/20) Custom steel density ignored in `_build_material_props` | P2-003 (T4) | [03_comment_20_custom_girder_density_ignored.md](notes/issue_drafts/03_comment_20_custom_girder_density_ignored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
+| [#41](https://github.com/Nidhikhare12/OsdagBridge/issues/41) Custom deck density not reaching `create_deck_load` | P2-004 (T4) | [04_comment_41_custom_deck_density_not_in_load.md](notes/issue_drafts/04_comment_41_custom_deck_density_not_in_load.md) | Prepared 2026-11-15; upstream posting pending confirmation |
+| [#19](https://github.com/Nidhikhare12/OsdagBridge/issues/19) OSI load does not restore `_material_custom_fields` | P2-005 (T4) | [05_comment_19_material_custom_fields_not_restored.md](notes/issue_drafts/05_comment_19_material_custom_fields_not_restored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
+
+(older duplicate notes, e.g. #88/#42/#92 root-cause material, are also documented in `notes/findings.md`.)
 
 ## Issues already on the repo that our findings duplicate
 (duplicate check performed 2026-11-15 against all 39 open+closed issues — see notes/existing_issues.md)
