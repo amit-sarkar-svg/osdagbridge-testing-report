@@ -1,0 +1,40 @@
+===PySide6===
+src/osdagbridge/desktop/ui/cad_3d.py:12:from PySide6.QtWidgets import (
+src/osdagbridge/desktop/ui/cad_3d.py:24:from PySide6.QtCore import QTimer, Qt
+src/osdagbridge/desktop/ui/template_page.py:2:from PySide6.QtWidgets import (
+===numpy===
+src/ospgrillage/__init__.py:46:import numpy as np  # re-exported: tests and users access ospgrillage.np
+src/ospgrillage/mesh.py:10:import numpy as np
+src/ospgrillage/osp_grillage.py:18:import numpy as np
+===osdag_core===
+src/osdagbridge/core/utils/connect.py:31:from osdag_core.cli import _get_output_dictionary
+src/osdagbridge/core/utils/connect.py:33:from osdag_core.design_type.compression_member.compression_bolted import Compression_bolted
+src/osdagbridge/core/utils/connect.py:34:from osdag_core.design_type.compression_member.compression_welded import Compression_welded
+===yaml===
+src/osdagbridge/desktop/ui/template_page.py:812:                yaml.dump(self.input_dict, input_file)
+src/osdagbridge/desktop/ui/template_page.py:839:                data = yaml.safe_load(f)
+===navcube===
+src/osdagbridge/desktop/ui/utils/custom_3dviewer.py:13:from navcube import NavCubeOverlay, NavCubeStyle
+src/osdagbridge/desktop/ui/utils/custom_3dviewer.py:14:from navcube.connectors.occ import OCCNavCubeSync
+src/osdagbridge/desktop/ui/mpl_plot_widget.py:17:from navcube import NavCubeOverlay, NavCubeStyle
+===OCC===
+src/osdagbridge/core/bridge_types/plate_girder/cad_generator.py:26:from OCC.Core.Quantity import Quantity_Color, Quantity_TOC_RGB, Quantity_NOC_BLACK
+src/osdagbridge/core/bridge_types/plate_girder/cad_generator.py:27:from OCC.Core.TopoDS import TopoDS_Shape
+src/osdagbridge/core/bridge_types/plate_girder/cad_generator.py:28:from OCC.Core.AIS import AIS_Shape
+===plotly===
+src/osdagbridge/core/bridge_types/plate_girder/plots_widget.py:2:import plotly.graph_objects as go
+===ifcopenshell===
+src/osdagbridge/core/ifc_export_bridge/bridge_ifc_generator.py:7:import ifcopenshell
+src/osdagbridge/core/ifc_export_bridge/bridge_geometry_mapper.py:8:import ifcopenshell
+src/osdagbridge/core/ifc_export_bridge/metadata_mapper.py:7:import ifcopenshell
+===openpyxl===
+src/osdagbridge/desktop/ui/dialogs/generate_results_dialog.py:1:import openpyxl
+src/osdagbridge/desktop/ui/dialogs/generate_results_dialog.py:2:from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+===pandas===
+src/osdagbridge/core/bridge_types/plate_girder/crossbracingforces.py:134:import pandas as pd
+src/osdagbridge/core/bridge_types/plate_girder/analysis_results.py:138:import pandas as pd
+src/osdagbridge/core/utils/codes/is800_2007.py:12:import pandas as pd
+===pylatex===
+===pydantic===
+src/osdagbridge.egg-info/PKG-INFO:697:Requires-Dist: pydantic>=2.0
+src/osdagbridge.egg-info/requires.txt:4:pydantic>=2.0

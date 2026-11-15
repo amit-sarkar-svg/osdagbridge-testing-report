@@ -1,45 +1,45 @@
-# Existing OsdagBridge Issues (open + closed, PRs excluded)
+# Existing issues — Nidhikhare12/OsdagBridge (open+closed, PRs excluded)
+Fetched 2026-11-15 via gh api. 40 issues (39 open, 1 closed), PRs excluded. Compact index for duplicate checks.
 
-Total: 39
-
-| # | State | Title | Labels |
-|---|-------|-------|--------|
-| #18 | closed | permission check  ignore |  |
-| #19 | open | [Bug] OSI load does not restore _material_custom_fields; Design re-primes custom grades from defaults |  |
-| #20 | open | [Bug] Custom steel density from UI/input_dict is ignored in _build_material_props |  |
-| #25 | open | Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS |  |
-| #41 | open | [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³) |  |
-| #42 | open | [Bug] Default steel grade E 350A cannot complete design — Gs not set |  |
-| #43 | open | [Bug] Cross-bracing and end-diaphragm custom grades are stored but unused in design |  |
-| #44 | open | [Bug] design() completes and builds CAD when util.fatigue exceeds 100% |  |
-| #45 | open | [Bug] Missing DCR categories are written as 0.0 on the output dock |  |
-| #48 | open | [Bug] Generated report contains placeholder sections and missing visualizations |  |
-| #53 | open | Graphics, Database, and Help menu dropdowns open but options are unresponsive |  |
-| #56 | open | Location Bug |  |
-| #61 | open | Fx plot titled "Shear Force Diagram" and Tx plot titled "Bending Moment Diagram" in Output Dock |  |
-| #64 | open | [Bug] Default RCC railing load is 1.4715 kN/m in the input dictionary but 6.806 kN/m in the design and report |  |
-| #65 | open | [Bug] Executive Summary says "design pass" for every component even when Overall Design Status is Fail |  |
-| #66 | open | [Bug] Report "Girder Section Dimensions" table prints metres labelled as mm (1.67 mm instead of 1670 mm) |  |
-| #67 | open | [Bug] An .osi file with an empty Span passes validation, then solve_extend_basic_input_dict raises ValueError |  |
-| #68 | open | [Bug] Report shows blank or N/A for No. of Traffic Lanes, Braking Load, wind and seismic load values |  |
-| #69 | open | [Bug] design() accepts out-of-range Span (19.9 m, 45.1 m) and completes without an error |  |
-| #70 | open | [Bug] Executive Summary: Girder Spacing and Deck Thickness have no units, and the "<=" symbol is dropped from the status text |  |
-| #71 | open | [Bug] Save Input overwrites committed deck and wearing-course thicknesses with defaults |  |
-| #72 | open | [Bug] End Diaphragm tab displays cross-bracing results instead of its own output dictionary |  |
-| #73 | open | [Bug] Girder support-reaction fields disagree with the reaction labels in the same plot |  |
-| #74 | open | [Bug] Runtime deck layout uses a fixed 0.5 m crash-barrier width instead of the input's 0.45 m |  |
-| #76 | open | [Bug] Custom material dialog restricts inputs to 1 decimal place (e.g. Poisson's ratio 0.31 cannot be entered) |  |
-| #81 | open | [Bug] PDF includes Material Take-off and References even when unchecked |  |
-| #82 | open | [Bug] Incorrect MPa unit labels for steel elastic and shear modulus in exported Excel results |  |
-| #84 | open | [Bug] Crash barrier area is mm² in the defaults but m² in the Additional Inputs dialog, so the Material Take-off shows 0.00 MT for the crash barrier |  |
-| #85 | open | [Bug] 3D CAD model not displayed after unlock and redesign (second run in the same session) |  |
-| #86 | open | [Bug] Selected wind speed, exposed height and terrain are replaced by defaults before analysis |  |
-| #87 | open | [Bug] Seismic load generation runs before governing vehicle selection and uses zero live-load mass |  |
-| #88 | open | [Bug] OSI validation accepts NaN physical inputs before layout and model construction |  |
-| #89 | open | [Bug] Skewed four-girder bridges retain only one per-girder design result |  |
-| #90 | open | [Bug] Optimized custom section choices are ignored and continuous bounds fail as unresolved dictionaries |  |
-| #91 | open | [Bug] Zero-overhang models omit the two outer physical girders from self-weight loading |  |
-| #92 | open | [Bug] Canonical temperature inputs do not create thermal load cases in the normal design pipeline |  |
-| #93 | open | [Bug] CAD uses fixed 3 m cross-bracing spacing despite 13 m in the design output |  |
-| #94 | open | [Bug] Girder Design Check summary reports 8 checks but displays only 6 check cards |  |
-| #95 | open | clarification required-Stress Limitation displays 0.9 × Fy instead of the stated Fy / γM0 |  |
+| # | State | Title | Files named in body |
+|---:|---|---|---|
+| 18 | closed | permission check  ignore | — |
+| 19 | open | [Bug] OSI load does not restore _material_custom_fields; Design re-primes custom grades from defaults | osi<br>src/osdagbridge/desktop/ui/docks/input_dock.py<br>src/osdagbridge/desktop/ui/template_page.py |
+| 20 | open | [Bug] Custom steel density from UI/input_dict is ignored in _build_material_props | src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/utils/common.py<br>src/osdagbridge/desktop/ui/dialogs/material_properties.py<br>src/osdagbridge/core/bridge_types/plate_girder/validator.py |
+| 25 | open | Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS | environment.yml<br>desktop/ui/utils/cad_palette.py:15<br>desktop/ui/dialogs/tabs/steel_design_details.py:296<br>desktop/ui/dialogs/tabs/steel_design_details.py:409<br>steel_design_details.py<br>cad_palette.py |
+| 41 | open | [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³) | — |
+| 42 | open | [Bug] Default steel grade E 350A cannot complete design — Gs not set | — |
+| 43 | open | [Bug] Cross-bracing and end-diaphragm custom grades are stored but unused in design | — |
+| 44 | open | [Bug] design() completes and builds CAD when util.fatigue exceeds 100% | — |
+| 45 | open | [Bug] Missing DCR categories are written as 0.0 on the output dock | — |
+| 48 | open | [Bug] Generated report contains placeholder sections and missing visualizations | — |
+| 53 | open | Graphics, Database, and Help menu dropdowns open but options are unresponsive | — |
+| 56 | open | Location Bug | — |
+| 61 | open | Fx plot titled "Shear Force Diagram" and Tx plot titled "Bending Moment Diagram" in Output Dock | src/osdagbridge/desktop/ui/mpl_plot_widget.py<br>src/osdagbridge/core/bridge_types/plate_girder/plot_generator.py |
+| 64 | open | [Bug] Default RCC railing load is 1.4715 kN/m in the input dictionary but 6.806 kN/m in the design and report | osi<br>defaults.py<br>additional_inputs.py<br>environment.yml<br>src/osdagbridge/core/bridge_types/plate_girder/defaults.py<br>irc6_2017.py::cl_206_5_railing_load<br>src/osdagbridge/desktop/ui/dialogs/additional_input/additional_inputs.py |
+| 65 | open | [Bug] Executive Summary says "design pass" for every component even when Overall Design Status is Fail | environment.yml<br>src/osdagbridge/core/reports/executive_summary.py |
+| 66 | open | [Bug] Report "Girder Section Dimensions" table prints metres labelled as mm (1.67 mm instead of 1670 mm) | environment.yml<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/reports/chap2.py<br>chap2.py |
+| 67 | open | [Bug] An .osi file with an empty Span passes validation, then solve_extend_basic_input_dict raises ValueError | osi<br>environment.yml<br>src/osdagbridge/core/utils/osi_validator.py<br>src/osdagbridge/core/bridge_types/plate_girder/defaults.py<br>src/osdagbridge/desktop/ui/template_page.py |
+| 68 | open | [Bug] Report shows blank or N/A for No. of Traffic Lanes, Braking Load, wind and seismic load values | environment.yml<br>osi<br>src/osdagbridge/core/reports/chap3.py<br>ui_fields_additional_input.py |
+| 69 | open | [Bug] design() accepts out-of-range Span (19.9 m, 45.1 m) and completes without an error | osi<br>environment.yml<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/utils/osi_validator.py |
+| 70 | open | [Bug] Executive Summary: Girder Spacing and Deck Thickness have no units, and the "<=" symbol is dropped from the status text | environment.yml<br>src/osdagbridge/core/reports/executive_summary.py<br>src/osdagbridge/core/reports/report_utils.py |
+| 71 | open | [Bug] Save Input overwrites committed deck and wearing-course thicknesses with defaults | T05B_before.osi<br>reproduce_save_reset.py<br>desktop/ui/template_page.py<br>src/osdagbridge/desktop/ui/template_page.py |
+| 72 | open | [Bug] End Diaphragm tab displays cross-bracing results instead of its own output dictionary | run_01/input_before.json<br>reproduce_ed_merge.py<br>desktop/ui/dialogs/transverse_member_design.py<br>src/osdagbridge/desktop/ui/dialogs/transverse_member_design.py<br>core/reports/report_generator.py<br>src/osdagbridge/core/reports/report_generator.py |
+| 73 | open | [Bug] Girder support-reaction fields disagree with the reaction labels in the same plot | run_01/input_before.json<br>desktop/ui/dialogs/steel_design.py<br>src/osdagbridge/desktop/ui/dialogs/steel_design.py<br>core/bridge_types/plate_girder/graph_engine.py<br>src/osdagbridge/core/bridge_types/plate_girder/graph_engine.py |
+| 74 | open | [Bug] Runtime deck layout uses a fixed 0.5 m crash-barrier width instead of the input's 0.45 m | run_01/input_before.json<br>run_01/runtime_properties.json<br>core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py |
+| 76 | open | [Bug] Custom material dialog restricts inputs to 1 decimal place (e.g. Poisson's ratio 0.31 cannot be entered) | src/osdagbridge/desktop/ui/dialogs/material_properties.py<br>bounds_selector.py |
+| 81 | open | [Bug] PDF includes Material Take-off and References even when unchecked | src/osdagbridge/core/reports/report_generator.py |
+| 82 | open | [Bug] Incorrect MPa unit labels for steel elastic and shear modulus in exported Excel results | — |
+| 84 | open | [Bug] Crash barrier area is mm² in the defaults but m² in the Additional Inputs dialog, so the Material Take-off shows 0.00 MT for the crash barrier | defaults.py<br>osi<br>environment.yml<br>src/osdagbridge/core/bridge_types/plate_girder/defaults.py<br>src/osdagbridge/desktop/ui/dialogs/additional_input/additional_inputs.py<br>ui_fields_additional_input.py<br>src/osdagbridge/core/boq/boq_generator.py |
+| 85 | open | [Bug] 3D CAD model not displayed after unlock and redesign (second run in the same session) | src/osdagbridge/desktop/ui/docks/input_dock.py<br>src/osdagbridge/desktop/ui/cad_3d.py<br>src/osdagbridge/desktop/ui/utils/cad_safety.py<br>template_page.py |
+| 86 | open | [Bug] Selected wind speed, exposed height and terrain are replaced by defaults before analysis | screening/scripts/probe_loading_pipeline.py<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>desktop/20261114-000403/run-03/input-before.json |
+| 87 | open | [Bug] Seismic load generation runs before governing vehicle selection and uses zero live-load mass | src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/bridge_types/plate_girder/analyser.py |
+| 88 | open | [Bug] OSI validation accepts NaN physical inputs before layout and model construction | osi<br>screening/scripts/review_replay.py --findings F03 --output-dir <new-directory><br>src/osdagbridge/core/bridge_types/plate_girder/validator.py<br>src/osdagbridge/core/utils/osi_validator.py<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py |
+| 89 | open | [Bug] Skewed four-girder bridges retain only one per-girder design result | output.json -> design_results.per_girder<br>screening/scripts/review_replay.py --findings F04 --output-dir <new-directory><br>src/osdagbridge/core/bridge_types/plate_girder/analysis_results.py<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py |
+| 90 | open | [Bug] Optimized custom section choices are ignored and continuous bounds fail as unresolved dictionaries | screening/scripts/review_replay.py --findings F05 --output-dir <new-directory><br>round2_full_reproductions.py<br>src/osdagbridge/desktop/ui/dialogs/additional_input/additional_inputs.py<br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py |
+| 91 | open | [Bug] Zero-overhang models omit the two outer physical girders from self-weight loading | screening/scripts/review_replay.py --findings F06 --output-dir <new-directory><br>src/osdagbridge/core/bridge_types/plate_girder/analyser.py |
+| 92 | open | [Bug] Canonical temperature inputs do not create thermal load cases in the normal design pipeline | round2_full_reproductions.py<br>review_replay.py --findings F07 --output-dir <new-directory><br>src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>src/osdagbridge/core/bridge_types/plate_girder/analyser.py |
+| 93 | open | [Bug] CAD uses fixed 3 m cross-bracing spacing despite 13 m in the design output | src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py<br>cad_generator.py |
+| 94 | open | [Bug] Girder Design Check summary reports 8 checks but displays only 6 check cards | — |
+| 95 | open | clarification required-Stress Limitation displays 0.9 × Fy instead of the stated Fy / γM0 | — |
+| 96 | open | [Bug] Loading a .osi file skips all custom-material validation — out-of-range material values load unchallenged | osi<br>osdagbridge/core/utils/osi_validator.py<br>template_page.py loadOSI_inputs<br>src/osdagbridge/core/utils/osi_validator.py |

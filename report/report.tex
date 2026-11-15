@@ -35,6 +35,7 @@ Code study (file:line references) & Complete \\
 Validator-boundary pytest suite (31 checks) & Complete --- 18 pass / 1 confirmed bug / skips pending baseline \\
 Headless design pipeline (probe) & Complete --- full \texttt{design()} OK in 60.5\,s \\
 Issue \#96 (new, filed) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/96} \\
+Issue \#97 (new, filed, T3 static) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/97} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -86,6 +87,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (diff posted in the issue).} add the material keys to the OSI validation loop and route them through \texttt{validate\_material\_inputs} in \texttt{validate()}.
 
+\subsection{New issue filed: \#97 --- input lock can crash when Additional Inputs dialog was never opened (T3, static)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/97}
+
+\textbf{Statement.} Lock/unlock propagates state to the Additional Inputs dialog, but \texttt{InputDock.toggle\_lock()} dereferences the dialog without checking whether it has been instantiated; because the dialog is created lazily, toggling lock before opening Additional Inputs can raise \texttt{AttributeError} on \texttt{None}. (Reported as a T3 static finding from code reading; not executed as a runtime repro in this session.)
+
+\textbf{Evidence (read-only, file:line).} \texttt{input\_dock.py:856--859} calls \texttt{self.parent.\_additional\_inputs\_dialog.lock(...)} unconditionally, while \texttt{template\_page.py:124} initializes \texttt{\_additional\_inputs\_dialog = None} and creates it on demand (\texttt{\_get\_additional\_inputs()}, L440--447); other call sites guard with \texttt{is not None} (e.g.\ L454,615,862).
+
+\textbf{Suggested fix (diff posted in the issue).} guard the dereference, e.g. \texttt{dlg = getattr(self.parent, "\_additional\_inputs\_dialog", None)} then call \texttt{dlg.lock(...)} only if not \texttt{None}.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -110,6 +120,7 @@ PYT-03 & validator geometry & span 19.9/45.1 corrected; carriageway 4.25/23.6 pa
 PYT-04 & validator NaN & span = NaN & \textbf{NaN accepted} (dup \#88) & pytest failure + root cause \\
 PYT-05 & OSI round trip & dict $\rightarrow$ \texttt{yaml.dump} $\rightarrow$ \texttt{safe\_load} $\rightarrow$ equality + validation & PASS & \texttt{tests/test\_osi\_round\_trip.py} \\
 F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader vs.\ the dialog check & \textbf{BUG} $\rightarrow$ \#96 & \texttt{evidence/analyze/osi\_material\_bypass.txt} \\
+P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static: \texttt{input\_dock.py:856--859}, lazy \texttt{template\_page.py:124,440--447}) & \textbf{ISSUE (T3)} $\rightarrow$ \#97 & \texttt{notes/issue\_drafts/01...} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

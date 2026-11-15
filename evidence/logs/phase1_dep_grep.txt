@@ -1,0 +1,17 @@
+===yaml===
+src/osdagbridge/desktop/ui/template_page.py:812:                yaml.dump(self.input_dict, input_file)
+src/osdagbridge/desktop/ui/template_page.py:839:                data = yaml.safe_load(f)
+===pylatex===
+===pydantic===
+src/osdagbridge.egg-info/PKG-INFO:697:Requires-Dist: pydantic>=2.0
+src/osdagbridge.egg-info/requires.txt:4:pydantic>=2.0
+===django===
+===plotly/ifc/openpyxl/navcube===
+src/osdagbridge/core/bridge_types/plate_girder/plots_widget.py:2:import plotly.graph_objects as go
+src/osdagbridge/core/ifc_export_bridge/bridge_ifc_generator.py:7:import ifcopenshell
+src/osdagbridge/core/ifc_export_bridge/bridge_geometry_mapper.py:8:import ifcopenshell
+src/osdagbridge/core/ifc_export_bridge/metadata_mapper.py:7:import ifcopenshell
+src/osdagbridge/desktop/ui/utils/custom_3dviewer.py:13:from navcube import NavCubeOverlay, NavCubeStyle
+src/osdagbridge/desktop/ui/utils/custom_3dviewer.py:14:from navcube.connectors.occ import OCCNavCubeSync
+src/osdagbridge/desktop/ui/dialogs/generate_results_dialog.py:1:import openpyxl
+src/osdagbridge/desktop/ui/mpl_plot_widget.py:17:from navcube import NavCubeOverlay, NavCubeStyle

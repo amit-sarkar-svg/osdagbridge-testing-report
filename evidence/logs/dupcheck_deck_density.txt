@@ -1,0 +1,10 @@
+#41 [open] [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³)
+  > [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³)
+  > Custom deck density is saved in the UI and in input_dict as material.deck.density, but it never makes it through to the dead-load analysis.
+--- 1 issue(s) ---
+#41 [open] [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³)
+  > [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³)
+  > ConcreteProperties doesn’t have a density field, and add_dead_loads() calls create_deck_load() with only the thickness. Because of that, the analysis always falls back to the default 25 kN/m³.
+  > 5.	Trace add_dead_loads() / create_deck_load() — the density is never passed, so 25 kN/m³ is used.
+  > •	plategirderbridge.py — add_dead_loads calls create_deck_load(slab_thickness_m=...) without passing density
+--- 1 issue(s) ---

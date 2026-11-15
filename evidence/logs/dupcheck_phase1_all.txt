@@ -1,0 +1,161 @@
+==== sqlite
+#20 [open] [Bug] Custom steel density from UI/input_dict is ignored in _build_material_props
+  > When a custom girder steel grade is selected (name not present in SQLite), `PlateGirderBridge._build_material_props()` correctly reads custom `fy`, `fu`, `E`, and Poisson from `input_dict`, but **hardcodes density** t...
+  > Works for DB grades (density looked up from SQLite). Fails only for custom grades where `_lookup_material(..., "Density")` returns `None`.
+#42 [open] [Bug] Default steel grade E 350A cannot complete design — Gs not set
+  > The default optimized design with SQLite grade E 350A fails at the design-check stage with:
+  > • Intg_osdag.sqlite → Steel_Grade_Properties should also be checked for the E 350A entry.
+--- 2 issue(s) ---
+
+==== osdag_core
+NO_MATCH
+
+==== PySide6
+#25 [open] Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS
+  > from PySide6.QtWidgets import QApplication
+  > from PySide6.QtGui import QFontDatabase, QFont, QFontInfo
+  > Environment: macOS 15 (Apple Silicon), PySide6 6.11.1, Python 3.12, environment built from `environment.yml`.
+--- 1 issue(s) ---
+
+==== pyproject
+NO_MATCH
+
+==== requirements
+NO_MATCH
+
+==== environment.yml
+#25 [open] Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS
+  > Environment: macOS 15 (Apple Silicon), PySide6 6.11.1, Python 3.12, environment built from `environment.yml`.
+#48 [open] [Bug] Generated report contains placeholder sections and missing visualizations
+  > * Python environment created using environment.yml
+#64 [open] [Bug] Default RCC railing load is 1.4715 kN/m in the input dictionary but 6.806 kN/m in the design and report
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#65 [open] [Bug] Executive Summary says "design pass" for every component even when Overall Design Status is Fail
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#66 [open] [Bug] Report "Girder Section Dimensions" table prints metres labelled as mm (1.67 mm instead of 1670 mm)
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#67 [open] [Bug] An .osi file with an empty Span passes validation, then solve_extend_basic_input_dict raises ValueError
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#68 [open] [Bug] Report shows blank or N/A for No. of Traffic Lanes, Braking Load, wind and seismic load values
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#69 [open] [Bug] design() accepts out-of-range Span (19.9 m, 45.1 m) and completes without an error
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#70 [open] [Bug] Executive Summary: Girder Spacing and Deck Thickness have no units, and the "<=" symbol is dropped from the status text
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+#84 [open] [Bug] Crash barrier area is mm² in the defaults but m² in the Additional Inputs dialog, so the Material Take-off shows 0.00 MT for the crash barrier
+  > Windows 11, Python 3.12 (from `environment.yml`), branch `dev` @ d74f56d.
+--- 10 issue(s) ---
+
+==== dependency
+#87 [open] [Bug] Seismic load generation runs before governing vehicle selection and uses zero live-load mass
+  > Open/closed issues were rechecked. Related#68 concerns report rows, not this native call-order/mass dependency. Custom mass modes and all seismic clauses are not exhaustively checked. Successful software execution is ...
+--- 1 issue(s) ---
+
+==== install
+#25 [open] Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS
+  > The application declares `"Ubuntu Sans"` as its font family but neither bundles the font nor provides a fallback at the global declaration. On any machine without Ubuntu Sans installed — including a stock macOS instal...
+  > `lightstyle.qss` declares no `font-family` at all, so the light theme uses the platform default while the dark theme requests Ubuntu Sans. On a machine where the font *is* installed, switching themes would change the ...
+#85 [open] [Bug] 3D CAD model not displayed after unlock and redesign (second run in the same session)
+  > - Windows 64-bit, Miniconda env `osdagbridge-env`, installed with `pip install -e .`
+--- 2 issue(s) ---
+
+==== pydantic
+NO_MATCH
+
+==== README
+NO_MATCH
+
+==== CLI
+#19 [open] [Bug] OSI load does not restore _material_custom_fields; Design re-primes custom grades from defaults
+  > 4. Without reopening the custom material dialog, click Design.
+#42 [open] [Bug] Default steel grade E 350A cannot complete design — Gs not set
+  > 4. Click Design.
+#53 [open] Graphics, Database, and Help menu dropdowns open but options are unresponsive
+  > When clicking on the "Graphics", "Database", or "Help" menus in the top menu bar, the dropdown opens correctly and displays options, but clicking any option produces no action. The dropdown closes properly after click...
+  > 2. Click on "Graphics" in the top menu bar
+  > 3. Click on any option within the opened dropdown
+  > Clicking a menu option should trigger its corresponding action.
+#64 [open] [Bug] Default RCC railing load is 1.4715 kN/m in the input dictionary but 6.806 kN/m in the design and report
+  > 2. Click Design, then Generate Report.
+#65 [open] [Bug] Executive Summary says "design pass" for every component even when Overall Design Status is Fail
+  > 1. Span 30, Carriageway Width 7.5, everything else default, click Design.
+  > 2. Click Generate Report.
+#66 [open] [Bug] Report "Girder Section Dimensions" table prints metres labelled as mm (1.67 mm instead of 1670 mm)
+  > 2. Click Design, then Generate Report.
+#68 [open] [Bug] Report shows blank or N/A for No. of Traffic Lanes, Braking Load, wind and seismic load values
+  > 2. Click Design, then Generate Report.
+#69 [open] [Bug] design() accepts out-of-range Span (19.9 m, 45.1 m) and completes without an error
+  > The UI and the `.osi` validator limit Span to 20.0 to 45.0 m ("software limitation"). The design pipeline itself does not check this: calling `set_input()` and `design()` with span 19.9 or 45.1 runs to the end with a ...
+#71 [open] [Bug] Save Input overwrites committed deck and wearing-course thicknesses with defaults
+  > I saved a 300 mm deck and a 75 mm wearing course in Additional Inputs. Those values remained set until I clicked the main **Save Input** button and saved an OSI. The saved values became 250 mm and 50 mm. In a separate...
+  > 3. Click the main Save Input button and save an OSI.
+#76 [open] [Bug] Custom material dialog restricts inputs to 1 decimal place (e.g. Poisson's ratio 0.31 cannot be entered)
+  > 3. In "Enter Custom Properties", click **Poisson's Ratio**, clear it, and type `0.31`.
+  > 4. Click **Thermal Expansion Coefficient**, clear it, and type `11.75`.
+#81 [open] [Bug] PDF includes Material Take-off and References even when unchecked
+  > 4. Click Design and wait for it to finish.
+  > 5. Go to File > Create Design Report, enter sample report details and click Next.
+  > 7. Click Save PDF and open the saved file.
+#82 [open] [Bug] Incorrect MPa unit labels for steel elastic and shear modulus in exported Excel results
+  > <!--StartFragment--><p data-pm-slice="1 1 []"><span>The OsdagBridge GUI displays the Modulus of Elasticity (E) and Modulus of Rigidity (G) in GPa, but the generated Excel results table labels these properties as MPa w...
+#84 [open] [Bug] Crash barrier area is mm² in the defaults but m² in the Additional Inputs dialog, so the Material Take-off shows 0.00 MT for the crash barrier
+  > 2. Click Design, then Generate Report.
+#85 [open] [Bug] 3D CAD model not displayed after unlock and redesign (second run in the same session)
+  > After a successful design run, unlocking the inputs (padlock → **Continue** on "Clear Results"), changing an input and clicking **Design** again finishes the analysis, but the **3D CAD viewport stays empty**. The mode...
+  > 3. Click **Design** and wait for it to finish. The 3D model is displayed ✅
+  > 4. Click the padlock → **Continue**.
+  > 5. Change Span to 25 and click **Design**.
+#90 [open] [Bug] Optimized custom section choices are ignored and continuous bounds fail as unresolved dictionaries
+
+==== example
+#19 [open] [Bug] OSI load does not restore _material_custom_fields; Design re-primes custom grades from defaults
+  > Example guard in `_prime_material_inputs`:
+#41 [open] [Bug] Custom deck density never reaches create_deck_load (always 25 kN/m³)
+  > This works fine by accident when the user leaves the density at 25. It breaks when a custom value is entered, for example 26 kN/m³. The dictionaries show 26, but the self-weight calculation still uses 25.
+#44 [open] [Bug] design() completes and builds CAD when util.fatigue exceeds 100%
+  > 1. Run an optimized design with custom materials (for example, span 30 m and CW 7.5 m).
+#45 [open] [Bug] Missing DCR categories are written as 0.0 on the output dock
+  > 2. Use custom steel (for example, fy 300).
+#53 [open] Graphics, Database, and Help menu dropdowns open but options are unresponsive
+  > When I went through the template_page.py file,the root cause was identified in the file defining the menu bar. All QAction objects for the Graphics, Database, and Help menus are created and added to their respective m...
+#56 [open] Location Bug
+  > While working on OsdagBridge, I noticed an issue with the “Select on Map” feature. When selecting locations in Chhattisgarh, the state name itself doesn't seem to be showing up, and quite a few cities in the state are...
+#65 [open] [Bug] Executive Summary says "design pass" for every component even when Overall Design Status is Fail
+  > A reader who only looks at the outcomes list is told the girder design passes, when the girder fails the fatigue check. It also happens at other spans (for example span 20 m gives a fatigue utilisation of 220.9 %).
+#66 [open] [Bug] Report "Girder Section Dimensions" table prints metres labelled as mm (1.67 mm instead of 1670 mm)
+  > Running the same input through `set_input()` and `design()` from a script and comparing `input_dict` before and after, `design()` changed 35 keys, for example:
+#74 [open] [Bug] Runtime deck layout uses a fixed 0.5 m crash-barrier width instead of the input's 0.45 m
+  > Read and validate that key instead of substituting the constant. For example, after shared input validation:
+#84 [open] [Bug] Crash barrier area is mm² in the defaults but m² in the Additional Inputs dialog, so the Material Take-off shows 0.00 MT for the crash barrier
+  > (or keep mm² in the dictionary and remove the `/ 1e6` in the dialog). A guard in the BOQ, for example treating values above 100 as mm², would also avoid a silent zero.
+#85 [open] [Bug] 3D CAD model not displayed after unlock and redesign (second run in the same session)
+  > The info box in the 3D view **is** updated on the second run (for example, Span Length changes from 20.00 m to 25.00 m), and no design-error dialog is shown.
+  > - **The model data is empty on the second run.** For example, `generator.model_data` (cleared in `clear_3d_cad`) or the parameters from `backend.get_3d_cad_parameters()` after `backend.reset()`. `display_and_register(...
+--- 11 issue(s) ---
+
+==== yaml
+#19 [open] [Bug] OSI load does not restore _material_custom_fields; Design re-primes custom grades from defaults
+  > 3. Optionally embed a `custom_materials` section in OSI YAML for round-trip fidelity.
+#67 [open] [Bug] An .osi file with an empty Span passes validation, then solve_extend_basic_input_dict raises ValueError
+  > import yaml
+  > d = yaml.safe_load(open("inputs.osi"))
+#69 [open] [Bug] design() accepts out-of-range Span (19.9 m, 45.1 m) and completes without an error
+  > import yaml
+  > inputs = yaml.safe_load(open("inputs.osi"))      # a saved default design
+#88 [open] [Bug] OSI validation accepts NaN physical inputs before layout and model construction
+  > The real YAML/OSI import gate accepts nonfinite physical values. In particular, a saved `.osi` containing `geometry.span: .nan` passes import validation and later fails layout sizing with `ValueError: cannot convert f...
+  > Read the [five saved YAML inputs and recorded results](https://github.com/priy-anshugupta/OsdagBridge/tree/7f52a26886027de7007574d2c2e977240c52ec72/screening/evidence/nonfinite-import/) with `screening/scripts/review_...
+  > Open/closed duplicates were rechecked. #67 covers empty span and#69 finite out-of-range span; this concerns nonfinite YAML and missing finite-number validation. No completed invalid design, GUI crash, exploit or final...
+--- 4 issue(s) ---
+
+==== verification
+#25 [open] Declared font "Ubuntu Sans" is neither bundled nor given a fallback, so the UI never renders in it on macOS
+  > ### Verification
+#76 [open] [Bug] Custom material dialog restricts inputs to 1 decimal place (e.g. Poisson's ratio 0.31 cannot be entered)
+  > ## Verification
+#86 [open] [Bug] Selected wind speed, exposed height and terrain are replaced by defaults before analysis
+  > Read validated site/canonical values first and document any legacy fallback. A scoped [routing/sequencing proposal patch](https://github.com/priy-anshugupta/OsdagBridge/blob/7f52a26886027de7007574d2c2e977240c52ec72/sc...
+#93 [open] [Bug] CAD uses fixed 3 m cross-bracing spacing despite 13 m in the design output
+  > This source recommendation is **untested**. The demonstrated control changes only the DTO and executes actual geometry; it is not a source-patch verification. Nonuniform per-bay spacing requires an explicit representa...
+--- 4 issue(s) ---
+

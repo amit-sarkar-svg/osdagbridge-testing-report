@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<stdin>", line 20, in <module>
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/desktop/ui/docks/input_dock.py", line 92, in __init__
+    self.build_left_panel(self.backend.input_values())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'P' object has no attribute 'input_values'
+ERR 'P' object has no attribute 'input_values'

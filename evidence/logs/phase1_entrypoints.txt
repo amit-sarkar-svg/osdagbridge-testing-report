@@ -1,0 +1,15 @@
+===osdagbridge-cli --help===
+osdagbridge CLI (stub)
+EXIT=0
+===osdagbridge-cli analyze x===
+osdagbridge CLI (stub)
+EXIT=0
+===web===
+web/.DS_Store
+web/frontend/package-lock.json
+web/frontend/package.json
+web/frontend/src/App.jsx
+web/backend/manage.py
+===web manage.py===
+#!/usr/bin/env python
+print("Django manage stub")

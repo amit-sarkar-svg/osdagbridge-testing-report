@@ -1,0 +1,739 @@
+106:import os, shutil, logging, datetime, tempfile, subprocess
+107:from dataclasses import dataclass, field
+108:from typing import Optional, List, Literal
+10:from .cad_top_view import TopViewCADWidget
+10:from OCC.Core.gp import gp_Trsf, gp_Vec, gp_Pnt, gp_Dir, gp_Ax2, gp_Ax1
+10:from PySide6.QtCore import Qt
+10:from PySide6.QtCore import Qt, QRectF
+10:from PySide6.QtCore import Qt, Signal, QSize, QEvent, QRect, QPropertyAnimation, QEasingCurve
+10:from PySide6.QtGui import QColor, QFont, QFontMetrics, QPainter, QPainterPath, QPen
+10:from PySide6.QtGui import QDoubleValidator, QIntValidator
+10:from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush, QPolygonF
+10:from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush, QPolygonF, QIcon
+10:from PySide6.QtGui import QPainter, QPen, QColor, QFont, QBrush, QPolygonF, QIcon, QPixmap
+10:from PySide6.QtWidgets import (
+10:from PySide6.QtWidgets import QSizePolicy, QWidget
+10:from collections import namedtuple
+10:from copy import deepcopy
+10:from dataclasses import dataclass, field
+10:from osdagbridge.core.bridge_types.plate_girder.ui_fields_project_location import (
+10:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+10:from osdagbridge.core.utils.codes.keyfile import KEY_RAILING_TYPE, KEY_FOOTPATH, KEY_CRASH_BARRIER_TYPE
+10:from osdagbridge.core.utils.common import *
+10:from osdagbridge.core.utils.common import MIN_BEARING_STIFFENER_SPACING_MM
+10:from osdagbridge.desktop.ui.docks.input_dock import InputDock
+10:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+10:import enum
+10:import math
+10:import numpy as np
+10:import os
+10:import re
+10:import time
+110:from osdagbridge.core.utils.common import (
+1167:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.support_conditions_cad import SupportCADWidget
+1168:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.support_detail_cad import SupportDetailCADWidget
+118:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017  # noqa: E402
+11:from .cad_cross_section import CrossSectionCADWidget
+11:from OCC.Core.BRepBuilderAPI import (
+11:from PySide6.QtCore import QTimer
+11:from PySide6.QtCore import Qt, Signal, QSize
+11:from PySide6.QtGui  import QColor, QPainter, QPen
+11:from PySide6.QtGui import QFont, QIcon, QPainter
+11:from PySide6.QtWidgets import (
+11:from PySide6.QtWidgets import QWidget
+11:from __future__ import annotations
+11:from collections import namedtuple
+11:from collections.abc import Iterable
+11:from concurrent.futures import ProcessPoolExecutor
+11:from datetime import datetime
+11:from osdagbridge.core.bridge_types.plate_girder.validator import BridgeInputValidator
+11:from osdagbridge.core.reports.report_generator import (
+11:from osdagbridge.core.utils.common import *
+11:from osdagbridge.desktop.resources.resources_rc import *
+11:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+11:from osdagbridge.desktop.ui.dialogs.tabs.steel_design_details import SteelDesignDetailsTab
+11:from osdagbridge.desktop.ui.docks.cad_cross_section import CrossSectionCADWidget
+11:from osdagbridge.desktop.ui.docks.output_dock import OutputDock
+11:from osdagbridge.desktop.ui.utils.cad_palette import (
+11:from scipy.spatial import distance
+11:from typing import Dict, List, Optional
+11:import json
+11:import matplotlib
+11:import numpy as np
+11:import openseespy.opensees as ops
+121:from osdagbridge.core.reports.report_utils import _tex
+122:from .executive_summary import executive_summary
+123:from .chap1 import ch1_project_info
+124:from .chap2 import ch2_input_parameters
+124:from __future__ import annotations
+125:from .chap3 import ch3_loads
+126:from .chap4 import ch4_analysis
+126:import copy
+127:from .chap5 import ch5_design_checks
+127:import json
+128:from .chap6 import ch6_drawings
+128:import math
+129:from .chap7 import ch7_quantities
+129:import time
+12:from OCC.Core.BRepPrimAPI import (
+12:from OCC.Display.qtDisplay import qtViewer3d
+12:from PySide6.QtCore import Qt
+12:from PySide6.QtCore import Qt, QPointF, QRectF, QSize
+12:from PySide6.QtCore import Qt, Signal, QTimer, QPoint, QEvent
+12:from PySide6.QtGui import QDoubleValidator, QIntValidator
+12:from PySide6.QtWidgets import (
+12:from copy import deepcopy
+12:from dataclasses import dataclass
+12:from itertools import combinations
+12:from mpl_toolkits.mplot3d.art3d import Line3DCollection
+12:from osdagbridge.core.bridge_components.super_structure.deck.geometry import (
+12:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+12:from osdagbridge.core.utils.codes.keyfile import *
+12:from osdagbridge.core.utils.common import *
+12:from osdagbridge.desktop.cad.irc5_geometry import (
+12:from osdagbridge.desktop.ui.dialogs.tabs.steel_design_analysis import SteelDesignAnalysisTab
+12:from osdagbridge.desktop.ui.docks.log_dock import LogDock
+12:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+12:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+12:from ospgrillage.utils import (
+12:from scipy.optimize import fsolve, root
+12:from typing import Any, Dict, List
+12:from typing import Callable, List, Optional
+12:from typing import Dict, List, Optional, Any
+12:import json
+12:import matplotlib.pyplot as plt
+12:import os
+12:import pandas as pd
+130:from .chap8 import ch8_design_log
+130:import warnings
+131:from .chap9 import references
+131:from .initial_sizing import (
+131:from pathlib import Path
+132:from typing import Optional
+134:import pandas as pd
+135:import math
+136:from collections import defaultdict, deque
+136:from osdagbridge.core.utils.common import (
+137:import openseespy.opensees as ops
+138:import pandas as pd
+139:from osdagbridge.core.utils.common import (
+139:from osdagbridge.core.utils.common import kN, m, m2
+13:from PySide6.QtCore import Qt
+13:from PySide6.QtGui import (
+13:from PySide6.QtGui import QDoubleValidator
+13:from collections import OrderedDict
+13:from mpl_toolkits.mplot3d import proj3d
+13:from navcube import NavCubeOverlay, NavCubeStyle
+13:from osdagbridge.core.data.project_location.database import Database
+13:from osdagbridge.core.utils.common import *
+13:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+13:from osdagbridge.desktop.ui.dialogs.tabs.steel_design_check import SteelDesignCheckTab
+13:from osdagbridge.desktop.ui.docks.cad_dual_view import BridgeDualCADWidget
+13:from osdagbridge.desktop.ui.utils.cad_palette import (
+13:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+13:from typing import Union
+13:import json
+13:import math
+13:import matplotlib.figure as mfigure
+13:import opsvis as opsv
+13:import platform
+13:import warnings
+140:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+144:from osdagbridge.core.reports.report_utils import _tex, _render_value, get_girder_entries
+1490:from pathlib import Path
+1491:import sqlite3
+14:from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Trsf, gp_Ax3, gp_Dir, gp_Ax2
+14:from PySide6.QtCore  import Qt, QSize, Signal, QTimer
+14:from PySide6.QtCore import Qt, QRectF, QRect
+14:from PySide6.QtGui import QColor, QPainter, QPen
+14:from collections.abc import Mapping
+14:from functools import lru_cache
+14:from matplotlib.text import Annotation
+14:from navcube.connectors.occ import OCCNavCubeSync
+14:from osdagbridge.core.bridge_types.plate_girder.analysis_results import PlateGirderAnalysisResults
+14:from osdagbridge.core.utils.codes.keyfile import (
+14:from osdagbridge.core.utils.common import *
+14:from osdagbridge.desktop.ui.dialogs.additional_input.additional_inputs import AdditionalInputs
+14:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+14:from osdagbridge.desktop.ui.docks.output_dock import NoScrollComboBox
+14:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+14:import json
+14:import logging
+14:import matplotlib.mathtext as mathtext
+14:import numpy as np
+1535:import ospgrillage as og
+1536:from math import *
+1569:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.cad_preview_widget import CadPreviewWidget
+1570:from osdagbridge.desktop.ui.dialogs.additional_input.ui_builder._segment_table_widget import SegmentTableWidget
+1570:import platform
+1571:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.rolled_section_preview import RolledSectionPreview
+1571:import os
+15:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakePrism, BRepPrimAPI_MakeCylinder
+15:from PySide6.QtCore import Qt
+15:from PySide6.QtCore import Qt, QEvent, QTimer
+15:from PySide6.QtCore import Qt, QRect
+15:from PySide6.QtGui   import QColor, QDoubleValidator, QIcon, QPainter, QPalette, QPen, QPixmap
+15:from PySide6.QtGui import QColor, QPainterPath, QPen, QFontMetrics, QIcon, QCursor
+15:from PySide6.QtWidgets import (
+15:from PySide6.QtWidgets import QSizePolicy, QWidget
+15:from __future__ import annotations
+15:from osdagbridge.core.bridge_types.plate_girder.initial_sizing import (
+15:from osdagbridge.core.bridge_types.plate_girder.validator import BridgeInputValidator
+15:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+15:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+15:from osdagbridge.desktop.ui.docks.dock_utils import apply_field_style
+15:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+15:from pathlib import Path
+15:from scipy import interpolate
+15:from typing import TYPE_CHECKING, Union
+15:import math
+1614:import sqlite3
+1615:from dataclasses import dataclass
+1616:from pathlib import Path
+1617:from typing import Dict, Optional
+16:from OCC.Core.BRepBuilderAPI import (
+16:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeBox, BRepPrimAPI_MakePrism
+16:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakePrism
+16:from PySide6.QtCore import Qt, QRectF
+16:from PySide6.QtGui import QColor, QFont, QPainter, QPainterPath, QPen
+16:from PySide6.QtGui import QFont
+16:from PySide6.QtWidgets import (
+16:from osdagbridge.core.utils.common import (
+16:from osdagbridge.core.utils.common import *
+16:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+16:from osdagbridge.desktop.ui.dialogs.loading_popup import LoadingDialogManager
+16:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+16:from osdagbridge.desktop.ui.docks.cad_cross_section import CrossSectionCADWidget
+16:from osdagbridge.desktop.ui.docks.output_dock import NoScrollComboBox
+16:from osdagbridge.desktop.ui.utils.cad_safety import CADSafetyGuard
+16:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+16:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+16:from osdagbridge.desktop.ui.widgets.native_map import NativeMapWidget
+16:from typing import List, Tuple, Union, TYPE_CHECKING
+16:import numpy as np
+17:from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse
+17:from OCC.Core.BRepBuilderAPI import (
+17:from PySide6.QtCore import Qt
+17:from PySide6.QtCore import Qt, QSize
+17:from PySide6.QtGui import QCursor, QPixmap, QPainter, QColor
+17:from PySide6.QtWidgets import (
+17:from __future__ import annotations
+17:from matplotlib.figure import Figure
+17:from navcube import NavCubeOverlay, NavCubeStyle
+17:from osdagbridge.core.bridge_components.super_structure.footpath.geometry import (
+17:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import GENERATE_RESULTS_DEFAULTS
+17:from osdagbridge.core.data.project_location.zone_lookup import get_zones_for_coordinates, get_temperature_for_coordinates
+17:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+17:from osdagbridge.core.utils.common import (
+17:from osdagbridge.desktop.ui.cad_3d import CAD3DWindow
+17:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+17:from osdagbridge.desktop.ui.docks.output_dock import (
+17:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+17:from osdagbridge.desktop.ui.widgets.placeholder_section_preview import PlaceholderSectionPreviewWidget
+17:from ospgrillage.mesh import Point, Mesh, create_point
+17:import math
+17:import openseespy.opensees as ops
+18:from OCC.Core.GCE2d import GCE2d_MakeArcOfCircle
+18:from PySide6.QtGui import QTextDocument
+18:from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+18:from osdagbridge.core.utils.common import (
+18:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style, create_action_button_bar
+18:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+18:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+18:from osdagbridge.desktop.ui.utils.mpl_widget_navcube_sync import MatplotlibNavCubeSync
+18:from osdagbridge.desktop.ui.utils.styled_scroll_area import StyledScrollArea
+18:from ospgrillage.load import ShapeFunction
+18:from ospgrillage.utils import (
+18:import math
+18:import numpy as np
+19:from .defaults import (
+19:from .results_data_post_processing import post_process, FORCE_KEEP, DISP_KEEP
+19:from OCC.Core.Geom import Geom_Plane
+19:from osdagbridge.core.bridge_components.super_structure.deck_reinforcement.geometry import (
+19:from osdagbridge.core.bridge_types.plate_girder.ui_fields import FrontendData
+19:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import (
+19:from osdagbridge.core.utils.codes.irc22_2015 import IRC22_2014
+19:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+19:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+19:from ospgrillage.utils import solve_zeta_eta
+19:from typing import List
+19:import numpy as np
+19:import openseespy.opensees as ops
+19:import os
+1:from PySide6.QtCore import Qt, QSize
+1:from PySide6.QtWidgets import (
+1:from PySide6.QtWidgets import QComboBox, QLineEdit, QSizePolicy
+1:from PySide6.QtWidgets import QScrollArea, QSizePolicy
+1:from PySide6.QtWidgets import QWidget, QLabel, QToolButton, QHBoxLayout, QSizePolicy, QVBoxLayout
+1:from PySide6.QtWidgets import QWidget, QSizePolicy
+1:from __future__ import annotations
+1:from osdagbridge.core.reports.report_utils import _tex
+1:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+1:from osdagbridge.core.utils.common import (
+1:from osdagbridge.core.utils.common import *
+1:from osdagbridge.desktop.ui.widgets.placeholder_section_preview import PlaceholderSectionPreviewWidget
+1:from typing import List
+1:from typing import TYPE_CHECKING
+1:import io
+1:import logging
+1:import math
+1:import matplotlib
+1:import numpy as np
+1:import openpyxl
+1:import os
+1:import os as _os
+1:import os, yaml
+1:import ospgrillage as og
+1:import sqlite3
+1:import sys
+20:from OCC.Core.gp import gp_Pln
+20:from PySide6.QtCore import Qt, QByteArray
+20:from PySide6.QtCore import Qt, QRegularExpression, QSize, QTimer, QPoint, QEvent, Signal
+20:from osdagbridge.core.bridge_components.super_structure.crash_barrier.geometry import (
+20:from osdagbridge.core.bridge_types.plate_girder.defaults import BASIC_INPUT_DICT, solve_extend_basic_input_dict
+20:from osdagbridge.core.bridge_types.plate_girder.graph_engine import GirderGraphEngine
+20:from osdagbridge.core.bridge_types.plate_girder.plot_generator import (
+20:from osdagbridge.core.data.project_location.database import Database
+20:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+20:from osdagbridge.desktop.ui.dialogs.generate_results_values_builder import resolve_table
+20:from osdagbridge.desktop.ui.docks.output_dock import (
+20:from osdagbridge.desktop.ui.utils.custom_widgets import SmartCursorComboBoxView
+20:from osdagbridge.desktop.ui.utils.styled_scroll_area import StyledScrollArea
+20:from typing import Dict, Optional, Any
+2140:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.stiffener_details_cad import StiffenerDetailsCad
+21:from PySide6.QtCore import Qt
+21:from PySide6.QtGui import QDoubleValidator, QRegularExpressionValidator, QIcon, QColor, QBrush
+21:from PySide6.QtSvgWidgets import QSvgWidget
+21:from osdagbridge.core.bridge_types.plate_girder.ui_fields_project_location import DB_PATH
+21:from osdagbridge.core.utils.common import (
+21:from osdagbridge.core.utils.common import *
+21:from osdagbridge.core.utils.common import DESIGN_CHECK_ORDER
+21:from osdagbridge.desktop.ui.dialogs.additional_input.ui_builder.common_ui_builder import UIBuilder
+21:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+21:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+21:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+21:from ospgrillage.load import (
+21:import numpy as np
+22:from .initial_sizing import DEFAULT_FOOTPATH_WIDTH
+22:from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse
+22:from OCC.Core.gp import (
+22:from PySide6.QtSvg import QSvgRenderer
+22:from PySide6.QtWebEngineWidgets import QWebEngineView
+22:from PySide6.QtWidgets import (
+22:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import ADDITIONAL_INPUTS_SCHEMA
+22:from osdagbridge.core.bridge_types.plate_girder.validator import BridgeInputValidator
+22:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+22:from osdagbridge.core.utils.common import (
+22:from osdagbridge.core.utils.osi_validator import validate_osi_inputs
+22:from osdagbridge.desktop.ui.dialogs.tabs.common import apply_field_style
+22:from osdagbridge.desktop.ui.dialogs.tabs.steel_design_check import StatusBadge
+22:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+22:from osdagbridge.desktop.ui.utils.styled_scroll_area import StyledScrollArea
+22:import math
+2328:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.end_diaphragm_cad import (
+237:from dataclasses import dataclass, field
+238:from typing import Optional
+23:from .analyser import BridgeGrillageModel
+23:from PySide6.QtWebEngineCore import QWebEngineSettings
+23:from PySide6.QtWidgets import QStackedWidget
+23:from osdagbridge.core.bridge_components.super_structure.railing.geometry import (
+23:from osdagbridge.core.utils.codes.irc112_2019 import IRC112_2019
+23:from osdagbridge.core.utils.common import *
+23:from osdagbridge.core.utils.logger import bridge_logger
+23:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.rolled_section_preview import RolledSectionPreview
+23:from osdagbridge.desktop.ui.dialogs.additional_input.ui_builder._load_combination_widget import LoadCombinationWidget
+23:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+23:from osdagbridge.desktop.ui.utils.custom_widgets import PercentBarWidget
+23:from osdagbridge.desktop.ui.utils.styled_scroll_area import StyledScrollArea
+23:import os
+24:from PySide6.QtCore import QTimer, Qt
+24:from PySide6.QtCore import QUrl, Qt, QPoint, QObject, Slot, Signal
+24:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import CUSTOM_LOAD_TAB_SCHEMA
+24:from osdagbridge.core.utils.codes.irc22_2015 import IRC22_2014
+24:from osdagbridge.core.utils.memory_guard import OpsMemoryGuard, log_memory, tracemalloc_mark_start
+24:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.stiffener_cad_preview import (
+24:from osdagbridge.desktop.ui.dialogs.additional_input.ui_builder.common_ui_builder import AdaptiveWidget
+24:from osdagbridge.desktop.ui.utils.custom_buttons import DockCustomButton
+24:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+24:from osdagbridge.desktop.ui.utils.custom_widgets import ToolBarWidget
+24:from osdagbridge.desktop.ui.utils.styled_scroll_area import StyledScrollArea
+24:import logging
+255:from osdagbridge.desktop.ui.template_page import CustomWindow
+256:from osdagbridge.core.bridge_types.plate_girder.plategirderbridge import PlateGirderBridge
+25:from .analysis_results import PlateGirderAnalysisResults
+25:from PySide6.QtWebChannel import QWebChannel
+25:from osdagbridge.core.bridge_components.super_structure.deck.builder import (
+25:from osdagbridge.core.utils.codes.keyfile import KEY_VEHICLE
+25:from osdagbridge.core.utils.common import *
+25:from osdagbridge.desktop.ui.dialogs.project_location import ProjectLocationDialog
+25:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+25:from osdagbridge.desktop.ui.utils.custom_widgets import PercentBarWidget
+262:from osdagbridge.core.bridge_types.plate_girder.initial_sizing import (
+265:from osdagbridge.core.bridge_components.super_structure.deck.geometry import (
+268:from osdagbridge.core.bridge_components.super_structure.crash_barrier.geometry import (
+26:from .designer import run_design_check
+26:from OCC.Core.Quantity import Quantity_Color, Quantity_TOC_RGB
+26:from OCC.Core.Quantity import Quantity_Color, Quantity_TOC_RGB, Quantity_NOC_BLACK
+26:from osdagbridge.core.bridge_components.super_structure.median.geometry import (
+26:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import DECK_DESIGN_SUMMARY_SCHEMA
+26:from osdagbridge.core.utils.common import (
+26:from osdagbridge.desktop.ui.docks.dock_utils import apply_field_style
+271:from osdagbridge.core.bridge_components.super_structure.railing.geometry import (
+274:from osdagbridge.core.bridge_components.super_structure.shear_studs.geometry import (
+278:from osdagbridge.core.utils.logger import bridge_logger
+279:from osdagbridge.core.bridge_types.plate_girder.designer import (BridgeConfig, IRC22CapacityCalculator, DCREngine, DemandEnvelope, design_envelope_engine,)
+27:from . import deckdesign
+27:from OCC.Core.AIS import AIS_Shape
+27:from OCC.Core.TopoDS import TopoDS_Shape
+27:from osdagbridge.core.bridge_types.plate_girder.ui_fields_additional_input import (
+27:from osdagbridge.desktop.ui.dialogs.material_properties import (
+27:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+27:import random
+28:from .plot_generator import (
+28:from OCC.Core.AIS import AIS_Shape
+28:from OCC.Core.gp import gp_Pnt
+28:from PySide6.QtWidgets import (
+28:from osdagbridge.core.bridge_types.plate_girder.plots_widget import (
+28:import math
+29:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeSphere
+29:from OCC.Core.TopAbs import TopAbs_EDGE
+29:from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Trsf, gp_Ax1, gp_Ax2, gp_Dir
+29:from __future__ import annotations
+29:from osdagbridge.core.bridge_types.plate_girder.bridge_geometry import BridgeGeometry, CrossSectionLayout
+29:from osdagbridge.core.utils.common import (
+29:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+2:from .registry import get_code
+2:from .report_generator import (
+2:from GirderDetailsTab._build_overview_card().
+2:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeBox, BRepPrimAPI_MakeCylinder, BRepPrimAPI_MakePrism
+2:from PySide6.QtCore import Qt
+2:from PySide6.QtCore import Qt, QPoint, QEvent
+2:from PySide6.QtGui import QDoubleValidator
+2:from PySide6.QtWidgets import (
+2:from PySide6.QtWidgets import QApplication, QDialog, QVBoxLayout, QLabel, QPushButton, QHBoxLayout, QWidget, QSizeGrip
+2:from __future__ import annotations
+2:from collections import defaultdict
+2:from dataclasses import dataclass
+2:from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+2:from osdagbridge.core.bridge_types.plate_girder.defaults import BASIC_INPUT_DICT
+2:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+2:from osdagbridge.core.utils.codes.keyfile import *
+2:from osdagbridge.core.utils.codes.keyfile import DEFAULT_CONCRETE_DENSITY, DEFAULT_BITUMINOUS_DENSITY
+2:from osdagbridge.core.utils.codes.keyfile import DEFAULT_STEEL_DENSITY
+2:from osdagbridge.core.utils.common import (
+2:from osdagbridge.core.utils.common import *
+2:from osdagbridge.desktop.ui.dialogs.additional_input.drawings.bracing_layout_cad import BracingLayoutCadWidget
+2:import ctypes
+2:import dataclasses
+2:import gc
+2:import json
+2:import logging
+2:import math
+2:import os
+2:import plotly.graph_objects as go
+2:import re
+2:import sqlite3
+2:import sys
+2:import sys as _sys
+2:import xarray as xr
+30:from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_MakeEdge
+30:from OCC.Core.BRepPrimAPI import BRepPrimAPI_MakeBox
+30:from osdagbridge.core.bridge_types.plate_girder.load_placement import LoadPlacementManager
+30:from osdagbridge.core.utils.common import (
+30:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+31:from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Fuse
+31:from OCC.Display.backend import load_backend
+31:from dataclasses import dataclass, field
+31:from osdag_core.cli import _get_output_dictionary
+31:from osdagbridge.core.bridge_types.plate_girder.defaults import BASIC_INPUT_DICT
+31:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+31:import warnings
+32:from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_Transform
+32:from PySide6.QtCore import Qt, QSize
+32:from osdagbridge.core.bridge_components.super_structure.crash_barrier.builder import (
+32:from osdagbridge.core.bridge_components.super_structure.plate_girder.builder import (
+32:from osdagbridge.core.bridge_types.plate_girder.analysis_results import PlateGirderAnalysisResults
+32:from osdagbridge.core.bridge_types.plate_girder.validator import BridgeInputValidator
+32:from ospgrillage.mesh import (
+32:from typing import Any, Dict, List, Optional
+331:from osdagbridge.desktop.ui.docks.cad_cross_section import CrossSectionCADWidget
+33:from PySide6.QtGui import QIcon
+33:from osdag_core.design_type.compression_member.compression_bolted import Compression_bolted
+33:from osdagbridge.core.bridge_types.plate_girder.dto import (SectionProperties, SteelProperties, ConcreteProperties, MaterialProperties, GrillageGeometry, DeckLayoutProperties)
+33:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+34:from osdag_core.design_type.compression_member.compression_welded import Compression_welded
+34:from osdagbridge.core.bridge_types.plate_girder.results_data import restructure_data as restructure_data_direct
+34:from osdagbridge.core.bridge_types.plate_girder.validator import BridgeInputValidator
+35:from osdag_core.design_type.tension_member.tension_bolted import Tension_bolted
+35:from osdagbridge.core.bridge_components.super_structure.deck.builder import (
+35:from osdagbridge.core.bridge_components.super_structure.plate_girder.builder import (
+35:from osdagbridge.core.utils.common import (
+36:from osdag_core.design_type.tension_member.tension_welded import Tension_welded
+37:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+38:from osdagbridge.core.bridge_components.super_structure.crash_barrier.builder import (
+38:from osdagbridge.core.utils.common import (
+38:from osdagbridge.desktop.cad.irc5_geometry import (
+3:from .bridge_geometry import (
+3:from OCC.Core.gp import gp_Trsf, gp_Vec, gp_Ax2, gp_Pnt, gp_Dir
+3:from PySide6.QtCore import Qt
+3:from PySide6.QtCore import Qt, QPoint, QEvent
+3:from PySide6.QtCore import Qt, Signal
+3:from PySide6.QtGui import QMouseEvent, QFont
+3:from PySide6.QtGui import QPainter, QPen, QColor
+3:from PySide6.QtWidgets import (
+3:from __future__ import annotations
+3:from dataclasses import dataclass
+3:from math import ceil, sqrt
+3:from osdagbridge.core.bridge_types.plate_girder.dto import SectionComponent
+3:from osdagbridge.core.utils.common import (
+3:from osdagbridge.core.utils.common import *
+3:from pathlib import Path
+3:from typing import List, Dict, Tuple, Optional
+3:import datetime
+3:import gc
+3:import json
+3:import logging
+3:import math
+3:import numpy as np
+3:import openseespy.opensees as ops
+3:import os
+3:import queue
+3:import re
+3:import time
+3:import types
+3:import warnings as _warnings
+40:from ospgrillage.material import Material, create_material
+41:from __future__ import annotations
+41:from osdagbridge.core.bridge_components.super_structure.railing.builder import (
+41:from ospgrillage.members import GrillageMember, Section, create_member, create_section
+42:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+42:from ospgrillage.postprocessing import (
+43:import logging
+44:from osdagbridge.core.bridge_components.super_structure.median.builder import (
+44:from osdagbridge.desktop.ui.utils.custom_buttons import DockCustomButton
+44:from typing import Optional
+45:from osdagbridge.core.bridge_types.plate_girder.bridge_geometry import (
+45:from osdagbridge.desktop.ui.docks.dock_utils import apply_field_style
+46:from osdagbridge.desktop.ui.utils.custom_widgets import RichCheckBox, PercentBarWidget, CustomRadioButton
+46:import numpy as np
+46:import numpy as np  # re-exported: tests and users access ospgrillage.np
+47:from osdagbridge.core.bridge_components.super_structure.cross_bracing.builder import (
+47:from osdagbridge.desktop.ui.dialogs.generate_results_dialog import GenerateResultsDialog
+47:import openseespy.opensees as ops  # re-exported: tests and users access ospgrillage.ops
+48:from osdagbridge.core.bridge_types.plate_girder.analysis_results import (
+48:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+48:from ospgrillage.utils import (
+48:import opsvis as opsv  # used internally by postprocessing (section_force_distribution_3d)
+49:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+49:import matplotlib.pyplot as plt  # re-exported: users access ospgrillage.plt
+4:from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_Transform, BRepBuilderAPI_MakePolygon, BRepBuilderAPI_MakeFace
+4:from PySide6.QtCore import Qt
+4:from PySide6.QtGui import QDoubleValidator
+4:from PySide6.QtGui import QIcon, QPixmap
+4:from PySide6.QtGui import QStandardItemModel
+4:from PySide6.QtWidgets import (
+4:from PySide6.QtWidgets import QLabel, QStackedLayout, QWidget
+4:from __future__ import annotations
+4:from contextlib import contextmanager
+4:from datetime import datetime
+4:from functools import lru_cache
+4:from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg
+4:from osdagbridge.core.utils.common import (
+4:from pathlib import Path
+4:from typing import Dict, List, Optional
+4:from typing import Literal, Optional, Union
+4:from typing import Optional
+4:from typing import Optional, Tuple
+4:import copy
+4:import io
+4:import math
+4:import matplotlib
+4:import multiprocessing as mp
+4:import numpy as np
+4:import os
+4:import re
+4:import sqlite3
+4:import warnings
+50:from ospgrillage.utils import *
+51:from osdagbridge.core.bridge_types.plate_girder.dto import (
+51:from ospgrillage.mesh import *
+52:from __future__ import annotations
+52:from ospgrillage.load import *
+53:from ospgrillage.material import *
+54:from ospgrillage.members import *
+54:from typing import TYPE_CHECKING
+55:from ospgrillage.osp_grillage import *
+56:from PySide6.QtWidgets import QPushButton
+56:from osdagbridge.core.reports.report_utils import _tex, _render_value
+56:from ospgrillage.postprocessing import *
+57:from osdagbridge.core.bridge_types.plate_girder.cad_generator import (
+57:from osdagbridge.core.utils.codes.keyfile import (
+5:from .export_ifc_handler import PlateGirderIfcExportHandler
+5:from .ui_fields import FrontendData
+5:from OCC.Core.BRepAlgoAPI import BRepAlgoAPI_Cut, BRepAlgoAPI_Fuse
+5:from PySide6.QtCore import QEvent, QPoint, QRect, QSize, QTimer, Qt
+5:from PySide6.QtGui import QDoubleValidator
+5:from PySide6.QtWidgets import (
+5:from PySide6.QtWidgets import QApplication, QVBoxLayout, QHBoxLayout, QDialog, QLabel, QProgressBar, QPushButton, QTextEdit, QWidget
+5:from PySide6.QtWidgets import QWidget
+5:from __future__ import annotations
+5:from copy import deepcopy
+5:from dataclasses import dataclass
+5:from matplotlib.figure import Figure
+5:from osdagbridge.core.reports.report_utils import _fig_or_placeholder, _render_value, _tex, get_girder_entries
+5:from osdagbridge.core.utils.codes.irc6_2017 import IRC6_2017
+5:from osdagbridge.core.utils.codes.keyfile import *
+5:from osdagbridge.desktop.ui.dialogs.generate_results_values_builder import (
+5:from osdagbridge.desktop.ui.utils.cad_palette import CAD_DIMENSION
+5:from typing import Any, Dict, Optional
+5:from typing import Callable, Optional, List
+5:import faulthandler
+5:import logging
+5:import math
+5:import matplotlib.pyplot as plt
+5:import re
+5:import types
+5:import uuid
+60:from osdagbridge.core.bridge_types.plate_girder import results_data
+61:from osdagbridge.core.utils.codes.is800_2007 import IS800_2007
+62:from osdagbridge.core.utils.common import *
+62:import xarray as xr
+63:from osdagbridge.desktop.ui.utils.custom_3dviewer import CustomViewer3d
+65:from osdagbridge.core.bridge_types.plate_girder.dto import (
+669:import sys
+670:from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout
+6:from .dto import (
+6:from PySide6 import QtCore
+6:from PySide6.QtCore import Qt
+6:from PySide6.QtCore import Qt, QTimer
+6:from PySide6.QtCore import Qt, QTimer, QPoint
+6:from PySide6.QtCore import Qt, Signal, QPoint, QPointF, QRect, QRectF, QUrl, QStandardPaths
+6:from PySide6.QtGui  import QColor, QFont, QPainter, QPen, QPolygon
+6:from PySide6.QtSvgWidgets import QSvgWidget
+6:from PySide6.QtWidgets import (
+6:from PySide6.QtWidgets import QWidget, QVBoxLayout, QTextEdit, QLabel
+6:from __future__ import annotations
+6:from math import ceil
+6:from math import isclose, floor, ceil
+6:from matplotlib.figure import Figure
+6:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+6:from osdagbridge.core.utils.codes.keyfile import LANE_REDUCTION_FACTORS
+6:from osdagbridge.core.utils.common import (
+6:from osdagbridge.core.utils.common import *
+6:from osdagbridge.desktop.ui.widgets.section_viewer import SectionPreviewWidget
+6:from pathlib import Path
+6:from typing import Dict, List
+6:from typing import TYPE_CHECKING
+6:import builtins
+6:import math
+6:import matplotlib.pyplot as plt
+6:import numpy as np
+6:import sys
+6:import time
+6:import uuid
+72:from osdagbridge.desktop.ui.utils.custom_cursors import pointing_hand_cursor
+73:from osdagbridge.core.reports.report_utils import _render_value, get_girder_entries, _tex
+75:from PySide6.QtWidgets import QApplication
+75:import math
+76:from PySide6.QtGui import QIcon
+77:from PySide6.QtCore import QFile, QTextStream
+78:from osdagbridge.desktop.resources import resources_rc
+7:from .dto import (
+7:from PySide6.QtCore import QPointF, QRectF, Qt
+7:from PySide6.QtCore import Qt
+7:from PySide6.QtCore import Qt, QDateTime, Signal
+7:from PySide6.QtCore import Qt, QFile, QTextStream, Signal, QTimer, QObject, QEvent, QThread
+7:from PySide6.QtGui import QColor, QPainter, QPen
+7:from PySide6.QtGui import QPainter, QColor, QPen, QFont, QIcon
+7:from PySide6.QtGui import QPainter, QPixmap, QImage, QBrush, QColor, QPen, QMouseEvent, QWheelEvent, QPainterPath
+7:from PySide6.QtWidgets import (
+7:from PySide6.QtWidgets import QApplication, QRubberBand, QToolTip, QWidget
+7:from PySide6.QtWidgets import QWidget, QVBoxLayout, QSplitter, QScrollArea, QHBoxLayout, QPushButton, QLabel
+7:from __future__ import annotations
+7:from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+7:from mpl_toolkits.mplot3d.art3d import Path3DCollection 
+7:from osdagbridge.core.utils.common import (
+7:from osdagbridge.core.utils.common import *
+7:from osdagbridge.desktop.ui.utils.custom_titlebar import CustomTitleBar
+7:from typing import Any
+7:from typing import Dict, List, Optional, Tuple
+7:import ast
+7:import contextlib
+7:import ifcopenshell
+7:import math
+7:import matplotlib.colors as mcolors
+7:import sqlite3
+7:import threading
+808:from osdagbridge.core.boq.boq_generator import calculate_material_quantities
+80:from OCC.Core.gp import gp_Ax1, gp_Dir
+81:from OCC.Core.BRepBuilderAPI import BRepBuilderAPI_Transform
+8:from .geometry import (
+8:from OCC.Core.gp import gp_Pnt, gp_Vec, gp_Trsf, gp_Dir, gp_Ax2, gp_Ax1,gp_Pnt2d, gp_Ax2d, gp_Dir2d
+8:from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve
+8:from PySide6.QtCore import Qt, QRectF
+8:from PySide6.QtGui import QColor
+8:from PySide6.QtGui import QColor, QFont, QPainter, QPaintEvent, QPainterPath, QPen, QTextDocument
+8:from PySide6.QtGui import QFont, QColor
+8:from PySide6.QtGui import QIcon, QAction, QKeySequence
+8:from PySide6.QtNetwork import QNetworkAccessManager, QNetworkRequest, QNetworkDiskCache, QNetworkReply
+8:from PySide6.QtWidgets import (
+8:from PySide6.QtWidgets import QSizePolicy, QWidget
+8:from PySide6.QtWidgets import QWidget, QPushButton, QScrollArea
+8:from __future__ import annotations
+8:from html import escape
+8:from matplotlib.figure import Figure
+8:from matplotlib.ticker import FuncFormatter
+8:from osdagbridge.core.bridge_components.super_structure.plate_girder.geometry import (
+8:from osdagbridge.core.ifc_export_bridge.bridge_cad_extraction import PlateGirderIFCExtractor
+8:from osdagbridge.core.ifc_export_bridge.bridge_geometry_mapper import BridgeGeometryMapper, create_ifc_guid
+8:from osdagbridge.core.reports.report_utils import _tex, _fig_embed
+8:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+8:from osdagbridge.core.utils.codes.keyfile import *
+8:from osdagbridge.core.utils.common import (
+8:from osdagbridge.core.utils.common import *
+8:from osdagbridge.desktop.ui.utils.custom_widgets import CustomRadioButton
+8:from typing import List
+8:from typing import TYPE_CHECKING
+8:import dataclasses
+8:import ifcopenshell
+8:import json
+8:import logging
+8:import math
+8:import numpy as np
+8:import re
+8:import sqlite3
+96:from PySide6.QtWidgets import QCheckBox, QLabel, QHBoxLayout
+97:from PySide6.QtWidgets import QCheckBox, QStyleOptionButton, QStyle, QApplication
+98:from PySide6.QtGui import QPainter, QTextDocument
+99:from PySide6.QtCore import Qt, QSize, QPoint
+9:from .cad_cross_section import CrossSectionCADWidget
+9:from OCC.Core.BRepBuilderAPI import (
+9:from OCC.Display import backend
+9:from PySide6.QtCore import QPointF, QRectF, Qt
+9:from PySide6.QtCore import Qt
+9:from PySide6.QtCore import Qt, QRectF, QPointF
+9:from PySide6.QtCore import Qt, QRectF, QPointF, QTimer, QSize
+9:from PySide6.QtGui import QColor, QPen, QPainter
+9:from PySide6.QtSvgWidgets import QSvgWidget
+9:from PySide6.QtWidgets import ( 
+9:from PySide6.QtWidgets import QHeaderView
+9:from PySide6.QtWidgets import QSizePolicy, QWidget
+9:from dataclasses import dataclass
+9:from matplotlib.ticker import MaxNLocator
+9:from osdagbridge.core.ifc_export_bridge.bridge_ifc_generator import BridgeIfcGenerator
+9:from osdagbridge.core.ifc_export_bridge.metadata_mapper import BridgeMetadataMapper
+9:from osdagbridge.core.utils.codes.irc5_2015 import IRC5_2015
+9:from osdagbridge.core.utils.codes.keyfile import (
+9:from osdagbridge.core.utils.codes.keyfile import *
+9:from osdagbridge.core.utils.common import (
+9:from osdagbridge.core.utils.common import *
+9:from osdagbridge.core.utils.logger import bridge_logger
+9:from osdagbridge.desktop.ui.dialogs.custom_messagebox import CustomMessageBox, MessageBoxType
+9:from pathlib import Path
+9:import logging
+9:import matplotlib.gridspec as gridspec
+9:import pprint
+9:import re
+9:import sys
+Binary file src/osdagbridge/desktop/ui/dialogs/additional_input/ui_builder/__pycache__/_segment_table_widget.cpython-312.pyc matches
+Binary file src/ospgrillage/__pycache__/osp_grillage.cpython-312.pyc matches

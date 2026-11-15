@@ -1,0 +1,142 @@
+{
+ "results": {
+  "A1": {
+   "label": "A1",
+   "status": "design_ok",
+   "runtime_s": 16.4,
+   "input_fingerprint": "585d83c42a00c16c2a57e7d0ffa63fd6e5c54b285cd0e493ae6b5375e76b2136",
+   "output_fingerprint": "1bf16c5f52cdc77d5bc2687fffa148e45df382757f0fb08211691ae89b1a6414",
+   "cad": {
+    "inputs": {
+     "geometry.span": 20.0,
+     "geometry.carriageway_width": 4.25,
+     "geometry.skew_angle": 0.0,
+     "typical_section.footpath_width": 0.0,
+     "typical_section.railing.width": 0.0,
+     "typical_section.no_of_footpaths": 0
+    },
+    "dto": {
+     "span_length_L": 20000.0,
+     "carriageway_width": 4250.0,
+     "skew_angle": 0.0,
+     "num_girders": 3,
+     "girder_spacing": 1716.6999999999998,
+     "footpath_config": "NONE",
+     "footpath_width": 0.0,
+     "railing_width": 0.0,
+     "deck_thickness": 250.0
+    }
+   }
+  },
+  "B": {
+   "label": "B",
+   "status": "design_ok",
+   "runtime_s": 34.7,
+   "input_fingerprint": "a207547e2943799a3aa72b34df808d92dffba1e2e68354e93e61b03e62b2e29f",
+   "output_fingerprint": "71ed47567cac2de771adf4fb293a7639a171d873010b72b87dd078657d148eb2"
+  },
+  "C": {
+   "label": "C",
+   "status": "design_ok",
+   "runtime_s": 71.9,
+   "input_fingerprint": "733506a32b8fcfec695ed3680be9545b17677cb226d46df4e79774a99ceb21c4",
+   "output_fingerprint": "61e0251f13d5d8f6a7400968f73b7dde56f972758991fc5882668d950725e2a6",
+   "cad": {
+    "inputs": {
+     "geometry.span": 30.0,
+     "geometry.carriageway_width": 9.0,
+     "geometry.skew_angle": 10.0,
+     "typical_section.footpath_width": 1.5,
+     "typical_section.railing.width": 0.375,
+     "typical_section.no_of_footpaths": 2
+    },
+    "dto": {
+     "span_length_L": 30000.0,
+     "carriageway_width": 9000.0,
+     "skew_angle": 10.0,
+     "num_girders": 6,
+     "girder_spacing": 2275.0,
+     "footpath_config": "BOTH",
+     "footpath_width": 1500.0,
+     "railing_width": 375.0,
+     "deck_thickness": 250.0
+    }
+   }
+  },
+  "A2": {
+   "label": "A2",
+   "status": "design_ok",
+   "runtime_s": 15.0,
+   "input_fingerprint": "585d83c42a00c16c2a57e7d0ffa63fd6e5c54b285cd0e493ae6b5375e76b2136",
+   "output_fingerprint": "27fbb7711bda415a04f5b4eef9dae7cb58da6f4405b7c83d1de379f986b06739"
+  },
+  "LIMITSOFF": {
+   "label": "LIMITSOFF",
+   "status": "design_ok",
+   "runtime_s": 16.9,
+   "input_fingerprint": "2c17c4fcbd72904a073a27ab3ae7821e1062f9ece03eb356d0726e5b4ddff240",
+   "output_fingerprint": "7f08382a16fc210221596a8b05596ebb47b1cbfe786daae31eb201de73db5238"
+  },
+  "A_fresh": {
+   "label": "A_fresh",
+   "status": "design_ok",
+   "runtime_s": 18.0,
+   "input_fingerprint": "585d83c42a00c16c2a57e7d0ffa63fd6e5c54b285cd0e493ae6b5375e76b2136",
+   "output_fingerprint": "305630b398b029a54d275b45033eff6a9a2c5ecb461be226c9ef17d15a79c0a1",
+   "cad": {
+    "inputs": {
+     "geometry.span": 20.0,
+     "geometry.carriageway_width": 4.25,
+     "geometry.skew_angle": 0.0,
+     "typical_section.footpath_width": 0.0,
+     "typical_section.railing.width": 0.0,
+     "typical_section.no_of_footpaths": 0
+    },
+    "dto": {
+     "span_length_L": 20000.0,
+     "carriageway_width": 4250.0,
+     "skew_angle": 0.0,
+     "num_girders": 3,
+     "girder_spacing": 1716.6999999999998,
+     "footpath_config": "NONE",
+     "footpath_width": 0.0,
+     "railing_width": 0.0,
+     "deck_thickness": 250.0
+    }
+   }
+  }
+ },
+ "checks": {
+  "A1_vs_A2_same_object": {
+   "run4_output_fingerprint": "27fbb7711bda415a04f5b4eef9dae7cb58da6f4405b7c83d1de379f986b06739",
+   "run1_output_fingerprint": "1bf16c5f52cdc77d5bc2687fffa148e45df382757f0fb08211691ae89b1a6414",
+   "identical_output": false,
+   "input_fingerprint_equal": true,
+   "output_diff_top_keys": [
+    "design_results.report_text"
+   ]
+  },
+  "A1_vs_A_fresh": {
+   "identical_output": false,
+   "output_diff_top_keys": [
+    "design_results.report_text"
+   ]
+  },
+  "A1_vs_LIMITSOFF": {
+   "identical_output": false,
+   "output_diff_top_keys": [
+    "design_options_cont.sls.crack_width",
+    "design_options_cont.sls.deflection_control",
+    "design_options_cont.sls.longitudinal_shear",
+    "design_options_cont.sls.stress_limitation",
+    "design_options_cont.uls.bending_resistance",
+    "design_options_cont.uls.fatigue",
+    "design_options_cont.uls.lateral_torsional_buckling",
+    "design_options_cont.uls.longitudinal_shear",
+    "design_options_cont.uls.transverse_force",
+    "design_options_cont.uls.vertical_shear",
+    "design_results.report_text"
+   ]
+  }
+ }
+}

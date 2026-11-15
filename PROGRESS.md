@@ -32,3 +32,6 @@
 
 ## Honest status
 - Nothing has been "run" yet for design cases; only import/validator smoke tests executed (see scripts/smoke_core.py output in notes).
+
+## Sessionized audit
+- [x] Phase 0 complete (2026-11-15): issues fetched (40), existing_issues.md compacted, STATE.md + all_issues_and_bugs.md created. Baseline missing.

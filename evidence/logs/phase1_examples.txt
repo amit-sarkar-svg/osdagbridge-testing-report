@@ -1,0 +1,21 @@
+FILE example_basic.yaml
+  top_keys: ['project']
+  has_real_dotted_span/cw/skew: False
+  validate.is_valid: True
+  validate.errors: []
+  validate.warnings: []
+---
+FILE verification_case_01.yaml
+  top_keys: NoneType
+  has_real_dotted_span/cw/skew: False
+  validate.is_valid: False
+  validate.errors: ['File does not contain a valid input dictionary.']
+  validate.warnings: []
+---
+FILE verification_case_02.yaml
+  top_keys: NoneType
+  has_real_dotted_span/cw/skew: False
+  validate.is_valid: False
+  validate.errors: ['File does not contain a valid input dictionary.']
+  validate.warnings: []
+---
