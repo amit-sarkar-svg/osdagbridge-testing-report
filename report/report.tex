@@ -38,6 +38,7 @@ Issue \#96 (new, filed) & Complete --- \url{https://github.com/Nidhikhare12/Osda
 Issue \#97 (new, filed, T3 static) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/97} \\
 Issue \#98 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/98} \\
 Issue \#99 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/99} \\
+Issue \#100 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/100} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -116,6 +117,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} add missing runtime deps and/or optional extras to match actual requirements, reconcile \texttt{pydantic}, and align manifests/README.
 
+\subsection{New issue filed: \#100 --- inconsistent dependency declarations across manifests (T6)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/100}
+
+\textbf{Statement.} \texttt{pyproject.toml}, \texttt{requirements.txt}, and \texttt{environment.yml} declare different package sets (e.g.\ \texttt{PySide6/numpy/ifcopenshell/openpyxl} present in requirements but not in pyproject deps; \texttt{matplotlib/openseespy/opsvis} differ; env relies on \texttt{osdag::osdag} and \texttt{-e .}), creating conflicting install guidance.
+
+\textbf{Evidence.} Manifests read from \texttt{dev @ d74f56d}; compared against actual imports/usage (\texttt{evidence/logs/phase1\_*}).
+
+\textbf{Suggested fix (posted in the issue).} establish a single source of truth (e.g.\ \texttt{pyproject} + extras), align/generate other manifests, and document per-workflow install paths.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -143,6 +153,7 @@ F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader
 P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static: \texttt{input\_dock.py:856--859}, lazy \texttt{template\_page.py:124,440--447}) & \textbf{ISSUE (T3)} $\rightarrow$ \#97 & \texttt{notes/issue\_drafts/01...} \\
 P1-001 & packaging/metadata & \texttt{osdag\_core 0.0.0} \texttt{Requires-Dist} includes bogus \texttt{sqlite} (not installable; stdlib is \texttt{sqlite3}) & \textbf{ISSUE (T5)} $\rightarrow$ \#98 & \texttt{evidence/logs/phase1\_installed\_meta.txt} \\
 P1-002 & packaging/pyproject & missing runtime deps (e.g.\ \texttt{PySide6}, \texttt{numpy}, \texttt{osdag\_core}, \texttt{yaml}, \texttt{OCC}) and unused \texttt{pydantic} vs \texttt{src} imports & \textbf{ISSUE (T5)} $\rightarrow$ \#99 & \texttt{evidence/logs/phase1\_p1\_002\_proof.txt} \\
+P1-003 & packaging/manifests & \texttt{pyproject.toml}, \texttt{requirements.txt}, \texttt{environment.yml} declare inconsistent dep sets & \textbf{ISSUE (T6)} $\rightarrow$ \#100 & manifests at \texttt{dev @ d74f56d} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

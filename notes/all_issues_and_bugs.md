@@ -40,6 +40,7 @@
 
 ### P1-003 — Inconsistent dependency declarations across `pyproject.toml`, `requirements.txt`, `environment.yml` (T6)
 - **Tier:** T6 (Documentation/naming/packaging wording-consistency)
+- **Filed:** [Nidhikhare12/OsdagBridge#100](https://github.com/Nidhikhare12/OsdagBridge/issues/100) (open, 2026-11-15) — draft: `notes/issue_drafts/08_inconsistent_dependency_manifests.md`
 - **Area:** Phase 1 — packaging files consistency
 - **Duplicate check:** full-body/title search (`evidence/logs/dupcheck_phase1_all.txt`): `requirements` no match; `environment.yml` appears only as environment context in unrelated issues (#25,#48,#64-#70,#84). **No duplicate found.**
 - **Evidence:** `pyproject.toml` `[scipy,fiona,shapely,pydantic,matplotlib,openseespy,opsvis,xarray]`; `requirements.txt` `PySide6>=6.5.0,<=6.9.3,numpy,scipy,fiona,shapely,pydantic,xarray,ifcopenshell,openpyxl` (omits e.g. matplotlib/openseespy/opsvis/osdag_core/yaml/navcube/OCC/plotly/pandas); `environment.yml` uses `osdag::osdag` and pip-installs `openseespy,opsvis,-e .`.

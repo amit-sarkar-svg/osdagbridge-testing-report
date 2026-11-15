@@ -24,6 +24,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 97 | Toggling input lock can crash when Additional Inputs dialog was never opened (`_additional_inputs_dialog` is None) | https://github.com/Nidhikhare12/OsdagBridge/issues/97 | open (T3 static) |
 | 98 | `osdag_core` dependency metadata declares bogus `sqlite` package (breaks clean dependency resolution) | https://github.com/Nidhikhare12/OsdagBridge/issues/98 | open (T5) |
 | 99 | `pyproject.toml` runtime dependencies omit required packages and declare unused `pydantic` | https://github.com/Nidhikhare12/OsdagBridge/issues/99 | open (T5) |
+| 100 | Inconsistent dependency declarations across `pyproject.toml`, `requirements.txt`, and `environment.yml` | https://github.com/Nidhikhare12/OsdagBridge/issues/100 | open (T6) |
 
 ## Duplicate-issue comment drafts (extra evidence)
 Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.
