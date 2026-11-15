@@ -22,6 +22,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 |---|-------|------|--------|
 | 96 | Loading a .osi file skips all custom-material validation — out-of-range material values load unchallenged | https://github.com/Nidhikhare12/OsdagBridge/issues/96 | open |
 | 97 | Toggling input lock can crash when Additional Inputs dialog was never opened (`_additional_inputs_dialog` is None) | https://github.com/Nidhikhare12/OsdagBridge/issues/97 | open (T3 static) |
+| 98 | `osdag_core` dependency metadata declares bogus `sqlite` package (breaks clean dependency resolution) | https://github.com/Nidhikhare12/OsdagBridge/issues/98 | open (T5) |
 
 (older duplicates / extra-evidence comments to #88, #19, #20, #42, #92 are documented in notes/findings.md)
 

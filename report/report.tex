@@ -36,6 +36,7 @@ Validator-boundary pytest suite (31 checks) & Complete --- 18 pass / 1 confirmed
 Headless design pipeline (probe) & Complete --- full \texttt{design()} OK in 60.5\,s \\
 Issue \#96 (new, filed) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/96} \\
 Issue \#97 (new, filed, T3 static) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/97} \\
+Issue \#98 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/98} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -96,6 +97,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (diff posted in the issue).} guard the dereference, e.g. \texttt{dlg = getattr(self.parent, "\_additional\_inputs\_dialog", None)} then call \texttt{dlg.lock(...)} only if not \texttt{None}.
 
+\subsection{New issue filed: \#98 --- \texttt{osdag\_core} metadata declares bogus \texttt{sqlite} dependency (T5)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/98}
+
+\textbf{Statement.} The installed \texttt{osdag\_core 0.0.0} package used with OsdagBridge declares \texttt{sqlite} in its \texttt{Requires-Dist} metadata. \texttt{sqlite} is not a valid/installable PyPI distribution for the stdlib module (\texttt{sqlite3}); this can break dependency resolution in clean environments.
+
+\textbf{Evidence.} \texttt{importlib.metadata.distribution("osdag\_core").metadata.get\_all("Requires-Dist")} includes \texttt{'sqlite'} (recorded in \texttt{evidence/logs/phase1\_installed\_meta.txt}); \texttt{tests/test\_phase1\_packaging.py::test\_osdag\_core\_declares\_bogus\_sqlite\_dep} confirms it.
+
+\textbf{Suggested fix (posted in the issue).} remove \texttt{sqlite} from \texttt{osdag\_core} \texttt{Requires-Dist} (stdlib \texttt{sqlite3} needs no pip dependency) or reference a corrected build in OsdagBridge setup.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -121,6 +131,7 @@ PYT-04 & validator NaN & span = NaN & \textbf{NaN accepted} (dup \#88) & pytest 
 PYT-05 & OSI round trip & dict $\rightarrow$ \texttt{yaml.dump} $\rightarrow$ \texttt{safe\_load} $\rightarrow$ equality + validation & PASS & \texttt{tests/test\_osi\_round\_trip.py} \\
 F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader vs.\ the dialog check & \textbf{BUG} $\rightarrow$ \#96 & \texttt{evidence/analyze/osi\_material\_bypass.txt} \\
 P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static: \texttt{input\_dock.py:856--859}, lazy \texttt{template\_page.py:124,440--447}) & \textbf{ISSUE (T3)} $\rightarrow$ \#97 & \texttt{notes/issue\_drafts/01...} \\
+P1-001 & packaging/metadata & \texttt{osdag\_core 0.0.0} \texttt{Requires-Dist} includes bogus \texttt{sqlite} (not installable; stdlib is \texttt{sqlite3}) & \textbf{ISSUE (T5)} $\rightarrow$ \#98 & \texttt{evidence/logs/phase1\_installed\_meta.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

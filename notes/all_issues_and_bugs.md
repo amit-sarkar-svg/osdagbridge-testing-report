@@ -22,6 +22,7 @@
 
 ### P1-001 — `osdag_core` metadata declares bogus `sqlite` dependency (T5)
 - **Tier:** T5 (Installation or environment blocker)
+- **Filed:** [Nidhikhare12/OsdagBridge#98](https://github.com/Nidhikhare12/OsdagBridge/issues/98) (open, 2026-11-15) — draft: `notes/issue_drafts/06_osdag_core_bogus_sqlite_dependency.md`
 - **Area:** Phase 1 — packaging/dependencies (installed dependency metadata)
 - **Duplicate check:** full-body/title search via `scripts/search_issues.py` over `notes/issues_raw.json` (`evidence/logs/dupcheck_phase1_all.txt`): keywords `sqlite`, `osdag_core` — hits are #20/#42 (SQLite DB usage in design), unrelated to `osdag_core` pip metadata declaring a `sqlite` distribution. **No duplicate found.**
 - **Evidence:** `evidence/logs/phase1_installed_meta.txt` (`osdag_core 0.0.0`): `Requires-Dist: ['pylatex', 'numpy', 'PyYaml', 'Click', 'pandas', 'sqlite', 'PySide6']`. `tests/test_phase1_packaging.py::test_osdag_core_declares_bogus_sqlite_dep` PASS. `pip index versions sqlite` → no matching distribution (stdlib module is `sqlite3`).
