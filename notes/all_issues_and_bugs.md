@@ -48,6 +48,7 @@
 
 ### P1-004 — README documents CLI commands that the stub CLI ignores (T6)
 - **Tier:** T6 (Documentation/usage wording vs behavior)
+- **Filed:** [Nidhikhare12/OsdagBridge#101](https://github.com/Nidhikhare12/OsdagBridge/issues/101) (open, 2026-11-15) — draft: `notes/issue_drafts/09_readme_cli_commands_but_stub_ignores_args.md`
 - **Area:** Phase 1 — README & CLI entry point
 - **Duplicate check:** full-body/title search (`evidence/logs/dupcheck_phase1_all.txt`): `README` no match; `CLI` hits refer to UI "click"/actions, not `osdagbridge-cli`. **No duplicate found.**
 - **Evidence:** `README.md` shows `osdagbridge analyze project.yaml --solver native` and `osdagbridge report project.yaml report.pdf`. Actual (`evidence/logs/phase1_entrypoints.txt`): `osdagbridge-cli --help` and `osdagbridge-cli analyze project.yaml` both print `osdagbridge CLI (stub)` (exit 0). `src/osdagbridge/cli/__main__.py:4-6`: `def main(): print("osdagbridge CLI (stub)")`. `tests/test_phase1_packaging.py::test_cli_stub_ignores_args` PASS.

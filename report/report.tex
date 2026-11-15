@@ -126,6 +126,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} establish a single source of truth (e.g.\ \texttt{pyproject} + extras), align/generate other manifests, and document per-workflow install paths.
 
+\subsection{New issue filed: \#101 --- README documents CLI usage but CLI entrypoint is a stub that ignores arguments (T6)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/101}
+
+\textbf{Statement.} \texttt{README.md} presents CLI support and documents example commands (e.g.\ \texttt{osdagbridge analyze project.yaml --solver native}, \texttt{osdagbridge report project.yaml report.pdf}), but the installed console script \texttt{osdagbridge-cli} (\texttt{pyproject.toml:85}) resolves to \texttt{osdagbridge.cli.\_\_main\_\_.main} which only prints \texttt{"osdagbridge CLI (stub)"} and ignores all arguments including \texttt{--help}.
+
+\textbf{Evidence.} \texttt{README.md:4,18,102,108,154}; \texttt{src/osdagbridge/cli/\_\_main\_\_.py} stub; invocations recorded in \texttt{evidence/logs/phase1\_entrypoints.txt}; \texttt{tests/test\_phase1\_packaging.py::test\_cli\_stub\_ignores\_args}.
+
+\textbf{Suggested fix (posted in the issue).} implement argument parsing and documented commands, or clearly mark CLI as unimplemented/WIP in README and align documented vs installed command names.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -154,6 +163,7 @@ P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static:
 P1-001 & packaging/metadata & \texttt{osdag\_core 0.0.0} \texttt{Requires-Dist} includes bogus \texttt{sqlite} (not installable; stdlib is \texttt{sqlite3}) & \textbf{ISSUE (T5)} $\rightarrow$ \#98 & \texttt{evidence/logs/phase1\_installed\_meta.txt} \\
 P1-002 & packaging/pyproject & missing runtime deps (e.g.\ \texttt{PySide6}, \texttt{numpy}, \texttt{osdag\_core}, \texttt{yaml}, \texttt{OCC}) and unused \texttt{pydantic} vs \texttt{src} imports & \textbf{ISSUE (T5)} $\rightarrow$ \#99 & \texttt{evidence/logs/phase1\_p1\_002\_proof.txt} \\
 P1-003 & packaging/manifests & \texttt{pyproject.toml}, \texttt{requirements.txt}, \texttt{environment.yml} declare inconsistent dep sets & \textbf{ISSUE (T6)} $\rightarrow$ \#100 & manifests at \texttt{dev @ d74f56d} \\
+P1-004 & docs/CLI & README documents CLI commands/support but \texttt{osdagbridge-cli} entrypoint is a stub ignoring args/\texttt{--help} & \textbf{ISSUE (T6)} $\rightarrow$ \#101 & \texttt{evidence/logs/phase1\_entrypoints.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
