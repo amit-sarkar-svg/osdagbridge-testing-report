@@ -32,6 +32,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 130 | Integer validators raise `OverflowError` on `inf`/`-inf` instead of returning a validation message | https://github.com/Nidhikhare12/OsdagBridge/issues/130 | open (T2) |
 | 131 | `saveOSI_inputs` uses `yaml.dump` (unsafe tags) while load uses `yaml.safe_load` — round-trip can fail | https://github.com/Nidhikhare12/OsdagBridge/issues/131 | open (T2) |
 | 132 | Skew sign not mirror-symmetric: +15°/−15° give different design demands for a symmetric bridge | https://github.com/Nidhikhare12/OsdagBridge/issues/132 | open (T2) |
+| 133 | Valid inputs (span 45 m + median + footpaths) make `design()` run >10 minutes without completing | https://github.com/Nidhikhare12/OsdagBridge/issues/133 | open (T2) |
 
 ## Duplicate-issue comment drafts (extra evidence)
 Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.

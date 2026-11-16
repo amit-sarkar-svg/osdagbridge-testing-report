@@ -246,6 +246,14 @@
 - **Evidence (read-only):** `saveOSI_inputs` does not append `.osi` if missing or normalize case (`.OSI`/`.yaml`) — relies on dialog/filter; overwrite confirmation not explicitly coded (OS/dialog-dependent). `loadOSI_inputs` catches exceptions and shows error (no "Loaded OSI Successfully!" on failure), rejects non-dict/invalid via `validate_osi_inputs` before populate, but `populate_from_dict` called after validation (partial-state risk if populate throws mid-way is implementation-dependent). Empty/binary/dir/permission errors surface via exception handler.
 - **Notes:** no GUI-driven file I/O execution this session (T3 for unexecuted paths); yaml round-trip type issue captured separately as P4I-001.
 
+### P5-005 — `design()` non-termination on valid span-45 + median + footpath inputs (T2)
+- **Tier:** T2 (likely performance/hang bug)
+- **Filed:** [Nidhikhare12/OsdagBridge#133](https://github.com/Nidhikhare12/OsdagBridge/issues/133) (open, 2026-11-17) — draft: `notes/issue_drafts/17_design_nontermination_span45_median_footpath.md`
+- **Area:** Phase 4 — crash/timeout sweep
+- **Duplicate check:** searched `hang`/`slow`/`timeout`/`non-converg` in refreshed issues — no match. No duplicate.
+- **Evidence (executed):** SW03 (span45, cw15, skew−15, foot Both Sides, median Yes) and SW06 (span45, cw15, skew+15, foot Single Side, median Yes) both exceeded the 600 s per-case timeout (`evidence/logs/design_sweep_run.log`); SW03 rerun without timeout consumed >12 min CPU with no result before being stopped. Controls complete in 28–261 s. `fsolve` non-convergence warning (`ospgrillage/utils.py:555`) and repeated `thermal_load not available` warnings in case logs.
+- **Expected vs actual:** valid in-limits inputs should finish in time comparable to other cases or raise a clear error; **actual:** hangs >10 min with no output.
+
 ## Phase 4 — headless design harness + oracle/metamorphic (2026-11-17, session 3)
 
 ### P5-004 — Skew sign is not mirror-symmetric: +θ vs −θ give different design demands (T2)

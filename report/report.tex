@@ -46,6 +46,7 @@ Issue \#129 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#130 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/130} \\
 Issue \#131 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/131} \\
 Issue \#132 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/132} \\
+Issue \#133 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/133} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -196,6 +197,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} make live-load placement / oblique-mesh load mapping mirror-invariant; regression test that DCR magnitudes for positive and negative skew match within tolerance.
 
+\subsection{New issue filed: \#133 --- \texttt{design()} non-termination on valid span-45 + median + footpath inputs (T2)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/133}
+
+\textbf{Statement.} Valid in-limits inputs (span 45 m, cw 15 m, median Yes, footpaths) make \texttt{design()} exceed 600 s without producing output; a no-timeout rerun consumed $>12$ min CPU with no result. Control cases complete in 28--261 s. Non-convergent \texttt{fsolve} warnings appear in the case logs.
+
+\textbf{Evidence.} \texttt{evidence/logs/design\_sweep\_run.log} (SW03/SW06 timeout), \texttt{evidence/logs/SW03\_rerun.log}, \texttt{dictionaries/SW03/case.log}, controls \texttt{dictionaries/OR\_SPAN45/result.json}.
+
+\textbf{Suggested fix (posted in the issue).} bound the moving-load/envelope solver so non-convergent cases terminate with a clear warning; add a regression test with a time budget.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -231,6 +241,7 @@ P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range c
 P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} (5 integer keys) instead of message & \textbf{ISSUE (T2)} $\rightarrow$ \#130 & \texttt{evidence/logs/trackF\_validator\_fuzz.txt} \\
 P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (round-trip can fail) & \textbf{ISSUE (T2)} $\rightarrow$ \#131 & \texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt} \\
 P5-004 & analysis/skew & skew sign not mirror-symmetric: positive vs negative skew give different design demands (2 pairs) & \textbf{ISSUE (T2)} $\rightarrow$ \#132 & \texttt{dictionaries/OR\_SKEW*/output.json} \\
+P5-005 & analysis/performance & \texttt{design()} non-termination ($>$10 min) on valid span-45 + median + footpath inputs & \textbf{ISSUE (T2)} $\rightarrow$ \#133 & \texttt{evidence/logs/design\_sweep\_run.log} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
