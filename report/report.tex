@@ -41,6 +41,7 @@ Issue \#99 (new, filed, T5) & Complete --- \url{https://github.com/Nidhikhare12/
 Issue \#100 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/100} \\
 Issue \#101 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/101} \\
 Issue \#127 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/127} \\
+Issue \#128 (new, filed, T7) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/128} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -146,6 +147,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} populate with valid representative inputs that pass validation, or clearly mark/exclude as placeholders.
 
+\subsection{New issue filed: \#128 --- \texttt{example\_basic.yaml} uses placeholder keys but passes validation vacuously (T7)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/128}
+
+\textbf{Statement.} \texttt{examples/plate\_girder/example\_basic.yaml} uses a placeholder schema (e.g.\ \texttt{project.span\_m}) with no real dotted OSI keys (e.g.\ \texttt{geometry.span}), yet \texttt{validate\_osi\_inputs} returns \texttt{is\_valid=True} with no errors/warnings because it polices only present known keys.
+
+\textbf{Evidence.} \texttt{evidence/logs/phase1\_examples.txt}: top-level \texttt{['project']}, no real span/cw/skew dotted keys, \texttt{validate.is\_valid=True}; \texttt{tests/test\_phase1\_packaging.py::test\_examples\_parse\_and\_validate}.
+
+\textbf{Suggested fix (posted in the issue).} provide real OSI-key example values, or clearly mark as a non-loadable placeholder/template.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -176,6 +186,7 @@ P1-002 & packaging/pyproject & missing runtime deps (e.g.\ \texttt{PySide6}, \te
 P1-003 & packaging/manifests & \texttt{pyproject.toml}, \texttt{requirements.txt}, \texttt{environment.yml} declare inconsistent dep sets & \textbf{ISSUE (T6)} $\rightarrow$ \#100 & manifests at \texttt{dev @ d74f56d} \\
 P1-004 & docs/CLI & README documents CLI commands/support but \texttt{osdagbridge-cli} entrypoint is a stub ignoring args/\texttt{--help} & \textbf{ISSUE (T6)} $\rightarrow$ \#101 & \texttt{evidence/logs/phase1\_entrypoints.txt} \\
 P1-005 & docs/examples & \texttt{verification\_case\_01/02.yaml} are empty placeholders (no valid input dict), fail validation & \textbf{ISSUE (T6)} $\rightarrow$ \#127 & \texttt{evidence/logs/phase1\_examples.txt} \\
+P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but passes \texttt{validate\_osi\_inputs} vacuously & \textbf{ISSUE (T7)} $\rightarrow$ \#128 & \texttt{evidence/logs/phase1\_examples.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

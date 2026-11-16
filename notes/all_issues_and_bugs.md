@@ -64,6 +64,7 @@
 
 ### P1-006 — `example_basic.yaml` uses non-real keys yet passes `validate_osi_inputs` vacuously (T7)
 - **Tier:** T7 (Oddity that might be intended)
+- **Filed:** [Nidhikhare12/OsdagBridge#128](https://github.com/Nidhikhare12/OsdagBridge/issues/128) (open, 2026-11-17) — draft: `notes/issue_drafts/12_example_basic_vacuous_validation.md`
 - **Area:** Phase 1 — examples vs OSI validator behavior
 - **Duplicate check:** full-body/title search (`evidence/logs/dupcheck_phase1_all.txt`): `example`/`yaml` hits relate to load/validation bugs (#19,#67,#69,#88), not this shipped example's placeholder schema. **No duplicate found.**
 - **Evidence:** `evidence/logs/phase1_examples.txt`: top-level key `['project']`, no real dotted keys (`geometry.span`/`geometry.carriageway_width`/`geometry.skew_angle`), `validate_osi_inputs` → `is_valid=True, errors=[], warnings=[]`. `tests/test_phase1_packaging.py::test_examples_parse_and_validate` PASS. Validator polices only *present* known keys and does not require basic inputs at load.

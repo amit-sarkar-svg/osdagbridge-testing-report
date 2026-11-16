@@ -27,6 +27,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 100 | Inconsistent dependency declarations across `pyproject.toml`, `requirements.txt`, and `environment.yml` | https://github.com/Nidhikhare12/OsdagBridge/issues/100 | open (T6) |
 | 101 | README documents CLI usage but installed CLI entrypoint is a stub that ignores arguments | https://github.com/Nidhikhare12/OsdagBridge/issues/101 | open (T6) |
 | 127 | `verification_case_01.yaml` and `verification_case_02.yaml` are empty placeholders that fail OSI validation | https://github.com/Nidhikhare12/OsdagBridge/issues/127 | open (T6) |
+| 128 | `example_basic.yaml` uses placeholder keys but passes `validate_osi_inputs` vacuously | https://github.com/Nidhikhare12/OsdagBridge/issues/128 | open (T7) |
 
 ## Duplicate-issue comment drafts (extra evidence)
 Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.
