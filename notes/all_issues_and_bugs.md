@@ -233,6 +233,7 @@
 
 ### P4I-001 — `saveOSI_inputs` uses `yaml.dump` (unsafe tags) incompatible with `yaml.safe_load` on load (T2)
 - **Tier:** T2 (Likely save/load round-trip bug)
+- **Filed:** [Nidhikhare12/OsdagBridge#131](https://github.com/Nidhikhare12/OsdagBridge/issues/131) (open, 2026-11-17) — draft: `notes/issue_drafts/15_save_osi_yaml_dump_unsafe_tags_break_safe_load.md`
 - **Area:** Track I — `desktop/ui/template_page.py` save/load OSI
 - **Duplicate check:** `scripts/search_issues.py "yaml.dump"`, `"python/object"`, `"safe_load"` — no matching issue for unsafe-dump vs safe-load incompatibility.
 - **Evidence (executed):** `evidence/logs/trackI_yaml_dump_safe_load.txt`: `yaml.dump({"a": np.float64(1.5), "t": (1,2), "s": {1,2}})` emits `!!python/...`, `!!python/tuple`, `!!set`; `yaml.safe_load` raises `ConstructorError`. Code: `saveOSI_inputs` (~793–820) calls `yaml.dump(self.input_dict, input_file)`; `loadOSI_inputs` (~827+) calls `yaml.safe_load(f)`.

@@ -30,6 +30,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 128 | `example_basic.yaml` uses placeholder keys but passes `validate_osi_inputs` vacuously | https://github.com/Nidhikhare12/OsdagBridge/issues/128 | open (T7) |
 | 129 | `validate_material_inputs` skips range checks for cross-bracing/end-diaphragm material keys | https://github.com/Nidhikhare12/OsdagBridge/issues/129 | open (T2) |
 | 130 | Integer validators raise `OverflowError` on `inf`/`-inf` instead of returning a validation message | https://github.com/Nidhikhare12/OsdagBridge/issues/130 | open (T2) |
+| 131 | `saveOSI_inputs` uses `yaml.dump` (unsafe tags) while load uses `yaml.safe_load` — round-trip can fail | https://github.com/Nidhikhare12/OsdagBridge/issues/131 | open (T2) |
 
 ## Duplicate-issue comment drafts (extra evidence)
 Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.

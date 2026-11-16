@@ -44,6 +44,7 @@ Issue \#127 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#128 (new, filed, T7) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/128} \\
 Issue \#129 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/129} \\
 Issue \#130 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/130} \\
+Issue \#131 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/131} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -176,6 +177,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} reject non-finite values before integer conversion (e.g. in \texttt{\_to\_int}) and return an appropriate validation message.
 
+\subsection{New issue filed: \#131 --- \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (T2)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/131}
+
+\textbf{Statement.} \texttt{saveOSI\_inputs} writes with \texttt{yaml.dump} while \texttt{loadOSI\_inputs} reads with \texttt{yaml.safe\_load}; unsafe Python tags (e.g. numpy scalars, tuples, sets) can be saved but fail to load.
+
+\textbf{Evidence.} Executed YAML round-trip (\texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt}): dump of dict containing \texttt{np.float64}, tuple, set produces \texttt{!!python/...}/\texttt{!!set}/\texttt{!!python/tuple} tags and \texttt{yaml.safe\_load} raises \texttt{ConstructorError}. Code: \texttt{template\_page.py} $\approx$793--850.
+
+\textbf{Suggested fix (posted in the issue).} use \texttt{yaml.safe\_dump} and/or normalize types (numpy scalars, tuples, sets) before saving for safe round-trip.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -209,6 +219,7 @@ P1-005 & docs/examples & \texttt{verification\_case\_01/02.yaml} are empty place
 P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but passes \texttt{validate\_osi\_inputs} vacuously & \textbf{ISSUE (T7)} $\rightarrow$ \#128 & \texttt{evidence/logs/phase1\_examples.txt} \\
 P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range checks for CB/ED material keys (girder/deck only) & \textbf{ISSUE (T2)} $\rightarrow$ \#129 & \texttt{evidence/logs/phase3\_drift\_check.txt} \\
 P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} (5 integer keys) instead of message & \textbf{ISSUE (T2)} $\rightarrow$ \#130 & \texttt{evidence/logs/trackF\_validator\_fuzz.txt} \\
+P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (round-trip can fail) & \textbf{ISSUE (T2)} $\rightarrow$ \#131 & \texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
