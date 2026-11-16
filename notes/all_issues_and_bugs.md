@@ -56,6 +56,7 @@
 
 ### P1-005 — `examples/plate_girder/verification_case_01.yaml` and `02` are empty placeholders (T6)
 - **Tier:** T6 (Documentation/example content)
+- **Filed:** [Nidhikhare12/OsdagBridge#127](https://github.com/Nidhikhare12/OsdagBridge/issues/127) (open, 2026-11-17) — draft: `notes/issue_drafts/11_empty_verification_example_placeholders.md`
 - **Area:** Phase 1 — examples
 - **Duplicate check:** full-body/title search (`evidence/logs/dupcheck_phase1_all.txt`): `example`/`verification` hits unrelated to these shipped files. **No duplicate found.**
 - **Evidence:** `evidence/logs/phase1_examples.txt`: both load as `None`/no keys, `validate_osi_inputs` → `is_valid=False`, errors `['File does not contain a valid input dictionary.']`. `tests/test_phase1_packaging.py::test_examples_parse_and_validate` PASS.
@@ -148,3 +149,43 @@
 - **Duplicate check:** n/a.
 - **Evidence:** Attempt 1: `evidence/logs/phase2_offscreen_attempt1.txt` (exit 127, `timeout` unavailable). Attempt 2: `evidence/logs/phase2_offscreen_attempt2.txt` (exit 0 but `AttributeError: 'P' object has no attribute 'input_values'` at `docks/input_dock.py:92` inside `InputDock.__init__` with minimal harness). Stopped after 2 attempts per rules.
 - **What blocked:** harness incompatibility/time constraints; dict read-back via live dock instantiation not achieved, so affected checks remained static (T3).
+
+## Phase 3 — Validation rule drift (2026-11-17)
+
+### P3-001 — `validate_material_inputs` has no range-validation branches for cross-bracing/end-diaphragm material keys (T2)
+- **Tier:** T2 (Likely bug / validation gap)
+- **Area:** Phase 3 — `core/bridge_types/plate_girder/validator.py` `BridgeInputValidator.validate_material_inputs`
+- **Duplicate check:** searched refreshed issues (through #126) via `scripts/search_issues.py`: `cross_bracing.fy`/`end_diaphragm.fy` no direct match; #118 covers cross-field consistency (fu<fy, G vs E,ν) and per-field dialog checks but not missing core per-field branches for CB/ED; #43/#125 cover storage/consumption/staleness, not range validation. **No duplicate found.**
+- **Evidence:** `scripts/drift_check.py` + `evidence/logs/phase3_drift_check.txt` (executed in `osdagbridge-env`, clone on sys.path). Calls show girder ranges enforced but cross-bracing/end-diaphragm keys accepted without correction:
+  - `validate_material_inputs(KEY_MATERIAL_GIRDER_FY, 5000)` → rejected `(1200.0, 'Yield Strength, Fy must be between 100.0 and 1200.0 MPa.')`
+  - `validate_material_inputs(KEY_MATERIAL_CROSS_BRACING_FY, 5000)` → `ACCEPTED (None)`
+  - `validate_material_inputs(KEY_MATERIAL_END_DIAPHRAGM_FY, 5000)` → `ACCEPTED (None)`
+  - CB/ED samples also accepted: `material.cross_bracing.fu=2000`, `material.cross_bracing.e=500`, `material.cross_bracing.density=200`, `material.end_diaphragm.fu=2000`, `material.end_diaphragm.density=200` → `ACCEPTED`. No stiffener material keys found in `common.py`.
+- **Code (read-only):** `validator.py:78-172` implements branches only for `KEY_MATERIAL_GIRDER_*` and `KEY_MATERIAL_DECK_*`; `material.cross_bracing.*` and `material.end_diaphragm.*` keys fall through to `return None`.
+- **Expected vs actual:** per-field custom material range validation should apply consistently to all steel components that accept custom properties (girder, cross bracing, end diaphragm) or be explicitly scoped; **actual:** core `validate_material_inputs` validates girder/deck only and silently accepts out-of-range CB/ED material values.
+- **Notes:** dialog-level behavior and custom-material flows differ (see #118/#43/#76/#125); this finding is specific to `BridgeInputValidator.validate_material_inputs`. OSI load-time also skips material validation (#96).
+
+### P3-002 — OSI validator does not police unknown enum values for `structure.type`, `geometry.include_median`, `geometry.footpath` (T7)
+- **Tier:** T7 (Oddity that might be intended; tolerant load behavior)
+- **Area:** Phase 3 — `core/utils/osi_validator.py`
+- **Duplicate check:** no matching issue found for these specific enum keys being accepted at OSI load (design.mode is validated; #96 covers material keys).
+- **Evidence:** `evidence/logs/phase3_drift_check.txt`: `OsiInputValidator().validate({...})` returns `valid=True, errors=[]` for `structure.type='Railway Bridge'`, `geometry.include_median='Maybe'`, `geometry.footpath='Triple'`. `design.mode` unknown is correctly rejected when using `KEY_DESIGN_MODE` (`geometry.design_mode`): `valid=False` with expected-modes error (separate probe in log/session). OSI validator only runs `_validate_design_mode` and present-value checks for `_BASIC_KEYS`/`_ADDITIONAL_KEYS`.
+- **Expected vs actual:** unknown/unsupported enum selections could be rejected at load for consistency; **actual:** accepted (tolerant). May be intentional to avoid blocking hand-edited files, but can defer invalid state to later stages.
+
+### P3-003 — `_ADDITIONAL_KEYS` entries with no numeric bound enforced by `validate_additional_inputs` (T3)
+- **Tier:** T3 (Static/executed observation — bounds may be intentionally unspecified)
+- **Area:** Phase 3 — `validator.py` vs `osi_validator.py` `_ADDITIONAL_KEYS`
+- **Duplicate check:** not searched as a single umbrella issue (heterogeneous keys); no specific duplicate identified.
+- **Evidence:** `evidence/logs/phase3_drift_check.txt`: of 57 `_ADDITIONAL_KEYS`, 41 produced a limit response to extreme values (±1e9) and **16 produced no limit response** (accepted/None, no exception): `loading.live_load.footpath_pressure.value`, `loading.seismic_load.dead_load.value`, `loading.seismic_load.live_load.value`, `loading.wind_load.gust_factor.value`, `loading.wind_load.drag_coeff.value`, `loading.wind_load.drag_coeff_ll.value`, `loading.wind_load.lift_coeff.value`, `loading.wind_load.super_area_elev.value`, `loading.wind_load.super_area_plain.value`, `loading.wind_load.exposed_frontal_area.value`, `loading.temperature_load.thermal_coeff_steel`, `loading.temperature_load.thermal_coeff_rcc`, `design_options.shear_studs.height`, `design_options.shear_studs.transverse_spacing`, `design_options_cont.camber.mode`, `design_options_cont.camber.value`. `osi_validator` delegates to `validate_additional_inputs`, so load-time behavior matches (no bounds) for these when present.
+- **Notes:** some are mode/non-numeric or may be intentionally unbounded; not asserted as bugs without domain-specific limits. Recorded for drift visibility.
+
+### P3-004 — Basic/median cross-field and basic ranges consistent at core and OSI-load (present values) (T8)
+- **Tier:** T8 (Checked and correct, within tested scope)
+- **Area:** Phase 3 — `validate_basic_inputs` vs `osi_validator`
+- **Evidence:** `evidence/logs/phase3_drift_check.txt`: span/cw/skew basic keys enforced by both (present-only at load). Median Yes with carriageway 6.0 m rejected consistently: `validate_basic_inputs` returns required width 7.50 m; `osi_validator` returns `valid=False` with same error. Material girder/deck ranges enforced in `validate_material_inputs`; OSI load still skips `material.*` keys (consistent with #96).
+
+### P3-005 — Lint (ruff/pyflakes) on `src/osdagbridge/core` unavailable in environment (T9)
+- **Tier:** T9 (Could not test as requested tool unavailable)
+- **Area:** Phase 3 — static lint
+- **Evidence:** `evidence/logs/phase3_lint_core.txt` shows `ruff`, `pyflakes`, and `flake8` not found (env/system).
+- **What blocked:** no requested linter installed; top-10 triage not produced.
