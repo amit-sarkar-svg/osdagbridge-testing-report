@@ -1,0 +1,283 @@
+Rc files read (in order):
+  NONE
+Latexmk: This is Latexmk, John Collins, 9 March 2026. Version 4.88.
+Latexmk: applying rule 'pdflatex'...
+Rule 'pdflatex':  Reasons for rerun
+Changed files or newly in use/created:
+  report/report.tex
+Category 'changed_user':
+  report/report.tex
+
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex  -interaction=nonstopmode -halt-on-error -recorder -output-directory="report/build"  "report/report.tex"'
+------------
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./report/report.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/size11.clo))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstpatch.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/lstmisc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/listings/listings.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+))) (/usr/local/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+(report/build/report.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/local/texlive/2026/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/local/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(report/build/report.out) (report/build/report.out)
+Overfull \hbox (213.01485pt too wide) in paragraph at lines 28--53
+[] 
+[1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (23.74483pt too wide) in paragraph at lines 68--69
+[]\OT1/cmr/m/n/10.95 UI--core flow ver-i-fied in \OT1/cmtt/m/n/10.95 template[]
+page.py\OT1/cmr/m/n/10.95 : \OT1/cmr/bx/n/10.95 De-sign \OT1/cmr/m/n/10.95 = []
+\OT1/cmtt/m/n/10.95 prime[]material[]inputs() $\OMS/cmsy/m/n/10.95 !$ \OT1/cmtt
+/m/n/10.95 set[]input()
+
+Overfull \hbox (22.97954pt too wide) in paragraph at lines 68--69
+\OMS/cmsy/m/n/10.95 !$ \OT1/cmtt/m/n/10.95 design()\OT1/cmr/m/n/10.95 ; \OT1/cm
+r/bx/n/10.95 Save \OT1/cmr/m/n/10.95 = \OT1/cmtt/m/n/10.95 solve[]extend[]basic
+[]input[]dict() $\OMS/cmsy/m/n/10.95 !$ \OT1/cmtt/m/n/10.95 yaml.dump\OT1/cmr/m
+/n/10.95 ; \OT1/cmr/bx/n/10.95 Load \OT1/cmr/m/n/10.95 = \OT1/cmtt/m/n/10.95 ya
+ml.safe[]load
+
+Overfull \hbox (52.61644pt too wide) in paragraph at lines 69--70
+[]\OT1/cmr/m/n/10.95 Headless fi-delity: the UI's material-priming step was re-
+pro-duced with-out Qt (\OT1/cmtt/m/n/10.95 scripts/ui[]emulation.py\OT1/cmr/m/n
+/10.95 )
+
+Overfull \hbox (51.21132pt too wide) in paragraph at lines 103--104
+[]\OT1/cmr/bx/n/10.95 Statement. \OT1/cmr/m/n/10.95 Lock/unlock prop-a-gates st
+ate to the Ad-di-tional In-puts di-a-log, but \OT1/cmtt/m/n/10.95 InputDock.tog
+gle[]lock()
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[2{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}]
+Overfull \hbox (127.37653pt too wide) in paragraph at lines 105--106
+[]\OT1/cmr/bx/n/10.95 Evidence (read-only, file:line). \OT1/cmtt/m/n/10.95 inpu
+t[]dock.py:856--859 \OT1/cmr/m/n/10.95 calls \OT1/cmtt/m/n/10.95 self.parent.[]
+additional[]inputs[]dialog.lock(...)
+
+Overfull \hbox (33.16626pt too wide) in paragraph at lines 107--108
+[]\OT1/cmr/bx/n/10.95 Suggested fix (diff posted in the is-sue). \OT1/cmr/m/n/1
+0.95 guard the deref-er-ence, e.g. \OT1/cmtt/m/n/10.95 dlg = getattr(self.paren
+t,
+
+Overfull \hbox (53.11855pt too wide) in paragraph at lines 114--115
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmtt/m/n/10.95 importlib.metadata.distribu
+tion("osdag[]core").metadata.get[]all("Requires-Dist")
+
+Overfull \hbox (313.89095pt too wide) in paragraph at lines 114--115
+\OT1/cmr/m/n/10.95 in-cludes \OT1/cmtt/m/n/10.95 'sqlite' \OT1/cmr/m/n/10.95 (r
+ecorded in \OT1/cmtt/m/n/10.95 evidence/logs/phase1[]installed[]meta.txt\OT1/cm
+r/m/n/10.95 ); \OT1/cmtt/m/n/10.95 tests/test[]phase1[]packaging.py::test[]osda
+g[]core[]declares[]bogus[]sqlite[]dep
+
+Overfull \hbox (111.70367pt too wide) in paragraph at lines 121--122
+[]\OT1/cmr/bx/n/10.95 Statement. \OT1/cmtt/m/n/10.95 pyproject.toml \OT1/cmr/m/
+n/10.95 de-clares \OT1/cmtt/m/n/10.95 [scipy,fiona,shapely,pydantic,matplotlib,
+openseespy,opsvis,xarray]
+
+Overfull \hbox (157.42506pt too wide) in paragraph at lines 123--124
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmr/m/n/10.95 Im-port/usage proof in \OT1/
+cmtt/m/n/10.95 evidence/logs/phase1[]imports[]clean.txt \OT1/cmr/m/n/10.95 and 
+\OT1/cmtt/m/n/10.95 evidence/logs/phase1[]p1[]002[]proof.txt\OT1/cmr/m/n/10.95 
+;
+
+Overfull \hbox (103.1344pt too wide) in paragraph at lines 132--133
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmr/m/n/10.95 Man-i-fests read from \OT1/c
+mtt/m/n/10.95 dev @ d74f56d\OT1/cmr/m/n/10.95 ; com-pared against ac-tual im-po
+rts/usage (\OT1/cmtt/m/n/10.95 evidence/logs/phase1[]*\OT1/cmr/m/n/10.95 ). 
+
+Overfull \hbox (19.6657pt too wide) in paragraph at lines 139--140
+[]\OT1/cmr/bx/n/10.95 Statement. \OT1/cmtt/m/n/10.95 README.md \OT1/cmr/m/n/10.
+95 presents CLI sup-port and doc-u-ments ex-am-ple com-mands (e.g. \OT1/cmtt/m/
+n/10.95 osdagbridge
+
+Overfull \hbox (8.20175pt too wide) in paragraph at lines 139--140
+\OT1/cmtt/m/n/10.95 analyze project.yaml --solver native\OT1/cmr/m/n/10.95 , \O
+T1/cmtt/m/n/10.95 osdagbridge report project.yaml report.pdf\OT1/cmr/m/n/10.95 
+), but
+
+Overfull \hbox (62.68904pt too wide) in paragraph at lines 139--140
+\OT1/cmr/m/n/10.95 the in-stalled con-sole script \OT1/cmtt/m/n/10.95 osdagbrid
+ge-cli \OT1/cmr/m/n/10.95 (\OT1/cmtt/m/n/10.95 pyproject.toml:85\OT1/cmr/m/n/10
+.95 ) re-solves to \OT1/cmtt/m/n/10.95 osdagbridge.cli.[][]main[][].main
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[3]
+Overfull \hbox (146.13727pt too wide) in paragraph at lines 141--142
+\OT1/cmr/m/n/10.95 tions recorded in \OT1/cmtt/m/n/10.95 evidence/logs/phase1[]
+entrypoints.txt\OT1/cmr/m/n/10.95 ; \OT1/cmtt/m/n/10.95 tests/test[]phase1[]pac
+kaging.py::test[]cli[]stub[]ignores[]args\OT1/cmr/m/n/10.95 . 
+
+Overfull \hbox (37.49974pt too wide) in paragraph at lines 148--149
+[]\OT1/cmr/bx/n/10.95 Statement. \OT1/cmtt/m/n/10.95 examples/plate[]girder/ver
+ification[]case[]01.yaml \OT1/cmr/m/n/10.95 and \OT1/cmtt/m/n/10.95 verificatio
+n[]case[]02.yaml
+
+Overfull \hbox (27.93547pt too wide) in paragraph at lines 150--151
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmtt/m/n/10.95 evidence/logs/phase1[]examp
+les.txt\OT1/cmr/m/n/10.95 : both load as \OT1/cmtt/m/n/10.95 None\OT1/cmr/m/n/1
+0.95 /no keys with \OT1/cmtt/m/n/10.95 is[]valid=False\OT1/cmr/m/n/10.95 ,
+
+Overfull \hbox (213.68886pt too wide) in paragraph at lines 150--151
+\OT1/cmr/m/n/10.95 er-ror \OT1/cmtt/m/n/10.95 ['File does not contain a valid i
+nput dictionary.']\OT1/cmr/m/n/10.95 ; \OT1/cmtt/m/n/10.95 tests/test[]phase1[]
+packaging.py::test[]examples[]parse[]and[]validate\OT1/cmr/m/n/10.95 . 
+
+Overfull \hbox (12.08635pt too wide) in paragraph at lines 159--160
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmtt/m/n/10.95 evidence/logs/phase1[]examp
+les.txt\OT1/cmr/m/n/10.95 : top-level \OT1/cmtt/m/n/10.95 ['project']\OT1/cmr/m
+/n/10.95 , no real span/cw/skew
+
+Overfull \hbox (79.34276pt too wide) in paragraph at lines 159--160
+\OT1/cmr/m/n/10.95 dot-ted keys, \OT1/cmtt/m/n/10.95 validate.is[]valid=True\OT
+1/cmr/m/n/10.95 ; \OT1/cmtt/m/n/10.95 tests/test[]phase1[]packaging.py::test[]e
+xamples[]parse[]and[]validate\OT1/cmr/m/n/10.95 . 
+
+Overfull \hbox (51.09627pt too wide) in paragraph at lines 166--167
+\OT1/cmr/m/n/10.95 girder/deck ma-te-rial keys but has no branches for \OT1/cmt
+t/m/n/10.95 material.cross[]bracing.* \OT1/cmr/m/n/10.95 or \OT1/cmtt/m/n/10.95
+ material.end[]diaphragm.*\OT1/cmr/m/n/10.95 ,
+
+Overfull \hbox (26.20369pt too wide) in paragraph at lines 168--169
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmr/m/n/10.95 Ex-e-cuted calls in \OT1/cmt
+t/m/n/10.95 scripts/drift[]check.py \OT1/cmr/m/n/10.95 (\OT1/cmtt/m/n/10.95 evi
+dence/logs/phase3[]drift[]check.txt\OT1/cmr/m/n/10.95 ):
+
+Overfull \hbox (39.34343pt too wide) in paragraph at lines 177--178
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmr/m/n/10.95 Ex-e-cuted fuzz (\OT1/cmtt/m
+/n/10.95 scripts/validator[]fuzz.py\OT1/cmr/m/n/10.95 , \OT1/cmtt/m/n/10.95 evi
+dence/logs/trackF[]validator[]fuzz.*\OT1/cmr/m/n/10.95 ):
+
+Overfull \hbox (35.43118pt too wide) in paragraph at lines 177--178
+\OT1/cmr/m/n/10.95 10 ex-cep-tions for \OT1/cmtt/m/n/10.95 KEY[]TS[]NO[]OF[]GIR
+DERS\OT1/cmr/m/n/10.95 , \OT1/cmtt/m/n/10.95 KEY[]WC[]LD[]LANE[]TABLE[]COUNT\OT
+1/cmr/m/n/10.95 , \OT1/cmtt/m/n/10.95 KEY[]MP[]CB[]NO[]OF[]CROSS[]BRACINGS\OT1/
+cmr/m/n/10.95 ,
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[4]
+Overfull \hbox (41.23755pt too wide) in paragraph at lines 184--185
+[]\OT1/cmr/bx/n/10.95 Statement. \OT1/cmtt/m/n/10.95 saveOSI[]inputs \OT1/cmr/m
+/n/10.95 writes with \OT1/cmtt/m/n/10.95 yaml.dump \OT1/cmr/m/n/10.95 while \OT
+1/cmtt/m/n/10.95 loadOSI[]inputs \OT1/cmr/m/n/10.95 reads with \OT1/cmtt/m/n/10
+.95 yaml.safe[]load\OT1/cmr/m/n/10.95 ;
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 195.
+
+
+Overfull \hbox (72.2812pt too wide) in paragraph at lines 195--196
+[]\OT1/cmr/bx/n/10.95 Evidence. \OT1/cmtt/m/n/10.95 dictionaries/OR[]SKEW\OMS/c
+mtt/m/n/10.95 f\OT1/cmtt/m/n/10.95 15,M15,75,M75\OMS/cmtt/m/n/10.95 g\OT1/cmtt/
+m/n/10.95 /output.json\OT1/cmr/m/n/10.95 , \OT1/cmtt/m/n/10.95 evidence/logs/or
+acle[]runs\OMS/cmtt/m/n/10.95 f\OT1/cmtt/m/n/10.95 1,2\OMS/cmtt/m/n/10.95 g\OT1
+/cmtt/m/n/10.95 .log\OT1/cmr/m/n/10.95 ;
+
+! LaTeX Error: Unicode character θ (U+03B8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.197 ...gression test that DCR magnitudes for +θ
+                                                   and -θ match within tole...
+
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on report/build/report.log.
+Latexmk: Getting log file 'report/build/report.log'
+Latexmk: Examining 'report/build/report.fls'
+Latexmk: Examining 'report/build/report.log'
+Latexmk: Summary of warnings from last run of *latex:
+  =====Latex reported missing or unavailable character(s).
+=====See log file for details.
+Latexmk: ====Problematic refs and citations with line #s in .tex file:
+  ! LaTeX Error: Unicode character θ (U+03B8)
+Latexmk: Errors, so I did not complete making targets
+Collected error summary (may duplicate other messages):
+  pdflatex: Command for 'pdflatex' gave return code 1
+      Refer to 'report/build/report.log' and/or above output for details
+
+Latexmk: Sometimes, the -f option can be used to get latexmk
+  to try to force complete processing.
+  But normally, you will need to correct the file(s) that caused the
+  error, and then rerun latexmk.
+  In some cases, it is best to clean out generated files before rerunning
+  latexmk after you've corrected the files.

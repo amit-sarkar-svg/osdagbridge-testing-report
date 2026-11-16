@@ -45,6 +45,7 @@ Issue \#128 (new, filed, T7) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#129 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/129} \\
 Issue \#130 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/130} \\
 Issue \#131 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/131} \\
+Issue \#132 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/132} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -186,6 +187,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} use \texttt{yaml.safe\_dump} and/or normalize types (numpy scalars, tuples, sets) before saving for safe round-trip.
 
+\subsection{New issue filed: \#132 --- skew sign is not mirror-symmetric (T2)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/132}
+
+\textbf{Statement.} For a symmetric section (no median/footpath), flipping skew sign mirrors the bridge; demands should match. Executed headless designs (span 30, cw 10.5, Optimized) show +15° vs -15°: \texttt{util.shear} 59.28 vs 41.08, \texttt{util.fatigue} 183.74 vs 167.06; +7.5° vs -7.5°: 62.32 vs 42.18, 182.25 vs 175.33 — while self-weight checks are identical. Sign of a symmetric parameter changes the design.
+
+\textbf{Evidence.} \texttt{dictionaries/OR\_SKEW\{15,M15,75,M75\}/output.json}, \texttt{evidence/logs/oracle\_runs\{1,2\}.log}; scripts \texttt{oracle\_runs.py}, \texttt{design\_runner.py}.
+
+\textbf{Suggested fix (posted in the issue).} make live-load placement / oblique-mesh load mapping mirror-invariant; regression test that DCR magnitudes for +θ and -θ match within tolerance.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -220,6 +230,7 @@ P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but pas
 P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range checks for CB/ED material keys (girder/deck only) & \textbf{ISSUE (T2)} $\rightarrow$ \#129 & \texttt{evidence/logs/phase3\_drift\_check.txt} \\
 P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} (5 integer keys) instead of message & \textbf{ISSUE (T2)} $\rightarrow$ \#130 & \texttt{evidence/logs/trackF\_validator\_fuzz.txt} \\
 P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (round-trip can fail) & \textbf{ISSUE (T2)} $\rightarrow$ \#131 & \texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt} \\
+P5-004 & analysis/skew & skew sign not mirror-symmetric: +\texttheta{} vs $-\theta$ give different design demands (2 pairs) & \textbf{ISSUE (T2)} $\rightarrow$ \#132 & \texttt{dictionaries/OR\_SKEW*/output.json} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

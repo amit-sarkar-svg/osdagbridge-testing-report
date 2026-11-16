@@ -245,3 +245,30 @@
 - **Area:** Track I — `desktop/ui/template_page.py` save/load
 - **Evidence (read-only):** `saveOSI_inputs` does not append `.osi` if missing or normalize case (`.OSI`/`.yaml`) — relies on dialog/filter; overwrite confirmation not explicitly coded (OS/dialog-dependent). `loadOSI_inputs` catches exceptions and shows error (no "Loaded OSI Successfully!" on failure), rejects non-dict/invalid via `validate_osi_inputs` before populate, but `populate_from_dict` called after validation (partial-state risk if populate throws mid-way is implementation-dependent). Empty/binary/dir/permission errors surface via exception handler.
 - **Notes:** no GUI-driven file I/O execution this session (T3 for unexecuted paths); yaml round-trip type issue captured separately as P4I-001.
+
+## Phase 4 — headless design harness + oracle/metamorphic (2026-11-17, session 3)
+
+### P5-004 — Skew sign is not mirror-symmetric: +θ vs −θ give different design demands (T2)
+- **Tier:** T2 (likely analysis bug — sign-dependent results)
+- **Filed:** [Nidhikhare12/OsdagBridge#132](https://github.com/Nidhikhare12/OsdagBridge/issues/132) (open, 2026-11-17) — draft: `notes/issue_drafts/16_skew_sign_mirror_asymmetry.md`
+- **Area:** Phase 4 — mirror-symmetry metamorphic check (analysis)
+- **Duplicate check:** `scripts/search_issues.py` for `skew`/`mirror`/`asymmetric`: closest #89 (skewed per-girder omission), #124 (inconsistent width) — neither compares +θ vs −θ sign. No duplicate.
+- **Evidence (executed):** headless designs from defaults, span 30 / cw 10.5 / no median / no footpath / Optimized, only skew sign differs. ±15°: `util.shear` 59.28 vs 41.08, `util.fatigue` 183.74 vs 167.06, `util.mu_applied` 2602.12 vs 2376.38; ±7.5°: `util.shear` 62.32 vs 42.18, `util.fatigue` 182.25 vs 175.33. Self-weight checks identical (`util.long_trans_shear` 21.52 both; stiffener leg 1.479 both). Confirmed in two independent sign pairs (`dictionaries/OR_SKEW*/output.json`, `evidence/logs/oracle_runs1.log`, `oracle_runs2.log`).
+- **Expected vs actual:** for a symmetric section, +θ and −θ are mirror images → equal demand magnitudes; **actual:** +skew consistently ~44–48% higher shear, ~9% higher moment. Sign of symmetric parameter affects design.
+- **Likely area:** `analyser.py` `create_grillage(skew=self.angle, mesh_type="Oblique")` (~L275) + `load_placement.py` load mapping; exact line under investigation.
+
+### P5-001 — Headless design harness works from defaults (no baseline.osi required) (T8)
+- **Tier:** T8 (checked and correct — harness capability)
+- **Area:** Phase 4 — `scripts/design_runner.py`
+- **Evidence (executed):** built a 688-key input dict from `BASIC_INPUT_DICT` + `solve_extend_basic_input_dict` + `prime_material_inputs(in_session)`; `PlateGirderBridge().set_input(d); design()` completed (`dictionaries/SMOKE/result.json`: status ok, runtime 71.7–79.1 s, 1304 top-level output keys). `project.location=None` is handled by design (seismic falls back to Zone II z=0.10) — no weather data invented.
+- **Notes:** `design()` returns `output_dict` as a `mappingproxy`; harness converts via `dict()`. 25-case crash sweep launched (`scripts/design_sweep.py`, `evidence/logs/design_sweep_run.log`).
+
+### P5-002 — Smoke-case output invariants pass (T8)
+- **Tier:** T8 (checked and correct)
+- **Area:** Phase 4 — invariant/oracle check on `dictionaries/SMOKE/output.json`
+- **Evidence (executed):** 0 NaN/inf values, 0 negative thickness/depth/width among scalar output fields; `util.*` values 21.52–187.06 (these are DCR×100 percent, confirmed by `plategirderbridge.py:4102` `*100` and `report_generator` `/100` in `chap5.py:219`); `steeldesign.details.moment.mu_applied=2646.84` kNm vs `md_capacity=11477.22` kNm → DCR 0.231, consistent with printed design-check table. Units consistent across keys (section depth 1.67 m in `member_properties` vs 1670 mm in `steeldesign.details.total_depth`).
+
+### P5-003 — "thermal_load load case not available" warnings at load combinations (T4, dup #92)
+- **Tier:** T4 (Duplicate — #92 "canonical temperature inputs do not create thermal load cases")
+- **Area:** Phase 4 — smoke-case log
+- **Evidence (executed):** `evidence/logs/design_smoke2.log` shows repeated `UserWarning: BASIC_1..BASIC_6, ACCIDENTAL_1: 'thermal_load' load case not available — create it before calling create_uls_combinations()` (analyser.py:2381). Same root condition as #92; not re-reported.
