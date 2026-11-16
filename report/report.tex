@@ -42,6 +42,7 @@ Issue \#100 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#101 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/101} \\
 Issue \#127 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/127} \\
 Issue \#128 (new, filed, T7) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/128} \\
+Issue \#129 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/129} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -156,6 +157,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} provide real OSI-key example values, or clearly mark as a non-loadable placeholder/template.
 
+\subsection{New issue filed: \#129 --- \texttt{validate\_material\_inputs} skips range checks for cross-bracing/end-diaphragm material keys (T2)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/129}
+
+\textbf{Statement.} \texttt{BridgeInputValidator.validate\_material\_inputs} enforces per-field ranges for girder/deck material keys but has no branches for \texttt{material.cross\_bracing.*} or \texttt{material.end\_diaphragm.*}, so out-of-range CB/ED custom material values are accepted.
+
+\textbf{Evidence.} Executed calls in \texttt{scripts/drift\_check.py} (\texttt{evidence/logs/phase3\_drift\_check.txt}): girder Fy=5000 rejected; cross-bracing/end-diaphragm Fy=5000 and sampled Fu/E/density extremes accepted (returned \texttt{None}). Code: \texttt{validator.py} $\approx$L78--172 handles only girder/deck keys.
+
+\textbf{Suggested fix (posted in the issue).} extend per-field validation to CB/ED steel material keys (same/component-appropriate ranges) or explicitly handle/flag them.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -187,6 +197,7 @@ P1-003 & packaging/manifests & \texttt{pyproject.toml}, \texttt{requirements.txt
 P1-004 & docs/CLI & README documents CLI commands/support but \texttt{osdagbridge-cli} entrypoint is a stub ignoring args/\texttt{--help} & \textbf{ISSUE (T6)} $\rightarrow$ \#101 & \texttt{evidence/logs/phase1\_entrypoints.txt} \\
 P1-005 & docs/examples & \texttt{verification\_case\_01/02.yaml} are empty placeholders (no valid input dict), fail validation & \textbf{ISSUE (T6)} $\rightarrow$ \#127 & \texttt{evidence/logs/phase1\_examples.txt} \\
 P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but passes \texttt{validate\_osi\_inputs} vacuously & \textbf{ISSUE (T7)} $\rightarrow$ \#128 & \texttt{evidence/logs/phase1\_examples.txt} \\
+P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range checks for CB/ED material keys (girder/deck only) & \textbf{ISSUE (T2)} $\rightarrow$ \#129 & \texttt{evidence/logs/phase3\_drift\_check.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

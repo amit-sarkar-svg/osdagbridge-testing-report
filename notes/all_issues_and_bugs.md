@@ -155,6 +155,7 @@
 
 ### P3-001 — `validate_material_inputs` has no range-validation branches for cross-bracing/end-diaphragm material keys (T2)
 - **Tier:** T2 (Likely bug / validation gap)
+- **Filed:** [Nidhikhare12/OsdagBridge#129](https://github.com/Nidhikhare12/OsdagBridge/issues/129) (open, 2026-11-17) — draft: `notes/issue_drafts/10_p3_validate_material_inputs_missing_cb_ed_branches.md`
 - **Area:** Phase 3 — `core/bridge_types/plate_girder/validator.py` `BridgeInputValidator.validate_material_inputs`
 - **Duplicate check:** searched refreshed issues (through #126) via `scripts/search_issues.py`: `cross_bracing.fy`/`end_diaphragm.fy` no direct match; #118 covers cross-field consistency (fu<fy, G vs E,ν) and per-field dialog checks but not missing core per-field branches for CB/ED; #43/#125 cover storage/consumption/staleness, not range validation. **No duplicate found.**
 - **Evidence:** `scripts/drift_check.py` + `evidence/logs/phase3_drift_check.txt` (executed in `osdagbridge-env`, clone on sys.path). Calls show girder ranges enforced but cross-bracing/end-diaphragm keys accepted without correction:
