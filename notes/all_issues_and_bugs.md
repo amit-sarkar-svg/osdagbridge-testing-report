@@ -191,3 +191,56 @@
 - **Area:** Phase 3 — static lint
 - **Evidence:** `evidence/logs/phase3_lint_core.txt` shows `ruff`, `pyflakes`, and `flake8` not found (env/system).
 - **What blocked:** no requested linter installed; top-10 triage not produced.
+
+## Tracks F–I (validation fuzz, location/weather, LaTeX escaping, OSI file I/O) — 2026-11-17 (session 2)
+
+### P4F-001 — Integer additional-input validators raise `OverflowError` on `inf`/`-inf` instead of a validation message (T2)
+- **Tier:** T2 (Likely bug — uncaught exception)
+- **Filed:** [Nidhikhare12/OsdagBridge#130](https://github.com/Nidhikhare12/OsdagBridge/issues/130) (open, 2026-11-17) — draft: `notes/issue_drafts/14_validator_integer_fields_raise_overflowerror_on_inf.md`
+- **Area:** Track F — `core/bridge_types/plate_girder/validator.py` `validate_additional_inputs` / `_to_int`
+- **Duplicate check:** `scripts/search_issues.py "OverflowError"`, `"infinity"` on refreshed `notes/issues_raw.json` — no match. #88 is NaN/nonfinite acceptance (different symptom).
+- **Evidence (executed):** `scripts/validator_fuzz.py` → `evidence/logs/trackF_validator_fuzz.txt`, `evidence/logs/trackF_validator_fuzz.json` (5460 calls, 242 flags, 10 exceptions). `inf`/`-inf` cause `OverflowError: cannot convert float infinity to integer` for `KEY_TS_NO_OF_GIRDERS`, `KEY_WC_LD_LANE_TABLE_COUNT`, `KEY_MP_CB_NO_OF_CROSS_BRACINGS`, `KEY_DS_STUD_COUNT`, `KEY_DO_LOAD_CYCLES` (2 values × 5 keys).
+- **Expected vs actual:** invalid non-finite integer input should yield a validation correction/message; **actual:** uncaught `OverflowError`.
+- **Draft:** `notes/issue_drafts/14_validator_integer_fields_raise_overflowerror_on_inf.md`
+
+### P4F-002 — Non-finite `NaN`/`inf` accepted as valid by many validators (T4, dup/root-cause overlap #88)
+- **Tier:** T4 (Duplicate root-cause overlap — #88 NaN/nonfinite acceptance)
+- **Area:** Track F — `validate_basic_inputs`, `validate_material_inputs`, `validate_additional_inputs` (via `_to_float`/comparison behavior)
+- **Duplicate check:** #88 "[Bug] OSI validation accepts NaN physical inputs..." cites `BridgeInputValidator._to_float` and nonfinite handling; same underlying acceptance of NaN/nonfinite values.
+- **Evidence (executed):** `scripts/validator_fuzz.py` flags `naninf_valid` = 132 (basic 3, material 12, additional 117) where validators returned `None` (treated as valid) for `nan` (and in some cases related non-finite paths). Log: `evidence/logs/trackF_validator_fuzz.txt/json`.
+- **Extra detail:** scope extends across many material/additional keys beyond examples in #88; `inf` on float-handled paths can be accepted or trigger other behavior depending on branch (separate from integer OverflowError in P4F-001).
+
+### P4F-003 — `bool` values accepted as numeric inputs in multiple validators (T7)
+- **Tier:** T7 (Oddity; Python `bool` is `int` subclass — sometimes numerically within range)
+- **Area:** Track F — numeric validators
+- **Duplicate check:** no specific existing issue found for bool-as-number acceptance.
+- **Evidence (executed):** `scripts/validator_fuzz.py` flags `bool_valid` = 100 (e.g. `geometry.skew_angle` accepts `True/False`, various material/additional keys accept `True/False` when coerced value falls in range). Full list in `evidence/logs/trackF_validator_fuzz.json`.
+- **Notes:** not all are invalid (e.g. False==0 can be in-range), but accepting booleans as numeric inputs may be unintended; recorded as executed oddity.
+
+### P4G-001 — Map coordinate validator accepts out-of-range and out-of-India coordinates; weather validator accepts unknown zone strings (T7)
+- **Tier:** T7 (Oddity/weak validation; behavior may be intentional scope)
+- **Area:** Track G — `validate_map_coordinates`, `validate_custom_weather_data`
+- **Duplicate check:** no matching existing issue found for these specific cases.
+- **Evidence (executed):** `scripts/location_fuzz.py` → `evidence/logs/trackG_location_weather.txt/json` (34 cases, 0 exceptions). `validate_map_coordinates` returns valid for out-of-range lat/lon (90.0001, 180.0001), swapped lat/lon, and outside-India location (40.7128,-74.0060); only checks non-empty numeric parse. `validate_custom_weather_data` rejects `Select Zone` but accepts `UNKNOWN` and empty string as zone when wind/temps valid.
+- **Notes:** module is IRC/India-context per task; validator does not enforce geographic/zone bounds beyond current checks.
+
+### P4H-001 — LaTeX escaping for free-text report fields not fully verified headlessly (T3)
+- **Tier:** T3 (Static/partial — not fully executed end-to-end)
+- **Area:** Track H — `core/reports/*`
+- **Duplicate check:** many report/LaTeX issues exist; did not claim new bug without executed failing repro.
+- **Evidence (read-only):** `grep` found no `pylatex/NoEscape/escape_latex`; custom escaping present in `core/reports/report_utils.py` (e.g. backslash/colon handling) and partial char escaping in `core/reports/chap8.py` (`_ % & #`). `report_generator.py` invokes pdflatex via `osdag_latex_env`/subprocess (per grep). No headless report generation with special-char strings (`A&B`, `%`, `_`, `#`, `{}`, `$`, `~`, `^`, unicode, 300-char) executed this session.
+- **What blocked:** end-to-end report build with controlled free-text inputs not exercised; completeness of escaping for all user free-text fields (project name/client/location/remarks etc.) remains unverified.
+
+### P4I-001 — `saveOSI_inputs` uses `yaml.dump` (unsafe tags) incompatible with `yaml.safe_load` on load (T2)
+- **Tier:** T2 (Likely save/load round-trip bug)
+- **Area:** Track I — `desktop/ui/template_page.py` save/load OSI
+- **Duplicate check:** `scripts/search_issues.py "yaml.dump"`, `"python/object"`, `"safe_load"` — no matching issue for unsafe-dump vs safe-load incompatibility.
+- **Evidence (executed):** `evidence/logs/trackI_yaml_dump_safe_load.txt`: `yaml.dump({"a": np.float64(1.5), "t": (1,2), "s": {1,2}})` emits `!!python/...`, `!!python/tuple`, `!!set`; `yaml.safe_load` raises `ConstructorError`. Code: `saveOSI_inputs` (~793–820) calls `yaml.dump(self.input_dict, input_file)`; `loadOSI_inputs` (~827+) calls `yaml.safe_load(f)`.
+- **Expected vs actual:** saved OSI should round-trip via safe load; **actual:** unsafe tags can make saved files unloadable.
+- **Draft:** `notes/issue_drafts/15_save_osi_yaml_dump_unsafe_tags_break_safe_load.md`
+
+### P4I-002 — OSI save/load static observations (extension handling, overwrite, error paths) (T8/T7 mix, partial)
+- **Tier:** T8/T7 (checked behavior/observations, static + limited reasoning)
+- **Area:** Track I — `desktop/ui/template_page.py` save/load
+- **Evidence (read-only):** `saveOSI_inputs` does not append `.osi` if missing or normalize case (`.OSI`/`.yaml`) — relies on dialog/filter; overwrite confirmation not explicitly coded (OS/dialog-dependent). `loadOSI_inputs` catches exceptions and shows error (no "Loaded OSI Successfully!" on failure), rejects non-dict/invalid via `validate_osi_inputs` before populate, but `populate_from_dict` called after validation (partial-state risk if populate throws mid-way is implementation-dependent). Empty/binary/dir/permission errors surface via exception handler.
+- **Notes:** no GUI-driven file I/O execution this session (T3 for unexecuted paths); yaml round-trip type issue captured separately as P4I-001.

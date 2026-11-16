@@ -43,6 +43,7 @@ Issue \#101 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#127 (new, filed, T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/127} \\
 Issue \#128 (new, filed, T7) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/128} \\
 Issue \#129 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/129} \\
+Issue \#130 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/130} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -166,6 +167,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} extend per-field validation to CB/ED steel material keys (same/component-appropriate ranges) or explicitly handle/flag them.
 
+\subsection{New issue filed: \#130 --- integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} instead of a validation message (T2)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/130}
+
+\textbf{Statement.} \texttt{BridgeInputValidator.validate\_additional\_inputs} raises \texttt{OverflowError: cannot convert float infinity to integer} for \texttt{inf}/\texttt{-inf} on several integer fields instead of returning a validation correction/message.
+
+\textbf{Evidence.} Executed fuzz (\texttt{scripts/validator\_fuzz.py}, \texttt{evidence/logs/trackF\_validator\_fuzz.*}): 10 exceptions for \texttt{KEY\_TS\_NO\_OF\_GIRDERS}, \texttt{KEY\_WC\_LD\_LANE\_TABLE\_COUNT}, \texttt{KEY\_MP\_CB\_NO\_OF\_CROSS\_BRACINGS}, \texttt{KEY\_DS\_STUD\_COUNT}, \texttt{KEY\_DO\_LOAD\_CYCLES}.
+
+\textbf{Suggested fix (posted in the issue).} reject non-finite values before integer conversion (e.g. in \texttt{\_to\_int}) and return an appropriate validation message.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -198,6 +208,7 @@ P1-004 & docs/CLI & README documents CLI commands/support but \texttt{osdagbridg
 P1-005 & docs/examples & \texttt{verification\_case\_01/02.yaml} are empty placeholders (no valid input dict), fail validation & \textbf{ISSUE (T6)} $\rightarrow$ \#127 & \texttt{evidence/logs/phase1\_examples.txt} \\
 P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but passes \texttt{validate\_osi\_inputs} vacuously & \textbf{ISSUE (T7)} $\rightarrow$ \#128 & \texttt{evidence/logs/phase1\_examples.txt} \\
 P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range checks for CB/ED material keys (girder/deck only) & \textbf{ISSUE (T2)} $\rightarrow$ \#129 & \texttt{evidence/logs/phase3\_drift\_check.txt} \\
+P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} (5 integer keys) instead of message & \textbf{ISSUE (T2)} $\rightarrow$ \#130 & \texttt{evidence/logs/trackF\_validator\_fuzz.txt} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)
