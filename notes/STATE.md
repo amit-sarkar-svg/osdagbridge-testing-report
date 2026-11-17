@@ -24,20 +24,21 @@
 ## Tier counts (new findings, this audit — cumulative)
 | Tier | Count |
 |---|---:|
-| T1 Confirmed bug | 0 |
+| T1 Confirmed bug | 2 |
 | T2 Likely bug | 3 |
 | T3 Static finding | 3 |
 | T4 Duplicate | 5 |
 | T5 Installation/env blocker | 2 |
 | T6 Doc/typo/unit-label/wording | 4 |
 | T7 Oddity, maybe intended | 5 |
-| T8 Checked and correct | 5 |
+| T8 Checked and correct | 7 |
 | T9 Could not test | 3 |
-| **Total** | **30** |
+| **Total** | **34** |
 
 (Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
 
 ## Key facts learned
+- **Phase 4 filed/recorded:** #132 (skew sign asymmetry T2), #133 (non-termination T2), #134 (wrong PASS zero-demand T1), #135 (2nd-design crash T1). Comment drafts: 17b (#133 SW23), 18b (#134 SW15/SW22). Sweep 25 cases done: 3 timeouts, 3 wrong-PASS, rest finite. Custom Fy + Optimized->Custom round-trip = PASS (T8).
 - Duplicates refreshed 2026-11-17 (session 2): 129 items, 70 issues, 59 PRs, max #129. Always search refreshed `notes/issues_raw.json` via `scripts/search_issues.py`.
 - **Track F:** integer validators raise `OverflowError` on `inf/-inf` (5 keys). NaN/inf accepted broadly (dup root cause #88). Bool accepted as numeric in-range in many cases.
 - **Track G:** `validate_map_coordinates` is numeric-only (accepts out-of-range/outside-India); `validate_custom_weather_data` accepts unknown/empty zone (not "Select Zone").
