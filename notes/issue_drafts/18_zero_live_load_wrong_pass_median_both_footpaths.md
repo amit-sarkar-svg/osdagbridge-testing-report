@@ -89,3 +89,5 @@ Searched refreshed issues (open+closed, 131 items) via `scripts/search_issues.py
 
 **Notes**
 Reported as T1 (confirmed) because the wrong PASS is executed and reproduced (SW05 and P5_SW05R) with the exact input isolated and near-neighbor controls showing nonzero demands.
+
+**Update (2026-11-17, after filing):** a second, very different valid input reproduces the same bug — SW15: span 45 m, cw 23.6 m, skew −7.5°, no median/footpath → same `Element` index error, `mu_applied=0.0`, verdict PASS. So the trigger is broader than the filed title suggests; see comment draft `notes/issue_drafts/18b_comment_issue134_more_wrong_pass_triggers.md` (posted status: pending).

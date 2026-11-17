@@ -289,3 +289,9 @@
 - **Tier:** T4 (Duplicate — #92 "canonical temperature inputs do not create thermal load cases")
 - **Area:** Phase 4 — smoke-case log
 - **Evidence (executed):** `evidence/logs/design_smoke2.log` shows repeated `UserWarning: BASIC_1..BASIC_6, ACCIDENTAL_1: 'thermal_load' load case not available — create it before calling create_uls_combinations()` (analyser.py:2381). Same root condition as #92; not re-reported.
+
+### P5-006b — Wrong-PASS #134 trigger is broader than filed (extra evidence for comment) (T1)
+- **Tier:** T1 (extra reproduction of confirmed wrong PASS)
+- **Relates to:** #134 (already filed) — comment draft `notes/issue_drafts/18b_comment_issue134_more_wrong_pass_triggers.md`, posting pending
+- **Evidence (executed):** SW15 (span45, cw23.6, skew−7.5, footpath None, median No) → same `analyser.py:1998` "Envelope-based governing LL detection failed ('Element' index)" warning, `mu_applied=0.0`, all util 0, verdict PASS (max DCR 0.4545 from excluded checks). Different span/width/skew/median/footpath than #134's trigger → the bug is in the governing-LL envelope element lookup itself, not a specific geometry. Not solely girder count (SW07/09/13/14/21 with 10–11 girders complete normally).
+- **Action:** comment draft prepared for #134; do not file as new issue (duplicate of #134).
