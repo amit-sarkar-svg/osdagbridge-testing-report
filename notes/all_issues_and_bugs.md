@@ -295,3 +295,16 @@
 - **Relates to:** #134 (already filed) — comment draft `notes/issue_drafts/18b_comment_issue134_more_wrong_pass_triggers.md`, posting pending
 - **Evidence (executed):** SW15 (span45, cw23.6, skew−7.5, footpath None, median No) → same `analyser.py:1998` "Envelope-based governing LL detection failed ('Element' index)" warning, `mu_applied=0.0`, all util 0, verdict PASS (max DCR 0.4545 from excluded checks). Different span/width/skew/median/footpath than #134's trigger → the bug is in the governing-LL envelope element lookup itself, not a specific geometry. Not solely girder count (SW07/09/13/14/21 with 10–11 girders complete normally).
 - **Action:** comment draft prepared for #134; do not file as new issue (duplicate of #134).
+
+### P5-007 — Idempotence crash: second `design()` on same object fails in LTB buckling (T1)
+- **Tier:** T1 (Confirmed crash — executed)
+- **Draft:** `notes/issue_drafts/19_idempotence_second_design_crash.md`
+- **Duplicate check:** `second run`/`math domain`/`Mcr`/`redesign` — #85 closest (CAD display on 2nd run, no design-error dialog), different failure; no duplicate.
+- **Evidence (executed):** guarded harness (with `__main__`), `dictionaries/IDEM2/same.py`: call #1 `RUN1_DONE` (normal), call #2 → `ValueError: math domain error` at `irc22_2015.py:639` `math.sqrt(beta_b*(Zp*fy)/Mcr)`, via `designer.py:1007 compute_buckling_resistance`, stage 5 `_run_dcr_checks` (`evidence/logs/determinism_2.log`, full traceback `dictionaries/IDEM2/same.log`). Earlier unguarded `IDEM` run was a forkserver re-exec artifact and discarded.
+- **Input:** default span30/cw10.5/skew0/no median/no footpath/Optimized (the normal SW01 case) — valid.
+- **Expected vs actual:** two consecutive `design()` calls on one object should not crash; **actual:** 2nd call crashes in LTB check.
+
+### P5-008 — Sweep completion summary (25 cases) (T8/T1/T2 mix)
+- **Tier:** record of outcomes (not a single finding)
+- **Evidence:** `test_cases/sweep_results.csv` (25 rows), `evidence/logs/design_sweep_run.log`, `evidence/logs/design_sweep_resume.log`.
+- **25 cases:** 3 timeouts (SW03/SW06 span45+median+footpaths → #133; SW23 also timeout 600 s), 3 wrong-PASS zero-demand (SW05, SW15, SW22 → #134), 19 completed with finite outputs; no crashes/exceptions on completed cases; no wrong PASS/FAIL verdicts among checked DCR rows. SW23 (span 35, cw 23.6, skew 7.5, footpath Both Sides, median Yes) timed out — same non-termination class as #133; add to that issue as extra evidence.)
