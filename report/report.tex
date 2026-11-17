@@ -47,6 +47,7 @@ Issue \#130 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#131 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/131} \\
 Issue \#132 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/132} \\
 Issue \#133 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/133} \\
+Issue \#134 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/134} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -206,6 +207,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} bound the moving-load/envelope solver so non-convergent cases terminate with a clear warning; add a regression test with a time budget.
 
+\subsection{New issue filed: \#134 --- wrong PASS: silent live-load skip gives zero ULS demand (T1)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/134}
+
+\textbf{Statement.} Valid inputs (span 30, cw 7.5, skew 0, footpath Both Sides, median Yes) make governing-LL detection fail (\texttt{analyser.py:1998} warning); no live-load case is created, \texttt{mu\_applied=0.0}, all structural DCRs $=0$, yet the design reports \texttt{Status PASS}. Four near-neighbor controls (one field changed) show normal nonzero demands.
+
+\textbf{Evidence.} \texttt{dictionaries/SW05/case.log}, \texttt{dictionaries/P5\_SW05R/run.log}, \texttt{dictionaries/P5\_SW05R/output.json}; controls \texttt{dictionaries/P5\_MED\_NOFOOT}, \texttt{P5\_FOOT\_NOMED}, \texttt{P5\_MED\_CW105}.
+
+\textbf{Suggested fix (posted in the issue).} use \texttt{method="nearest"} on the \texttt{Element} lookup and/or raise on governing-LL detection failure instead of continuing to PASS.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -242,6 +252,7 @@ P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \
 P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (round-trip can fail) & \textbf{ISSUE (T2)} $\rightarrow$ \#131 & \texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt} \\
 P5-004 & analysis/skew & skew sign not mirror-symmetric: positive vs negative skew give different design demands (2 pairs) & \textbf{ISSUE (T2)} $\rightarrow$ \#132 & \texttt{dictionaries/OR\_SKEW*/output.json} \\
 P5-005 & analysis/performance & \texttt{design()} non-termination ($>$10 min) on valid span-45 + median + footpath inputs & \textbf{ISSUE (T2)} $\rightarrow$ \#133 & \texttt{evidence/logs/design\_sweep\_run.log} \\
+P5-006 & analysis/wrong-PASS & silent live-load skip gives zero ULS demand but verdict PASS (cw7.5+median+both footpaths) & \textbf{ISSUE (T1)} $\rightarrow$ \#134 & \texttt{dictionaries/P5\_SW05R/output.json} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

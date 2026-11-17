@@ -33,6 +33,7 @@ FOSSEE Winter Internship screening task: testing the short-span steel girder bri
 | 131 | `saveOSI_inputs` uses `yaml.dump` (unsafe tags) while load uses `yaml.safe_load` — round-trip can fail | https://github.com/Nidhikhare12/OsdagBridge/issues/131 | open (T2) |
 | 132 | Skew sign not mirror-symmetric: +15°/−15° give different design demands for a symmetric bridge | https://github.com/Nidhikhare12/OsdagBridge/issues/132 | open (T2) |
 | 133 | Valid inputs (span 45 m + median + footpaths) make `design()` run >10 minutes without completing | https://github.com/Nidhikhare12/OsdagBridge/issues/133 | open (T2) |
+| 134 | Wrong PASS: silent live-load skip → zero ULS demand (cw 7.5 + median + both footpaths) | https://github.com/Nidhikhare12/OsdagBridge/issues/134 | open (T1) |
 
 ## Duplicate-issue comment drafts (extra evidence)
 Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.

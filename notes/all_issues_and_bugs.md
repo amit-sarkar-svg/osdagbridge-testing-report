@@ -246,6 +246,15 @@
 - **Evidence (read-only):** `saveOSI_inputs` does not append `.osi` if missing or normalize case (`.OSI`/`.yaml`) — relies on dialog/filter; overwrite confirmation not explicitly coded (OS/dialog-dependent). `loadOSI_inputs` catches exceptions and shows error (no "Loaded OSI Successfully!" on failure), rejects non-dict/invalid via `validate_osi_inputs` before populate, but `populate_from_dict` called after validation (partial-state risk if populate throws mid-way is implementation-dependent). Empty/binary/dir/permission errors surface via exception handler.
 - **Notes:** no GUI-driven file I/O execution this session (T3 for unexecuted paths); yaml round-trip type issue captured separately as P4I-001.
 
+### P5-006 — Wrong PASS: silent live-load skip → zero ULS demand (median Yes + Both Sides footpath + cw 7.5) (T1)
+- **Tier:** T1 (Confirmed wrong PASS — executed and reproduced)
+- **Filed:** [Nidhikhare12/OsdagBridge#134](https://github.com/Nidhikhare12/OsdagBridge/issues/134) (open, 2026-11-17) — draft: `notes/issue_drafts/18_zero_live_load_wrong_pass_median_both_footpaths.md`
+- **Area:** Phase 4 — crash/timeout sweep (SW05) + targeted repro
+- **Duplicate check:** searched `governing LL`, `live-load`, `zero` DCR — #87 (seismic zero-LL mass) and #45 (missing DCR shown 0.0) related but different triggers; no exact duplicate.
+- **Evidence (executed):** SW05 / P5_SW05R (span30, cw7.5, skew0, footpath Both Sides, median Yes) → `analyser.py:1998` warning "Envelope-based governing LL detection failed ('Element' index)... skipping LL creation" + 26 live-load warnings; `mu_applied=0.0`, all `util.*=0.0`, ULS Flexure/Shear DCR 0.000, verdict **PASS** (max DCR 0.2853 from a stiffener check excluded from structural set). Four controls with one field changed (no median / no footpath / cw10.5) show 0 warnings and normal demands (flexure 22–30%, fatigue 186–242%). Reproduced twice (SW05, P5_SW05R).
+- **Root cause:** `analyser.py:1991` `env_lc.sel(Element=gov_element)` KeyError swallowed by broad `except` (:1998) → `ll_load_case=None` → no ULS LL → zero demand → PASS.
+- **Expected vs actual:** nonzero live-load demand expected; **actual:** zero demand + PASS (unconservative).
+
 ### P5-005 — `design()` non-termination on valid span-45 + median + footpath inputs (T2)
 - **Tier:** T2 (likely performance/hang bug)
 - **Filed:** [Nidhikhare12/OsdagBridge#133](https://github.com/Nidhikhare12/OsdagBridge/issues/133) (open, 2026-11-17) — draft: `notes/issue_drafts/17_design_nontermination_span45_median_footpath.md`
