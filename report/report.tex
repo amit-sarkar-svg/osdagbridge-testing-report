@@ -48,6 +48,7 @@ Issue \#131 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#132 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/132} \\
 Issue \#133 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/133} \\
 Issue \#134 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/134} \\
+Issue \#135 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/135} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -216,6 +217,15 @@ loader never calls) rejects all three:
 
 \textbf{Suggested fix (posted in the issue).} use \texttt{method="nearest"} on the \texttt{Element} lookup and/or raise on governing-LL detection failure instead of continuing to PASS.
 
+\subsection{New issue filed: \#135 --- second \texttt{design()} on same object crashes in LTB buckling (T1)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/135}
+
+\textbf{Statement.} Calling \texttt{design()} twice on the same \texttt{PlateGirderBridge} object: run 1 completes, run 2 crashes with \texttt{ValueError: math domain error} in \texttt{irc22\_2015.py:639} (\texttt{math.sqrt(beta\_b*(Zp*fy)/Mcr)}), stage 5 LTB check — stale per-run state. No duplicate (\#85 is CAD-display on 2nd run, no crash).
+
+\textbf{Evidence.} guarded harness \texttt{dictionaries/IDEM2/same.py}; \texttt{evidence/logs/determinism\_2.log} (RUN1\_DONE then ValueError); full traceback \texttt{dictionaries/IDEM2/same.log}. An unguarded earlier harness (forkserver re-exec) was discarded as an artifact.
+
+\textbf{Suggested fix (posted in the issue).} reset all per-run section/DTO state at the start of \texttt{design()}, guard the LTB sqrt, and add an idempotence regression test.
+
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
 \toprule
@@ -253,6 +263,7 @@ P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags 
 P5-004 & analysis/skew & skew sign not mirror-symmetric: positive vs negative skew give different design demands (2 pairs) & \textbf{ISSUE (T2)} $\rightarrow$ \#132 & \texttt{dictionaries/OR\_SKEW*/output.json} \\
 P5-005 & analysis/performance & \texttt{design()} non-termination ($>$10 min) on valid span-45 + median + footpath inputs & \textbf{ISSUE (T2)} $\rightarrow$ \#133 & \texttt{evidence/logs/design\_sweep\_run.log} \\
 P5-006 & analysis/wrong-PASS & silent live-load skip gives zero ULS demand but verdict PASS (cw7.5+median+both footpaths) & \textbf{ISSUE (T1)} $\rightarrow$ \#134 & \texttt{dictionaries/P5\_SW05R/output.json} \\
+P5-007 & crash/idempotence & 2nd \texttt{design()} on same object crashes in LTB sqrt (\texttt{math domain error}) & \textbf{ISSUE (T1)} $\rightarrow$ \#135 & \texttt{evidence/logs/determinism\_2.log} \\
 \bottomrule
 \end{longtable}
 (52 further cases --- geometry boundaries, footpath/median combinations, skew, Optimized vs.\ Custom, custom girder/cross-bracing/end-diaphragm/deck materials, out-of-range and malformed values --- are generated from the app-saved baseline and will be appended with exact parameters.)

@@ -1,5 +1,7 @@
 # [Bug/Crash] Second `design()` call on the same object crashes in LTB buckling check (`math domain error`)
 
+**Filed:** [Nidhikhare12/OsdagBridge#135](https://github.com/Nidhikhare12/OsdagBridge/issues/135) — open (filed 2026-11-17)
+
 **Environment**
 - OsdagBridge `dev` @ `d74f56d` (2026-07-26)
 - macOS (Intel), conda env `osdagbridge-env`, Python 3.12.16

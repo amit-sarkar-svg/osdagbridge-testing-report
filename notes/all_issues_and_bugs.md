@@ -298,7 +298,7 @@
 
 ### P5-007 — Idempotence crash: second `design()` on same object fails in LTB buckling (T1)
 - **Tier:** T1 (Confirmed crash — executed)
-- **Draft:** `notes/issue_drafts/19_idempotence_second_design_crash.md`
+- **Filed:** [Nidhikhare12/OsdagBridge#135](https://github.com/Nidhikhare12/OsdagBridge/issues/135) (open, 2026-11-17) — draft: `notes/issue_drafts/19_idempotence_second_design_crash.md`
 - **Duplicate check:** `second run`/`math domain`/`Mcr`/`redesign` — #85 closest (CAD display on 2nd run, no design-error dialog), different failure; no duplicate.
 - **Evidence (executed):** guarded harness (with `__main__`), `dictionaries/IDEM2/same.py`: call #1 `RUN1_DONE` (normal), call #2 → `ValueError: math domain error` at `irc22_2015.py:639` `math.sqrt(beta_b*(Zp*fy)/Mcr)`, via `designer.py:1007 compute_buckling_resistance`, stage 5 `_run_dcr_checks` (`evidence/logs/determinism_2.log`, full traceback `dictionaries/IDEM2/same.log`). Earlier unguarded `IDEM` run was a forkserver re-exec artifact and discarded.
 - **Input:** default span30/cw10.5/skew0/no median/no footpath/Optimized (the normal SW01 case) — valid.
