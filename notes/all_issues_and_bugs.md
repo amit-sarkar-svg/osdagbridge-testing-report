@@ -316,3 +316,10 @@
   - Optimized→Custom round-trip: feeding Optimized's exact chosen dims (depth 1670 mm, web 1628, flanges 510×22, web tw 10) into a properly-built Custom dict (`RT_Custom3`) gives flex 23.26 / fatigue 188.74 vs Optimized 23.06 / 187.06, moment 2669 vs 2647 kNm — within ~1% (SAIL thickness snapping explains residual). PASS.
   - **Discarded false positives:** (a) hand-built `RT_Custom` with fabricated G6/G7 dims gave `total_depth=1,670,000` mm and absurd DCRs — caused by my inconsistent input, not a product bug; (b) unguarded determinism harness `IDEM` forkserver re-exec artifact — discarded. Report relies only on properly-built/gaurded runs.
 - **No new issue filed** from these checks.
+
+### P5-010 — Hand statics check: reported DL moment/reaction plausible from first principles (T8)
+- **Tier:** T8 (Checked and correct, within justified tolerance)
+- **Area:** Phase 4 — oracle hand-check on SMOKE (span30, cw10.5, 5 girders, Optimized)
+- **Evidence (executed + hand calc):** from `dictionaries/SMOKE/output.json`: girder mass 274.1124 kg/m → 2.689 kN/m self-weight; deck 0.25 m × 24.5 kN/m³ × 2.28 m tributary = 13.965 kN/m; total w ≈ 16.65 kN/m per girder. Simple statics `wL²/8` (L=30 m) → M_DL ≈ 1874 kNm. Reported ULS `mu_applied = 2646.84` kNm → ratio 1.41. DL reaction `wL/2` ≈ 250 kN/girder; reported bearing reaction 472.49 kN → ratio 1.89. Log: total DL 2981.4 kN (5 girders → ~596 kN each over 30 m ≈ 19.9 kN/m) consistent with hand w + wearing course/crash barriers.
+- **Expectation & tolerance:** `mu_applied` is a factored ULS combination (dead + live + partial factors γ≈1.35–1.5 + impact), so it must exceed the unfactored DL-only moment by a factor of order 1.3–2.0; observed 1.41 (moment) and 1.89 (reaction) fall in that band. Exact load factors/distribution are not applied here (not guessed per rules), so this is a plausibility check, not an exact recomputation.
+- **Conclusion:** no inconsistency found; results are in plausible relation to inputs. Not a bug.
