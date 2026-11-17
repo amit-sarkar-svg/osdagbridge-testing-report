@@ -308,3 +308,11 @@
 - **Tier:** record of outcomes (not a single finding)
 - **Evidence:** `test_cases/sweep_results.csv` (25 rows), `evidence/logs/design_sweep_run.log`, `evidence/logs/design_sweep_resume.log`.
 - **25 cases:** 3 timeouts (SW03/SW06 span45+median+footpaths → #133; SW23 also timeout 600 s), 3 wrong-PASS zero-demand (SW05, SW15, SW22 → #134), 19 completed with finite outputs; no crashes/exceptions on completed cases; no wrong PASS/FAIL verdicts among checked DCR rows. SW23 (span 35, cw 23.6, skew 7.5, footpath Both Sides, median Yes) timed out — same non-termination class as #133; add to that issue as extra evidence.)
+
+### P5-009 — Custom material Fy and Optimized→Custom round-trip checks (T8; two false positives avoided)
+- **Tier:** T8 (Checked and correct) + record of discarded artifacts
+- **Evidence (executed):**
+  - Custom girder Fy 380 vs 450 (built from defaults, material.girder=custom): flexure util 21.44 → 18.42 (changes as expected); shear/fatigue unchanged (not yield-governed). Custom Fy is consumed — PASS.
+  - Optimized→Custom round-trip: feeding Optimized's exact chosen dims (depth 1670 mm, web 1628, flanges 510×22, web tw 10) into a properly-built Custom dict (`RT_Custom3`) gives flex 23.26 / fatigue 188.74 vs Optimized 23.06 / 187.06, moment 2669 vs 2647 kNm — within ~1% (SAIL thickness snapping explains residual). PASS.
+  - **Discarded false positives:** (a) hand-built `RT_Custom` with fabricated G6/G7 dims gave `total_depth=1,670,000` mm and absurd DCRs — caused by my inconsistent input, not a product bug; (b) unguarded determinism harness `IDEM` forkserver re-exec artifact — discarded. Report relies only on properly-built/gaurded runs.
+- **No new issue filed** from these checks.
