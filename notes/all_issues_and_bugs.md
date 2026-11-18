@@ -323,3 +323,35 @@
 - **Evidence (executed + hand calc):** from `dictionaries/SMOKE/output.json`: girder mass 274.1124 kg/m → 2.689 kN/m self-weight; deck 0.25 m × 24.5 kN/m³ × 2.28 m tributary = 13.965 kN/m; total w ≈ 16.65 kN/m per girder. Simple statics `wL²/8` (L=30 m) → M_DL ≈ 1874 kNm. Reported ULS `mu_applied = 2646.84` kNm → ratio 1.41. DL reaction `wL/2` ≈ 250 kN/girder; reported bearing reaction 472.49 kN → ratio 1.89. Log: total DL 2981.4 kN (5 girders → ~596 kN each over 30 m ≈ 19.9 kN/m) consistent with hand w + wearing course/crash barriers.
 - **Expectation & tolerance:** `mu_applied` is a factored ULS combination (dead + live + partial factors γ≈1.35–1.5 + impact), so it must exceed the unfactored DL-only moment by a factor of order 1.3–2.0; observed 1.41 (moment) and 1.89 (reaction) fall in that band. Exact load factors/distribution are not applied here (not guessed per rules), so this is a plausibility check, not an exact recomputation.
 - **Conclusion:** no inconsistency found; results are in plausible relation to inputs. Not a bug.
+
+## Phase 5 (calculation-level) — session 4 (2026-11-17)
+
+### P6-001 — Differential unit tests: 11 safety-relevant pure functions match hand calculations (T8)
+- **Tier:** T8 (checked and correct)
+- **Area:** Track J — `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`, map in `notes/calc_functions.md`.
+- **Evidence (executed):** plastic shear (Vd=1312.16 kN for d=1000/tw=10/fy=250, = Av·fyw/√3/1.10 ✓), deflection limits (live L/800=37.5, total L/600=50, flip exactly at limit ✓), effective width (inner min(Lo/4,B)=8, outer=8 ✓), modular ratio (m_short clamps to 7.5, m_long to 15.0 ✓), deck moment capacity/inverse (Mu=106.542 kNm, As inverse=1000 ✓), min steel (260 mm²/m ✓), v_Rd,c (0.3233 MPa ✓), Kv support-only (5.35 ✓), section class boundaries flip exactly at 8.4/9.4/13.6·eps ✓. gamma_m0=1.10 as cited.
+- **Note:** initial "mismatches" were harness unit/key errors (Vd in kN vs N hand calc; beff_m key), corrected — not product bugs.
+
+### P6-002 — reset() does not fix the #135 repeated-design crash; RSS grows (extra evidence for #135)
+- **Tier:** extra evidence for confirmed T1 (#135), comment draft `notes/issue_drafts/19b_comment_issue135_reset_does_not_help.md`
+- **Evidence (executed):** `scripts/stress_runs.py`, `evidence/logs/trackL_stress.{log,json}` — 5 runs on one object with `reset()` between: run1 ok (mu 2646.84, flex 23.06); runs 2–5 all `ValueError: math domain error` at `irc22_2015.py:639`. `reset()` = `memory.release()` only; insufficient. Peak RSS grew monotonically 356860→429432 (log KB units) across attempts.
+- **Action:** comment draft for #135; do NOT file as new issue (duplicate).
+
+### P6-003 — calc function extremes mostly outside validator limits; no in-range crash found (T7/T8)
+- **Tier:** T7/T8 (record)
+- **Area:** Track K — `scripts/calc_extremes.py`, `evidence/logs/trackK_extremes.txt`.
+- **Evidence:** fy=0/1e-9/1e9/neg/nan/inf on moment capacity gives 0/tiny/negative/nan/inf — but validators restrict fy to 100–1200 MPa, so these cannot occur through the UI/validator (T7: not a bug). v_Rd,c with As=-1 raises TypeError (negative steel impossible in range). Kv with c=0/nan/inf returns 5.35 (support-only branch). No in-limit crash identified. `_fmax_lc` in designer.py returns 0.0 on exception (≈L2933-2934) — downstream mechanism of already-filed #134, not a new issue. Bare `except Exception: pass` found in analysis_results.py query helpers (L1161/1184/1202/1240/1256/1409) — display/query paths, not capacity calculations.
+
+### P6-004 — Independent cross-platform reproduction of #132 (skew sign asymmetry) — comment reply (T2 evidence)
+- **Tier:** T2 (extra evidence for filed #132)
+- **Event:** Mounil2005 commented on #132 (2026-11-17, issuecomment-6960456238) reproducing on Windows 11/Python3.12 with default bridge span30/cw7.5/4 girders/Ahmedabad, changing only skew sign. Their table: flexure 19.49/18.17, shear 41.73/53.27, fatigue 157.07/145.93, LTB 22.70/22.70 for +15/-15.
+- **Recheck on this device (macOS/osdagbridge-env, dev d74f56d):** built span30/cw7.5/skew±15/no median/footpath/Optimized via defaults (4 girders), `scripts/design_runner.py` + `scripts/oracle_checks.py`; outputs `dictionaries/RECHK_P15`, `RECHK_M15`: flexure 19.49/18.17, shear 41.73/53.27, fatigue 157.07/145.93, LTB 22.70/22.70 — **exact match** to the commenter's Windows numbers.
+- **Key point for reply:** the two independent setups (my original cw10.5/5-girder/no-location vs commenter's cw7.5/4-girder/Ahmedabad) both show sign-dependent results but the *direction* of the shear difference flips (+skew higher in mine, −skew higher in theirs). This confirms the defect is sign-dependence itself, not a fixed sign bias — consistent with load placement onto a mirrored mesh changing which girder governs. LTB identical in both setups (self-weight-only check) while load-driven checks differ — reinforces that the fault is in load-driven/moving-load handling.
+- **Action:** reply draft `notes/issue_drafts/20_reply_issue132_recheck.md` prepared for user to post (never post from agent).
+
+### P6-005 — Shear-buckling tau_b three-range boundary & untested crack/stud formulas (T7/T8)
+- **Tier:** T7 (source-defined) / T8 (checked)
+- **Evidence (executed):** `IS800_2007.cl_8_4_2_2_tau_b_Simple_postcritical` at fyw=250: tau_b 144.34 (λw≤0.8), 99.30 (1.19), 100.23 (λw=1.2), 98.58 (1.21). The small non-monotonic jump at λw=1.2 comes from the two cited formula ranges meeting at 0.68·fy/√3 (mid) vs 0.694·fy/√3 (high) — both are the standard's own expressions; the code picks the high branch at exactly 1.2. Inherent to the cited IS 800 formula, not a coding mistake → T7, not reported.
+- **Note:** IRC22 `cl_603_3_3_2_shear_buckling_post_critical` returns a dict whose Vd key my harness probed with the wrong name (got None) — harness artifact, not a product bug.
+- **New issues #140–#146 (other contributor, 2026-11-18):** impact factor always 0.10, transverse wind ignores girder depth, vehicle choices ignored, crash-barrier/median loads not reaching analysis, footpath custom pressure ignored + added to DL, partial safety factors have no effect, design-check toggles have no effect. These overlap planned load-path tests — agent will NOT duplicate; only new trigger conditions/components would be reported.
+- **Extreme valid inputs EX45 (span45/cw23.6/skew15) / EX20 (span20/cw4.25/skew−15):** EX45 was still running (>5 min CPU) when the server restarted and the run was cancelled — inconclusive, not counted as a hang finding (honest T9/incomplete).

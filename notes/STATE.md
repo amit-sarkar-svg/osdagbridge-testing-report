@@ -6,7 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
-- **Phase 4 (headless design sweep + oracle checks) — completed 2026-11-17.** 25-case pairwise sweep done, 3 wrong-PASS + 3 timeouts + 1 idempotence crash found. Remaining: hand-check statics, Optimized→Custom round-trip, custom-material sensitivity (T8 checks); Phase 4 design() with app-saved `baseline.osi` still blocked.
+- **Phase 5 (calculation-level unit tests) — completed 2026-11-17.** 11 pure calc functions verified against hand calcs (all T8 PASS); extremes are outside validator ranges (no in-range bug); skew/footpath logic correct; reset() does NOT fix #135 crash (comment draft 19b). Files #132-135 filed. `baseline.osi` still missing (blocks full Phase 4/5 design runs).
 
 ## What is done
 - Phases 0–2 and Phase 3 (prior): issues fetched earlier; UI/core mapping and drift checks done. Issues filed/recorded: #96–#101, #127, #128, #129. Comment drafts #43/#20/#41/#19 prepared.
@@ -31,13 +31,14 @@
 | T5 Installation/env blocker | 2 |
 | T6 Doc/typo/unit-label/wording | 4 |
 | T7 Oddity, maybe intended | 5 |
-| T8 Checked and correct | 7 |
+| T8 Checked and correct | 9 |
 | T9 Could not test | 3 |
-| **Total** | **34** |
+| **Total** | **36** |
 
 (Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
 
 ## Key facts learned
+- **Phase 5:** 11 calc functions match hand calcs (moment/shear/defl/effwidth/modular/vRd/Kv/section-class); new comment draft 19b (#135 reset does not help, RSS grows); extremes outside validator ranges (T7); no new T1/T2 from calc-level.
 - **Phase 4 filed/recorded:** #132 (skew sign asymmetry T2), #133 (non-termination T2), #134 (wrong PASS zero-demand T1), #135 (2nd-design crash T1). Comment drafts: 17b (#133 SW23), 18b (#134 SW15/SW22). Sweep 25 cases done: 3 timeouts, 3 wrong-PASS, rest finite. Custom Fy + Optimized->Custom round-trip = PASS (T8).
 - Duplicates refreshed 2026-11-17 (session 2): 129 items, 70 issues, 59 PRs, max #129. Always search refreshed `notes/issues_raw.json` via `scripts/search_issues.py`.
 - **Track F:** integer validators raise `OverflowError` on `inf/-inf` (5 keys). NaN/inf accepted broadly (dup root cause #88). Bool accepted as numeric in-range in many cases.
