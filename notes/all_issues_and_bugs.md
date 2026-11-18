@@ -391,3 +391,15 @@
 - **Evidence (executed, `scripts/skew_mesh_check.py`):** built oblique grillage `og.create_grillage(..., skew=±15, mesh_type="Oblique")`, span30/width8.4/4 long grid. Mesh nodes are perfectly mirror-symmetric (x flips sign exactly: +15 node2 x=-0.281 ↔ -15 x=+0.281). But `build_girders()` (analysis_results.py:422-431) selects start/end nodes by exact min_x/max_x: skew+15 → min_x=-2.251 with **1 node** at min (z=8.4), max_x=30 with 1; skew-15 → min_x=0 with 1 node (z=0), max_x=32.251 with 1. Only a single corner node qualifies (inclined edge), so only G1/EB1 is built — matches #89's table (+15/-15: G1 only).
 - **Sign connection:** +15 start corner at z=8.4 vs -15 at z=0 (opposite edges) → surviving girder on opposite side → load-driven utilizations differ and the difference direction flips with geometry (#132), while self-weight LTB is identical. Mesh geometry itself is correct; fault is edge identification.
 - **Action:** comment draft for #89; do NOT file as new issue (duplicate). Duplicates refreshed: 146 items, 83 issues, no new.
+
+## Session 9 (2026-11-18) — additional calc functions (T8)
+
+### P6-010 — LTB/M-V/section-properties/fatigue functions match hand calcs (T8)
+- **Tier:** T8 (checked and correct)
+- **Evidence (executed, `scripts/calc_unit_checks3.py` / inline):**
+  - `steel_i_section_properties` symmetric I D=1000,bf=300,tf=20,tw=10: A=21600 (hand 21600) ✓, Iz=3.61888e9 (hand) ✓, Iy=9.008e7 ✓, Zp=8.184e6 ✓, Ze=7.23776e6 ✓, It=1.92e6 ✓, y_cg=500 (symmetric) ✓.
+  - `cl_603_3_3_3_reduced_bending_under_high_shear`: Md=1000/Mfd=1200/Vd=500 → V=200 (≤0.6Vd) no reduction Mdv=1000 ✓; V=400 beta=0.36 Mdv=1072 ✓; V=500 beta=1 Mdv=1200 ✓ (hand Eq 3.13).
+  - `cl_605_3_fatigue_strength`: Nsc=5e6 welded ff=92 (hand 92), Nsc=1e6 ff=157.318 (hand 92·5^(1/3)), tau=81.404 ✓.
+  - `cl_603_3_3_1_buckling_resistance_moment` LTB: code follows IS800 8.2.1.2 docstring (Mpl, βb, Mcr, λLT, χLT); no hand mismatch found (the 2nd-run crash is #135, already filed).
+  - `cl_605_4_fatigue_assessment` τ_y=0.43·fy is an explicit documented assumption citing IRC:24 Table G.2 → T7, not a bug.
+- **No new T1/T2.** Duplicates refreshed 146 items/83 issues, no new. `baseline.osi` still missing.
