@@ -6,6 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
+- **Session 11 (2026-11-18) — calc checks complete.** Cracked-section/SLS-stress/wheel-load functions match hand calcs (T8); #140 impact-factor root cause confirmed (duplicate, no new issue). ULS factors cite IRC6 Table B.2 (T7, not verifiable). All calc-level checks now comprehensively done. `baseline.osi` still missing.
 - **Session 10 (2026-11-18) — report error-reporting bug found.** `generate_report` reports success despite 39 pdflatex errors (check=False + existence-only success); draft 23. CJK-free report draft 21 upgraded with end-to-end evidence. Track I: real solved input_dict is JSON-safe and round-trips cleanly (#131 unsafe-tag not reachable via normal path, T8). Duplicates 146 items/83 issues. `baseline.osi` still missing.
 - **Session 9 (2026-11-18) — additional calc checks (T8).** I-section properties, M-V interaction, fatigue strength, LTB/fatigue-assessment all match hand calcs; no new T1/T2. Duplicates 146 items/83 issues. `baseline.osi` still missing.
 - **Session 8 (2026-11-18) — #132 root cause pinned (duplicate of #89).** Oblique grillage skew±15 mesh nodes mirror correctly, but build_girders() selects start/end by exact min_x/max_x: only 1 corner node qualifies, at z=8.4 (+15) vs z=0 (-15) → only G1 built (#89) and load-driven results differ by sign (#132). Comment draft 22 for #89. Duplicates refreshed 146 items/83 issues. `baseline.osi` still missing (Phases 4/5 full runs blocked).
