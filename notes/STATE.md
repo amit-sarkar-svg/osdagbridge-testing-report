@@ -6,6 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
+- **Phase 5 calc-level continuation — completed 2026-11-18 (session 6).** Crack-control, stud Eq6.1, moment/shear scaling, gamma values, spacing-limit directions all match hand calcs (T8). No new T1/T2. Duplicates refreshed 146 items/83 issues (no new since #140-146). `baseline.osi` still missing.
 - **Phase 5 calc-level — completed; #132 recheck done 2026-11-18.** 11 pure calc functions match hand calcs (T8); extremes outside validator ranges (T7); skew/footpath tau_b boundaries source-defined (T7); reset() does NOT fix #135 crash (comment draft 19b). Mounil2005's Windows comment on #132 reproduced EXACTLY on this macOS clone (flex 19.49/18.17, shear 41.73/53.27, fat 157.07/145.93, LTB 22.70/22.70) — reply draft 20 prepared. Duplicates refreshed: 146 items, 83 issues (new #140-146 by another contributor cover impact/vehicle/CB-median/footpath/gamma/toggle — do not duplicate). Files #132-135 filed. `baseline.osi` still missing.
 
 ## What is done
@@ -31,9 +32,9 @@
 | T5 Installation/env blocker | 2 |
 | T6 Doc/typo/unit-label/wording | 4 |
 | T7 Oddity, maybe intended | 5 |
-| T8 Checked and correct | 9 |
+| T8 Checked and correct | 10 |
 | T9 Could not test | 3 |
-| **Total** | **36** |
+| **Total** | **37** |
 
 (Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
 
