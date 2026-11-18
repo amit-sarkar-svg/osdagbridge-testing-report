@@ -367,3 +367,18 @@
   - γm0=1.10 (matches cited IS800 8.4.1/IRC22 603.3.3.2 docstring); γv stud default 1.25 (cl 606.3.1 signature) ✓.
   - Shear-connector spacing limits (cl 606.9): min 75, max=min(600,3·200,4·100)=400; `is_spacing_acceptable` flips exactly at 74/75 and 400/401 ✓.
 - **No new T1/T2.** Duplicates re-freshed (146 items, 83 issues; no new since last). #140-146 (other contributor) cover impact/vehicle/CB-median/footpath/gamma/toggle — not duplicated.
+
+## Session 7 (2026-11-18) — Track H close-out + #132 root-cause note
+
+### P6-007 — Non-Latin (CJK) free-text in report metadata crashes pdflatex (T2)
+- **Tier:** T2 (likely bug — report generation fails on valid input)
+- **Draft:** `notes/issue_drafts/21_report_cjk_freetext_crashes_pdflatex.md`
+- **Duplicate check:** #70 (dropped ≤ math symbol, different trigger), #121 (missing \endhead) — no CJK/non-Latin issue. No duplicate.
+- **Evidence (executed):** `_tex()` escapes ASCII specials and maps only ∠,ⅹ,×; Latin accents compile (exit 0, `evidence/logs/tex_test/latin.log`); CJK `日本` → pdflatex fatal `! LaTeX Error: Unicode character 日 (U+65E5) not set up`, no PDF (`evidence/logs/tex_test/specialchars.log`). Fields via `_tex()`: project_name, project_location, designer, reviewer, company, client, job_number (`report_generator.py:319-329`, `preamble():150`).
+- **Expected vs actual:** user-typeable free text should not abort report; **actual:** no PDF for CJK.
+- **Note:** T2 not T1 because the exact GUI→report call was not executed (no baseline.osi); the `_tex`→.tex→pdflatex path is the real one.
+
+### P6-008 — #132 root-cause investigation (no new finding; sign asymmetry from mesh/load mapping) (T8 record)
+- **Tier:** record (no new bug; #132 already filed)
+- Duplicate refresh 2026-11-18: 146 items, 83 issues, max #146, no new since #140-146.
+- **Evidence (read-only):** `analyser.py:1988-1998` governing-LL via `env_lc.sel(Element=gov_element)` (this exact call throws for #134's affected inputs, but #132's two runs complete, so #132 is NOT that exception path). Skew handled in `mesh.py:245-266` with degrees→radians (`skew_1/180*π`, `tan`), thresholds [11,30] deg at L675. `loading.live_load.eccentricity` (1.2) is defined in validator/UI/defaults but not consumed in analyser load generation (separate area, likely #140-146). No single line pinned for the sign flip — it is the oblique mesh/load distribution; no new T1/T2.
