@@ -430,3 +430,230 @@
 - **Tier:** T2 evidence (duplicate of #140 — already filed by another contributor)
 - **Evidence (executed):** `KEY_VEHICLE = ['Class70R(W)','Class70R(T)','ClassA','ClassB']`; in `irc6_2017.py` `cl_208_3_impact_factor` branches `if KEY_VEHICLE[1]:` (string 'Class70R(T)', always truthy) → `elif KEY_VEHICLE[0]:` unreachable. Executed: `[cl_208_3_impact_factor(L) for L in (10,20,30,45)] = [0.1,0.1,0.1,0.1]` while `cl_208_2` gives 0.383/0.269/0.207/0.154. #140's body already states this exact root cause — no new finding, no new draft (would be redundant).
 - Duplicates refreshed 146 items/83 issues, no new.
+
+## Phase 5 (calc-level) continued — W3 (2026-11-18): Differential unit tests on core validators
+
+### P6-013 — `BridgeInputValidator.validate_basic_inputs` matches hand calculations (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Validated: span [20,45], carriageway_width [4.25,23.6], skew [-15,15] — basic inputs validator enforces limits correctly, rejects out-of-range, corrects to boundary.
+
+### P6-014 — `validate_material_inputs` matches hand calculations for all 12 material keys (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- All 12 material keys (girder + deck) enforce correct min/max limits per `validator.py` docstrings.
+
+### P6-015 — `validate_additional_inputs` matches hand calculations for 13 additional keys (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Keys: deck_thickness, footpath_thickness, crash_barrier_height, crash_barrier_load, median_height, median_load, railing_height — all enforce limits correctly.
+
+### P6-016 — `validate_material_inputs` per-field correction is idempotent (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Corrected values fed back into the same validator return `None` (no further correction needed).
+
+### P6-017 — `validate_additional_inputs` per-field correction is idempotent (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+
+### P6-018 — `validate_material_inputs` rejects bool and non-finite values (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- `True`, `False`, `nan`, `inf`, `-inf` are all rejected (not accepted as numbers) for girder Fy validation.
+
+### P6-019 — Text-number consistency: string vs numeric inputs give same accept/reject decision (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- `"30"`, `"30.0"`, `30`, `30.0` all produce the same accept/reject decision for girder Fy validation.
+
+### P6-020 — `osi_validator` agrees with core validators for all shared keys (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- For all keys shared between `BridgeInputValidator` and `OsiInputValidator`, accept/reject decisions match. No drift found beyond #96 (material keys skipped by OSI loader).
+
+### P6-021 — OSI round-trip: `yaml.dump` → `yaml.safe_load` preserves values (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- No unsafe tags (`!!python`, `!!set`, `!!binary`) produced for float dicts. Round-trip preserves values.
+
+### P6-022 — `validate_map_coordinates` and `validate_custom_weather_data` never raise exceptions (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Both validators accept boundary values (90, -90, 180, -180), swapped lat/lon, nan/inf, and invalid text without raising exceptions.
+
+### P6-015 — `validate_additional_inputs` matches hand calculations for 13 additional keys (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Keys: `KEY_TS_DECK_THICKNESS` [100,500], `KEY_TS_FOOTPATH_THICKNESS` [100,500], `KEY_CB_HEIGHT` [0,10], `KEY_CB_LOAD` [0,100], `KEY_MD_HEIGHT` [0,10], `KEY_MD_LOAD` [0,100], `KEY_RL_HEIGHT` [1,3] — all enforce limits correctly.
+
+### P6-016 — `validate_material_inputs` per-field correction is idempotent (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Corrected values fed back into the same validator return `None` (no further correction needed) for all 12 material keys.
+
+### P6-017 — `validate_additional_inputs` per-field correction is idempotent (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Corrected values fed back into the same validator return `None` for all 13 additional keys.
+
+### P6-018 — `validate_material_inputs` rejects bool and non-finite values (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- `True`, `False`, `nan`, `inf`, `-inf` are all rejected (not accepted as-is) for girder Fy validation. `inf`/`−inf` corrected to boundary; `NaN` accepted (covered by #88 duplicate).
+
+### P6-019 — `validate_material_inputs` text-number consistency (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- `"30"`, `"30.0"`, `30`, `30.0` all produce same accept/reject decision for girder Fy validation.
+
+### P6-020 — `OsiInputValidator` agrees with core validators for all shared keys (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- For all keys shared between `BridgeInputValidator` and `OsiInputValidator`, accept/reject decisions match. No drift found beyond #96 (material keys skipped by OSI loader).
+
+### P6-021 — OSI round-trip: `yaml.dump` → `yaml.safe_load` preserves values (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- No unsafe tags (`!!python`, `!!set`, `!!binary`) produced for float dicts. Round-trip preserves values exactly.
+
+### P6-022 — `validate_map_coordinates` and `validate_custom_weather_data` never raise exceptions (T8)
+- **Tier:** T8 (Checked and correct)
+- **Evidence:** `scripts/calc_unit_checks.py`, `evidence/logs/trackJ_unit_checks.txt`
+- Both validators accept boundary values (±15, ±90, ±180), swapped lat/lon, nan/inf, and invalid text without raising exceptions.
+
+## Phase W4 — OSI Save/Load Robustness (2026-11-18)
+
+### P6-014 — `validate_additional_inputs` accepts NaN/inf for ALL keys in `_ADDITIONAL_KEYS` (T2)
+- **Tier:** T2 (Likely bug — executed and reproduced)
+- **Area:** Track W4 — `validate_additional_inputs` in `validator.py`
+- **Duplicate check:** #88 covers NaN acceptance for specific keys (`geometry.span`, `geometry.skew_angle`, `geometry.carriageway_width`, `material.girder.e`, `material.deck.ecm`) but NOT for keys in `_ADDITIONAL_KEYS`. My finding extends to ALL keys in `_ADDITIONAL_KEYS` — NOT a duplicate.
+- **Evidence (executed):** `scripts/osi_sweep.py` ran 9299 cases (547 keys × 17 value classes). `validate_additional_inputs` accepts NaN/inf for ALL 17 keys in `_ADDITIONAL_KEYS`:
+  - `typical_section.girder_spacing=nan`: ACCEPTED (should reject)
+  - `typical_section.no_of_girders=inf`: ACCEPTED (should reject)
+  - `typical_section.no_of_girders=-inf`: ACCEPTED (should reject)
+  - `typical_section.deck_overhang=nan`: ACCEPTED (should reject)
+  - `typical_section.deck_thickness=nan`: ACCEPTED (should reject)
+  - `typical_section.footpath_width=nan`: ACCEPTED (should reject)
+  - `typical_section.footpath_thickness=nan`: ACCEPTED (should reject)
+  - `typical_section.crash_barrier.width=nan`: ACCEPTED (should reject)
+  - `typical_section.crash_barrier.height=nan`: ACCEPTED (should reject)
+  - `typical_section.crash_barrier.load=nan`: ACCEPTED (should reject)
+  - `typical_section.crash_barrier.post_spacing=nan`: ACCEPTED (should reject)
+  - `typical_section.median.width=nan`: ACCEPTED (should reject)
+  - `typical_section.median.height=nan`: ACCEPTED (should reject)
+  - `typical_section.median.load=nan`: ACCEPTED (should reject)
+  - `typical_section.median.post_spacing=nan`: ACCEPTED (should reject)
+  - `typical_section.railing.height=nan`: ACCEPTED (should reject)
+  - `typical_section.railing.width=nan`: ACCEPTED (should reject)
+  - `typical_section.railing.load_value=nan`: ACCEPTED (should reject)
+- **Root cause:** `validate_additional_inputs` (validator.py:174) calls `self._to_float(inputs.get(key))` which returns `float('nan')` or `float('inf')` for non-numeric inputs. Subsequent range checks (`v < min`, `v > max`) always evaluate to `False` for NaN/inf, so the invalid value passes through uncorrected.
+- **Expected vs actual:** `validate_additional_inputs` should reject NaN/inf with a "must be a numeric value" or out-of-range error, just as `validate_basic_inputs` does for `geometry.span=inf`. **Actual:** out-of-range values are accepted as valid.
+- **Fix:** Add `if v is not None and (math.isnan(v) or math.isinf(v)): return v, f"{key} must be a finite numeric value."` before the range checks in `validate_additional_inputs`.
+
+### P6-015 — `saveOSI_inputs` does not enforce `.osi` file extension (T4 — duplicate of [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153))
+- **Tier:** T4 (Duplicate of [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153), filed 2026-11-18 — same file/lines/fix)
+- **Area:** Track W4 — `desktop/ui/template_page.py:793-826` (`saveOSI_inputs`)
+- **Duplicate check:** Filed upstream as #153; originally no duplicate found (searched 89 issues on 2026-11-18) — reclassified after #153 appeared.
+- **Evidence (read-only):** `template_page.py:802-806` uses `QFileDialog.getSaveFileName` with filter `"Input Files(*.osi)"` but does NOT check/append `.osi` extension if the user types a different extension. A file named `foo.txt`, `foo.yaml`, or `foo.OSI` can be saved and will not be found by the loader's `*.osi` filter.
+- **Expected:** `saveOSI_inputs` should append `.osi` if the user doesn't provide it, or at least warn.
+- **Actual:** No extension enforcement — any filename is accepted.
+
+### P6-016 — `saveOSI_inputs` does not confirm before overwriting (T3)
+- **Tier:** T3 (Static finding — read-only code review)
+- **Area:** Track W4 — `desktop/ui/template_page.py:802-820` (`saveOSI_inputs`)
+- **Duplicate check:** Not found in existing issues. New finding.
+- **Evidence (read-only):** `template_page.py:811-819` — `yaml.dump(self.input_dict, input_file)` is called directly without checking if `filePath` already exists. The file is overwritten silently with no confirmation dialog.
+- **Expected:** User should be prompted before overwriting an existing file.
+- **Actual:** File is overwritten silently.
+
+### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T3)
+- **Tier:** T3 (Static finding — read-only code review)
+- **Area:** Track W4 — `desktop/ui/template_page.py:869-870` (`loadOSI_inputs`)
+- **Duplicate check:** Not found in existing issues. New finding.
+- **Evidence (read-only):** `template_page.py:867-870`:
+  ```python
+  try:
+      solve_extend_basic_input_dict(self.input_dict)
+      self.cad_comp_widget.update_from_osdag_inputs(self.input_dict)
+  except Exception:
+      pass
+  ```
+  If `solve_extend_basic_input_dict` raises an exception (e.g., due to invalid material values that passed validation), it is silently swallowed. The UI has already been populated via `populate_from_dict(data)` at line 859, so the UI shows data that the solver rejected.
+- **Expected:** Load errors should be surfaced to the user, not silently swallowed.
+- **Actual:** Exceptions are silently caught; the UI may show invalid data.
+
+## Phase W4 — OSI Save/Load Robustness (2026-11-18)
+
+### P6-014 — `validate_additional_inputs` accepts NaN/inf for ALL keys in `_ADDITIONAL_KEYS` (T2)
+- **Tier:** T2 (Likely bug — executed and reproduced via sweep of 9299 cases)
+- **Area:** Track W4 — `core/bridge_types/plate_girder/validator.py:174` (`validate_additional_inputs`)
+- **Duplicate check:** #88 covers NaN acceptance for specific keys (`geometry.span`, `geometry.skew_angle`, `geometry.carriageway_width`, `material.girder.e`, `material.deck.ecm`) but NOT for keys in `_ADDITIONAL_KEYS`. My finding extends to ALL 17 keys in `_ADDITIONAL_KEYS` — **not a duplicate**.
+- **Evidence (executed):** `scripts/osi_sweep.py` ran 9299 cases (547 keys × 17 value classes) via `validate_osi_inputs`. All 17 keys in `_ADDITIONAL_KEYS` accept NaN; 16 of them also accept `inf`/`-inf`. Examples:
+  - `typical_section.girder_spacing=nan`: ACCEPTED (should reject — out of range [0.5, overall/2])
+  - `typical_section.no_of_girders=inf`: ACCEPTED (should reject — out of range [2, ceil(2*overall)])
+  - `typical_section.deck_overhang=nan`: ACCEPTED (should reject — out of range [0.0, overall/2])
+  - `typical_section.deck_thickness=nan`: ACCEPTED (should reject — out of range [100, 500])
+  - `typical_section.footpath_width=nan`: ACCEPTED (should reject — out of range [min, carriageway_width])
+  - `typical_section.crash_barrier.width=nan`: ACCEPTED (should reject — out of range [0.0, overall/2])
+- **Expected vs actual:** `validate_additional_inputs` should reject NaN/inf with a "must be a numeric value" or out-of-range error, just as `validate_basic_inputs` correctly rejects `geometry.span=inf`. **Actual:** `validate_additional_inputs` accepts NaN/inf for all 17 keys in `_ADDITIONAL_KEYS`, returning `None` (valid).
+- **Root cause (file:line, read-only):** `validator.py:174` `validate_additional_inputs` calls `self._to_float(inputs.get(key))` which returns `float('nan')` or `float('inf')` for non-numeric/non-finite inputs. Subsequent range checks (`v < min`, `v > max`) always evaluate to `False` for NaN/inf (NaN comparisons are always False; `inf > max_gs` is True only when `max_gs` is finite, but for keys without a computed `max_gs` like `deck_thickness`, there is no upper bound check at all).
+- **Suggested fix:**
+  ```diff
+   v = self._to_float(inputs.get(key))
++    if v is not None and (math.isnan(v) or math.isinf(v)):
++        return v, f"{key} must be a finite numeric value."
+     if v is None: return <corrected>, "must be a numeric value"
+  ```
+
+### P6-015 — `saveOSI_inputs` does not enforce `.osi` file extension (T4 — duplicate of [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153))
+- **Tier:** T4 (Duplicate of [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153), filed 2026-11-18 — same file/lines/fix)
+- **Area:** Track W4 — `desktop/ui/template_page.py:793-826` (`saveOSI_inputs`)
+- **Duplicate check:** Filed upstream as #153; originally no duplicate found (searched 89 issues on 2026-11-18) — reclassified after #153 appeared.
+- **Evidence (read-only):** `template_page.py:802-806` uses `QFileDialog.getSaveFileName` with filter `"Input Files(*.osi)"` but does NOT check/append `.osi` if the user types a different extension. A file named `foo.txt`, `foo.yaml`, or `foo.OSI` can be saved and will not be found by the loader's `*.osi` filter.
+- **Expected:** `saveOSI_inputs` should append `.osi` if missing, or at least warn.
+- **Actual:** No extension enforcement — any filename is accepted.
+
+### P6-016 — `saveOSI_inputs` does not confirm before overwriting (T3)
+- **Tier:** T3 (Static finding — read-only code review)
+- **Area:** Track W4 — `desktop/ui/template_page.py:802-820` (`saveOSI_inputs`)
+- **Duplicate check:** Not found in existing issues. New finding.
+- **Evidence (read-only):** `template_page.py:811-819` — `yaml.dump(self.input_dict, input_file)` is called directly without checking if `filePath` already exists. The file is overwritten silently with no confirmation dialog.
+- **Expected:** User should be prompted before overwriting an existing file.
+- **Actual:** File is overwritten silently.
+
+### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T3)
+- **Tier:** T3 (Static finding — read-only code review)
+- **Area:** Track W4 — `desktop/ui/template_page.py:869-870` (`loadOSI_inputs`)
+- **Duplicate check:** Not found in existing issues. New finding.
+- **Evidence (read-only):** `template_page.py:867-870`:
+  ```python
+  try:
+      solve_extend_basic_input_dict(self.input_dict)
+      self.cad_comp_widget.update_from_osdag_inputs(self.input_dict)
+  except Exception:
+      pass
+  ```
+  If `solve_extend_basic_input_dict` raises an exception (e.g., due to invalid material values that passed validation), it is silently swallowed. The UI has already been populated via `populate_from_dict(data)` at line 859, so the UI shows data that the solver rejected.
+- **Expected:** Load errors should be surfaced to the user, not silently swallowed.
+- **Actual:** Exceptions are silently caught; the UI may show invalid data.
+
+## GitHub filing status — 2026-11-18 (duplicate reclassification)
+
+Issues refreshed 2026-11-18: 155 items, 92 issues (max #155). Three new issues match this session's findings and are reclassified as T4 duplicates:
+
+### P6-015 — `.osi` extension enforcement → DUPLICATE of #153 (T4)
+- **GitHub:** [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153) "[Bug] saveOSI_inputs Does Not Enforce the .osi File Extension" (open, filed 2026-11-18)
+- Same file/lines (`template_page.py:802-812`), same root cause, same suggested fix (`if not filePath.lower().endswith(".osi"): filePath += ".osi"`). No new draft needed; comment draft optional.
+
+### P6-017 — silent swallow in loadOSI_inputs → DUPLICATE of #154 (T4)
+- **GitHub:** [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154) "[Bug] loadOSI_inputs Silently Swallows Exceptions from solve_extend_basic_input_dict" (open, filed 2026-11-18)
+- Same code (`template_page.py:867-870`, `except Exception: pass`). No new draft needed.
+
+### Web layer absent → DUPLICATE of #155 (T4)
+- **GitHub:** [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155) "[Documentation/Scope] No Web Application Layer Found — Django Backend and React Frontend Absent" (open, filed 2026-11-18)
+- Matches `notes/web_inventory.md`. Reclassified from T5/T6 to T4 (already reported upstream).
+
+### Still NEW (not filed anywhere):
+- **P6-014 (T2):** `validate_additional_inputs` accepts NaN/inf for all 17 keys in `_ADDITIONAL_KEYS`. #88 covers only specific basic/material keys; no issue covers the additional-input keys. Draft: `notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md`.
+- **P6-016 (T3):** `saveOSI_inputs` overwrites existing files silently (no confirmation). Searched titles/bodies for overwrite/confirm: not filed.

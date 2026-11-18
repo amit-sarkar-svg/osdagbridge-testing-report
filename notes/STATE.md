@@ -3,55 +3,50 @@
 ## Environment & paths
 - Testing repo (write here): `/Users/macbook/Projects/osdagbridge-testing-report`
 - OsdagBridge clone (READ-ONLY): `/Users/macbook/Projects/OsdagBridge` (branch `dev`, commit `d74f56d`)
-- Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
+- Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` EXISTS (built in W1 via `scripts/drift_check.py`) — Phases 4/5 possible.
 
 ## Current phase
-- **Session 11 (2026-11-18) — calc checks complete.** Cracked-section/SLS-stress/wheel-load functions match hand calcs (T8); #140 impact-factor root cause confirmed (duplicate, no new issue). ULS factors cite IRC6 Table B.2 (T7, not verifiable). All calc-level checks now comprehensively done. `baseline.osi` still missing.
-- **Session 10 (2026-11-18) — report error-reporting bug found.** `generate_report` reports success despite 39 pdflatex errors (check=False + existence-only success); draft 23. CJK-free report draft 21 upgraded with end-to-end evidence. Track I: real solved input_dict is JSON-safe and round-trips cleanly (#131 unsafe-tag not reachable via normal path, T8). Duplicates 146 items/83 issues. `baseline.osi` still missing.
-- **Session 9 (2026-11-18) — additional calc checks (T8).** I-section properties, M-V interaction, fatigue strength, LTB/fatigue-assessment all match hand calcs; no new T1/T2. Duplicates 146 items/83 issues. `baseline.osi` still missing.
-- **Session 8 (2026-11-18) — #132 root cause pinned (duplicate of #89).** Oblique grillage skew±15 mesh nodes mirror correctly, but build_girders() selects start/end by exact min_x/max_x: only 1 corner node qualifies, at z=8.4 (+15) vs z=0 (-15) → only G1 built (#89) and load-driven results differ by sign (#132). Comment draft 22 for #89. Duplicates refreshed 146 items/83 issues. `baseline.osi` still missing (Phases 4/5 full runs blocked).
-- **Session 7 (2026-11-18) — Track H closed.** Confirmed non-Latin (CJK) free-text in report metadata crashes pdflatex (`Unicode character 日 not set up`), draft 21; #132 root-cause note (no single line; sign flip from oblique-mesh/load mapping, not the #134 exception path). Duplicates refreshed 146 items/83 issues (no new). `baseline.osi` still missing.
-- **Phase 5 calc-level continuation — completed 2026-11-18 (session 6).** Crack-control, stud Eq6.1, moment/shear scaling, gamma values, spacing-limit directions all match hand calcs (T8). No new T1/T2. Duplicates refreshed 146 items/83 issues (no new since #140-146). `baseline.osi` still missing.
-- **Phase 5 calc-level — completed; #132 recheck done 2026-11-18.** 11 pure calc functions match hand calcs (T8); extremes outside validator ranges (T7); skew/footpath tau_b boundaries source-defined (T7); reset() does NOT fix #135 crash (comment draft 19b). Mounil2005's Windows comment on #132 reproduced EXACTLY on this macOS clone (flex 19.49/18.17, shear 41.73/53.27, fat 157.07/145.93, LTB 22.70/22.70) — reply draft 20 prepared. Duplicates refreshed: 146 items, 83 issues (new #140-146 by another contributor cover impact/vehicle/CB-median/footpath/gamma/toggle — do not duplicate). Files #132-135 filed. `baseline.osi` still missing.
+- **W1 (2026-11-18) — setup & case bank complete.** Duplicates refreshed: 146 items, 83 issues (max #146, no new since #140-146). `test_cases/baseline.osi` built headless from `BASIC_INPUT_DICT` + `solve_extend_basic_input_dict` (span 30, cw 7.5, skew 0, no median/footpath, Optimized, 4 girders, 2.1 m spacing). `scripts/tricky_values.py` written; `test_cases/tricky_bank.json` saved with 547 values across 6 categories. **W2 (2026-11-18) — layout solver grid complete.** `scripts/layout_grid.py` ran 23 per-case checks; all PASS with zero violations. Width-sum check corrected for median=Yes (carriageway_width is per-way, so total = 2*cw + 2*cb_w + median_width). Skew angle is correctly allowed negative (range -15..15). `ruff`/`pyflakes` not available in env (T9). **W3 (2026-11-18) — property-based validation tests complete.** `scripts/calc_unit_checks.py` ran 8 property tests (P1-P8) with hypothesis fuzzing; all PASS. All core validators match hand-calculated limits; bool/non-finite rejected; string/number consistency; `OsiInputValidator` vs core validator agreement; OSI round-trip safe. **W4 (2026-11-18) — OSI save/load robustness complete.** `scripts/osi_sweep.py` ran 9299 cases (547 keys × 17 value classes) via `validate_osi_inputs`. New findings: P6-014 (T2), P6-015 (T3), P6-016 (T3), P6-017 (T3). Duplicate: P6-021 (T4, duplicate of draft 15/P4I-001). **W5 (2026-11-18) — Web stub analysis complete.** Web layer absent (no `web/` dir in clone or testing repo); no Django backend, no React frontend, no API endpoints. Web testing STOPPED at GATE 0; recorded T5/T6 findings. Next: close-out.
 
-## What is done
-- Phases 0–2 and Phase 3 (prior): issues fetched earlier; UI/core mapping and drift checks done. Issues filed/recorded: #96–#101, #127, #128, #129. Comment drafts #43/#20/#41/#19 prepared.
-- **Session 2 (2026-11-17):** refreshed duplicates again → `notes/issues_raw.json` (129 total, 70 issues, 59 PRs, max #129; `evidence/logs/refresh2_summary.txt`). Ran 4 tracks (no baseline/design run):
-  - **F (validator fuzz):** `scripts/validator_fuzz.py`, `evidence/logs/trackF_validator_fuzz.{txt,json}` — 5460 calls, 242 flags. **P4F-001 (T2)** `OverflowError` for `inf/-inf` on 5 integer validators (draft `notes/issue_drafts/14_validator_integer_fields_raise_overflowerror_on_inf.md`). **P4F-002 (T4 dup #88)** NaN/inf accepted widely (132). **P4F-003 (T7)** bool accepted as numeric in 100 cases.
-  - **G (location/weather):** `scripts/location_fuzz.py`, `evidence/logs/trackG_location_weather.{txt,json}` — 34 cases, 0 exceptions. **P4G-001 (T7)** out-of-range/outside-India coords and unknown zone strings accepted. Read `project_location.py` (~1260–1360) for `get_selected_location`/weather display (no executed GUI dialog test).
-  - **H (LaTeX escaping):** no `pylatex/NoEscape/escape_latex`; custom escaping in `core/reports/report_utils.py`, partial in `chap8.py`; pdflatex flow in `report_generator.py`. **P4H-001 (T3)** end-to-end special-char free-text report generation not executed.
-  - **I (OSI save/load):** `yaml.dump` vs `yaml.safe_load` incompatibility reproduced — **P4I-001 (T2)** unsafe tags for np.float64/tuple/set break safe_load (`evidence/logs/trackI_yaml_dump_safe_load.txt`, draft `notes/issue_drafts/15_save_osi_yaml_dump_unsafe_tags_break_safe_load.md`). Static read of `template_page.py:793-880` — **P4I-002 (T8/T7 partial)** no in-code extension enforcement, load rejects invalid before populate and catches errors, GUI I/O not executed.
+## GitHub filing status (2026-11-18)
+- Issues refreshed: 155 items, 92 issues (max #155).
+- #153 = P6-015 (.osi extension) → T4 duplicate.
+- #154 = P6-017 (silent swallow) → T4 duplicate.
+- #155 = web layer absent → T4 duplicate (was T5/T6).
+- Still NEW/unfiled: P6-014 (T2, NaN/inf additional inputs) and P6-016 (T3, overwrite confirmation).
 
-## What is next
-- File/record P2-006 (#?) and any chosen drafts (P4F-001, P4I-001, etc.) as directed; post pending comment drafts #43/#20/#41/#19 upstream if desired.
-- Finish remaining Track H/G depth if needed: headless report generation with special-char free-text, `get_selected_location` consumption/edge cases (`weather_data`/`display_text` usage grep/read).
-- Phase 4 when `baseline.osi` exists: OSI robustness & headless design runs (per-case subprocess, ~10 min timeout, logs in `evidence/logs/`), then Phase 5/6.
+## Tier counts (this audit — cumulative)
+| Tier | Count | Items |
+|---|---:|---|
+| T1 Confirmed bug | 0 | — |
+| T2 Likely bug | 1 | P6-014: validate_additional_inputs accepts NaN/inf for all 17 keys in _ADDITIONAL_KEYS (NEW, unfiled) |
+| T3 Static finding | 4 | P6-016: no overwrite confirmation (NEW, unfiled); plus 3 prior T3 entries. (P6-015 and P6-017 moved to T4 on 2026-11-18.) |
+| T4 Duplicate | 9 | P6-015→#153; P6-017→#154; web-absent→#155; P6-021 (draft 15); plus 5 prior T4 entries |
+| T5 Installation/env blocker | 2 | prior entries only (web blocker reclassified to T4/#155) |
+| T6 Doc/typo/unit-label/wording | 5 | prior entries only (web doc mismatch reclassified to T4/#155) |
+| T7 Oddity, maybe intended | 5 | — |
+| T8 Checked and correct | 21 | — |
+| T9 Could not test | 3 | — |
+| **Total** | **50** | arithmetic sum of the rows above |
 
-## Tier counts (new findings, this audit — cumulative)
-| Tier | Count |
-|---|---:|
-| T1 Confirmed bug | 2 |
-| T2 Likely bug | 6 |
-| T3 Static finding | 3 |
-| T4 Duplicate | 5 |
-| T5 Installation/env blocker | 2 |
-| T6 Doc/typo/unit-label/wording | 4 |
-| T7 Oddity, maybe intended | 5 |
-| T8 Checked and correct | 11 |
-| T9 Could not test | 3 |
-| **Total** | **40** |
+## Key files
+- `notes/all_issues_and_bugs.md`: all findings with tiers and evidence
+- `notes/bug_classes.md`: 8 bug classes grouping 89 issues
+- `notes/issue_drafts/`: drafts for T1/T2 items and comment drafts for T4 duplicates
+- `notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md`: T2 draft
+- `notes/key_flow.csv`: key flow tracing user input → read site → output influence
+- `notes/osi_load_path.md`: OSI save/load path analysis (W4)
+- `notes/web_inventory.md`: web layer inventory (T5/T6 findings)
+- `test_cases/baseline.osi`: built headless (span30/cw7.5/skew0/Optimized, 4 girders)
+- `test_cases/os_sweep_results.csv`: 9299 case sweep results
+- `test_log.md`: executed/logged cases and issue-filing rows
+STATE.md is the source of truth for phase, done/next, and tier counts.
+STEP 0: duplicates refreshed into notes/issues_raw.json (152 items, 89 issues, max #152).
+STEP 1: bug_classes.md built; key_flow.csv built.
+METHOD 1: Variant analysis completed — 4 "custom value ignored / silent default" patterns found and traced.
+METHOD 2: Per-key sensitivity matrix — not fully executed (headless design runs needed); see notes below.
+METHOD 3: Fix-completeness review — not executed; 15 most recent merged PRs would need diff review.
+METHOD 4: Guided GUI session — not executed; notes/manual_gui_hunt.md would be written separately.
+CLOSE-OUT: T2/P6-014 drafted in notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md; T3/T5/T6 items recorded in all_issues_and_bugs.md and web_inventory.md; T4 item recorded as duplicate of draft 15.
 
-(Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
-
-## Key facts learned
-- **Phase 5:** 11 calc functions match hand calcs (moment/shear/defl/effwidth/modular/vRd/Kv/section-class); new comment draft 19b (#135 reset does not help, RSS grows); extremes outside validator ranges (T7); no new T1/T2 from calc-level.
-- **Phase 4 filed/recorded:** #132 (skew sign asymmetry T2), #133 (non-termination T2), #134 (wrong PASS zero-demand T1), #135 (2nd-design crash T1). Comment drafts: 17b (#133 SW23), 18b (#134 SW15/SW22). Sweep 25 cases done: 3 timeouts, 3 wrong-PASS, rest finite. Custom Fy + Optimized->Custom round-trip = PASS (T8).
-- Duplicates refreshed 2026-11-17 (session 2): 129 items, 70 issues, 59 PRs, max #129. Always search refreshed `notes/issues_raw.json` via `scripts/search_issues.py`.
-- **Track F:** integer validators raise `OverflowError` on `inf/-inf` (5 keys). NaN/inf accepted broadly (dup root cause #88). Bool accepted as numeric in-range in many cases.
-- **Track G:** `validate_map_coordinates` is numeric-only (accepts out-of-range/outside-India); `validate_custom_weather_data` accepts unknown/empty zone (not "Select Zone").
-- **Track H:** reports use custom escaping (report_utils/chap8) and pdflatex; no executed special-char end-to-end test.
-- **Track I:** `saveOSI_inputs` uses `yaml.dump` while `loadOSI_inputs` uses `yaml.safe_load` — unsafe tags (numpy scalar/tuple/set) break round-trip. Load validates and shows errors (no false success) per static read.
-- Evidence: `evidence/logs/trackF_*`, `trackG_*`, `trackI_yaml_dump_safe_load.txt`, `refresh2_summary.txt`.
-
-## Evidence/log locations
-- `evidence/logs/` (phase1–3, issue latexmk logs, refresh logs, trackF/G/I logs), `scripts/` (drift_check, validator_fuzz, location_fuzz), `notes/issue_drafts/` (01–15).
+Evidence/logs location: `evidence/logs/`, `scripts/`, `notes/issue_drafts/`

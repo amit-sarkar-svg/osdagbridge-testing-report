@@ -1,0 +1,12 @@
+key,written_by(file:line),read_by(file:line),influences_output?
+KEY_GIRDER (grade selection),plategirderbridge.py:2098, _build_material_props:2120, yes — DB grade overrides UI custom values
+KEY_MATERIAL_GIRDER_E,plategirderbridge.py:1183, _build_material_props:1185, yes — custom E read from input_dict if grade not in DB
+KEY_MATERIAL_GIRDER_FY,plategirderbridge.py:1193, _build_material_props:1195, yes — custom fy read from input_dict if grade not in DB
+KEY_MATERIAL_DECK_FCK,plategirderbridge.py:1210, _build_material_props:1212, yes — custom fck read from input_dict if grade not in DB
+KEY_MATERIAL_DECK_FCTM,plategirderbridge.py:1218, _build_material_props:1220, yes — custom fctm read from input_dict if grade not in DB
+KEY_TS_NO_OF_GIRDERS,defaults.py:711, design():735, yes — determines girder count; off-by-one yields 3-5 girders for same inputs
+KEY_MP_CB_SPACING,defaults.py:472, crossbracingforces.py:250, yes — used in analysis; fallback 3.0 m always used if UI value absent
+KEY_WC_DENSITY (wearing course),plategirderbridge.py:1334, create_deck_load: not called, no — always 25.0 kN/m³ default; deck concrete density not passed
+KEY_MATERIAL_DECK_DENSITY, not read by create_deck_load, analyser.py:466, yes — deck density always 25.0 kN/m³ default; never flows to self-weight
+KEY_PROJECT_LOCATION,plategirderbridge.py:1908, add_live_loads: not read, no — dead input; location change has no effect on design
+KEY_SL_SOIL_TYPE,plategirderbridge.py:1923, add_live_loads: not read, no — dead input; soil type has no effect on design
