@@ -567,10 +567,10 @@
 - **Expected:** User should be prompted before overwriting an existing file.
 - **Actual:** File is overwritten silently.
 
-### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T3)
-- **Tier:** T3 (Static finding — read-only code review)
+### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T4 — duplicate of [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154))
+- **Tier:** T4 (Duplicate of [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154), filed 2026-11-18 — same code path: `try: solve_extend_basic_input_dict(...) / self.cad_comp_widget.update_from_osdag_inputs(...) / except Exception: pass`)
 - **Area:** Track W4 — `desktop/ui/template_page.py:869-870` (`loadOSI_inputs`)
-- **Duplicate check:** Not found in existing issues. New finding.
+- **Duplicate check:** Filed upstream as #154 (open, 2026-11-18); originally no duplicate found (searched 89 issues) — reclassified after #154 appeared.
 - **Evidence (read-only):** `template_page.py:867-870`:
   ```python
   try:
@@ -622,10 +622,10 @@
 - **Expected:** User should be prompted before overwriting an existing file.
 - **Actual:** File is overwritten silently.
 
-### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T3)
-- **Tier:** T3 (Static finding — read-only code review)
+### P6-017 — `solve_extend_basic_input_dict` exceptions silently swallowed in `loadOSI_inputs` (T4 — duplicate of [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154))
+- **Tier:** T4 (Duplicate of [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154), filed 2026-11-18 — same code path: `try: solve_extend_basic_input_dict(...) / self.cad_comp_widget.update_from_osdag_inputs(...) / except Exception: pass`)
 - **Area:** Track W4 — `desktop/ui/template_page.py:869-870` (`loadOSI_inputs`)
-- **Duplicate check:** Not found in existing issues. New finding.
+- **Duplicate check:** Filed upstream as #154 (open, 2026-11-18); originally no duplicate found (searched 89 issues) — reclassified after #154 appeared.
 - **Evidence (read-only):** `template_page.py:867-870`:
   ```python
   try:

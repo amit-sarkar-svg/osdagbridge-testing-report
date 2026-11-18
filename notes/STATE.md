@@ -11,8 +11,8 @@
 ## GitHub filing status (2026-11-18)
 - Issues refreshed: 155 items, 92 issues (max #155).
 - #153 = P6-015 (.osi extension) → T4 duplicate.
-- #154 = P6-017 (silent swallow) → T4 duplicate.
-- #155 = web layer absent → T4 duplicate (was T5/T6).
+- #154 = P6-017 (silent swallow) → T4 duplicate; comment draft `notes/issue_drafts/26_comment_154_osi_swallow_t4.md`.
+- #155 = web layer absent → T4 duplicate (was T5/T6); no comment draft yet (see `notes/web_inventory.md`).
 - Still NEW/unfiled: P6-014 (T2, NaN/inf additional inputs) and P6-016 (T3, overwrite confirmation).
 
 ## Tier counts (this audit — cumulative)
