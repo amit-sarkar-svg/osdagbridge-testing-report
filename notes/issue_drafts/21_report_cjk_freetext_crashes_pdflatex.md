@@ -1,4 +1,4 @@
-# [Bug/Report] Non-Latin (CJK) free-text in report metadata crashes pdflatex (`Unicode character ... not set up`)
+# [Bug/Report] Non-Latin (CJK) free-text in report metadata causes 39 LaTeX errors; generator still reports success with dropped glyphs
 
 **Environment**
 - OsdagBridge `dev` @ `d74f56d` (2026-07-26)
@@ -49,3 +49,15 @@ Searched refreshed issues (146 items, 83 issues, `notes/issues_raw.json`) via `s
 
 **Notes**
 Reported as T2 (likely) because the failure is reproduced on a minimal doc using the project's own `_tex()` and pdflatex; the full GUI report call was not run (no baseline.osi), but the exact failing path (`_tex` → `.tex` → pdflatex) is the one the report generator uses. Latin accents are explicitly shown to work, so the bug is specific to non-Latin scripts.
+
+
+**UPDATE — executed end-to-end via `build_report_payload` + `generate_report` (stronger evidence)**
+`scripts/report_cjk_clean.py` built a real report with `project_name="日本 Bridge"`, `client="Client 日本"` from the completed SMOKE dict. Result: `generate_report` returned `ReportResult(pdf_path=...)` with no error surfaced to the caller and `PDF_EXISTS True` — i.e. the app reports **success** (exit 0 from the harness). But compiling the generated `.tex` directly:
+```
+pdflatex -interaction=nonstopmode cjk_report.tex  -> EXIT 1, 39 "Unicode character ... not set up" errors
+Output written on cjk_report.pdf (16 pages, 184347 bytes).
+```
+The raw CJK appears in the `.tex` (lines 59/77/146: `日本 Bridge`). Because `generate_report` runs `pdflatex -interaction=nonstopmode` with `check=False` and only tests `os.path.exists(pdf)` (report_generator.py:969-980), the 39 LaTeX errors are swallowed: the user gets a PDF with the CJK glyphs silently dropped and **no warning**. The minimal test with `-halt-on-error` gave "no PDF"; the real generator's nonstopmode gives a partial PDF reported as success.
+Evidence: `scripts/report_cjk_clean.py`, `evidence/logs/report_cjk_clean.log`, `evidence/logs/cjk_clean/cjk_report.tex`, `evidence/logs/cjk_clean/compile.log` (39 errors).
+
+**Root cause (second part):** `src/osdagbridge/core/reports/report_generator.py:969-980` — `res = subprocess.run([compiler, '-interaction=nonstopmode', ...], check=False)` then `if os.path.exists(tmp_pdf): copy2(...)` and success is returned without inspecting `res.returncode` or the log for `! LaTeX Error`. So any LaTeX error (CJK here, `≤` from #70, missing glyphs) yields a silently-degraded PDF marked successful.
