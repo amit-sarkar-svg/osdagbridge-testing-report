@@ -70,12 +70,12 @@
 - **Evidence:** `evidence/logs/phase1_examples.txt`: top-level key `['project']`, no real dotted keys (`geometry.span`/`geometry.carriageway_width`/`geometry.skew_angle`), `validate_osi_inputs` → `is_valid=True, errors=[], warnings=[]`. `tests/test_phase1_packaging.py::test_examples_parse_and_validate` PASS. Validator polices only *present* known keys and does not require basic inputs at load.
 - **Expected vs actual:** an illustrative example would typically use real dotted input keys; **actual:** placeholder schema (`project.span_m`) passes loader validation vacuously. May be intentional tolerance, but misleading.
 
-### P1-007 — Web entry point is stubbed; desktop-parity (input dict/defaults/validation) cannot be tested (T9)
-- **Tier:** T9 (Could not test)
+### P1-007 — Web entry point is stubbed; desktop-parity (input dict/defaults/validation) cannot be tested (T4 — duplicate of [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155))
+- **Tier:** T4 (Duplicate of [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155), filed 2026-11-18)
 - **Area:** Phase 1 — web entry point parity
-- **Duplicate check:** not applicable (no parity claim to label duplicate).
-- **Evidence:** `evidence/logs/phase1_entrypoints.txt`: `web/backend/manage.py` contains only a stub print; `web/frontend/package.json` minimal (`name`/`version` 0.0.0); no runnable backend/frontend implementing input dict/defaults/validation found.
-- **What blocked:** absence of a functional web implementation prevents any meaningful comparison of input dict construction, defaults, or validation against the desktop UI.
+- **Duplicate check:** filed upstream as #155; confirmed by repo-root `web/` inventory (2026-11-18): `manage.py` prints "Django manage stub", `package.json` declares only name/version 0.0.0, `App.jsx` renders `null`, `components/.gitkeep` placeholder. No Django apps/views/urls/settings, no runnable frontend, no `fetch`/`axios`, no `osdagbridge.core` import.
+- **Evidence:** `evidence/logs/phase1_entrypoints.txt`; corrected inventory in `notes/web_inventory.md`; comment draft `notes/issue_drafts/27_comment_155_web_layer_absent_t4.md`.
+- **What blocked:** absence of a functional web implementation prevents any meaningful comparison of input dict construction, defaults, or validation against the desktop UI. (Note: #155's claim "top-level web directory — Not found" is inaccurate; the directory exists but holds stubs. Conclusion identical.)
 
 ### P1-008 — `pyproject.toml` declares console entry points for desktop and CLI (T8)
 - **Tier:** T8 (Checked and correct)
@@ -652,7 +652,9 @@ Issues refreshed 2026-11-18: 155 items, 92 issues (max #155). Three new issues m
 
 ### Web layer absent → DUPLICATE of #155 (T4)
 - **GitHub:** [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155) "[Documentation/Scope] No Web Application Layer Found — Django Backend and React Frontend Absent" (open, filed 2026-11-18)
-- Matches `notes/web_inventory.md`. Reclassified from T5/T6 to T4 (already reported upstream).
+- Matches corrected `notes/web_inventory.md`. Reclassified from T5/T6 to T4 (already reported upstream).
+- **Correction:** repo-root `web/` exists but is stub-only: `manage.py` → `print("Django manage stub")`; `package.json` → name/version `0.0.0` only (no scripts/deps); `App.jsx` → `return null`; `components/.gitkeep` → `# placeholder`. #155's evidence table says top-level `web/` "Not found" — inaccurate; its conclusion (no Django/React layer) stands.
+- Comment draft: `notes/issue_drafts/27_comment_155_web_layer_absent_t4.md`.
 
 ### Still NEW (not filed anywhere):
 - **P6-014 (T2):** `validate_additional_inputs` accepts NaN/inf for all 17 keys in `_ADDITIONAL_KEYS`. #88 covers only specific basic/material keys; no issue covers the additional-input keys. Draft: `notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md`.

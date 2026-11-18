@@ -51,6 +51,7 @@ Issue \#134 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#135 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/135} \\
 Issue \#153 (new, filed, T3) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/153} \\
 Issue \#154 (new, filed, T3) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/154} \\
+Issue \#155 (new, filed, T5/T6) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/155} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -253,6 +254,35 @@ loader never calls) rejects all three:
 \textbf{Suggested fix (as filed in the issue).} Catch the exception explicitly and surface it (e.g. \texttt{CustomMessageBox} error), preserving diagnostics and keeping UI/internal state consistent, instead of \texttt{pass}.
 
 \textbf{Severity / confidence.} S2 (wrong data shown as if load succeeded) / High (static, code path unambiguous).
+
+\subsection{New issue filed: \#155 --- web application layer absent (stub-only \texttt{web/}; T5/T6 filed; now T4 duplicate of \#155)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/155}
+
+\textbf{Statement.} The 2026-11-18 GATE 0 inventory found that the OsdagBridge repository contains no runnable web application: no Django backend, no React frontend, and no HTTP API. The repository is a desktop application (PySide; UI in \texttt{desktop/ui/template\_page.py}) whose \texttt{web/} tree at the repository root contains only stubs. Web (Django/React) testing therefore cannot start; any documentation or task that assumes a web layer misstates the repository.
+
+\textbf{Corrected repository-root inventory (read-only).}
+
+\begin{longtable}{@{}p{5.2cm}p{5.6cm}p{4.2cm}@{}}
+\toprule
+Path / file & Content & Verdict \\
+\midrule
+\texttt{web/backend/manage.py} & \texttt{print("Django manage stub")} & stub --- no Django project \\
+\texttt{web/frontend/package.json} & \texttt{\{"name":"osdagbridge-frontend","version":"0.0.0"\}} & stub --- no scripts / dependencies \\
+\texttt{web/frontend/src/App.jsx} & \texttt{export default function App()\{ return null; \}} & placeholder --- renders nothing \\
+\texttt{web/frontend/src/components/.gitkeep} & \texttt{\# placeholder} & intentionally empty \\
+\texttt{web/.DS\_Store} & 6,148 bytes (macOS artifact) & noise \\
+\bottomrule
+\end{longtable}
+
+No \texttt{settings.py}, \texttt{urls.py}, \texttt{wsgi.py}, models or views; no \texttt{urlpatterns} anywhere in the tree; no \texttt{fetch(}/\texttt{axios(} calls; no import of \texttt{osdagbridge.core} under \texttt{web/}. Note: \#155's evidence table lists the top-level \texttt{web/} directory as ``Not found'', which is inaccurate --- the directory exists but holds stubs; the conclusion (no usable web layer) is correct.
+
+\textbf{Evidence.} \texttt{notes/web\_inventory.md} (corrected inventory); commands \texttt{find} under the clone's \texttt{web/} and \texttt{cat} of the four stub files; \texttt{grep -rn urlpatterns} (no matches). Recorded as \textbf{P1-007} (T9) in Phase 1; reclassified to T4 duplicate of \#155 on 2026-11-18. Comment draft: \texttt{notes/issue\_drafts/27\_comment\_155\_web\_layer\_absent\_t4.md}.
+
+\textbf{Expected vs actual.} \emph{Expected:} a runnable Django + React layer, or documentation explicitly stating the desktop-only scope. \emph{Actual:} stub files only; no runnable app; web testing requires building one.
+
+\textbf{Suggested resolution (as filed in the issue).} If web testing is in scope: implement the Django backend, React frontend and API integration. If the project is desktop-only: update README/requirements to describe desktop architecture and remove references to a non-existent web application. Testing-scope blocker --- not a defect in the desktop application.
+
+\textbf{Severity / confidence.} Blocker (web testing only) / High (inventory reproducible; conclusion independent of path detail).
 
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
