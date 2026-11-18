@@ -355,3 +355,15 @@
 - **Note:** IRC22 `cl_603_3_3_2_shear_buckling_post_critical` returns a dict whose Vd key my harness probed with the wrong name (got None) — harness artifact, not a product bug.
 - **New issues #140–#146 (other contributor, 2026-11-18):** impact factor always 0.10, transverse wind ignores girder depth, vehicle choices ignored, crash-barrier/median loads not reaching analysis, footpath custom pressure ignored + added to DL, partial safety factors have no effect, design-check toggles have no effect. These overlap planned load-path tests — agent will NOT duplicate; only new trigger conditions/components would be reported.
 - **Extreme valid inputs EX45 (span45/cw23.6/skew15) / EX20 (span20/cw4.25/skew−15):** EX45 was still running (>5 min CPU) when the server restarted and the run was cancelled — inconclusive, not counted as a hang finding (honest T9/incomplete).
+
+## Phase 5 calc-level continuation (2026-11-18, session 6)
+
+### P6-006 — Additional calc functions match hand calcs; scaling and limit directions correct (T8)
+- **Tier:** T8 (checked and correct)
+- **Evidence (executed, `scripts/calc_unit_checks2.py`, `evidence/logs/trackJ_unit_checks2.txt`):**
+  - Crack-control `As_min` (IRC22 604.4 docstring kc=0.5,k=0.65): fctm=2.5,fy=500,ts=200 → 325 mm²/m (hand: 0.5·0.65·2.5·200·1000/500=325) ✓; doubling fctm doubles As ✓.
+  - Stud strength Eq 6.1 (cl 606.3.1): d=20,hs=100,fu=500,fck_cu=30,Ecm=30000,γv=1.25 → Qu=78.743 kN (hand: concrete governs, Qu_conc=0.29·1.0·400·√(24·30000)/1.25=78.743 kN < steel 100.5) ✓. (Initial "mismatch" was harness probing nonexistent `Qu_steel_kN`; code returns governing `Qu_kN`.)
+  - Moment capacity 2×As (hand quadratic 208.669 kNm = code 208.669) ✓; shear Vd 2×tw = 2624.32 = 2×1312.16 ✓.
+  - γm0=1.10 (matches cited IS800 8.4.1/IRC22 603.3.3.2 docstring); γv stud default 1.25 (cl 606.3.1 signature) ✓.
+  - Shear-connector spacing limits (cl 606.9): min 75, max=min(600,3·200,4·100)=400; `is_spacing_acceptable` flips exactly at 74/75 and 400/401 ✓.
+- **No new T1/T2.** Duplicates re-freshed (146 items, 83 issues; no new since last). #140-146 (other contributor) cover impact/vehicle/CB-median/footpath/gamma/toggle — not duplicated.

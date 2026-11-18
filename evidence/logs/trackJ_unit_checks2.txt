@@ -1,0 +1,10 @@
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+crack_control As_min                   exp=325.0                act=325.0                  match=True
+crack_control As_min 2x fctm -> 2x     exp=650.0                act=650.0                  match=True
+stud full keys sample ['Qu_kN', 'governing_mode', 'alpha', 'clause', 'Qu_table7_kN']
+stud Qu_steel Eq6.1 (kN)               exp=100.531              act=None                   match=False
+stud all Qu keys {'Qu_kN': 78.743, 'Qu_table7_kN': 80}
+gamma_m0_steel 1.1 (IS800 8.4.1/IRC22 603.3.3.2 docstring says 1.10)
+gamma_v_stud default 1.25 (cl 606.3.1 signature)
+moment_capacity 2x As (hand)           exp=208.669              act=208.669                match=True
+shear Vd 2x tw -> 2x                   exp=2624.32              act=2624.32                match=True
