@@ -49,6 +49,8 @@ Issue \#132 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12
 Issue \#133 (new, filed, T2) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/133} \\
 Issue \#134 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/134} \\
 Issue \#135 (new, filed, T1) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/135} \\
+Issue \#153 (new, filed, T3) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/153} \\
+Issue \#154 (new, filed, T3) & Complete --- \url{https://github.com/Nidhikhare12/OsdagBridge/issues/154} \\
 52-case mutated-input run & \textbf{Blocked} --- awaiting app-saved \texttt{baseline.osi} \\
 UI-vs-dictionary comparisons, multi-run, 3D CAD/plot checks & Pending (manual + automated after baseline) \\
 \bottomrule
@@ -61,7 +63,7 @@ The short-span steel plate girder bridge module of OsdagBridge (\texttt{dev} bra
   \item verify documented input limits against the actual source;
   \item exercise the module headlessly with boundary, combination, custom-material and malformed inputs;
   \item separate \emph{correct rejection} (PASS) from \emph{bad input accepted / value silently ignored} (candidate bug);
-  \item check every candidate against all 39 existing GitHub issues before reporting;
+  \item check every candidate against all 92 existing GitHub issues before reporting;
   \item record every executed case with exact parameters, expected vs.\ actual, and evidence.
 \end{enumerate}
 
@@ -74,7 +76,7 @@ The short-span steel plate girder bridge module of OsdagBridge (\texttt{dev} bra
 \end{itemize}
 
 \section{Duplicate check}
-All issues (open + closed, PRs excluded) were fetched from the API on 2026-11-15: 95 items on page~1, 56 pull requests skipped, \textbf{39 issues} remain (\texttt{notes/issues\_raw.json}, readable index \texttt{notes/existing\_issues.md}). Every candidate finding was searched against that file before being called new.
+Issues were first fetched on 2026-11-15 and refreshed on 2026-11-18: most recently \textbf{155 items, 92 issues} (max \#155), pull requests excluded (\texttt{notes/issues\_raw.json}; readable index \texttt{notes/existing\_issues.md}). Every candidate finding was searched against that file --- with \texttt{scripts/search\_issues.py} over titles and bodies --- before being called new. The 2026-11-18 refresh revealed \#153/\#154/\#155, which cover this session's \texttt{.osi}-extension, silent-swallow and web-absent findings (reclassified to T4 duplicates; see Findings and \texttt{notes/all\_issues\_and\_bugs.md}).
 
 \section{Findings}
 \subsection{New issue filed: \#96 --- .osi loader skips all custom-material validation}
@@ -225,6 +227,32 @@ loader never calls) rejects all three:
 \textbf{Evidence.} guarded harness \texttt{dictionaries/IDEM2/same.py}; \texttt{evidence/logs/determinism\_2.log} (RUN1\_DONE then ValueError); full traceback \texttt{dictionaries/IDEM2/same.log}. An unguarded earlier harness (forkserver re-exec) was discarded as an artifact.
 
 \textbf{Suggested fix (posted in the issue).} reset all per-run section/DTO state at the start of \texttt{design()}, guard the LTB sqrt, and add an idempotence regression test.
+
+\subsection{New issue filed: \#153 --- \texttt{saveOSI\_inputs} does not enforce the .osi file extension (T3 filed; now T4 duplicate of \#153)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/153}
+
+\textbf{Statement.} In \texttt{saveOSI\_inputs()} (\texttt{desktop/ui/template\_page.py:793--826}), the path returned by \texttt{QFileDialog.getSaveFileName(self, ``Save Design Inputs'', default\_dir, ``Input Files(*.osi)'', None)} is passed unmodified to \texttt{open(filePath, 'w')}. Nothing checks or appends the \texttt{.osi} extension, so a user typing \texttt{my\_design.txt} saves a file that the loader's \texttt{*.osi} filter will not list. A plain rename is required before the file can be loaded.
+
+\textbf{Evidence.} \texttt{notes/osi\_load\_path.md} (OSI save/load path analysis, STEP 2); \texttt{template\_page.py:802--806} (dialog), \texttt{template\_page.py:812} (\texttt{open(filePath, 'w')}); we recorded the finding as \textbf{P6-015} (T3, static) on 2026-11-18 in \texttt{notes/all\_issues\_and\_bugs.md}. The identical review (same file/lines, same fix) was filed upstream as \#153 (2026-11-18); P6-015 was reclassified to T4 duplicate. Comment draft: \texttt{notes/issue\_drafts/25\_comment\_153\_osi\_extension\_t4.md}.
+
+\textbf{Expected vs actual.} \emph{Expected:} \texttt{.osi} appended automatically or a warning shown. \emph{Actual:} any filename accepted; no enforcement, no warning.
+
+\textbf{Suggested fix (as filed in the issue).} \texttt{if not filePath.lower().endswith(".osi"): filePath += ".osi"} before \texttt{open(...)}; or display a warning for unsupported extensions.
+
+\textbf{Severity / confidence.} S3 (usability; the saved file is invisible to the load filter) / High (static, path unambiguous).
+
+\subsection{New issue filed: \#154 --- \texttt{loadOSI\_inputs} silently swallows exceptions from \texttt{solve\_extend\_basic\_input\_dict} (T3 filed; now T4 duplicate of \#154)}
+\textbf{Link:} \url{https://github.com/Nidhikhare12/OsdagBridge/issues/154}
+
+\textbf{Statement.} In \texttt{loadOSI\_inputs()}, the order is: (1) \texttt{validate\_osi\_inputs(data)}; (2) on success, \texttt{populate\_from\_dict(data)} populates the dock; (3) \texttt{solve\_extend\_basic\_input\_dict(self.input\_dict)} runs inside a bare \texttt{try/except Exception: pass}. Any exception raised by the solve step --- invalid material values that slipped through validation, or any arithmetic failure --- is swallowed with no log and no message. The UI is left showing the loaded values even though the solver rejected them.
+
+\textbf{Evidence.} \texttt{notes/osi\_load\_path.md} (item 4: exceptions silently swallowed); \texttt{template\_page.py:847--870} (validate $\rightarrow$ populate $\rightarrow$ \texttt{except Exception: pass}); recorded as \textbf{P6-017} (T3, static) on 2026-11-18 in \texttt{notes/all\_issues\_and\_bugs.md}. The identical review (same code path) was filed upstream as \#154 (2026-11-18); P6-017 was reclassified to T4 duplicate. Comment draft: \texttt{notes/issue\_drafts/26\_comment\_154\_osi\_swallow\_t4.md}.
+
+\textbf{Expected vs actual.} \emph{Expected:} the solve failure surfaces an error to the user and the load aborts (or the dock is not populated). \emph{Actual:} the exception disappears; the dock shows the loaded values as if the load succeeded.
+
+\textbf{Suggested fix (as filed in the issue).} Catch the exception explicitly and surface it (e.g. \texttt{CustomMessageBox} error), preserving diagnostics and keeping UI/internal state consistent, instead of \texttt{pass}.
+
+\textbf{Severity / confidence.} S2 (wrong data shown as if load succeeded) / High (static, code path unambiguous).
 
 \subsection{Confirmed duplicates of existing issues (extra root-cause detail, comment material only)}
 \begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
