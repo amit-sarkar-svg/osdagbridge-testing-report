@@ -6,6 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
+- **Session 10 (2026-11-18) — report error-reporting bug found.** `generate_report` reports success despite 39 pdflatex errors (check=False + existence-only success); draft 23. CJK-free report draft 21 upgraded with end-to-end evidence. Track I: real solved input_dict is JSON-safe and round-trips cleanly (#131 unsafe-tag not reachable via normal path, T8). Duplicates 146 items/83 issues. `baseline.osi` still missing.
 - **Session 9 (2026-11-18) — additional calc checks (T8).** I-section properties, M-V interaction, fatigue strength, LTB/fatigue-assessment all match hand calcs; no new T1/T2. Duplicates 146 items/83 issues. `baseline.osi` still missing.
 - **Session 8 (2026-11-18) — #132 root cause pinned (duplicate of #89).** Oblique grillage skew±15 mesh nodes mirror correctly, but build_girders() selects start/end by exact min_x/max_x: only 1 corner node qualifies, at z=8.4 (+15) vs z=0 (-15) → only G1 built (#89) and load-driven results differ by sign (#132). Comment draft 22 for #89. Duplicates refreshed 146 items/83 issues. `baseline.osi` still missing (Phases 4/5 full runs blocked).
 - **Session 7 (2026-11-18) — Track H closed.** Confirmed non-Latin (CJK) free-text in report metadata crashes pdflatex (`Unicode character 日 not set up`), draft 21; #132 root-cause note (no single line; sign flip from oblique-mesh/load mapping, not the #134 exception path). Duplicates refreshed 146 items/83 issues (no new). `baseline.osi` still missing.
@@ -29,15 +30,15 @@
 | Tier | Count |
 |---|---:|
 | T1 Confirmed bug | 2 |
-| T2 Likely bug | 4 |
+| T2 Likely bug | 6 |
 | T3 Static finding | 3 |
 | T4 Duplicate | 5 |
 | T5 Installation/env blocker | 2 |
 | T6 Doc/typo/unit-label/wording | 4 |
 | T7 Oddity, maybe intended | 5 |
-| T8 Checked and correct | 10 |
+| T8 Checked and correct | 11 |
 | T9 Could not test | 3 |
-| **Total** | **38** |
+| **Total** | **40** |
 
 (Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
 
