@@ -403,3 +403,14 @@
   - `cl_603_3_3_1_buckling_resistance_moment` LTB: code follows IS800 8.2.1.2 docstring (Mpl, βb, Mcr, λLT, χLT); no hand mismatch found (the 2nd-run crash is #135, already filed).
   - `cl_605_4_fatigue_assessment` τ_y=0.43·fy is an explicit documented assumption citing IRC:24 Table G.2 → T7, not a bug.
 - **No new T1/T2.** Duplicates refreshed 146 items/83 issues, no new. `baseline.osi` still missing.
+
+### P6-011 — generate_report reports success despite pdflatex fatal errors (T2)
+- **Tier:** T2 (likely bug — silent degraded output)
+- **Draft:** `notes/issue_drafts/23_report_success_despite_latex_errors.md`
+- **Duplicate check:** `success`+`pdflatex`, `error`+`report`, `diagnostic` — no match; #70 is a trigger (≤), not this silent-success path. No duplicate.
+- **Evidence (executed):** `scripts/report_cjk_clean.py`, `evidence/logs/report_cjk_clean.log`: `generate_report` returned success + PDF_EXISTS True with CJK metadata; direct `pdflatex -interaction=nonstopmode` on generated `.tex` → EXIT 1, 39 "Unicode character not set up" errors, still wrote 16-page PDF (`cjk_clean/compile.log`). Code `report_generator.py:969-980`: `check=False`, existence-only success, `res.returncode`/log never inspected.
+- **Expected vs actual:** non-zero pdflatex exit / `! LaTeX Error` should fail or warn; **actual:** degraded PDF returned as normal success.
+
+### P6-012 — Track I save/load file-I/O edge cases (T8)
+- **Tier:** T8 (checked and correct — normal path)
+- **Evidence (executed):** real solved `input_dict` (688 keys from defaults) contained ONLY JSON-safe types (str/float/int/bool/None/list/dict); `yaml.dump`→`yaml.safe_load` round-trip OK (688 keys equal) both before and after `set_input()`. unicode/space path write+read OK at file level. So #131's unsafe-tag failure (numpy scalar/tuple/set) is NOT reachable through the normal save path — no new finding.
