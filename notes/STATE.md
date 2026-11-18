@@ -6,6 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
+- **Session 7 (2026-11-18) — Track H closed.** Confirmed non-Latin (CJK) free-text in report metadata crashes pdflatex (`Unicode character 日 not set up`), draft 21; #132 root-cause note (no single line; sign flip from oblique-mesh/load mapping, not the #134 exception path). Duplicates refreshed 146 items/83 issues (no new). `baseline.osi` still missing.
 - **Phase 5 calc-level continuation — completed 2026-11-18 (session 6).** Crack-control, stud Eq6.1, moment/shear scaling, gamma values, spacing-limit directions all match hand calcs (T8). No new T1/T2. Duplicates refreshed 146 items/83 issues (no new since #140-146). `baseline.osi` still missing.
 - **Phase 5 calc-level — completed; #132 recheck done 2026-11-18.** 11 pure calc functions match hand calcs (T8); extremes outside validator ranges (T7); skew/footpath tau_b boundaries source-defined (T7); reset() does NOT fix #135 crash (comment draft 19b). Mounil2005's Windows comment on #132 reproduced EXACTLY on this macOS clone (flex 19.49/18.17, shear 41.73/53.27, fat 157.07/145.93, LTB 22.70/22.70) — reply draft 20 prepared. Duplicates refreshed: 146 items, 83 issues (new #140-146 by another contributor cover impact/vehicle/CB-median/footpath/gamma/toggle — do not duplicate). Files #132-135 filed. `baseline.osi` still missing.
 
@@ -26,7 +27,7 @@
 | Tier | Count |
 |---|---:|
 | T1 Confirmed bug | 2 |
-| T2 Likely bug | 3 |
+| T2 Likely bug | 4 |
 | T3 Static finding | 3 |
 | T4 Duplicate | 5 |
 | T5 Installation/env blocker | 2 |
@@ -34,7 +35,7 @@
 | T7 Oddity, maybe intended | 5 |
 | T8 Checked and correct | 10 |
 | T9 Could not test | 3 |
-| **Total** | **37** |
+| **Total** | **38** |
 
 (Additions this session: T2 +2 P4F-001,P4I-001; T3 +1 P4H-001; T4 +1 P4F-002/#88; T7 +3 P4F-003,P4G-001,P4I-002-mix; T8 +1 P4I-002-mix/checked aspects.)
 
