@@ -6,7 +6,7 @@
 - Conda env: `osdagbridge-env` (Python 3.12.16). `baseline.osi` **MISSING** (blocks Phases 4,5).
 
 ## Current phase
-- **Phase 5 (calculation-level unit tests) — completed 2026-11-17.** 11 pure calc functions verified against hand calcs (all T8 PASS); extremes are outside validator ranges (no in-range bug); skew/footpath logic correct; reset() does NOT fix #135 crash (comment draft 19b). Files #132-135 filed. `baseline.osi` still missing (blocks full Phase 4/5 design runs).
+- **Phase 5 calc-level — completed; #132 recheck done 2026-11-18.** 11 pure calc functions match hand calcs (T8); extremes outside validator ranges (T7); skew/footpath tau_b boundaries source-defined (T7); reset() does NOT fix #135 crash (comment draft 19b). Mounil2005's Windows comment on #132 reproduced EXACTLY on this macOS clone (flex 19.49/18.17, shear 41.73/53.27, fat 157.07/145.93, LTB 22.70/22.70) — reply draft 20 prepared. Duplicates refreshed: 146 items, 83 issues (new #140-146 by another contributor cover impact/vehicle/CB-median/footpath/gamma/toggle — do not duplicate). Files #132-135 filed. `baseline.osi` still missing.
 
 ## What is done
 - Phases 0–2 and Phase 3 (prior): issues fetched earlier; UI/core mapping and drift checks done. Issues filed/recorded: #96–#101, #127, #128, #129. Comment drafts #43/#20/#41/#19 prepared.
