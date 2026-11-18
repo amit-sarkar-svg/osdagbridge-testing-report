@@ -414,3 +414,19 @@
 ### P6-012 — Track I save/load file-I/O edge cases (T8)
 - **Tier:** T8 (checked and correct — normal path)
 - **Evidence (executed):** real solved `input_dict` (688 keys from defaults) contained ONLY JSON-safe types (str/float/int/bool/None/list/dict); `yaml.dump`→`yaml.safe_load` round-trip OK (688 keys equal) both before and after `set_input()`. unicode/space path write+read OK at file level. So #131's unsafe-tag failure (numpy scalar/tuple/set) is NOT reachable through the normal save path — no new finding.
+
+## Session 11 (2026-11-18) — final calc checks (T8 + duplicate confirmation)
+
+### P6-013 — Crack-width/SLS-stress/cracked-section/section-props/wheel-load functions match hand calcs (T8)
+- **Tier:** T8 (checked and correct)
+- **Evidence (executed):**
+  - `_cracked_section` (IRC112 cracked-section quadratic): As=1000,d=200,Es=200000,Ecm=30000 → x=45.4017, Icr=1.9053e8 — hand calc matches to 1e-6 ✓.
+  - `_sls_stress` (IRC112 Cl.12.2.1, σs ≤ 0.80 fyk): limit flip exact at σs=400 (=0.8·500) inclusive ✓.
+  - Wheel loads `_max_wheel_load_kN`: C70R 83.385 kN, ClassA 55.917 kN (max axle N / 2 / 1000 per cited IRC6 docstring) ✓; contact length/width are table lookups per cited IRC6 drawings ✓.
+  - ULS/SLS load combination factors (1.35 DL, 1.75 surf, 1.5 variable) cite IRC6 Table B.2 — could not hand-verify table values without the standard → T7 (source unknown), not called wrong.
+- **No new T1/T2.**
+
+### P6-014 — #140 impact-factor root cause confirmed (duplicate of #140, no new issue)
+- **Tier:** T2 evidence (duplicate of #140 — already filed by another contributor)
+- **Evidence (executed):** `KEY_VEHICLE = ['Class70R(W)','Class70R(T)','ClassA','ClassB']`; in `irc6_2017.py` `cl_208_3_impact_factor` branches `if KEY_VEHICLE[1]:` (string 'Class70R(T)', always truthy) → `elif KEY_VEHICLE[0]:` unreachable. Executed: `[cl_208_3_impact_factor(L) for L in (10,20,30,45)] = [0.1,0.1,0.1,0.1]` while `cl_208_2` gives 0.383/0.269/0.207/0.154. #140's body already states this exact root cause — no new finding, no new draft (would be redundant).
+- Duplicates refreshed 146 items/83 issues, no new.
