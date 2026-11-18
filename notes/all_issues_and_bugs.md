@@ -382,3 +382,12 @@
 - **Tier:** record (no new bug; #132 already filed)
 - Duplicate refresh 2026-11-18: 146 items, 83 issues, max #146, no new since #140-146.
 - **Evidence (read-only):** `analyser.py:1988-1998` governing-LL via `env_lc.sel(Element=gov_element)` (this exact call throws for #134's affected inputs, but #132's two runs complete, so #132 is NOT that exception path). Skew handled in `mesh.py:245-266` with degrees→radians (`skew_1/180*π`, `tan`), thresholds [11,30] deg at L675. `loading.live_load.eccentricity` (1.2) is defined in validator/UI/defaults but not consumed in analyser load generation (separate area, likely #140-146). No single line pinned for the sign flip — it is the oblique mesh/load distribution; no new T1/T2.
+
+## Session 8 (2026-11-18) — #132 root cause pinned (already filed #89)
+
+### P6-009 — Root cause of #132 sign asymmetry = #89 girder edge-identification (duplicate of #89, comment draft)
+- **Tier:** T2 evidence (duplicate of already-filed #89 / related #132); NOT a new issue
+- **Draft:** `notes/issue_drafts/22_comment_issue89_skew_root_cause.md`
+- **Evidence (executed, `scripts/skew_mesh_check.py`):** built oblique grillage `og.create_grillage(..., skew=±15, mesh_type="Oblique")`, span30/width8.4/4 long grid. Mesh nodes are perfectly mirror-symmetric (x flips sign exactly: +15 node2 x=-0.281 ↔ -15 x=+0.281). But `build_girders()` (analysis_results.py:422-431) selects start/end nodes by exact min_x/max_x: skew+15 → min_x=-2.251 with **1 node** at min (z=8.4), max_x=30 with 1; skew-15 → min_x=0 with 1 node (z=0), max_x=32.251 with 1. Only a single corner node qualifies (inclined edge), so only G1/EB1 is built — matches #89's table (+15/-15: G1 only).
+- **Sign connection:** +15 start corner at z=8.4 vs -15 at z=0 (opposite edges) → surviving girder on opposite side → load-driven utilizations differ and the difference direction flips with geometry (#132), while self-weight LTB is identical. Mesh geometry itself is correct; fault is edge identification.
+- **Action:** comment draft for #89; do NOT file as new issue (duplicate). Duplicates refreshed: 146 items, 83 issues, no new.
