@@ -1,0 +1,5 @@
+EXIT 1
+RUN1_DONE
+Traceback (most recent call last):
+    b.design(); o2=sig(dict(b.output_dict)); print("RUN2_DONE",flush=True)
+ValueError: math domain error

@@ -1,0 +1,41 @@
+[
+  {
+    "run": 1,
+    "status": "ok",
+    "wall_s": 58.0,
+    "rss_mb": 356860.0,
+    "sig": [
+      30.0,
+      2646.84,
+      23.06
+    ]
+  },
+  {
+    "run": 2,
+    "status": "ValueError: math domain error",
+    "wall_s": 41.7,
+    "rss_mb": 425056.0,
+    "sig": null
+  },
+  {
+    "run": 3,
+    "status": "ValueError: math domain error",
+    "wall_s": 41.8,
+    "rss_mb": 426620.0,
+    "sig": null
+  },
+  {
+    "run": 4,
+    "status": "ValueError: math domain error",
+    "wall_s": 35.8,
+    "rss_mb": 428456.0,
+    "sig": null
+  },
+  {
+    "run": 5,
+    "status": "ValueError: math domain error",
+    "wall_s": 42.9,
+    "rss_mb": 429432.0,
+    "sig": null
+  }
+]

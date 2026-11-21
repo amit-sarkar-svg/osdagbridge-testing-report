@@ -1,0 +1,1 @@
+{"id": "L2.grid.cw.4.5", "status": "PASS", "runtime": 0.331, "peak_mb": 33.4, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "solve_valid", "layer": "L2"}

@@ -1,0 +1,26 @@
+SW01 SKIP already-done
+SW02 SKIP already-done
+SW03 SKIP already-done
+SW04 SKIP already-done
+SW05 SKIP already-done
+SW06 SKIP already-done
+SW07 SKIP already-done
+SW08 SKIP already-done
+SW09 SKIP already-done
+SW10 SKIP already-done
+SW11 SKIP already-done
+SW12 SKIP already-done
+SW13 ok 108.9 
+SW14 ok 452.8 
+SW15 ok 357.6 
+SW16 ok 203.9 
+SW17 ok 158.6 
+SW18 ok 55.2 
+SW19 ok 48.6 
+SW20 ok 21.2 
+SW21 ok 259.8 
+SW22 ok 299.2 
+SW23 timeout 600.0 
+SW24 ok 84.9 
+SW25 ok 30.8 
+RESUME_DONE

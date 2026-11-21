@@ -1,0 +1,1 @@
+{"id": "L3.typical_section.median.load.inf", "status": "PASS", "runtime": 0.228, "peak_mb": 33.4, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "loader_no_crash_valid_rejected", "layer": "L3"}

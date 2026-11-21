@@ -1,0 +1,7 @@
+'--help' rc= 0 out= osdagbridge CLI (stub) err= 
+'analyze test_cases/baseline.osi' rc= 0 out= osdagbridge CLI (stub) err= 
+'analyze missing.osi' rc= 0 out= osdagbridge CLI (stub) err= 
+'analyze evidence/tmp' rc= 0 out= osdagbridge CLI (stub) err= 
+'analyze evidence/tmp/empty.osi' rc= 0 out= osdagbridge CLI (stub) err= 
+'--bogus-flag' rc= 0 out= osdagbridge CLI (stub) err= 
+'' rc= 0 out= osdagbridge CLI (stub) err= 

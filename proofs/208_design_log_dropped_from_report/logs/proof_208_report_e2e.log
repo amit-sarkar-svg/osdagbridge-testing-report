@@ -1,0 +1,14 @@
+PAYLOAD log_entries = ['INFO: Stage 1 complete MARKERINFOA', 'WARNING: Deck crack width check skipped MARKERWARNB', 'ERROR: Bearing stiffener check failed MARKERERRC']
+RESULT ReportResult(pdf_path='evidence/tmp/proof208_run1/report_208.pdf', tex_path='evidence/tmp/proof208_run1/report_208.tex')
+TEX contains MARKERINFOA -> False
+TEX contains MARKERWARNB -> False
+TEX contains MARKERERRC -> False
+pypdf not installed: PDF text check skipped
+--
+PAYLOAD log_entries = ['INFO: Stage 1 complete MARKERINFOA', 'WARNING: Deck crack width check skipped MARKERWARNB', 'ERROR: Bearing stiffener check failed MARKERERRC']
+RESULT ReportResult(pdf_path='evidence/tmp/proof208_run2/report_208.pdf', tex_path='evidence/tmp/proof208_run2/report_208.tex')
+TEX contains MARKERINFOA -> False
+TEX contains MARKERWARNB -> False
+TEX contains MARKERERRC -> False
+pypdf not installed: PDF text check skipped
+--

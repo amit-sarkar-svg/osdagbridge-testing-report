@@ -1,0 +1,1 @@
+{"id": "L3.typical_section.footpath_thickness.unit30", "status": "PASS", "runtime": 0.494, "peak_mb": 33.6, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "loader_no_crash_valid_rejected", "layer": "L3"}

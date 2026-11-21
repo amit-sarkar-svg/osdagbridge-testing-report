@@ -1,0 +1,1 @@
+{"id": "L1.weather.max_temp.bool_t", "status": "PASS", "runtime": 0.3, "peak_mb": 33.7, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

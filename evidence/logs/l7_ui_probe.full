@@ -1,0 +1,78 @@
+qt.qpa.fonts: Populating font family aliases took 131 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+WIDGET geometry.span QLineEdit QDoubleValidator
+eometry.span typed='nan'     text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='inf'     text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='1e999'   text='45.0'    dict='45.0'     popups+=1
+eometry.span typed='30,5'    text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='19.999'  text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='1e1'     text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='-0'      text='20.0'    dict='20.0'     popups+=1
+eometry.span typed='  '      text='20.0'    dict='20.0'     popups+=1
+WIDGET geometry.skew_angle QLineEdit QDoubleValidator
+y.skew_angle typed='nan'     text='-15.0'   dict='-15.0'    popups+=1
+y.skew_angle typed='inf'     text='-15.0'   dict='-15.0'    popups+=1
+y.skew_angle typed='1e999'   text='15.0'    dict='15.0'     popups+=1
+y.skew_angle typed='30,5'    text='-15.0'   dict='-15.0'    popups+=1
+y.skew_angle typed='19.999'  text='15.0'    dict='15.0'     popups+=1
+y.skew_angle typed='1e1'     text='11'      dict='11'       popups+=0
+y.skew_angle typed='-0'      text='-0'      dict='-0'       popups+=0
+y.skew_angle typed='  '      text='-15.0'   dict='-15.0'    popups+=1
+WIDGET geometry.carriageway_width QLineEdit QDoubleValidator
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.4 m
+  no_of_girders = 4
+  girder_spacing = 2.1 m
+  deck_overhang = 1.05 m
+ageway_width typed='nan'     text='7.5'     dict='7.5'      popups+=1
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.4 m
+  no_of_girders = 4
+  girder_spacing = 2.1 m
+  deck_overhang = 1.05 m
+ageway_width typed='inf'     text='7.5'     dict='7.5'      popups+=1
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 24.5 m
+  no_of_girders = 4
+  girder_spacing = 6.125 m
+  deck_overhang = 3.0625 m
+ageway_width typed='1e999'   text='23.6'    dict='23.6'     popups+=1
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.4 m
+  no_of_girders = 4
+  girder_spacing = 2.1 m
+  deck_overhang = 1.05 m
+ageway_width typed='30,5'    text='7.5'     dict='7.5'      popups+=1
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 20.898999999999997 m
+  no_of_girders = 4
+  girder_spacing = 5.2247 m
+  deck_overhang = 2.6124 m
+ageway_width typed='19.999'  text='19.999'  dict='19.999'   popups+=0
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 11.899999999999999 m
+  no_of_girders = 4
+  girder_spacing = 2.975 m
+  deck_overhang = 1.4875 m
+ageway_width typed='1e1'     text='11'      dict='11'       popups+=0
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 5.15 m
+  no_of_girders = 4
+  girder_spacing = 1.2875 m
+  deck_overhang = 0.6438 m
+ageway_width typed='-0'      text='4.25'    dict='4.25'     popups+=1
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.4 m
+  no_of_girders = 4
+  girder_spacing = 2.1 m
+  deck_overhang = 1.05 m
+ageway_width typed='  '      text='7.5'     dict='7.5'      popups+=1
+####### 3D rendering pipe initialisation #####
+Display3d class initialization starting ...
+Aspect_DisplayConnection created.
+OpenGl_GraphicDriver created.
+V3d_Viewer created.
+AIS_InteractiveContext created.
+V3d_View created
+Graphic3d_Camera created
+Graphic3d_StructureManager created

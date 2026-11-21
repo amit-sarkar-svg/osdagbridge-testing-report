@@ -1,0 +1,3 @@
+# Comment draft for #88 (T4)
+Same defect is reachable without an .osi file. `BridgeInputValidator.validate_basic_inputs` returns None (valid) for NaN: span `nan`/`"nan"`, skew `nan`, carriageway `nan` (and `validate_material_inputs` for Fy `nan`). Also bool `True` is accepted as skew 1.0. Cause: `_to_float` (validator.py:1094-1097) uses `float()`, and every `<`/`>` range test is False for NaN. Evidence: `scripts/probe_cands1.py`, log `evidence/logs/probe_cands1.log` (identical in a second process). Suggested fix: `math.isfinite` check and reject `bool` in `_to_float`.
+Also: `validate_map_coordinates("999","nan")`, `("inf","0")`, `("-500","1e999")` return `(True, '')` (see #180).

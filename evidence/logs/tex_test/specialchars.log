@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.15)  18 NOV 2026 12:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.11.15)  18 NOV 2026 13:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -27,7 +27,7 @@ File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
 )
-No file specialchars.aux.
+(./specialchars.aux)
 \openout1 = `specialchars.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 2.
@@ -46,6 +46,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 2.
 LaTeX Font Info:    ... okay on input line 2.
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 7
 .
+
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
 )
@@ -65,13 +66,58 @@ l.13 Item 10: 日
 You may provide a definition with
 \DeclareUnicodeCharacter 
 
- 
+
+! LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.13 Item 10: 日本
+                    \\
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Overfull \hbox (2298.48903pt too wide) in paragraph at lines 3--15
+\OT1/cmr/m/n/12 Item 11: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAA 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--15
+
+ []
+
+[1
+
+{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
+al/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+(./specialchars.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+ ***********
+ ) 
 Here is how much of TeX's memory you used:
- 447 strings out of 467525
- 8483 string characters out of 5418981
- 433756 words of memory out of 5000000
- 29439 multiletter control sequences out of 15000+600000
+ 459 strings out of 467525
+ 8539 string characters out of 5418981
+ 434756 words of memory out of 5000000
+ 29445 multiletter control sequences out of 15000+600000
  628613 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,1n,38p,153b,95s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 35i,5n,38p,330b,126s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on specialchars.pdf (1 page, 26252 bytes).
+PDF statistics:
+ 24 PDF objects out of 1000 (max. 8388607)
+ 14 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

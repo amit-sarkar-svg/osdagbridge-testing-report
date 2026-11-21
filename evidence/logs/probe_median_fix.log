@@ -1,0 +1,16 @@
+BEFORE median='No' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median='Yes' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median='' -> (4.25, 'Carriageway width must be specified.')
+BEFORE median='None' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median=None -> (4.25, 'Carriageway width must be specified.')
+AFTER_FIX median='No' -> (4.25, 'Carriageway width must be specified.')
+AFTER_FIX median='Yes' -> (7.5, 'Carriageway width must be specified.')
+--
+BEFORE median='No' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median='Yes' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median='' -> (4.25, 'Carriageway width must be specified.')
+BEFORE median='None' -> (7.5, 'Carriageway width must be specified.')
+BEFORE median=None -> (4.25, 'Carriageway width must be specified.')
+AFTER_FIX median='No' -> (4.25, 'Carriageway width must be specified.')
+AFTER_FIX median='Yes' -> (7.5, 'Carriageway width must be specified.')
+--

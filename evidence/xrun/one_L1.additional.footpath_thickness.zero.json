@@ -1,0 +1,1 @@
+{"id": "L1.additional.footpath_thickness.zero", "status": "PASS", "runtime": 0.403, "peak_mb": 33.5, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

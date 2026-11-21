@@ -1,0 +1,650 @@
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:854: UserWarning: No median component in layout; skipping median load creation
+  warnings.warn("No median component in layout; skipping median load creation")
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_1: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_2: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_3: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_4: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_5: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: BASIC_6: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: ACCIDENTAL_1: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: ACCIDENTAL_2: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: ACCIDENTAL_3: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: SEISMIC_1: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: SEISMIC_2: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: SEISMIC_3: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2381: UserWarning: SEISMIC_4: 'thermal_load' load case not available — create it before calling create_uls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_1: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_2: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_3: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_4: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_5: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_RARE_6: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_1: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_2: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_3: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_4: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_5: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_FREQUENT_6: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_QP_1: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/analyser.py:2576: UserWarning: SLS_QP_2: 'thermal_load' load case not available — create it before calling create_sls_combinations().
+  warnings.warn(
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+Bridge width from layout: 12.25 m
+Self weight line load @ z=1.215 m: 6011.69 N/m (A=0.07658 m²)
+Self weight line load @ z=3.670 m: 6011.69 N/m (A=0.07658 m²)
+Self weight line load @ z=6.125 m: 6011.69 N/m (A=0.07658 m²)
+Self weight line load @ z=8.580 m: 6011.69 N/m (A=0.07658 m²)
+Self weight line load @ z=11.035 m: 6011.69 N/m (A=0.07658 m²)
+Deck slab load magnitude: 6250.00 N/m²
+Wearing course load magnitude: 1200.00 N/m²
+Footpath load magnitude: 4905.00 N/m²
+[Footpath left] patch corners: p1(x=0.000, z=0.375)  p2(x=45.000, z=0.375)  p3(x=45.000, z=1.875)  p4(x=0.000, z=1.875)
+[Footpath right] patch corners: p1(x=0.000, z=10.375)  p2(x=45.000, z=10.375)  p3(x=45.000, z=11.875)  p4(x=0.000, z=11.875)
+Crash barrier line load magnitude: 6540.00 N/m
+[Crash barrier left] line load: start(x=0.000, z=2.125)  end(x=45.000, z=2.125)
+[Crash barrier right] line load: start(x=0.000, z=10.125)  end(x=45.000, z=10.125)
+Railing line load magnitude: 1471.50 N/m
+[Railing left] line load: start(x=0.000, z=0.188)  end(x=45.000, z=0.188)
+[Railing right] line load: start(x=0.000, z=12.062)  end(x=45.000, z=12.062)
+Median line load magnitude: 4000.00 N/m
+Wind loads (IRC:6-2017): Pz=463.7 N/m²  FT=21.88 kN  FT/m=0.486 kN/m  FL=9.9232 N/m²  FV=695.55 N/m²
+Seismic inputs: DL=6121.6 kN  Governing LL=0.0 kN
+Seismic loads (IRC:6-2017 Cl.218): Z=0.1  Ah=0.1400  Av=0.0933
+  Feq_X=857.03 kN  Feq_Z=857.03 kN  Feq_Y=571.35 kN
+Governing LL: Case2 1xClass70R  (max |Mz_i| = 991.64 kNm)
+ULS Basic combinations:
+  Created: BASIC_1: 1.35DL + 1.75DW + 1.5LL + 0.9WL       DL=1.35(adding)  Surf=1.75  live_load leading
+  Created: BASIC_2: 1.35DL + 1.75DW + 1.15LL + 1.5WL      DL=1.35(adding)  Surf=1.75  wind_load leading
+  Created: BASIC_3: 1.35DL + 1.75DW + 1.15LL + 0.9WL      DL=1.35(adding)  Surf=1.75  thermal_load leading
+  Created: BASIC_4: 1.0DL + 1.0DW + 1.5LL + 0.9WL         DL=1.0(relieving)  Surf=1.0  live_load leading
+  Created: BASIC_5: 1.0DL + 1.0DW + 1.15LL + 1.5WL        DL=1.0(relieving)  Surf=1.0  wind_load leading
+  Created: BASIC_6: 1.0DL + 1.0DW + 1.15LL + 0.9WL        DL=1.0(relieving)  Surf=1.0  thermal_load leading
+
+ULS Accidental combinations:
+  Created: ACCIDENTAL_1: 1.0DL + 1.0DW + 0.75LL           DL=1.0  vehicle_collision(no lc)  live_load leading
+  Created: ACCIDENTAL_2: 1.0DL + 1.0DW + 0.75LL           DL=1.0  barge_impact(no lc)  live_load leading
+  Created: ACCIDENTAL_3: 1.0DL + 1.0DW + 0.75LL           DL=1.0  floating_bodies(no lc)  live_load leading
+
+ULS Seismic combinations:
+  Created: SEISMIC_1: 1.35DL + 1.75DW + 0.2LL + 1.5EL     DL=1.35(adding)  EL=1.5(service)
+  Created: SEISMIC_2: 1.35DL + 1.75DW + 0.2LL + 0.75EL    DL=1.35(adding)  EL=0.75(construction)
+  Created: SEISMIC_3: 1.0DL + 1.0DW + 0.2LL + 1.5EL       DL=1.0(relieving)  EL=1.5(service)
+  Created: SEISMIC_4: 1.0DL + 1.0DW + 0.2LL + 0.75EL      DL=1.0(relieving)  EL=0.75(construction)
+
+Total ULS combinations created: 13
+SLS Rare combinations:
+  Created: SLS_RARE_1: 1.0DL + 1.2DW + 1.0LL + 0.6WL      DL=1.0  Surf=1.2(adding)  live_load leading
+  Created: SLS_RARE_2: 1.0DL + 1.2DW + 0.75LL + 1.0WL     DL=1.0  Surf=1.2(adding)  wind_load leading
+  Created: SLS_RARE_3: 1.0DL + 1.2DW + 0.75LL + 0.6WL     DL=1.0  Surf=1.2(adding)  thermal_load leading
+  Created: SLS_RARE_4: 1.0DL + 1.0DW + 1.0LL + 0.6WL      DL=1.0  Surf=1.0(relieving)  live_load leading
+  Created: SLS_RARE_5: 1.0DL + 1.0DW + 0.75LL + 1.0WL     DL=1.0  Surf=1.0(relieving)  wind_load leading
+  Created: SLS_RARE_6: 1.0DL + 1.0DW + 0.75LL + 0.6WL     DL=1.0  Surf=1.0(relieving)  thermal_load leading
+
+SLS Frequent combinations:
+  Created: SLS_FREQUENT_1: 1.0DL + 1.2DW + 0.75LL + 0.5WL  DL=1.0  Surf=1.2(adding)  live_load leading
+  Created: SLS_FREQUENT_2: 1.0DL + 1.2DW + 0.2LL + 0.6WL  DL=1.0  Surf=1.2(adding)  wind_load leading
+  Created: SLS_FREQUENT_3: 1.0DL + 1.2DW + 0.2LL + 0.5WL  DL=1.0  Surf=1.2(adding)  thermal_load leading
+  Created: SLS_FREQUENT_4: 1.0DL + 1.0DW + 0.75LL + 0.5WL  DL=1.0  Surf=1.0(relieving)  live_load leading
+  Created: SLS_FREQUENT_5: 1.0DL + 1.0DW + 0.2LL + 0.6WL  DL=1.0  Surf=1.0(relieving)  wind_load leading
+  Created: SLS_FREQUENT_6: 1.0DL + 1.0DW + 0.2LL + 0.5WL  DL=1.0  Surf=1.0(relieving)  thermal_load leading
+
+SLS Quasi-permanent combinations:
+  Created: SLS_QP_1: 1.0DL + 1.2DW                        DL=1.0  Surf=1.2(adding)  TL=0.5
+  Created: SLS_QP_2: 1.0DL + 1.0DW                        DL=1.0  Surf=1.0(relieving)  TL=0.5
+
+Total SLS combinations created: 14
+Envelope ULS (worst signed magnitude) over 13 combinations: peak |Mz_i|=5595.09 kNm  peak |dy|=68.81 mm
+Envelope SLS (worst signed magnitude) over 14 combinations: peak |Mz_i|=5288.27 kNm  peak |dy|=65.04 mm
+
+------------------------------------------------------------
+  PLATE GIRDER BRIDGE - DESIGN SUMMARY
+------------------------------------------------------------
+  Span                  : 45.0 m
+  Overall width         : 12.150 m
+  No. of girders        : 5
+  Girder spacing        : 2430.0 mm
+  Deck overhang         : 1215.0 mm
+
+------------------------------------------------------------
+  GIRDER G1 CROSS-SECTION (mm) / PROPERTIES (SI)
+------------------------------------------------------------
+  Total depth      D    : 2500.0
+  Web depth        d_w  : 2438.0
+  Web thickness    t_w  : 14.0
+  Top flange width B_ft : 750.0
+  Top flange thk   T_ft : 32.0
+  Bot flange width B_fb : 750.0
+  Bot flange thk   T_fb : 32.0
+  Area   A  : 0.076582 m^2
+  I_z       : 0.086135 m^4
+  I_y       : 0.002198 m^4
+  I_t (J)   : 0.000017 m^3
+------------------------------------------------------------
+------------------------------------------------------------
+  GIRDER G2 CROSS-SECTION (mm) / PROPERTIES (SI)
+------------------------------------------------------------
+  Total depth      D    : 2500.0
+  Web depth        d_w  : 2438.0
+  Web thickness    t_w  : 14.0
+  Top flange width B_ft : 750.0
+  Top flange thk   T_ft : 32.0
+  Bot flange width B_fb : 750.0
+  Bot flange thk   T_fb : 32.0
+  Area   A  : 0.076582 m^2
+  I_z       : 0.086135 m^4
+  I_y       : 0.002198 m^4
+  I_t (J)   : 0.000017 m^3
+------------------------------------------------------------
+------------------------------------------------------------
+  GIRDER G3 CROSS-SECTION (mm) / PROPERTIES (SI)
+------------------------------------------------------------
+  Total depth      D    : 2500.0
+  Web depth        d_w  : 2438.0
+  Web thickness    t_w  : 14.0
+  Top flange width B_ft : 750.0
+  Top flange thk   T_ft : 32.0
+  Bot flange width B_fb : 750.0
+  Bot flange thk   T_fb : 32.0
+  Area   A  : 0.076582 m^2
+  I_z       : 0.086135 m^4
+  I_y       : 0.002198 m^4
+  I_t (J)   : 0.000017 m^3
+------------------------------------------------------------
+------------------------------------------------------------
+  GIRDER G4 CROSS-SECTION (mm) / PROPERTIES (SI)
+------------------------------------------------------------
+  Total depth      D    : 2500.0
+  Web depth        d_w  : 2438.0
+  Web thickness    t_w  : 14.0
+  Top flange width B_ft : 750.0
+  Top flange thk   T_ft : 32.0
+  Bot flange width B_fb : 750.0
+  Bot flange thk   T_fb : 32.0
+  Area   A  : 0.076582 m^2
+  I_z       : 0.086135 m^4
+  I_y       : 0.002198 m^4
+  I_t (J)   : 0.000017 m^3
+------------------------------------------------------------
+------------------------------------------------------------
+  GIRDER G5 CROSS-SECTION (mm) / PROPERTIES (SI)
+------------------------------------------------------------
+  Total depth      D    : 2500.0
+  Web depth        d_w  : 2438.0
+  Web thickness    t_w  : 14.0
+  Top flange width B_ft : 750.0
+  Top flange thk   T_ft : 32.0
+  Bot flange width B_fb : 750.0
+  Bot flange thk   T_fb : 32.0
+  Area   A  : 0.076582 m^2
+  I_z       : 0.086135 m^4
+  I_y       : 0.002198 m^4
+  I_t (J)   : 0.000017 m^3
+------------------------------------------------------------
+============================================================
+  IRC 22:2015 DESIGN CHECK PIPELINE
+============================================================
+
+[Step 1] Loading bridge configuration ...
+  Config: L=45.0m | E 350A/M40 | D=2500.0mm | 7 girders @ 2.43m
+
+[Step 2] Running checks for 7 girder(s) ...
+  [INFO] bs_R_kN not set — using max Vu = 735.5 kN as bearing reaction default
+  [X] G1                                       max_DCR=1.404  FAIL
+  [X] G2                                       max_DCR=1.400  FAIL
+  [X] G3                                       max_DCR=1.394  FAIL
+  [X] G4                                       max_DCR=1.391  FAIL
+  [X] G5                                       max_DCR=1.394  FAIL
+  [X] G6                                       max_DCR=1.400  FAIL
+  [X] G7                                       max_DCR=1.404  FAIL
+
+  Controlling girder: G1  (max_DCR = 1.404)
+
+[Step 4] Generating report for controlling girder ...
+
+==============================================================================
+               IRC 22:2015 COMPOSITE BRIDGE DESIGN CHECK REPORT               
+          Demand (Analyser)  -->  IRC 22 Capacity  -->  DCR Pipeline          
+                        Generated: 2026-11-17 14:05:06                        
+==============================================================================
+
+BRIDGE CONFIGURATION
+--------------------
+  Span                    : 45.00 m
+  Support                 : simply_supported
+  Carriageway Width       : 7.50 m
+  Girder Spacing          : 2.43 m
+  No. of Girders          : 7
+  Beam Type               : outer
+  Steel Grade             : E 350A (fy = 350.0 MPa)
+  Concrete Grade          : M40 (fck = 40.0 MPa)
+  Rebar Grade             : Fe 500
+
+STEEL SECTION (Plate Girder - Welded)
+-------------------------------------
+  Overall Depth D         : 2,500.00 mm
+  Top Flange              : 750.0 x 32.0 mm
+  Bottom Flange           : 750.0 x 32.0 mm
+  Web                     : 2436 x 14.0 mm
+  A_steel                 : 82,104 mm2
+  Iz_steel                : 89,961,084,832 mm4
+
+CONCRETE SLAB
+-------------
+  Slab Thickness          : 250.00 mm
+  Haunch Depth            : 0.000 mm
+
+DESIGN DEMANDS (Envelope ULS)
+-----------------------------
+  Location                : critical element
+  Member                  : G1
+  Source                  : grillage_analysis
+
+  Mu (factored)           : 5,595.09 kNm
+  Vu (factored)           : 574.56 kN
+  Nu (factored)           : 52.41 kN
+  delta_live              : 5.73 mm
+  delta_total             : 33.43 mm
+  Stress Range            : 122.07 MPa
+  Shear Range             : 32.02 MPa
+  Nsc                     : 2,000,000 cycles
+  M_sls (service)         : 5,288.27 kNm
+  V_sls (service)         : 545.99 kN
+
+IRC 22:2015 CAPACITY COMPUTATIONS
+---------------------------------
+
+  1. Effective Width (Cl.603.2.1)
+     beff = 2430.0 mm
+
+  2. Section Classification (Cl.603)
+     epsilon = 0.8450
+     Web: Slender  (d/tw = 174.0)
+     Flange: Slender  (b/tf = 11.5)
+     Governing: Slender
+
+  3. Positive Moment Capacity (Cl.603.3.1)
+     PNA Location: web
+     xu = 525.36 mm
+     Mp = Md = 33,379.93 kNm  (γm0 and γc embedded)
+
+  4. Plastic Shear Resistance (Cl.603.3.3.2)
+     Av = 34,104 mm²
+     Vn = 6,891.48 kN
+     Vd = 6,264.98 kN
+
+  4b. Shear Buckling Resistance (Cl.603.3.3.2 — Post-Critical)
+     Kv = 7.127  |  λw = 2.179
+     τb = 42.55 MPa  |  Vcr = 1,319.22 kN
+
+  5. Buckling Resistance Moment (Cl.603.3.3.1)
+     Mcr = 609,609.69 kNm  |  λ_LT = 0.2033  |  χ_LT = 1.0000
+     Mb = 25,454.97 kNm
+
+  6. Bending–Shear Interaction (Cl.603.3.3.3)
+     beta = 0.0000  |  Mdv = 33,379.93 kNm
+
+  7. Composite Section Properties (Cl.604.3)
+     Short-term (n=7.5):  I = 167,471,552,846 mm⁴  |  y_top = 817.2 mm  |  y_bot = 1932.8 mm
+     Long-term  (n=15.0):  I = 141,448,725,682 mm⁴
+
+  8. SLS Stress Limits (Cl.604.3.1)
+     Concrete limit   : σc  ≤ 0.48 fck = 19.2 MPa
+     Steel equiv. limit: fe  ≤ 0.90 fy  = 315.0 MPa
+     Rebar limit      : σr  ≤ 0.80 fyk = 400.0 MPa
+     --- Actual stresses (M_sls = 5288.3 kNm) ---
+     σc (concrete)  = 3.440 MPa  OK
+     fe (steel)     = 67.038 MPa  OK
+     σr (rebar)     = 24.035 MPa  OK
+     τ (web shear)  = 16.010 MPa
+
+  9. Deflection Limits (Cl.604.3.2)
+     Live + impact ≤ L/800 = 56.25 mm
+     Total         ≤ L/600 = 75.00 mm
+
+  10. Fatigue Assessment (Cl.605)
+     f_fd  = 86.960 MPa  |  τ_fd = 49.354 MPa
+
+  11. Shear Stud Capacity (Cl.606.3.1)
+     Qu = 95.363 kN / stud
+     Required ULS spacing = 1385.3 mm
+
+  12. Shear Connector Spacing Limits (Cl.606.9)
+     Max spacing = min(600, 3t_slab, 4h_stud) = 400 mm
+     Min spacing = 75 mm
+
+DESIGN CHECK RESULTS (DCR = Demand / Capacity)
+----------------------------------------------
+  -------------------------------------------------------------------------
+    #  Check                            Demand    Capacity      DCR  Status
+  -------------------------------------------------------------------------
+    1  ULS Flexure                     5595.09    33379.93    0.168   PASS 
+    2  ULS Shear                        574.56     6264.98    0.092   PASS 
+    2  ULS Shear Buckling               574.56     1319.22    0.435   PASS 
+    3  M-V Interaction                 5595.09    33379.93    0.168   PASS 
+    4  M-N Interaction                    0.17        1.00    0.170   PASS 
+    5  LTB (Girder SW Only)            1087.23     2763.91    0.393   PASS 
+    5  LTB (Construction Stage)        4390.89    25454.97    0.172   PASS 
+    7  Stud Spacing Feasibility (Cl.606.9)      75.00      400.00    0.188   PASS 
+    7  Stud Detailing                     0.00        1.00    0.000   PASS 
+    8  Fatigue Normal Stress            122.07       86.96    1.404  *FAIL*
+    9  Fatigue Shear Stress              32.02       49.35    0.649   PASS 
+   11  SLS Steel Equiv. Stress           67.04      315.00    0.213   PASS 
+   13  SLS Deflection (Live)              5.73       56.25    0.102   PASS 
+   14  SLS Deflection (Total)            33.43       75.00    0.446   PASS 
+   20  Int.Stiff: Leg ≤ H_limit         365.00      169.03    2.159  *FAIL*
+   20  Int.Stiff: Iys ≥ Iys_min     5013288.00  343190033.33    0.015   PASS 
+   21  Brg.Stiff: Web Buckling          735.54   232977.38    0.003   PASS 
+   21  Brg.Stiff: Local Crushing        735.54      949.36    0.775   PASS 
+   21  Brg.Stiff: Bearing Contact       735.54     4645.45    0.158   PASS 
+   21  Brg.Stiff: Column Buckling       735.54     4817.27    0.153   PASS 
+  -------------------------------------------------------------------------
+
+DCR BAR CHART
+-------------
+  ULS Flexure            [|||||||......................................] 0.168
+  ULS Shear              [||||.........................................] 0.092
+  ULS Shear Buckling     [|||||||||||||||||||..........................] 0.435
+  M-V Interaction        [|||||||......................................] 0.168
+  M-N Interaction        [|||||||......................................] 0.170
+  LTB (Girder SW Only)   [|||||||||||||||||............................] 0.393
+  LTB (Construction Stage) [|||||||......................................] 0.172
+  Stud Spacing Feasibility (Cl.606.9) [||||||||.....................................] 0.188
+  Stud Detailing         [.............................................] 0.000
+  Fatigue Normal Stress  [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] 1.404
+  Fatigue Shear Stress   [|||||||||||||||||||||||||||||................] 0.649
+  SLS Steel Equiv. Stress [|||||||||....................................] 0.213
+  SLS Deflection (Live)  [||||.........................................] 0.102
+  SLS Deflection (Total) [||||||||||||||||||||.........................] 0.446
+  Int.Stiff: Leg ≤ H_limit [XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] 2.159
+  Int.Stiff: Iys ≥ Iys_min [.............................................] 0.015
+  Brg.Stiff: Web Buckling [.............................................] 0.003
+  Brg.Stiff: Local Crushing [||||||||||||||||||||||||||||||||||...........] 0.775
+  Brg.Stiff: Bearing Contact [|||||||......................................] 0.158
+  Brg.Stiff: Column Buckling [||||||.......................................] 0.153
+
+OVERALL VERDICT
+---------------
+
+  Status           : FAIL
+  Checks Run       : 20
+  PASS / WARN / FAIL: 13 / 0 / 1
+  Maximum DCR      : 1.4037
+  Critical Check   : Fatigue Normal Stress (Cl.605)
+
+  >>> DESIGN FAILS ONE OR MORE CHECKS - REVISION REQUIRED <<<
+
+
+============================================================
+  PIPELINE COMPLETE -- G1  Overall: FAIL
+============================================================
+
+============================================================
+  DECK SLAB DESIGN RESULTS
+============================================================
+IRC 6:2017 Deck Slab Design Summary
+====================================================
+
+Governing vehicle      : Class70R(W)
+Impact factor (IF)     : 1.100  [IRC 6:2017 Cl.208]
+  (1 + 0.100 for span 45.0 m)
+γ<sub>DL</sub>  [Table B.2]      : 1.35
+γ<sub>LL</sub>  [Table B.2]      : 1.5
+
+Effective span (S)     : 2.430 m  (girder c/c)
+Deck thickness         : 250 mm
+Concrete               : M40  (f<sub>ck</sub> = 40 MPa, f<sub>ctm</sub> = 3.0 MPa)
+Reinforcement          : Fe 500  (f<sub>y</sub> = 500 MPa)
+
+Cover Adequacy  [IRC 112:2020 Table 14.2 — 100-yr service life]
+----------------------------------------
+  Concrete grade        : M40  → Exposure: Very Severe
+  Recommended min cover : 50 mm
+  Top cover provided    : 50 mm  → OK
+  Bottom cover provided : 50 mm  → OK
+
+Interior Span Loads
+----------------------------------------
+  Dead load (w<sub>DL</sub>)     : 6.13 kN/m²
+  Max wheel load (P)   : 83.4 kN  [IRC 6:2017 Cl.204]
+  Cross-bracing spacing : 3.000 m  (b/l<sub>o</sub> = 1.23)
+  Effective width b<sub>e</sub> : 1.842 m  [IRC 112:2020 Eq. B3.1, α<sub>e</sub> = 2.37]
+
+Interior Span Design Moments
+----------------------------------------
+  M<sub>DL</sub>                : 3.620 kNm/m
+  M<sub>LL</sub> (unfactored)    : 27.499 kNm/m
+  M<sub>ULS</sub> (sagging)      : 50.261 kNm/m
+  M<sub>ULS</sub> (hogging, 75%) : 37.696 kNm/m
+
+Bottom (Sagging) Reinforcement
+----------------------------------------
+  Effective depth d    : 194.0 mm
+  A<sub>s</sub> required          : 655 mm²/m
+  Provided             : Ø12 @ 165 mm c/c  →  685 mm²/m
+  Moment capacity M<sub>u</sub>  : 55.251 kNm/m
+  Status               : PASS
+
+Top (Hogging) Reinforcement
+----------------------------------------
+  Effective depth d    : 194.0 mm
+  A<sub>s</sub> required          : 488 mm²/m
+  Provided             : Ø12 @ 220 mm c/c  →  514 mm²/m
+  Moment capacity M<sub>u</sub>   : 41.925 kNm/m
+  Status               : PASS
+
+Longitudinal (Distribution) Reinforcement  [IRC 112:2020 Cl.16.6.1]
+----------------------------------------
+  20% of A<sub>s</sub>bot        : 137 mm²/m
+  As required          : 303 mm²/m
+  Provided             : Ø12 @ 300 mm c/c  →  377 mm²/m
+
+Deck Overhang Design
+----------------------------------------
+  Overhang length L<sub>oh</sub> : 1215 mm  (1.215 m)
+  Edge clearance f      : 0.150 m  [IRC 6:2017 Table 3]
+  Railing DL load       : 1.472 kN/m  [IRC 6:2017 Cl.206.5]
+  Crash barrier moment  : 7.50 kNm/m  [IRC 6:2017 Cl.206.4]
+  Wheel arm from root   : 1.065 m
+  M<sub>DL</sub> (overhang)       : 6.313 kNm/m  (slab 4.526 + railing 1.788)
+  M<sub>LL</sub> (overhang)       : 52.923 kNm/m
+  M<sub>ULS</sub> (overhang)      : 107.096 kNm/m
+
+Overhang Top Reinforcement
+----------------------------------------
+  Effective depth d     : 194.0 mm
+  As required           : 1479 mm²/m
+  Provided              : Ø12 @ 75 mm c/c  →  1508 mm²/m
+  Moment capacity M<sub>u</sub>    : 114.707 kNm/m
+  Status                : PASS
+
+====================================================
+Shear Checks  (IRC 112:2020)
+====================================================
+
+One-Way Shear — Interior Span  [Cl.10.3.2]
+----------------------------------------
+  V<sub>DL</sub> at support         : 7.449 kN/m
+  V<sub>LL</sub> at support         : 45.266 kN/m
+  V<sub>ULS</sub>          : 84.746 kN/m
+  V<sub>RD</sub>,c (no links)        : 107.582 kN/m  → PASS
+
+Punching Shear — Interior Span  [Cl.10.4]
+----------------------------------------
+  Effective contact c1    : 400 mm  (transverse, incl. WC dispersion)
+  Effective contact c2    : 250 mm  (longitudinal, incl. WC dispersion)
+  Control perimeter u1    : 3738 mm  (at 2d = 388 mm)
+  v<sub>ED</sub>                    : 0.1897 MPa
+  v<sub>RD</sub>,c                   : 0.5545 MPa  → PASS
+
+Shear Check — Overhang  [IRC 112:2020 Cl.10.3.2]
+----------------------------------------
+  V<sub>ULS</sub> (one-way) at root : 94.037 kN/m
+  V<sub>RD</sub>,c (no links)        : 134.464 kN/m  → PASS
+
+Punching Shear — Overhang  [IRC 112:2020 Cl.10.4]
+----------------------------------------
+  Control perimeter u1    : 3738 mm  (at 2d = 388 mm)
+  v<sub>ED</sub>                    : 0.1897 MPa
+  v<sub>RD</sub>,c                   : 0.6931 MPa  → PASS
+
+====================================================
+SLS Checks  (IRC 112:2020)
+====================================================
+
+Stress Check — Bottom (Sagging)  [Cl.12.2.1]
+----------------------------------------
+  M<sub>SLS</sub>,char (sagging)  : 33.870 kNm/m  (γ<sub>DL</sub>=1.0, γ<sub>LL</sub>=1.0)
+  Neutral axis depth x  : 189.7 mm
+  Concrete σ<sub>c</sub>         : 2.73 MPa  ≤ 19.2 MPa  → PASS
+  Steel σ<sub>s</sub>            : 377.84 MPa  ≤ 400.0 MPa  → PASS
+
+Stress Check — Top (Hogging)  [Cl.12.2.1]
+----------------------------------------
+  M<sub>SLS</sub>,char (hogging)  : 25.402 kNm/m  (γ<sub>DL</sub>=1.0, γ<sub>LL</sub>=1.0)
+  Concrete σ<sub>c</sub>           : 2.06 MPa  ≤ 19.2 MPa  → PASS
+  Steel σ<sub>s</sub>              : 376.54 MPa  ≤ 400.0 MPa  → PASS
+
+Crack Width Check — Bottom (Sagging)  [Cl.12.3.4]
+----------------------------------------
+  M<sub>SLS</sub>,freq (sagging)  : 26.307 kNm/m  (γ<sub>DL</sub>=1.0, γ<sub>LL</sub>=0.75)
+  Steel stress σ<sub>s</sub>       : 293.48 MPa
+  ρ<sub>p,eff</sub>               : 0.03408
+  Crack spacing S<sub>r,max</sub>  : 229.9 mm
+  Strain diff ε<sub>sm</sub>−ε<sub>cm</sub>  : 8.804e-04
+  Crack width w<sub>k</sub>      : 0.2024 mm  ≤ 0.3 mm  → PASS
+
+Crack Width Check — Top (Hogging)  [Cl.12.3.4]
+----------------------------------------
+  M<sub>SLS</sub>,freq (hogging)  : 19.730 kNm/m  (γ<sub>DL</sub>=1.0, γ<sub>LL</sub>=0.75)
+  Steel stress σ<sub>s</sub>       : 292.47 MPa
+  ρ<sub>p,eff</sub>              : 0.02500
+  Crack spacing S<sub>r,max</sub>   : 251.6 mm
+  Strain diff ε<sub>sm</sub>−ε<sub>cm</sub>  : 8.774e-04
+  Crack width w<sub>k</sub>      : 0.2208 mm  ≤ 0.3 mm  → PASS
+
+Overhang SLS Stress Check  [IRC 112:2020 Cl.12.2.1]
+----------------------------------------
+  M<sub>SLS</sub>,char (overhang) : 72.029 kNm/m  (γ_DL=1.0, γ_LL=1.0)
+  Concrete σ<sub>c</sub>          : 5.77 MPa  ≤ 19.2 MPa  → PASS
+  Steel σ<sub>s</sub>              : 367.41 MPa  ≤ 400.0 MPa  → PASS
+
+Overhang Crack Width Check  [IRC 112:2020 Cl.12.3.4]
+----------------------------------------
+  M<sub>SLS</sub>,freq (overhang) : 55.600 kNm/m  (γ_DL=1.0, γ_LL=0.75)
+  Steel stress σ<sub>s</sub>      : 283.61 MPa
+  ρ<sub>p,eff</sub>                : 0.07798
+  Crack spacing S<sub>r,max</sub> : 196.2 mm
+  Strain diff ε<sub>sm</sub> − ε<sub>cm</sub>  : 8.508e-04
+  Crack width w<sub>k</sub>       : 0.1669 mm  ≤ 0.3 mm  → PASS
+============================================================
+
+======================================================================
+                  CROSS BRACING CONFIGURATION & GEOMETRY
+======================================================================
+  Brace type               : X-type
+  Top chord                : Yes
+  Bottom chord             : Yes
+----------------------------------------------------------------------
+  Girder spacing (s)       : 2.4300 m
+  Girder depth (D)         : 2.5000 m
+  Brace clear height (h)   : 2.1250 m  (depth_ratio = 0.85)
+  Diagonal length          : 3.2281 m
+  Diagonal angle (alpha)   : 41.17 deg from horizontal
+  Panel spacing            : 3.000 m
+======================================================================
+
+===============================================================================================
+                      CROSS BRACING — CRITICAL DESIGN FORCES
+===============================================================================================
+Girder Pair Type  F_diag (kN)  F_chord (kN)     Gov LC
+      G1-G2    T       16.691        12.565 1.5 EQ (a)
+      G1-G2    C      -11.220        -8.446 1.5 EQ (b)
+      G2-G3    T       13.888        10.454 1.5 EQ (a)
+      G2-G3    C       -3.871        -2.914 1.5 EQ (b)
+      G3-G4    T       13.942        10.495 1.5 EQ (a)
+      G3-G4    C       -0.917        -0.691 1.5 EQ (b)
+      G4-G5    T       14.354        10.805 1.5 EQ (a)
+      G4-G5    C       -2.701        -2.033       EQ_Z
+===============================================================================================
+
+------------------------------------------------------------
+  CROSS BRACING DESIGNS  (4 pair(s))  diag L=3228 mm  chord L=2430 mm
+------------------------------------------------------------
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+  Total time : 3.121s  |  16 designs
+------------------------------------------------------------
+
+===========================================================================
+                   CROSS BRACING — OSDAG DESIGN RESULTS                    
+===========================================================================
+  Pair : G1-G2
+    Diagonal [    Tension    16.691 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.37  λ=262.4  Bolted
+    Diagonal [Compression    11.220 kN]  →  40 x 40 x 3   cap=11.33 kN  eff=0.69  λ=170.6  Bolted
+    Chord    [    Tension    12.565 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.28  λ=197.6  Bolted
+    Chord    [Compression     8.446 kN]  →  40 x 40 x 3   cap=17.94 kN  eff=0.78  λ=128.4  Bolted
+  Pair : G2-G3
+    Diagonal [    Tension    13.888 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.31  λ=262.4  Bolted
+    Diagonal [Compression     3.871 kN]  →  40 x 40 x 3   cap=11.33 kN  eff=0.36  λ=170.6  Bolted
+    Chord    [    Tension    10.454 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.23  λ=197.6  Bolted
+    Chord    [Compression     2.914 kN]  →  40 x 40 x 3   cap=17.94 kN  eff=0.27  λ=128.4  Bolted
+  Pair : G3-G4
+    Diagonal [    Tension    13.942 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.31  λ=262.4  Bolted
+    Diagonal [Compression     0.917 kN]  →  40 x 40 x 3   cap=11.33 kN  eff=0.08  λ=170.6  Bolted
+    Chord    [    Tension    10.495 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.23  λ=197.6  Bolted
+    Chord    [Compression     0.691 kN]  →  40 x 40 x 3   cap=17.94 kN  eff=0.06  λ=128.4  Bolted
+  Pair : G4-G5
+    Diagonal [    Tension    14.354 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.32  λ=262.4  Bolted
+    Diagonal [Compression     2.701 kN]  →  40 x 40 x 3   cap=11.33 kN  eff=0.25  λ=170.6  Bolted
+    Chord    [    Tension    10.805 kN]  →  40 x 40 x 3   cap=45.0 kN  eff=0.24  λ=197.6  Bolted
+    Chord    [Compression     2.033 kN]  →  40 x 40 x 3   cap=17.94 kN  eff=0.19  λ=128.4  Bolted
+===========================================================================
+
+===========================================================================
+                   END DIAPHRAGM — OSDAG DESIGN RESULTS                    
+===========================================================================
+  Pair : G1-G2
+  Pair : G2-G3
+  Pair : G3-G4
+  Pair : G4-G5
+===========================================================================
+DEBUG railing raw: IRC 5 - RCC Railing
+DEBUG railing resolved: IRC 5 RCC railing
+DEBUG girder spacing input m: 2.43
+DEBUG girder spacing dto mm: 2430.0
+DEBUG stiffeners | mode=Optimized | intermediate_on=True spacing=3655.0 thick=10.0 outstand=365.0 | longitudinal_on=False count=1 thick=8.0 | bearing_pairs=4 thick=10.0 outstand=365.0
+DEBUG stiffeners raw keys | intermediate='Yes' longitudinal='No'
+ok  158.6
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.

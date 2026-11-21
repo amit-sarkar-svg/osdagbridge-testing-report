@@ -1,0 +1,1 @@
+{"id": "L1.weather.zone.neg", "status": "PASS", "runtime": 0.306, "peak_mb": 33.6, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

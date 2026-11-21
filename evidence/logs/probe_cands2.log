@@ -1,0 +1,45 @@
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 12.899999999999999 m
+  no_of_girders = 6
+  girder_spacing = 2.15 m
+  deck_overhang = 1.075 m
+ref n,spacing,overhang 6 2.15 1.075 width 
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 12.899999999999999 m
+  no_of_girders = 4
+  girder_spacing = 3.225 m
+  deck_overhang = 1.6125 m
+C06 entered spacing 2.5 overhang 0.9 n=4 -> 3.225 1.6125
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.899999999999999 m
+  no_of_girders = 4
+  girder_spacing = 2.225 m
+  deck_overhang = 1.1125 m
+median No -> {'geometry.carriageway_width': 8.0, 'typical_section.footpath_width': 0.0, 'typical_section.crash_barrier.width': 0.45, 'typical_section.median.width': 0.0, 'typical_section.railing.width': 0.0, 'design_options_cont.sls.crack_width': True, 'typical_section.overall_bridge_width': 8.899999999999999, 'member_properties.girder_details.section_inputs.support_width.G1.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G2.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G3.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G4.M1': 400.0, 'member_properties.girder_details.section_input.top_flange_width.G1.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G1.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G2.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G2.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G3.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G3.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G4.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G4.M1': 510, 'member_properties.girder_details.section_input.top_flange_width': 510, 'member_properties.girder_details.section_input.bottom_flange_width': 510, 'member_properties.end_diaphragm_details.top_flange_width.G1G2.E1M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G1G2.E1M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G1G2.E1M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G1G2.E1M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G2G3.E2M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G2G3.E2M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G2G3.E2M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G2G3.E2M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G3G4.E3M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G3G4.E3M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G3G4.E3M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G3G4.E3M2': ''}
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 18.099999999999998 m
+  no_of_girders = 8
+  girder_spacing = 2.2625 m
+  deck_overhang = 1.1312 m
+median Yes -> {'geometry.carriageway_width': 8.0, 'typical_section.footpath_width': 0.0, 'typical_section.crash_barrier.width': 0.45, 'typical_section.median.width': 1.2, 'typical_section.railing.width': 0.0, 'design_options_cont.sls.crack_width': True, 'typical_section.overall_bridge_width': 18.099999999999998, 'member_properties.girder_details.section_inputs.support_width.G1.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G2.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G3.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G4.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G5.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G6.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G7.M1': 400.0, 'member_properties.girder_details.section_inputs.support_width.G8.M1': 400.0, 'member_properties.girder_details.section_input.top_flange_width.G1.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G1.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G2.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G2.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G3.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G3.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G4.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G4.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G5.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G5.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G6.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G6.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G7.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G7.M1': 510, 'member_properties.girder_details.section_input.top_flange_width.G8.M1': 510, 'member_properties.girder_details.section_input.bottom_flange_width.G8.M1': 510, 'member_properties.girder_details.section_input.top_flange_width': 510, 'member_properties.girder_details.section_input.bottom_flange_width': 510, 'member_properties.end_diaphragm_details.top_flange_width.G1G2.E1M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G1G2.E1M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G1G2.E1M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G1G2.E1M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G2G3.E2M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G2G3.E2M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G2G3.E2M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G2G3.E2M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G3G4.E3M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G3G4.E3M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G3G4.E3M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G3G4.E3M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G4G5.E4M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G4G5.E4M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G4G5.E4M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G4G5.E4M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G5G6.E5M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G5G6.E5M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G5G6.E5M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G5G6.E5M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G6G7.E6M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G6G7.E6M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G6G7.E6M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G6G7.E6M2': '', 'member_properties.end_diaphragm_details.top_flange_width.G7G8.E7M1': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G7G8.E7M1': '', 'member_properties.end_diaphragm_details.top_flange_width.G7G8.E7M2': '', 'member_properties.end_diaphragm_details.bottom_flange_width.G7G8.E7M2': ''}
+n EXC ValueError invalid literal for int() with base 10: '3.0'
+n EXC ValueError Number of girders must be at least 2.
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 12.899999999999999 m
+  no_of_girders = 3
+  girder_spacing = 4.3 m
+  deck_overhang = 2.15 m
+n_girders input 3.0 -> 3
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 12.899999999999999 m
+  no_of_girders = 4
+  girder_spacing = 3.225 m
+  deck_overhang = 1.6125 m
+n_girders input '4' -> 4
+C08 EXC TypeError float() argument must be a string or a real number, not 'NoneType'
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 12.899999999999999 m
+  no_of_girders = 6
+  girder_spacing = 2.15 m
+  deck_overhang = 1.075 m
+keys changed by solver: []

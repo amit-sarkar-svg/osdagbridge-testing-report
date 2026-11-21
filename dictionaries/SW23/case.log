@@ -1,0 +1,5 @@
+/Users/macbook/Projects/OsdagBridge/src/ospgrillage/utils.py:555: RuntimeWarning: The iteration is not making good progress, as measured by the 
+ improvement from the last ten iterations.
+  root_func = fsolve(
+
+[resume] TIMEOUT 600s

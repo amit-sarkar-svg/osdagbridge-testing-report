@@ -1,0 +1,6 @@
+EMPTY geometry.span initial=  BASIC default= None -> text '20.0' dict '20.0' popups 1 Span must be a numeric value.
+EMPTY geometry.skew_angle initial=  BASIC default= None -> text '-15.0' dict '-15.0' popups 1 Skew angle must be a numeric value.
+EMPTY geometry.carriageway_width initial=  BASIC default= None -> text '7.5' dict '7.5' popups 1 Carriageway width must be specified.
+EMPTY geometry.span initial=  BASIC default= None -> text '20.0' dict '20.0' popups 1 Span must be a numeric value.
+EMPTY geometry.skew_angle initial=  BASIC default= None -> text '-15.0' dict '-15.0' popups 1 Skew angle must be a numeric value.
+EMPTY geometry.carriageway_width initial=  BASIC default= None -> text '7.5' dict '7.5' popups 1 Carriageway width must be specified.

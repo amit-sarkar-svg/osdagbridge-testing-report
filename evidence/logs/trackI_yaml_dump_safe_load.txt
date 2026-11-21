@@ -1,0 +1,30 @@
+DUMPED_OK
+a: !!python/object/apply:numpy._core.multiarray.scalar
+- !!python/object/apply:numpy.dtype
+  args:
+  - f8
+  - false
+  - true
+  state: !!python/tuple
+  - 3
+  - <
+  - null
+  - null
+  - null
+  - -1
+  - -1
+  - 0
+- !!binary |
+  AAAAAAAA+D8=
+f: 1.5
+s: !!set
+  1: null
+  2: null
+t: !!python/tuple
+- 1
+- 2
+
+SAFE_LOAD_ERR <class 'yaml.constructor.ConstructorError'> could not determine a constructor for the tag 'tag:yaml.org,2002:python/object/apply:numpy._core.multiarray.scalar'
+  in "<unicode string>", line 1, column 4:
+    a: !!python/object/apply:numpy._cor ... 
+       ^

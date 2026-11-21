@@ -9,3 +9,22 @@
 | P6-W5-08 | 2026-11-18 | duplicate-reclass (Track W5) | web layer absent matched by upstream issue | New finding expected | GitHub #155 filed 2026-11-18 (Django/React absent) | T4 DUPLICATE of #155 | comment draft 27; notes/issues_raw.json, notes/web_inventory.md (corrected) |
 | P6-W5-09 | 2026-11-18 | still-new (Track W5) | NaN/inf in all `_ADDITIONAL_KEYS` (P6-014) | Reject non-finite | Not filed anywhere (#88 covers other keys only) | NEW (T2) | scripts/osi_sweep.py, test_cases/os_sweep_results.csv | notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md |
 | P6-W5-10 | 2026-11-18 | still-new (Track W5) | overwrite confirmation (P6-016) | Prompt before overwrite | Not filed (searched overwrite/confirm) | NEW (T3) | template_page.py:811-819 | none yet |
+
+| X2-01 | 2026-11-21 | PlateGirderBridge.design | A1_params.json, design() x2 same object | 2nd run same result | depth 0.00167 m, ValueError math domain | FAIL T4 (#135 root cause) | evidence/logs/probe_double_convert_*.log | #135 |
+| X2-02 | 2026-11-21 | UI path | set_input+design x2 | no crash | both ok | PASS T8 | evidence/logs/probe_ui_path_alias.log | - |
+| X2-03 | 2026-11-21 | validator | span/skew/cw/Fy = nan | rejected | None (valid) | FAIL T4 | evidence/logs/probe_cands1.log | #88 |
+| X2-04 | 2026-11-21 | validator | cw None, median No | min 4.25 | 7.5 | FAIL T2 | probe_cands1.log | none |
+| X2-05 | 2026-11-21 | validate_map_coordinates | 999,nan / inf,0 | invalid | (True,'') | FAIL T4 | probe_cands1.log | #180 |
+| X2-06 | 2026-11-21 | static | bandit/ruff/pip-audit | - | 0 HIGH, no CVEs | T3/T8 | evidence/logs/bandit.json | - |
+| X2-07 | 2026-11-21 | UI dock (offscreen) | Skew Angle field empty + editingFinished | 0.0 (SKEW_ANGLE_DEFAULT) | -15.0 | FAIL T1 | evidence/logs/l7_empty_field.log | new (draft 30) |
+| X2-08 | 2026-11-21 | validator | cw=None, median='No' | 4.25 | 7.5 | FAIL T1 | evidence/logs/probe_median_fix.log | new (draft 31) |
+| X2-09 | 2026-11-21 | report chap8 | log_entries=['INFO: UNIQUEMARKER123',...] | lines in tex | absent | FAIL T1 | evidence/logs/probe_ch8_log.log | new (draft 32) |
+| X2-10 | 2026-11-21 | _lookup_material | ('E 999','Yield Strength'), ('', ...) | float or LookupError | None / IndexError | FAIL T1 | evidence/logs/probe_cands3*.log | new (draft 33) |
+| X2-11 | 2026-11-21 | _tex | 'a\\b' | a\textbackslash{}b | a\textbackslash\{\}b | FAIL T1 | evidence/logs/probe_tex_escape.log | new (draft 34) |
+| X2-12 | 2026-11-21 | CLI | --help, analyze missing.osi, dir, empty, bogus flag | non-zero for bad input | rc 0, 'stub' | FAIL T4 | evidence/logs/l8_cli.log | #101 |
+| X2-13 | 2026-11-21 | report | name '\\input{/etc/hostname}', CJK, special chars, stem space | escaped/compiles | escaped, PDF ok | PASS T8 | evidence/logs/l6_report_cases.log | - |
+| X2-14 | 2026-11-21 | UI dock | type nan/inf/1e999/30,5 into span/skew/cw | rejected | blocked/corrected with popup | PASS T8 | evidence/logs/l7_ui_probe.log | - |
+| X2-15 | 2026-11-21 | UI dock screenshots | span 30, cw 10, median No, skew 5; clear skew; clear carriageway | skew 0.0; cw 4.25 | skew -15.0; cw 7.5 (screenshots) | FAIL T1 | proofs/206_*/screenshots, proofs/207_*/screenshots | #206, #207 |
+| X2-16 | 2026-11-21 | report end-to-end | output_dict['design_log'] = 3 marker lines; full generate_report, 2 runs | markers in .tex | payload has markers, .tex has none | FAIL T1 | proofs/208_*/logs/proof_208_report_e2e.log | #208 |
+| X2-17 | 2026-11-21 | L4 corner sweep | scripts/l4_corners.py (32 corners) | complete, finite outputs | 14/32 done: 12 ok, 2 timeouts (not conclusive: CPU contention / worker kill) | PARTIAL | evidence/xrun/l4_corners.jsonl | - |
+| X2-18 | 2026-11-21 | L5 sequences | scripts/l5_state.py ABCA | valid run | INVALID: harness lacked __main__ guard for forkserver pool; fixed, rerun pending | T9 (harness) | evidence/logs/l5_ABCA_INVALID_no_main_guard.log | - |

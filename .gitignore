@@ -11,3 +11,8 @@ report/build/
 *.aux
 *.toc
 *.out
+
+# scratch output of test runs (large, regenerated)
+evidence/tmp/
+# OsdagBridge application logs created when the app runs from this folder (not test evidence)
+ResourceFiles/

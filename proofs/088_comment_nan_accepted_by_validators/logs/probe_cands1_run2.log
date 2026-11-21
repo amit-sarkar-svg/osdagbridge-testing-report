@@ -1,0 +1,17 @@
+geometry.span nan -> None
+geometry.skew_angle nan -> None
+geometry.carriageway_width nan -> None
+geometry.span 'nan' -> None
+geometry.skew_angle 'nan' -> None
+geometry.carriageway_width 'nan' -> None
+geometry.span True -> (20.0, 'Span must be between 20.0 m and 45.0 m (software limitation).')
+geometry.skew_angle True -> None
+geometry.carriageway_width True -> (4.25, 'Minimum carriageway width required is 4.25 m as per IRC 5:2015 Clause 104.3.1.')
+geometry.span inf -> (45.0, 'Span must be between 20.0 m and 45.0 m (software limitation).')
+geometry.skew_angle inf -> (15.0, 'Skew angle must be between -15.0° and 15.0°.')
+geometry.carriageway_width inf -> (23.6, 'Carriageway width exceeds 23.6 m (software limitation).')
+cw None median No -> (7.5, 'Carriageway width must be specified.')
+fy nan -> None
+coords 999,nan -> (True, '')
+coords inf,0 -> (True, '')
+coords -500,1e999 -> (True, '')

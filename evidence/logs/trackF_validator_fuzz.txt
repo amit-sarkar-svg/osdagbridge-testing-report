@@ -1,0 +1,23 @@
+F_SUMMARY keys_basic=3 keys_material=12 keys_additional=76 calls=5460 flags=242
+FLAG_COUNTS {'naninf_valid': 132, 'bool_valid': 100, 'exc': 10}
+FLAG naninf_valid basic geometry.span nan None
+FLAG naninf_valid basic geometry.carriageway_width nan None
+FLAG bool_valid basic geometry.skew_angle True None
+FLAG bool_valid basic geometry.skew_angle False None
+FLAG naninf_valid basic geometry.skew_angle nan None
+FLAG naninf_valid material material.girder.density nan None
+FLAG naninf_valid material material.girder.fy nan None
+FLAG naninf_valid material material.girder.fu nan None
+FLAG naninf_valid material material.girder.e nan None
+FLAG naninf_valid material material.girder.g nan None
+FLAG bool_valid material material.girder.poisson False None
+FLAG naninf_valid material material.girder.poisson nan None
+FLAG bool_valid material material.girder.thermal True None
+FLAG naninf_valid material material.girder.thermal nan None
+FLAG naninf_valid material material.deck.density nan None
+FLAG naninf_valid material material.deck.fck nan None
+FLAG bool_valid material material.deck.fctm True None
+FLAG naninf_valid material material.deck.fctm nan None
+FLAG naninf_valid material material.deck.ecm nan None
+FLAG naninf_valid material material.deck.thermal nan None
+WROTE evidence/logs/trackF_validator_fuzz.json

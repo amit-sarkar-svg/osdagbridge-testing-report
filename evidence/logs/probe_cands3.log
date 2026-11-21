@@ -1,0 +1,4 @@
+lookup ('E 999', 'Yield Strength') -> None
+lookup ('', 'Yield Strength') EXC IndexError string index out of range
+lookup ('E 250', 'Yield Strength') -> None
+lookup ('E 250', 'Bogus Property') -> None

@@ -1,0 +1,1 @@
+{"id": "L1.material.g.bool_f", "status": "PASS", "runtime": 0.331, "peak_mb": 33.7, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

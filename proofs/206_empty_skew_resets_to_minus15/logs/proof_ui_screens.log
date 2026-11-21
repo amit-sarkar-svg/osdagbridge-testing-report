@@ -1,0 +1,3 @@
+BEFORE skew='5' cw='10' median='No'
+AFTER clearing skew: text='-15.0' dict='-15.0' popup=['Skew angle must be a numeric value.']
+AFTER clearing carriageway (median 'No'): text='7.5' dict='7.5' popup=['Carriageway width must be specified.']

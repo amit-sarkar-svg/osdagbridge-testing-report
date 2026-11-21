@@ -1,0 +1,34 @@
+== normal
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_k11rhw5i/rep.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_k11rhw5i/rep.tex')
+PDF_EXISTS True SIZE 236614 STALE_BYTES False
+FILES ['rep.pdf', 'rep.tex']
+== stale_cjk
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_d5qms9ax/rep.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_d5qms9ax/rep.tex')
+PDF_EXISTS True SIZE 236709 STALE_BYTES False
+FILES ['rep.pdf', 'rep.tex']
+== special
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_97usi_sh/rep.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_97usi_sh/rep.tex')
+PDF_EXISTS True SIZE 240007 STALE_BYTES False
+FILES ['rep.pdf', 'rep.tex']
+== backslash
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_5sydcpas/rep.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_5sydcpas/rep.tex')
+PDF_EXISTS True SIZE 237473 STALE_BYTES False
+FILES ['rep.pdf', 'rep.tex']
+== stem_space
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_y9kew_8d/my report.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_y9kew_8d/my report.tex')
+PDF_EXISTS True SIZE 236614 STALE_BYTES False
+FILES ['my report.pdf', 'my report.tex']
+== stem_amp
+RESULT ReportResult(pdf_path=None, tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_hp0ftzp2/&foo.tex')
+PDF_EXISTS False SIZE 0 STALE_BYTES None
+FILES ['&foo.tex']
+== stem_dash
+== stem_dash
+RESULT ReportResult(pdf_path=None, tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_dyslun0e/-foo.tex')
+PDF_EXISTS False SIZE 0 STALE_BYTES None
+== stem_dash
+RESULT ReportResult(pdf_path=None, tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_zvduzyjb/-foo.tex')
+PDF_EXISTS False SIZE 0 STALE_BYTES None
+== latex_input
+RESULT ReportResult(pdf_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_96anax4y/rep.pdf', tex_path='/Users/macbook/Projects/osdagbridge-testing-report/evidence/tmp/l6_96anax4
+PDF_EXISTS True SIZE 237616 STALE_BYTES False

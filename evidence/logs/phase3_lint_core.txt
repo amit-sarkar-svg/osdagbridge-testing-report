@@ -1,0 +1,4 @@
+zsh:1: command not found: ruff
+zsh:1: command not found: pyflakes
+zsh:1: command not found: flake8
+NO_LINTER

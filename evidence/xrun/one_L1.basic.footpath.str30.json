@@ -1,0 +1,1 @@
+{"id": "L1.basic.footpath.str30", "status": "PASS", "runtime": 0.232, "peak_mb": 33.5, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

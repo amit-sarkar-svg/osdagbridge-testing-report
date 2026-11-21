@@ -1,0 +1,1 @@
+{"id": "L1.basic.design_mode.enum.OPTIMIZED", "status": "PASS", "runtime": 0.376, "peak_mb": 33.7, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

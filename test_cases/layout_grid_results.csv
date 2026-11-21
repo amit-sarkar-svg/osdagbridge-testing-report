@@ -1,0 +1,24 @@
+case,span,cw,skew,footpath,median,status,exception,violations,girders,spacing,overall_width,mutated,idempotent
+W2-001,20.0,4.25,0.0,None,No,ok,,,3,1.7167,5.15,True,True
+W2-002,20.0,10.5,0.0,None,No,ok,,,5,2.28,11.399999999999999,True,True
+W2-003,20.0,23.6,0.0,None,No,ok,,,10,2.45,24.5,True,True
+W2-004,30.0,4.25,0.0,None,No,ok,,,3,1.7167,5.15,True,True
+W2-005,30.0,10.5,0.0,None,No,ok,,,5,2.28,11.399999999999999,True,True
+W2-006,30.0,23.6,0.0,None,No,ok,,,10,2.45,24.5,True,True
+W2-007,40.0,4.25,0.0,None,No,ok,,,3,1.7167,5.15,True,True
+W2-008,40.0,10.5,0.0,None,No,ok,,,5,2.28,11.399999999999999,True,True
+W2-009,40.0,23.6,0.0,None,No,ok,,,10,2.45,24.5,True,True
+W2-010,45.0,4.25,0.0,None,No,ok,,,3,1.7167,5.15,True,True
+W2-011,45.0,10.5,0.0,None,No,ok,,,5,2.28,11.399999999999999,True,True
+W2-012,45.0,23.6,0.0,None,No,ok,,,10,2.45,24.5,True,True
+W2-013,30.0,4.25,0.0,Single Side,No,ok,,,3,2.3417,7.025,True,True
+W2-014,30.0,4.25,0.0,Both Sides,No,ok,,,4,2.225,8.9,True,True
+W2-015,30.0,10.5,0.0,Single Side,No,ok,,,6,2.2125,13.274999999999999,True,True
+W2-016,30.0,10.5,0.0,Both Sides,No,ok,,,7,2.1643,15.149999999999999,True,True
+W2-017,30.0,23.6,0.0,Single Side,No,ok,,,11,2.3977,26.375,True,True
+W2-018,30.0,23.6,0.0,Both Sides,No,ok,,,12,2.3542,28.25,True,True
+W2-019,30.0,4.25,0.0,None,Yes,ok,,,5,2.12,10.6,True,True
+W2-020,30.0,10.5,0.0,None,Yes,ok,,,10,2.31,23.099999999999998,True,True
+W2-021,30.0,23.6,0.0,None,Yes,ok,,,20,2.465,49.300000000000004,True,True
+W2-022,30.0,10.5,-15.0,None,No,ok,,,5,2.28,11.399999999999999,True,True
+W2-023,30.0,10.5,15.0,None,No,ok,,,5,2.28,11.399999999999999,True,True

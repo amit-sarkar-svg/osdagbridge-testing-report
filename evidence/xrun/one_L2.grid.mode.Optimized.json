@@ -1,0 +1,1 @@
+{"id": "L2.grid.mode.Optimized", "status": "PASS", "runtime": 0.524, "peak_mb": 33.6, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "solve_valid", "layer": "L2"}

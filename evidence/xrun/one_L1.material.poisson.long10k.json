@@ -1,0 +1,1 @@
+{"id": "L1.material.poisson.long10k", "status": "PASS", "runtime": 0.23, "peak_mb": 33.4, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

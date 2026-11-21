@@ -35,3 +35,12 @@
 
 ## Sessionized audit
 - [x] Phase 0 complete (2026-11-15): issues fetched (40), existing_issues.md compacted, STATE.md + all_issues_and_bugs.md created. Baseline missing.
+
+
+## 2026-11-21 (v2.0)
+- [x] Whole-codebase review (10 areas), static sweep (bandit/ruff/pip-audit)
+- [x] #135 root cause found and fix proven
+- [x] Filed #206, #207, #208, #209, #210 (all T1)
+- [x] proofs/ folder per issue; report restructured (v2.0); README rewritten
+- [ ] L4 corner sweep completion; rerun 2 inconclusive timeouts alone
+- [ ] L5 multi-run sequences (harness fixed)

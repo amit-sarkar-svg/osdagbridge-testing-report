@@ -1,0 +1,1 @@
+{"id": "L1.basic.span.inf", "status": "PASS", "runtime": 0.22, "peak_mb": 33.4, "exception_type": "", "innermost_frame": "", "message": "", "input_file": "", "traceback_sig": "", "oracle": "never_raise", "layer": "L1"}

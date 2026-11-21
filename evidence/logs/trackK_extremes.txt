@@ -1,0 +1,13 @@
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+=== deckdesign._moment_capacity_kNm (vary fy) ===
+moment_capacity fy: 0.0->0 | 1e-09->4.35e-10 | 1000000000.0->-3.53e+13 NAN/INF/NEG | -1.0->-0.435 NAN/INF/NEG | nan->nan NAN/INF/NEG | inf->-inf NAN/INF/NEG
+=== deckdesign._required_steel_mm2 (vary M) ===
+required_steel M: 0.0->0 | 1e-09->4.6e-09 | 1000000000.0->inf NAN/INF/NEG | -1.0->0 | nan->nan NAN/INF/NEG | inf->inf NAN/INF/NEG
+=== v_Rd_c (vary As) ===
+v_Rd_c As: 0.0->0.323 | 1e-09->0.323 | 1000000000.0->0.662 | -1.0->EXC TypeError | nan->nan NAN/INF/NEG | inf->0.662
+=== _min_steel_mm2 (vary fy) ===
+min_steel fy: 0.0->260 | 1e-09->260 | 1000000000.0->1.04e+11 | -1.0->260 | nan->nan NAN/INF/NEG | inf->inf NAN/INF/NEG
+=== cl_603_3_3_2_plastic_shear (vary fyw) ===
+plastic_shear fyw: 0.0->EXC AttributeError | 1e-09->EXC AttributeError | 1000000000.0->EXC AttributeError | -1.0->EXC AttributeError | nan->EXC AttributeError | inf->EXC AttributeError
+=== Kv (vary c) ===
+Kv c: 0.0->539 | 1e-09->539 | 1000000000.0->539 | -1.0->539 | nan->539 | inf->539

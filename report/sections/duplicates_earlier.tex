@@ -1,0 +1,12 @@
+\subsection{Root-cause detail contributed to existing issues (earlier sessions)}
+\begin{longtable}{@{}p{2.6cm}p{5.4cm}p{3.2cm}p{4.2cm}@{}}
+\toprule
+Finding & Statement & Existing issue & Root cause located \\
+\midrule
+F1 & NaN span accepted by validator & \#88 & \texttt{\_to\_float} (validator.py L1094) returns NaN unchecked; both boundary comparisons (L32--35) are False for NaN \\
+F2 & custom steel density never read by design pipeline & \#20 & \texttt{\_build\_material\_props} (plategirderbridge.py L1177) falls back to 78500\,N/m$^3$; key only read by the PDF report (chap3.py L280) \\
+F4 & custom material values wiped at Design after OSI load & \#19 & priming with empty \texttt{\_material\_custom\_fields} re-exports empty fields; \texttt{\_update\_input\_dict} (input\_dock.py L1029) stores \texttt{None} \\
+--- & default grade E 350A crashes at Stage 5 (``Gs not set'') & \#42 & \texttt{BridgeConfig.from\_plate\_girder\_bridge} (designer.py L309--315) reads \texttt{material.girder.g} which priming fills only for grades found in the DB \\
+--- & missing \texttt{thermal\_load} case warnings during load combinations & \#92 & analyser.py L2576 warnings observed in the headless probe log \\
+\bottomrule
+\end{longtable}

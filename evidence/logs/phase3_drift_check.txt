@@ -1,0 +1,63 @@
+== MATERIAL COMPONENT FY=5000 (validate_material_inputs) ==
+girder_fy (material.girder.fy): REJECTED -> (1200.0, 'Yield Strength, Fy must be between 100.0 and 1200.0 MPa.')
+cross_bracing_fy (material.cross_bracing.fy): ACCEPTED (None)
+end_diaphragm_fy (material.end_diaphragm.fy): ACCEPTED (None)
+-- CB/ED other props samples --
+material.cross_bracing.fu=2000: ACCEPTED
+material.cross_bracing.e=500: ACCEPTED
+material.cross_bracing.density=200: ACCEPTED
+material.end_diaphragm.fu=2000: ACCEPTED
+material.end_diaphragm.density=200: ACCEPTED
+stiffener material keys in common: []
+
+== ENUM/UNKNOWN in osi_validator ==
+design.mode unknown: valid=True errors=[]
+structure.type unknown: valid=True errors=[]
+geometry.include_median unknown: valid=True errors=[]
+geometry.footpath unknown: valid=True errors=[]
+
+== CROSS-FIELD: median Yes, carriageway < 7.5 ==
+validate_basic_inputs cw=6.0 median=Yes: (7.5, 'Minimum carriageway width required is 7.50 m as per IRC 5:2015 Clause 104.3.1.')
+osi_validator load cw=6.0 median=Yes span=30: valid=False errors=['geometry.carriageway_width: Minimum carriageway width required is 7.50 m as per IRC 5:2015 Clause 104.3.1.']
+
+== COMPACT TABLE (key | L1 | L2_osi | L3_ui_mentions | agree?) ==
+key | L1 | L2_osi | L3_ui_hits | agree?
+geometry.span | basic() | basic | 151 | Y (present-only)
+geometry.carriageway_width | basic() | basic | 21 | Y (present-only)
+geometry.skew_angle | basic() | basic | 21 | Y (present-only)
+typical_section.girder_spacing | additional() | additional | 32 | Y (present-only)
+typical_section.no_of_girders | additional() | additional | 11 | Y (present-only)
+typical_section.deck_overhang | additional() | additional | 29 | Y (present-only)
+typical_section.deck_thickness | additional() | additional | 20 | Y (present-only)
+typical_section.footpath_width | additional() | additional | 21 | Y (present-only)
+typical_section.footpath_thickness | additional() | additional | 13 | Y (present-only)
+typical_section.crash_barrier.width | additional() | additional | 836 | Y (present-only)
+typical_section.crash_barrier.height | additional() | additional | 515 | Y (present-only)
+typical_section.crash_barrier.load | additional() | additional | 634 | Y (present-only)
+typical_section.crash_barrier.post_spacing | additional() | additional | 0 | Y (present-only)
+typical_section.median.width | additional() | additional | 836 | Y (present-only)
+typical_section.median.height | additional() | additional | 515 | Y (present-only)
+material.girder.fy | material() | no | 54 | N (osi skips)
+material.girder.density | material() | no | 9 | N (osi skips)
+material.deck.fck | material() | no | 16 | N (osi skips)
+material.cross_bracing.fy | material() | no | 54 | N (osi skips)
+material.end_diaphragm.fy | material() | no | 54 | N (osi skips)
+material.deck.density | material() | no | 9 | N (osi skips)
+design.mode | N/A | enum(mode) | 520 | Y (mode only)
+structure.type | N/A (enum in UI/common) | no | 601 | Y
+geometry.include_median | N/A | no | 3 | Y
+
+== _ADDITIONAL_KEYS: validate_additional_inputs response to extreme value ==
+total=57 with_limit_response=41 no_limit_response=16 err=0
+no_limit_response keys (first 20): loading.live_load.footpath_pressure.value, loading.seismic_load.dead_load.value, loading.seismic_load.live_load.value, loading.wind_load.gust_factor.value, loading.wind_load.drag_coeff.value, loading.wind_load.drag_coeff_ll.value, loading.wind_load.lift_coeff.value, loading.wind_load.super_area_elev.value, loading.wind_load.super_area_plain.value, loading.wind_load.exposed_frontal_area.value, loading.temperature_load.thermal_coeff_steel, loading.temperature_load.thermal_coeff_rcc, design_options.shear_studs.height, design_options.shear_studs.transverse_spacing, design_options_cont.camber.mode, design_options_cont.camber.value
+err keys: 
+  ex typical_section.girder_spacing: high=None low=(0.5, 'Girder spacing is outside the practical range allowed in the software.')
+  ex typical_section.no_of_girders: high=None low=(2, 'No. of girders is outside the practical range allowed in the software.')
+  ex typical_section.deck_overhang: high=None low=(0.0, 'Deck overhang width is outside the practical range allowed in the software.')
+  ex typical_section.deck_thickness: high=(500, 'Deck thickness must not exceed 500 mm.') low=(100, 'Deck thickness must be at least 100 mm.')
+  ex typical_section.footpath_width: high=None low=(1.5, 'Footpath clear width is less than minimum 1.5 m required by IRC 5:2015 Clause 104.3.6.')
+  ex typical_section.footpath_thickness: high=(500, 'Footpath thickness must not exceed 500 mm.') low=(100, 'Footpath thickness must be at least 100 mm.')
+  ex typical_section.crash_barrier.width: high=None low=(0.0, 'Crash barrier width is outside the practical range allowed in the software.')
+  ex typical_section.crash_barrier.height: high=(10.0, 'Crash barrier height is outside the practical range allowed in the software.') low=(0.0, 'Crash barrier height is outside the practical range allowed in the software.')
+  ex typical_section.crash_barrier.load: high=(100.0, 'Crash barrier load is outside the practical range allowed in the software.') low=(0.0, 'Crash barrier load is outside the practical range allowed in the software.')
+  ex typical_section.crash_barrier.post_spacing: high=None low=(0.1, 'Crash barrier post spacing is outside the practical range allowed in the software.')

@@ -1,0 +1,26 @@
+id,area,class,file:line,claim,status
+C01,plategirderbridge,stale_overwritten_state,"plategirderbridge.py:536-589,683",design() re-divides girder dims by 1000 in place; 2nd design() w/o set_input -> depth 0.00167 m -> math domain error (root cause of #135),T4->#135 comment; CONFIRMED x2 + fix proven (scripts/probe_double_convert*.py)
+C02,plategirderbridge,stale_overwritten_state,template_page.py:689-690,"UI path set_input+design twice does NOT crash (Optimized, span30/cw15)",T8 checked; refutes UI-level crash for this config
+C03,validator,validation_gap,validator.py:1094-1097 (_to_float),float() accepts nan/bool: span/skew/cw/Fy NaN -> None (valid); skew True accepted,CONFIRMED x2; T4 #88 (comment draft 28)
+C04,validator,validation_gap,validator.py:968-984,validate_map_coordinates accepts 999/nan/inf/1e999,CONFIRMED x2; T4 #180
+C05,validator,silent_default,validator.py:46,median 'No' is truthy -> min width 7.5 instead of 4.25 when width None,CONFIRMED x2 (probe_cands1.log) S3 candidate; needs dup-check done: none found -> T2
+C06,defaults,silent_overwrite,"defaults.py:919,932",user spacing/overhang always re-derived,needs test
+C07,defaults,wrong_aggregation,initial_sizing.py:315 vs bridge_geometry.py:202,median width counted twice vs once,needs test
+C08,defaults,crash,defaults.py:908 (float(None)),carriageway None -> TypeError in solve_extend_basic_input_dict,CONFIRMED incidentally (build({}) traceback) T2
+C09,report,stale,report_generator.py:982-985,old PDF at same path returned as success when recompile fails,needs test (pdflatex)
+C10,report,latex_escape,chap8.py:18-22; report_utils.py:19-30,incomplete LaTeX escaping ($ { } \ ~ ^),needs test
+C11,report,hang,report_generator.py:969,subprocess.run pdflatex without timeout,"needs test, T3"
+C12,analyser,loads_skipped,"analyser.py:1646,1688","carriageway_width 0.0 not None -> unreachable ValueError, empty lane cases",needs test
+C13,analyser,loads_skipped,analyser.py:1711-1728,"vehicles dropped when lanes < combination need (possible zero live load, cf #134)",needs test
+C14,analysis_results,silent_fallback,analysis_results.py:1369,hard-coded 22.4 self-weight fallback,needs test
+C15,analysis_results,logic,analysis_results.py:1158-1159,max/min sign selection dead logic,needs test
+C16,designer,silent_default,"designer.py:2478-2487,405; deckdesign.py:472",missing dcr -> 0.0 reads PASS; 0 spacing -> default,T7 maybe intended
+C17,deckdesign,divide_zero,"deckdesign.py:166,215,285-292,528-532",no guards d=0/As=0/S=0,needs test
+C18,ui,state,template_page.py:664-708,_design_running stuck True if thread start raises,needs Qt test
+C19,ui,ui_dict_diverge,"input_dock.py:1005-1009,1048-1084","empty field writes default to dict, widget blank; populate_from_dict leaves stale widgets",needs Qt test
+C20,dialogs,custom_value_ignored,input_dock.py:729,Custom... reopen doesn't restore fields (cf #19),"needs test, probable T4 #19"
+C21,dialogs,precision,material_properties.py:541-548,'{:.1f}' rounds Poisson 0.25 (cf #77),needs test
+C22,plategirderbridge,resource,"plategirderbridge.py:1124-1167,3030-4068",_lookup_material returns None; sqlite connection leaks; except pass,needs test
+C23,ospgrillage,logic,mesh.py:245-258,skew check elif skips skew_2; negative skew passes overlap check,needs test
+C24,cli/packaging,install,README/pyproject/environment.yml:~27,'-e .examples/plate_girder' typo breaks conda env create; deps missing,T4 #99/#100 partly; needs check
+C25,tools,path,tools/view_results.py:70,writes xlsx to cwd; emoji prints on cp1252,T6

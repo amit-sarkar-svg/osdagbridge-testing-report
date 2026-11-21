@@ -1,0 +1,26 @@
+\begin{longtable}{@{}p{1.4cm}p{3.0cm}p{6.2cm}p{2.6cm}p{2.0cm}@{}}
+\toprule
+ID & Area & Parameters (exact) & Result & Evidence \\
+\midrule
+PYT-01 & validator steel & density 49.9/50/120/120.1; fy 99.9/100/1200/1200.1; fu, E, G, Poisson, thermal at both boundaries & PASS (7 params) & \texttt{tests/test\_validator\_limits.py} \\
+PYT-02 & validator deck & density, fck, fctm, Ecm, thermal at both boundaries & PASS (5 params) & same \\
+PYT-03 & validator geometry & span 19.9/45.1 corrected; carriageway 4.25/23.6 pass, 23.7 corrected; median+5.0 $\rightarrow$ 7.5; skew $\pm$15.1 corrected & PASS & same \\
+PYT-04 & validator NaN & span = NaN & \textbf{NaN accepted} (dup \#88) & pytest failure + root cause \\
+PYT-05 & OSI round trip & dict $\rightarrow$ \texttt{yaml.dump} $\rightarrow$ \texttt{safe\_load} $\rightarrow$ equality + validation & PASS & \texttt{tests/test\_osi\_round\_trip.py} \\
+F3-96 & OSI material bypass & fy 99999 / density 5 / fck $-$3 through the loader vs.\ the dialog check & \textbf{BUG} $\rightarrow$ \#96 & \texttt{evidence/analyze/osi\_material\_bypass.txt} \\
+P2-001 & lock/unlock flow & toggle lock before Additional Inputs opened (static: \texttt{input\_dock.py:856--859}, lazy \texttt{template\_page.py:124,440--447}) & \textbf{ISSUE (T3)} $\rightarrow$ \#97 & \texttt{notes/issue\_drafts/01...} \\
+P1-001 & packaging/metadata & \texttt{osdag\_core 0.0.0} \texttt{Requires-Dist} includes bogus \texttt{sqlite} (not installable; stdlib is \texttt{sqlite3}) & \textbf{ISSUE (T5)} $\rightarrow$ \#98 & \texttt{evidence/logs/phase1\_installed\_meta.txt} \\
+P1-002 & packaging/pyproject & missing runtime deps (e.g.\ \texttt{PySide6}, \texttt{numpy}, \texttt{osdag\_core}, \texttt{yaml}, \texttt{OCC}) and unused \texttt{pydantic} vs \texttt{src} imports & \textbf{ISSUE (T5)} $\rightarrow$ \#99 & \texttt{evidence/logs/phase1\_p1\_002\_proof.txt} \\
+P1-003 & packaging/manifests & \texttt{pyproject.toml}, \texttt{requirements.txt}, \texttt{environment.yml} declare inconsistent dep sets & \textbf{ISSUE (T6)} $\rightarrow$ \#100 & manifests at \texttt{dev @ d74f56d} \\
+P1-004 & docs/CLI & README documents CLI commands/support but \texttt{osdagbridge-cli} entrypoint is a stub ignoring args/\texttt{--help} & \textbf{ISSUE (T6)} $\rightarrow$ \#101 & \texttt{evidence/logs/phase1\_entrypoints.txt} \\
+P1-005 & docs/examples & \texttt{verification\_case\_01/02.yaml} are empty placeholders (no valid input dict), fail validation & \textbf{ISSUE (T6)} $\rightarrow$ \#127 & \texttt{evidence/logs/phase1\_examples.txt} \\
+P1-006 & docs/examples & \texttt{example\_basic.yaml} uses non-real keys but passes \texttt{validate\_osi\_inputs} vacuously & \textbf{ISSUE (T7)} $\rightarrow$ \#128 & \texttt{evidence/logs/phase1\_examples.txt} \\
+P3-001 & validation/material & \texttt{validate\_material\_inputs} skips range checks for CB/ED material keys (girder/deck only) & \textbf{ISSUE (T2)} $\rightarrow$ \#129 & \texttt{evidence/logs/phase3\_drift\_check.txt} \\
+P4F-001 & validation/type & integer validators raise \texttt{OverflowError} on \texttt{inf}/\texttt{-inf} (5 integer keys) instead of message & \textbf{ISSUE (T2)} $\rightarrow$ \#130 & \texttt{evidence/logs/trackF\_validator\_fuzz.txt} \\
+P4I-001 & io/osi & \texttt{saveOSI\_inputs} uses \texttt{yaml.dump} unsafe tags incompatible with \texttt{yaml.safe\_load} (round-trip can fail) & \textbf{ISSUE (T2)} $\rightarrow$ \#131 & \texttt{evidence/logs/trackI\_yaml\_dump\_safe\_load.txt} \\
+P5-004 & analysis/skew & skew sign not mirror-symmetric: positive vs negative skew give different design demands (2 pairs) & \textbf{ISSUE (T2)} $\rightarrow$ \#132 & \texttt{dictionaries/OR\_SKEW*/output.json} \\
+P5-005 & analysis/performance & \texttt{design()} non-termination ($>$10 min) on valid span-45 + median + footpath inputs & \textbf{ISSUE (T2)} $\rightarrow$ \#133 & \texttt{evidence/logs/design\_sweep\_run.log} \\
+P5-006 & analysis/wrong-PASS & silent live-load skip gives zero ULS demand but verdict PASS (cw7.5+median+both footpaths) & \textbf{ISSUE (T1)} $\rightarrow$ \#134 & \texttt{dictionaries/P5\_SW05R/output.json} \\
+P5-007 & crash/idempotence & 2nd \texttt{design()} on same object crashes in LTB sqrt (\texttt{math domain error}) & \textbf{ISSUE (T1)} $\rightarrow$ \#135 & \texttt{evidence/logs/determinism\_2.log} \\
+\bottomrule
+\end{longtable}

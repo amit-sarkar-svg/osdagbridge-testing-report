@@ -1,46 +1,75 @@
-# OsdagBridge Testing Report
+# OsdagBridge — Software Testing Report
 
-FOSSEE Winter Internship screening task: testing the short-span steel girder bridge module.
+Independent testing of the **short-span steel plate girder bridge module** of [OsdagBridge](https://github.com/Nidhikhare12/OsdagBridge) (branch `dev`, commit `d74f56d`), carried out for the FOSSEE Winter Internship screening task (IIT Bombay).
 
-## Environment
-- macOS (Intel), Miniconda, env: osdagbridge-env; Python 3.12.16; PySide6 6.11.3 (pip)
-- Branch tested: dev (commit: d74f56d, 2026-07-26 "fix: Z,Sa/g,Ah,Av in Report"), read-only — no source edits
+> The OsdagBridge source was treated as **read-only**. Every script, input, log, screenshot and generated report that supports a finding is stored in this repository. Proposed fixes were proven by monkeypatching a copy of the affected function inside the tests.
 
-## Structure
-- test_log.md: every test case with exact inputs and results
-- test_cases/: saved .osi input files (baseline + generated/ mutations + manifest.json)
-- dictionaries/: per-case Input/Output dictionary dumps + result.json + case.log
-- evidence/: tracebacks, probe outputs, screenshots
-- scripts/: fetch_issues, gen_cases, run_headless, case_runner, ui_emulation, analyze, state_runner, make_log_rows, pipeline_probe, smoke_core, osi_sweep (OSI load-time sweep), calc_unit_checks, layout_grid
-- tests/: pytest suite (validator limits + .osi round trip)
-- report/: LaTeX source and final PDF
-- notes/: setup log, code study, findings, run history, existing issues, bug_classes.md, key_flow.csv, osi_load_path.md, web_inventory.md
-- PROGRESS.md: checklist
+## Quick links
 
-## Issues raised
-| # | Title | Link | Status |
-|---|-------|------|--------|
-| 96 | Loading a .osi file skips all custom-material validation — out-of-range material values load unchallenged | https://github.com/Nidhikhare12/OsdagBridge/issues/96 | open |
-| 97 | Toggling input lock can crash when Additional Inputs dialog was never opened (`_additional_inputs_dialog` is None) | https://github.com/Nidhikhare12/OsdagBridge/issues/97 | open (T3 static) |
-| 98 | `osdag_core` dependency metadata declares bogus `sqlite` package (breaks clean dependency resolution) | https://github.com/Nidhikhare12/OsdagBridge/issues/98 | open (T5) |
-| 99 | `pyproject.toml` runtime dependencies omit required packages and declare unused `pydantic` | https://github.com/Nidhikhare12/OsdagBridge/issues/99 | open (T5) |
-| 100 | Inconsistent dependency declarations across `pyproject.toml`, `requirements.txt`, and `environment.yml` | https://github.com/Nidhikhare12/OsdagBridge/issues/100 | open (T6) |
-| 101 | README documents CLI usage but installed CLI entrypoint is a stub that ignores arguments | https://github.com/Nidhikhare12/OsdagBridge/issues/101 | open (T6) |
-| 127 | `verification_case_01.yaml` and `verification_case_02.yaml` are empty placeholders that fail OSI validation | https://github.com/Nidhikhare12/OsdagBridge/issues/127 | open (T6) |
-| 128 | `example_basic.yaml` uses placeholder keys but passes `validate_osi_inputs` vacuously | https://github.com/Nidhikhare12/OsdagBridge/issues/128 | open (T7) |
-| 129 | `validate_material_inputs` skips range checks for cross-bracing/end-diaphragm material keys | https://github.com/Nidhikhare12/OsdagBridge/issues/129 | open (T2) |
-| 130 | Integer validators raise `OverflowError` on `inf`/`-inf` instead of returning a validation message | https://github.com/Nidhikhare12/OsdagBridge/issues/130 | open (T2) |
-| 131 | `saveOSI_inputs` uses `yaml.dump` (unsafe tags) while load uses `yaml.safe_load` — round-trip can fail | https://github.com/Nidhikhare12/OsdagBridge/issues/131 | open (T2) |
-| 132 | Skew sign not mirror-symmetric: +15°/−15° give different design demands for a symmetric bridge | https://github.com/Nidhikhare12/OsdagBridge/issues/132 | open (T2) |
-| 133 | Valid inputs (span 45 m + median + footpaths) make `design()` run >10 minutes without completing | https://github.com/Nidhikhare12/OsdagBridge/issues/133 | open (T2) |
-| 134 | Wrong PASS: silent live-load skip → zero ULS demand (cw 7.5 + median + both footpaths) | https://github.com/Nidhikhare12/OsdagBridge/issues/134 | open (T1) |
-| 135 | Second `design()` call on the same object crashes in LTB buckling check (`math domain error`) | https://github.com/Nidhikhare12/OsdagBridge/issues/135 | open (T1) |
-| 153 | `saveOSI_inputs` does not enforce the `.osi` file extension (our P6-015, T3 static; filed upstream 2026-11-18) | https://github.com/Nidhikhare12/OsdagBridge/issues/153 | open (T3 → T4 dup of #153) |
-| 154 | `loadOSI_inputs` silently swallows exceptions from `solve_extend_basic_input_dict` (our P6-017, T3 static; filed upstream 2026-11-18) | https://github.com/Nidhikhare12/OsdagBridge/issues/154 | open (T3 → T4 dup of #154) |
-| 155 | No Web Application Layer — Django Backend and React Frontend absent; web testing blocked (our P1-007, T9; corrected 2026-11-18: stub-only `web/` at repo root) | https://github.com/Nidhikhare12/OsdagBridge/issues/155 | open (T5/T6 → T4 dup of #155) |
+| Document | Description |
+|---|---|
+| [**report/report.pdf**](report/report.pdf) | Full testing report (PDF, v2.0, 21 Nov 2026) |
+| [proofs/](proofs/) | One folder per issue: reproduction command, expected vs. actual, logs, screenshots, generated reports |
+| [test_log.md](test_log.md) | Every executed test: ID, exact parameters, expected, actual, result, evidence |
+| [notes/BUG_REPORT.md](notes/BUG_REPORT.md) | Working bug report with tiers and candidate status |
+| [notes/issue_drafts/](notes/issue_drafts/) | Issue and comment texts as drafted |
 
-## Duplicate-issue comment drafts (extra evidence)
-Prepared, evidence-backed comment drafts for existing issues (not new filings). Upstream posting status noted per draft.
+## At a glance
+
+| Metric | Value |
+|---|---|
+| Issues filed upstream | **23** |
+| Filed on 21 Nov 2026 | 5 (#206 – #210), all T1 (reproduced twice, fix proven) |
+| Root-cause analyses contributed to existing issues | 7 (incl. #135, #88, #20, #19, #42) |
+| Automated extreme-value cases (validators, layout, loader) | 1,966 executed, all oracles satisfied |
+| Upstream issues screened for duplicates | 124 issues + 80 PRs |
+
+## Issues filed
+
+**Tier:** T1 confirmed (2 fresh-process reproductions) · T2 likely · T3 static · T5 install · T6 docs · T7 maybe intended  
+**Severity:** S1 wrong engineering result / security · S2 crash or wrong behaviour with workaround · S3 cosmetic / low impact
+
+### Filed 21 November 2026
+
+| Issue | Title | Category | Tier | Sev. | State | Proof |
+|---|---|---|---|---|---|---|
+| [#206](https://github.com/Nidhikhare12/OsdagBridge/issues/206) | [Bug/Validation] Clearing the Skew Angle field silently sets skew to -15° instead of the default 0° | Validation / UI | T1 | S2 | open | [`proofs/206_empty_skew_resets_to_minus15`](proofs/206_empty_skew_resets_to_minus15/) |
+| [#207](https://github.com/Nidhikhare12/OsdagBridge/issues/207) | [Bug/Validation] Carriageway width validator treats Median = "No" as a median, suggesting 7.5 m instead of 4.25 m | Validation | T1 | S2 | open | [`proofs/207_median_no_treated_as_yes`](proofs/207_median_no_treated_as_yes/) |
+| [#208](https://github.com/Nidhikhare12/OsdagBridge/issues/208) | [Bug/Report] Design log warnings and errors are never written to the PDF report — ch8_design_log discards log_entries | Report | T1 | S2 | open | [`proofs/208_design_log_dropped_from_report`](proofs/208_design_log_dropped_from_report/) |
+| [#209](https://github.com/Nidhikhare12/OsdagBridge/issues/209) | [Bug/Robustness] PlateGirderBridge._lookup_material returns None for an unknown grade and raises IndexError for an empty name | Robustness | T1 | S3 | open | [`proofs/209_lookup_material_returns_none`](proofs/209_lookup_material_returns_none/) |
+| [#210](https://github.com/Nidhikhare12/OsdagBridge/issues/210) | [Bug/Report] _tex() double-escapes backslashes, so "\" in report text is printed as "\{}" | Report | T1 | S3 | open | [`proofs/210_tex_backslash_double_escape`](proofs/210_tex_backslash_double_escape/) |
+
+### Filed 15 – 18 November 2026
+
+| Issue | Title | Category | Tier | Sev. | State | Proof |
+|---|---|---|---|---|---|---|
+| [#96](https://github.com/Nidhikhare12/OsdagBridge/issues/96) | [Bug] Loading a .osi file skips all custom-material validation — out-of-range material values load unchallenged | Validation | T1 | S2 | open | see report §9 |
+| [#97](https://github.com/Nidhikhare12/OsdagBridge/issues/97) | [Bug] Toggling input lock can crash when Additional Inputs dialog was never opened (`_additional_inputs_dialog` is None) | UI state | T3 | S2 | open | see report §9 |
+| [#98](https://github.com/Nidhikhare12/OsdagBridge/issues/98) | [Bug/Install] `osdag_core` dependency metadata declares bogus `sqlite` package (breaks clean dependency resolution) | Install | T5 | S2 | open | see report §9 |
+| [#99](https://github.com/Nidhikhare12/OsdagBridge/issues/99) | [Bug/Install] `pyproject.toml` runtime dependencies omit required packages and declare unused `pydantic` | Install | T5 | S2 | open | see report §9 |
+| [#100](https://github.com/Nidhikhare12/OsdagBridge/issues/100) | [Docs/Packaging] Inconsistent dependency declarations across `pyproject.toml`, `requirements.txt`, and `environment.yml` | Packaging | T6 | S3 | open | see report §9 |
+| [#101](https://github.com/Nidhikhare12/OsdagBridge/issues/101) | [Docs/CLI] README documents CLI usage but installed CLI entrypoint is a stub that ignores arguments | Docs / CLI | T6 | S3 | open | see report §9 |
+| [#127](https://github.com/Nidhikhare12/OsdagBridge/issues/127) | [Docs/Examples] `verification_case_01.yaml` and `verification_case_02.yaml` are empty placeholders that fail OSI validation | Docs | T6 | S3 | open | see report §9 |
+| [#128](https://github.com/Nidhikhare12/OsdagBridge/issues/128) | [Docs/Examples] `example_basic.yaml` uses placeholder keys but passes `validate_osi_inputs` vacuously | Docs | T7 | S3 | open | see report §9 |
+| [#129](https://github.com/Nidhikhare12/OsdagBridge/issues/129) | [Bug/Validation] `validate_material_inputs` skips range checks for cross-bracing/end-diaphragm material keys | Validation | T2 | S2 | open | see report §9 |
+| [#130](https://github.com/Nidhikhare12/OsdagBridge/issues/130) | [Bug/Validation] Integer validators raise `OverflowError` on `inf`/`-inf` instead of returning a validation message | Validation | T2 | S2 | open | see report §9 |
+| [#131](https://github.com/Nidhikhare12/OsdagBridge/issues/131) | [Bug/I-O] `saveOSI_inputs` uses `yaml.dump` (unsafe tags) while load uses `yaml.safe_load` — round-trip can fail | File I/O | T2 | S2 | open | see report §9 |
+| [#132](https://github.com/Nidhikhare12/OsdagBridge/issues/132) | [Bug/Analysis] Skew sign is not mirror-symmetric: +15° and −15° give different design demands for a symmetric bridge | Analysis | T2 | S1 | open | see report §9 |
+| [#133](https://github.com/Nidhikhare12/OsdagBridge/issues/133) | [Bug/Performance] Valid inputs (span 45 m + median + footpaths) make `design()` run >10 minutes without completing | Performance | T2 | S2 | open | see report §9 |
+| [#134](https://github.com/Nidhikhare12/OsdagBridge/issues/134) | [Bug/Analysis] Valid input silently skips live load → all design demands = 0 and verdict PASS (wrong PASS) | Analysis | T1 | S1 | open | see report §9 |
+| [#135](https://github.com/Nidhikhare12/OsdagBridge/issues/135) | [Bug/Crash] Second `design()` call on the same object crashes in LTB buckling check (`math domain error`) | Crash / state | T1 | S2 | open | see report §9 |
+| [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153) | [Bug] saveOSI_inputs Does Not Enforce the .osi File Extension | File I/O | T3 | S3 | open | see report §9 |
+| [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154) | [Bug] loadOSI_inputs Silently Swallows Exceptions from solve_extend_basic_input_dict | File I/O | T3 | S2 | open | see report §9 |
+| [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155) | [Documentation/Scope] No Web Application Layer Found — Django Backend and React Frontend Absent | Scope / docs | T5 | S3 | open | see report §9 |
+
+## Contributions to existing issues
+
+| Target issue | Contribution | Proof / draft |
+|---|---|---|
+| [#135](https://github.com/Nidhikhare12/OsdagBridge/issues/135) | **Root cause:** `design()` converts girder dimensions mm→m *in place* (`plategirderbridge.py:536-589`, called at :683); a second run divides by 1000 again (1.67 m → 0.00167 m → `math domain error`). Fix proven. | [`proofs/135_comment_root_cause_double_mm_to_m`](proofs/135_comment_root_cause_double_mm_to_m/) |
+| [#88](https://github.com/Nidhikhare12/OsdagBridge/issues/88) / [#180](https://github.com/Nidhikhare12/OsdagBridge/issues/180) | NaN accepted by `validate_basic_inputs` / `validate_material_inputs`; `True` accepted as skew; coordinates 999/nan/inf accepted (`_to_float`, `validator.py:1094-1097`) | [`proofs/088_comment_nan_accepted_by_validators`](proofs/088_comment_nan_accepted_by_validators/) |
+
+Earlier comment drafts (format: target issue · audit ref · draft · status):
 
 | Target issue | Audit ref | Draft | Status |
 |---|---|---|---|
@@ -48,31 +77,51 @@ Prepared, evidence-backed comment drafts for existing issues (not new filings). 
 | [#20](https://github.com/Nidhikhare12/OsdagBridge/issues/20) Custom steel density ignored in `_build_material_props` | P2-003 (T4) | [03_comment_20_custom_girder_density_ignored.md](notes/issue_drafts/03_comment_20_custom_girder_density_ignored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
 | [#41](https://github.com/Nidhikhare12/OsdagBridge/issues/41) Custom deck density not reaching `create_deck_load` | P2-004 (T4) | [04_comment_41_custom_deck_density_not_in_load.md](notes/issue_drafts/04_comment_41_custom_deck_density_not_in_load.md) | Prepared 2026-11-15; upstream posting pending confirmation |
 | [#19](https://github.com/Nidhikhare12/OsdagBridge/issues/19) OSI load does not restore `_material_custom_fields` | P2-005 (T4) | [05_comment_19_material_custom_fields_not_restored.md](notes/issue_drafts/05_comment_19_material_custom_fields_not_restored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
-| [#153](https://github.com/Nidhikhare12/OsdagBridge/issues/153) `saveOSI_inputs` does not enforce `.osi` file extension | P6-015 (T4) | [25_comment_153_osi_extension_t4.md](notes/issue_drafts/25_comment_153_osi_extension_t4.md) | Prepared 2026-11-18; confirms upstream report; reclassified T3→T4 |
-| [#154](https://github.com/Nidhikhare12/OsdagBridge/issues/154) `loadOSI_inputs` silently swallows exceptions | P6-017 (T4) | [26_comment_154_osi_swallow_t4.md](notes/issue_drafts/26_comment_154_osi_swallow_t4.md) | Prepared 2026-11-18; confirms upstream report; reclassified T3→T4 |
-| [#155](https://github.com/Nidhikhare12/OsdagBridge/issues/155) No Web Application Layer found | P1-007 (T4) | [27_comment_155_web_layer_absent_t4.md](notes/issue_drafts/27_comment_155_web_layer_absent_t4.md) | Prepared 2026-11-18; corrected inventory; reclassified T9→T4 |
 
-(older duplicate notes, e.g. #88/#42/#92 root-cause material, are also documented in `notes/findings.md`.)
+## Documented but not filed
 
-## Issues already on the repo that our findings duplicate
-(duplicate check refreshed 2026-11-18 against all 92 open+closed issues — see notes/issues_raw.json and notes/STATE.md)
-- F1 NaN accepted → #88 (root-cause comment material)
-- F2 custom steel density ignored → #20 (also P2-003)
-- F4 custom fields wiped after OSI load → #19 (also P2-005)
-- CB/end-diaphragm custom grades stored but unused → #43 (P2-002)
-- custom deck density not reaching deck load → #41 (P2-004)
-- E 350A Gs crash → #42
-- missing thermal load case warnings → #92
-- `saveOSI_inputs` without `.osi` enforcement → #153 (also P6-015, T3→T4)
-- `loadOSI_inputs` silently swallowing solver exceptions → #154 (also P6-017, T3→T4)
-- Web application layer absent/stub-only → #155 (also P1-007, T9→T4)
-
-
-## Additional findings documented (not yet filed upstream)
 - **P6-014 (T2)** — `validate_additional_inputs` accepts NaN/inf for ALL 17 keys in `_ADDITIONAL_KEYS` (`typical_section.girder_spacing=nan`, `typical_section.no_of_girders=inf`, ...); root cause `validator.py:174` `_to_float` + always-False NaN comparisons. Draft: `notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md`; evidence `test_cases/os_sweep_results.csv` (9299-case sweep).
 - **P6-016 (T3)** — `saveOSI_inputs` overwrites existing files silently, no confirmation dialog (`template_page.py:811-819`).
 
-## Recent updates (2026-11-18)
-- Duplicate check refreshed: 155 items, 92 issues (max #155).
-- #153 / #154 / #155 were filed upstream 2026-11-18 (matching this session's P6-015 / P6-017 / P1-007); those findings are now T4 duplicates, documented in `report/report.tex`/`report.pdf` and `notes/all_issues_and_bugs.md`.
-- W5: bug classes built (`notes/bug_classes.md`), key flow traced (`notes/key_flow.csv`), OSI sweep carried out (`scripts/osi_sweep.py`).
+## Test coverage
+
+| Layer | Area | Status |
+|---|---|---|
+| L1 | Validators, every key with limit neighbours, NaN/inf, text forms, types | 1,233 cases, all pass |
+| L2 | Layout solver grid | 33 cases, all pass |
+| L3 | `.osi` loader incl. parser hazards (alias bomb, deep nesting, BOM, YAML 1.1 booleans) | 700 cases, no crash/hang |
+| L4 | Design pipeline corner sweep (`scripts/l4_corners.py`) | in progress — see report §5 and `evidence/xrun/l4_corners.jsonl` |
+| L5 | Repeated runs / state | #135 root-caused; sequence runs being repeated after a harness fix |
+| L6 | PDF report: free text, file names, injection attempt, design log | #208, #210; injection correctly escaped |
+| L7 | Desktop input dock (offscreen Qt) | #206, #207; non-numeric typing correctly blocked |
+| L8 | CLI entry point | stub (known #101) |
+| S | bandit, ruff, pip-audit, targeted grep | no high-severity finding |
+
+## Reproducing a finding
+
+```bash
+source ~/miniconda3/etc/profile.d/conda.sh && conda activate osdagbridge-env
+cd osdagbridge-testing-report
+python proofs/207_median_no_treated_as_yes/scripts/probe_median_fix.py
+```
+
+Each `proofs/<issue>/README.md` lists the exact command, the expected and actual result, and what every evidence file shows.
+
+## Environment
+
+- macOS 13.6 (Darwin 22.6.0), Intel; Miniconda env `osdagbridge-env`, Python 3.12, PySide6 6.11
+- OsdagBridge `dev` @ `d74f56d` (read-only clone, installed editable)
+- TeX Live `pdflatex` for report generation
+
+## Repository layout
+
+```
+proofs/        per-issue evidence (README, scripts, logs, inputs, screenshots, report output)
+report/        report.tex (+ sections/) and compiled report.pdf
+scripts/       harnesses: xrun.py, triage.py, minimize.py, probes, sweeps
+tests/         pytest suites and extreme-value case registry (tests/extreme/)
+test_cases/    baseline and generated minimal inputs
+evidence/      raw logs and sweep results (evidence/xrun/)
+dictionaries/  input/output dictionaries of design runs
+notes/         bug report, candidates, issue drafts, duplicate-check data, session state
+```

@@ -1,0 +1,1 @@
+{"scenario":"Desktop input dock: clear the Skew Angle field (empty) and leave it (editingFinished)","expected":"skew resets to SKEW_ANGLE_DEFAULT=0.0 (common.py:332)","actual":"widget and dict set to -15.0","script":"scripts/l7_empty_field.py"}

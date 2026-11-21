@@ -1,0 +1,21 @@
+idge/core/bridge_types/plate_girder/plategirderbridge.py", line 595, in _run_stage
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/plategirderbridge.py", line 2297, in _run_dcr_checks
+    _, engine, design_results = run_design_check(
+                                ^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/designer.py", line 3293, in run_design_check
+    g_cap = IRC22CapacityCalculator(g_config).compute_all(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/designer.py", line 1802, in compute_all
+    ltb = self.compute_buckling_resistance(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/bridge_types/plate_girder/designer.py", line 1007, in compute_buckling_resistance
+    res = IRC22_2014.cl_603_3_3_1_buckling_resistance_moment(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macbook/Projects/OsdagBridge/src/osdagbridge/core/utils/codes/irc22_2015.py", line 639, in cl_603_3_3_1_buckling_resistance_moment
+    lambda_LT = math.sqrt(beta_b * (Zp * fy) / Mcr)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: math domain error
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+

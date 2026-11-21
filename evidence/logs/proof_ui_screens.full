@@ -1,0 +1,29 @@
+qt.qpa.fonts: Populating font family aliases took 190 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+[INFO] osdag_latex_env module not found. LaTeX functionalities may be limited.
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 10.899999999999999 m
+  no_of_girders = 5
+  girder_spacing = 2.18 m
+  deck_overhang = 1.09 m
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 10.899999999999999 m
+  no_of_girders = 5
+  girder_spacing = 2.18 m
+  deck_overhang = 1.09 m
+BEFORE skew='5' cw='10' median='No'
+AFTER clearing skew: text='-15.0' dict='-15.0' popup=['Skew angle must be a numeric value.']
+[DEBUG] Bridge Layout Sizing Result:
+  overall_width = 8.4 m
+  no_of_girders = 5
+  girder_spacing = 1.68 m
+  deck_overhang = 0.84 m
+AFTER clearing carriageway (median 'No'): text='7.5' dict='7.5' popup=['Carriageway width must be specified.']
+####### 3D rendering pipe initialisation #####
+Display3d class initialization starting ...
+Aspect_DisplayConnection created.
+OpenGl_GraphicDriver created.
+V3d_Viewer created.
+AIS_InteractiveContext created.
+V3d_View created
+Graphic3d_Camera created
+Graphic3d_StructureManager created

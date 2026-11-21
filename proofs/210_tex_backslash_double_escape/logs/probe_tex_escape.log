@@ -1,0 +1,14 @@
+TEX_BACKSLASH 'a\\textbackslash\\{\\}b' expected 'a\\textbackslash{}b'
+TEX_ANGLE 'a<b>|c'
+(log_entries: List[str], input_dict: dict) -> str
+CH8 'INFO: ok' rc 1 pdf False
+CH8 'INFO: cost $5 and {x}' rc 1 pdf False
+CH8 'INFO: a ~ b ^ c \\ d' rc 1 pdf False
+--
+TEX_BACKSLASH 'a\\textbackslash\\{\\}b' expected 'a\\textbackslash{}b'
+TEX_ANGLE 'a<b>|c'
+(log_entries: List[str], input_dict: dict) -> str
+CH8 'INFO: ok' rc 1 pdf False
+CH8 'INFO: cost $5 and {x}' rc 1 pdf False
+CH8 'INFO: a ~ b ^ c \\ d' rc 1 pdf False
+--

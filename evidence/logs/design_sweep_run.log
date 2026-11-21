@@ -1,0 +1,13 @@
+cases=25 reqs=66 uncovered=6
+SW01 ok 130.5 
+SW02 ok 28.2 
+SW03 timeout 600.2 
+SW04 ok 42.6 
+SW05 ok 132.8 
+SW06 timeout 600.1 
+SW07 ok 261.5 
+SW08 ok 67.6 
+SW09 ok 303.0 
+SW10 ok 44.7 
+SW11 ok 43.4 
+SW12 ok 40.2 
