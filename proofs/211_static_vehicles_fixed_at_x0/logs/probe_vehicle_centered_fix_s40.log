@@ -1,0 +1,4 @@
+LOG Governing LL: Case2 1xClass70R  (max |Mz_i| = 1106.32 kNm)
+ORIGINAL span 40.0 mu_applied 3553.92 LL_Mz per girder {'G1': 797.1, 'G2': 775.5, 'G3': 775.5, 'G4': 797.1} overall FAIL flexure dcr [0.1515]
+LOG Governing LL: Case2 1xClass70R  (max |Mz_i| = 1527.67 kNm)
+PATCHED span 40.0 mu_applied 4137.7 LL_Mz per girder {'G1': 1362.0, 'G2': 1388.8, 'G3': 1388.8, 'G4': 1362.0} overall FAIL flexure dcr [0.1764]

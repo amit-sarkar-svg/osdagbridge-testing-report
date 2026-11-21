@@ -1,0 +1,10 @@
+INPUT R=250.02 kN  A_wb=5009.8 mm2  tw=8.0 mm  d=1092.0 mm  fy=350.0 MPa (fcd_y=318.182)
+REPORTED fcc=21858.5 MPa  -> capacity=109506.26 kN  status=PASS
+PHYSICAL_LIMIT squash load A*fy/gm0 = 1594.0 kN ; reported/squash = 68.7x ; fcc/fy = 62.5x
+WEB_STRUT r=tw/sqrt12=2.309 mm  KL=0.7d=764.4 mm  KL/r=331.0  fcd(program fn)=14.74 MPa  Fcdw=73.8 kN  -> FAIL (R=250.02)
+--
+INPUT R=250.02 kN  A_wb=5009.8 mm2  tw=8.0 mm  d=1092.0 mm  fy=350.0 MPa (fcd_y=318.182)
+REPORTED fcc=21858.5 MPa  -> capacity=109506.26 kN  status=PASS
+PHYSICAL_LIMIT squash load A*fy/gm0 = 1594.0 kN ; reported/squash = 68.7x ; fcc/fy = 62.5x
+WEB_STRUT r=tw/sqrt12=2.309 mm  KL=0.7d=764.4 mm  KL/r=331.0  fcd(program fn)=14.74 MPa  Fcdw=73.8 kN  -> FAIL (R=250.02)
+--

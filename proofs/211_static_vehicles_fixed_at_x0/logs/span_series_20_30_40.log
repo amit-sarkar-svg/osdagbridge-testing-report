@@ -1,0 +1,3 @@
+H_s20        cw=  7.5 span=20.0 med=No n_girders=6 LL_Mz(max girder)=  573.78 mu_applied=1141.82 delta_live=12.44 n_lc=45 t=48.4
+H_s30        cw=  7.5 span=30.0 med=No n_girders=6 LL_Mz(max girder)=  826.58 mu_applied=2219.12 delta_live=9.64 n_lc=45 t=81.8
+H_s40        cw=  7.5 span=40.0 med=No n_girders=6 LL_Mz(max girder)=  797.10 mu_applied=3553.92 delta_live=7.684 n_lc=45 t=103.4

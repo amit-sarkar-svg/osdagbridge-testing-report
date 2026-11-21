@@ -1,0 +1,42 @@
+{
+ "check": {
+  "check_id": 21,
+  "name": "Brg.Stiff: Web Buckling",
+  "clause": "Cl.509.7.3.1",
+  "demand": 250.02,
+  "demand_unit": "kN",
+  "capacity": 109506.26,
+  "capacity_unit": "kN",
+  "dcr": 0.0023,
+  "status": "PASS",
+  "note": "fcc=21858.51 MPa, A=(b1+n1)\u00b7tw=5010 mm\u00b2"
+ },
+ "bearing_stiffener_capacity_details": {
+  "design_guidance": false,
+  "H_max_mm": 166.0,
+  "tq_req_bearing_mm": 1.19,
+  "tq_req_leg_mm": 13.95,
+  "b1_mm": 82.222,
+  "n1_mm": 544.0,
+  "A_wb_mm2": 5009.776,
+  "rys_wb_mm": 80.144,
+  "KL_mm": 761.6,
+  "fcc_wb_MPa": 21858.515,
+  "Fcdw_wb_kN": 109506.265,
+  "n2_mm": 40.0,
+  "A_lc_mm2": 977.776,
+  "fcd_y_MPa": 318.182,
+  "Fcdw_lc_kN": 311.111,
+  "n_plates": 4,
+  "Aq_mm2": 6600.0,
+  "Fpsd_kN": 2100.0,
+  "h_w_strip_mm": 160.0,
+  "Aeff_bs_mm2": 5860.0,
+  "rys_bs_mm": 74.102,
+  "KL_r_bs": 10.278,
+  "fcd_bs_MPa": 318.182,
+  "H_limit_bs_mm": 118.322,
+  "Fcd_kN": 1864.545,
+  "R_kN": 250.02
+ }
+}

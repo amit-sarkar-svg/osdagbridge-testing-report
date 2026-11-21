@@ -1,4 +1,6 @@
-# QA STATE — X2 (2026-11-21, dev@d74f56d)
+# QA STATE — X3 (2026-11-21, dev@d74f56d)
+X3 (sections 1+2): filed 2026-11-22 as #211 (S1 static vehicles at x=0, draft 35), #212 (S2 stale PDF, draft 36), #213 (S2 web buckling > squash load, draft 37); proofs/211_*, 212_*, 213_*. Batch: scripts/batch_design.py test_cases/generated/s12_cases.json dictionaries/s12 (20/20 ok; DE_* invalid: params overwritten). L4 sweep paused at 16/32 (resumable). Committed and pushed to main 2026-11-22 (dictionaries/s12 kept local, 63 MB).
+
 UPDATE 2026-11-21 late: issues #206-#210 filed by user (drafts 30-34). proofs/ folder per issue (README+scripts+logs+screens). report/report.tex restructured v2.0 (sections/ includes; l4 counts via scripts/make_l4_counts.py; compile: cd report && pdflatex -output-directory=build report.tex x2; cp build/report.pdf .). README rewritten (backup notes/README_v1_backup.md).
 OPEN: L4 sweep continues (12 ok, 2 inconclusive timeouts c_s20_w23.6_k-15_BothSides_mYes, c_s20_w23.6_k15_None_mYes -> rerun ALONE: delete their lines from l4_corners.jsonl and rerun). L5: rerun `python scripts/l5_state.py ABCA` and ABABA ONLY after L4 finishes (main guard fixed).
 Done: Stage 0 (issues refreshed: 124 issues, 80 PRs, my 18 issues), Stage 1 (10 subagent reviews -> notes/candidates.csv), Stage 2 static (notes/static_sweep_x2.md), root cause of #135 proven (notes/issue_drafts/28), NaN validator confirmed (draft 29).

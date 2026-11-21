@@ -1,0 +1,166 @@
+{
+ "H_s20": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 20.0,
+  "geometry.carriageway_width": 7.5
+ },
+ "H_s30": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 30.0,
+  "geometry.carriageway_width": 7.5
+ },
+ "H_s40": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 40.0,
+  "geometry.carriageway_width": 7.5
+ },
+ "LW_w4.25": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 4.25
+ },
+ "LW_w4.50": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 4.5
+ },
+ "LW_w4.75": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 4.75
+ },
+ "LW_w5.00": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 5.0
+ },
+ "LW_w5.25": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 5.25
+ },
+ "LW_w5.50": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 5.5
+ },
+ "LW_w5.75": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 5.75
+ },
+ "LW_w6.00": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 6.0
+ },
+ "LW_w6.25": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 6.25
+ },
+ "LW_w6.50": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 6.5
+ },
+ "LW_w6.75": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 6.75
+ },
+ "LW_w7.00": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 7.0
+ },
+ "LW_w7.25": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 7.25
+ },
+ "LW_w7.50": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 7.5
+ },
+ "MED_w7.5": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "Yes",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 25.0,
+  "geometry.carriageway_width": 7.5
+ },
+ "DE_ctrl": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 20.0,
+  "geometry.carriageway_width": 7.5,
+  "typical_section.deck_thickness": 100.0
+ },
+ "DE_cov75": {
+  "geometry.skew_angle": 0.0,
+  "geometry.footpath": "None",
+  "geometry.include_median": "No",
+  "geometry.design_mode": "Optimized",
+  "geometry.span": 20.0,
+  "geometry.carriageway_width": 7.5,
+  "typical_section.deck_thickness": 100.0,
+  "design_options.deck.top_clear_cover": 75.0,
+  "design_options.deck.bottom_clear_cover": 75.0
+ }
+}

@@ -1,0 +1,8 @@
+{
+ "geometry.skew_angle": 0.0,
+ "geometry.footpath": "None",
+ "geometry.include_median": "No",
+ "geometry.design_mode": "Optimized",
+ "geometry.span": 30.0,
+ "geometry.carriageway_width": 7.5
+}

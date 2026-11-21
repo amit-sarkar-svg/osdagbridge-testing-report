@@ -52,8 +52,8 @@ Software under test & OsdagBridge, branch \texttt{dev}, commit \texttt{d74f56d} 
 Upstream repository & \url{https://github.com/Nidhikhare12/OsdagBridge} \\
 Evidence repository & \url{https://github.com/amit-sarkar-svg/osdagbridge-testing-report} \\
 Tester (GitHub account) & \texttt{amit-sarkar-svg} \\
-Test period & 15 -- 21 November 2026 \\
-Report version & 2.0 (21 November 2026) \\
+Test period & 15 -- 22 November 2026 \\
+Report version & 2.1 (22 November 2026) \\
 \bottomrule
 \end{tabular}
 \vfill
@@ -73,22 +73,25 @@ The plate girder bridge module of OsdagBridge was tested through its validators,
 \toprule
 Metric & Value \\
 \midrule
-GitHub issues filed by the tester & \textbf{23} (\issue{96}--\issue{155}, \issue{206}--\issue{210}) \\
-\quad of which filed in this version (21 Nov 2026) & 5 (\issue{206}, \issue{207}, \issue{208}, \issue{209}, \issue{210}) \\
+GitHub issues filed by the tester & \textbf{26} (\issue{96}--\issue{155}, \issue{206}--\issue{213}) \\
+\quad of which filed in this version (22 Nov 2026) & 3 (\issue{211} \sevH, \issue{212}, \issue{213}) \\
+\quad filed in version 2.0 (21 Nov 2026) & 5 (\issue{206}, \issue{207}, \issue{208}, \issue{209}, \issue{210}) \\
 Root-cause analyses contributed to existing issues & 7 (incl.\ \issue{135}, \issue{88}, \issue{20}, \issue{19}, \issue{42}) \\
-Automated extreme-value cases executed (validators, layout, loader) & 1\,966, all oracles satisfied \\
+Extreme-value cases (validators, layout, loader) & 1\,966, all oracles satisfied \\
 Full design runs executed in this version & see Section~\ref{sec:coverage} \\
-Upstream issues screened for duplicates & 124 issues, 80 pull requests \\
+Issues screened for duplicates (open and closed) & 210 issues, 80 PRs \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \paragraph{Most significant findings.}
 \begin{enumerate}[nosep]
+  \item \issue{211} --- the design live load is taken from static vehicles parked at the left support ($x = 0$), never at mid-span. On a 40\,m span the design moment rises by 16.4\,\% when the vehicles are centred; the girder live-load moment is underestimated (unconservative).
   \item \issue{134} --- a valid input combination silently skips the live load, so every design demand is zero and the design is reported as PASS (wrong engineering result).
   \item \issue{135} --- a second \texttt{design()} on the same object crashes. This version identifies the root cause: girder dimensions are converted from mm to m \emph{in place}, so the second run divides them by 1000 again (Section~\ref{sec:contrib}).
   \item \issue{208} --- design-log warnings and errors are collected for the report but never written to it.
   \item \issue{206} / \issue{207} --- clearing an input field silently substitutes a wrong value: skew becomes $-15^\circ$, and the carriageway minimum ignores ``Median = No''.
+  \item \issue{213} --- the bearing-zone web-buckling check reports a capacity 69 times the squash load; \issue{212} --- a failed report compilation returns an older PDF as the new report.
   \item \issue{96}, \issue{129}, \issue{130}, \issue{88} --- validation gaps: out-of-range or non-finite values reach the design pipeline.
 \end{enumerate}
 
@@ -160,8 +163,10 @@ L2 & Layout solver grid & 33 cases: span, carriageway, skew, footpath, median & 
 L3 & \texttt{.osi} loader and parser hazards & 700 cases incl.\ alias bomb, deep nesting, BOM, YAML 1.1 booleans & No crash or hang; gaps are the known \issue{96}, \issue{131}, \issue{153}, \issue{154} \\
 L4 & Design pipeline, corner sweep & \input{sections/l4_counts.tex} & No NaN/inf, negative dimension or out-of-range $\chi_{LT}$ in any completed output \\
 L5 & Repeated runs and state & Second \texttt{design()} on one object; UI path repeated twice & Crash \issue{135} reproduced and root-caused; UI path stable \\
-L6 & PDF report & 8 free-text and file-name cases, end-to-end log check & \issue{208}, \issue{210}; LaTeX injection attempt correctly escaped \\
+L6 & PDF report & 8 free-text and file-name cases, end-to-end log check, \LaTeX\ unavailable & \issue{208}, \issue{210}, \issue{212}; LaTeX injection attempt correctly escaped \\
 L7 & Desktop input dock (offscreen) & 27 typed-input checks on span, skew and carriageway; empty-field checks & \issue{206}, \issue{207}; non-numeric typing correctly blocked \\
+H & Hand calculations and physics oracles & Moving load on 20--40\,m spans (IRC Class A, 70R); squash-load limit; combination factors & \issue{211} \sevH, \issue{213}; extra evidence for \issue{174}, \issue{104} \\
+M & Metamorphic sweeps & Span 20/30/40\,m; carriageway 4.25--7.50\,m in 0.25\,m steps (20 full designs, one process each) & Live-load moment falls from 30 to 40\,m (\issue{211}); lane sweep never gives zero live load (correct) \\
 L8 & CLI entry point & 7 invocations (help, missing file, directory, empty file, bad flag) & Stub returns 0 for everything --- known \issue{101} \\
 S & Static security review & bandit, ruff, pip-audit, targeted grep & No high-severity finding; Section~\ref{sec:static} \\
 \bottomrule
@@ -174,7 +179,12 @@ S & Static security review & bandit, ruff, pip-audit, targeted grep & No high-se
 Issue & Title (abridged) & Category & Tier & Severity \\
 \midrule
 \endhead
-\multicolumn{5}{@{}l}{\textit{Filed 21 November 2026 (this version)}} \\
+\multicolumn{5}{@{}l}{\textit{Filed 22 November 2026 (this version)}} \\
+\issue{211} & Design live load from static vehicles parked at $x = 0$; girder live-load moment underestimated & Analysis & T1 & \sevH \\
+\issue{212} & Older PDF returned as the new report when compilation fails & Report & T1 & \sevM \\
+\issue{213} & Web-buckling check (Cl.\,509.7.3.1) capacity 69$\times$ the squash load; always passes & Design check & T1 & \sevM \\
+\midrule
+\multicolumn{5}{@{}l}{\textit{Filed 21 November 2026}} \\
 \issue{206} & Clearing the Skew Angle field silently sets skew to $-15^\circ$ instead of $0^\circ$ & Validation / UI & T1 & \sevM \\
 \issue{207} & Carriageway validator treats Median = ``No'' as a median (7.5\,m instead of 4.25\,m) & Validation & T1 & \sevM \\
 \issue{208} & Design-log warnings and errors never written to the PDF report & Report & T1 & \sevM \\
@@ -205,7 +215,9 @@ Issue & Title (abridged) & Category & Tier & Severity \\
 All issues were open at the time of writing. Severities for \issue{96}--\issue{155} were assigned for this summary from the impact described in each issue.
 
 % ------------------------------------------------------------------ 7
-\section{Detailed findings filed in this version}
+\input{sections/findings_v21.tex}
+
+\section{Detailed findings filed 21 November 2026}
 
 % ---- 206
 \subsection{\issue{206} --- Clearing the Skew Angle field sets skew to $-15^\circ$}
@@ -330,6 +342,7 @@ SQL & Table names interpolated from constants; values parameterised & T3 \\
   \item A CJK project name, special characters (\texttt{\% \$ \_ \{ \} \textasciitilde{} \textasciicircum{} \# \&}) and a file name with spaces all produce a PDF report.
   \item A file name starting with \texttt{\&} or \texttt{-}: generation fails, and \texttt{pdf\_path} is correctly returned as \texttt{None}.
   \item The carriageway width is defined per carriageway (UI label ``Each way''), so the overall width with a median ($2w + w_m + 2w_{cb}$) is consistent.
+  \item Carriageway widths 4.25--7.50\,m (span 25\,m, with median): the live load is never zero; the step at about 5.3\,m (one to two lanes, 366 to 845\,kNm) matches the IRC lane rule.
   \item Every completed design output in the corner sweep is free of NaN/inf and negative dimensions, and has $0 < \chi_{LT} \le 1$.
 \end{itemize}
 
@@ -338,6 +351,7 @@ SQL & Table names interpolated from constants; values parameterised & T3 \\
 \begin{itemize}[nosep]
   \item \textbf{Corner sweep (L4):} wide-carriageway designs take up to 8 minutes each, so the counts in Section~\ref{sec:coverage} reflect the state at the time of writing. Two cases with span 20\,m, carriageway 23.6\,m and a median exceeded the 600\,s limit. The first (skew $-15^\circ$, both footpaths) ran while a second design process was sharing the CPU. The second (skew $+15^\circ$, no footpath) was running when the tester stopped the invalid L5 run, which also terminated its worker processes. Neither timeout is therefore treated as a finding; both are being rerun alone.
   \item \textbf{Multi-run sequences (L5):} the first attempt was invalid because of a harness defect (missing \texttt{\_\_main\_\_} guard with the pipeline's multiprocessing pool). It has been fixed and will be rerun.
+  \item \textbf{Deck-geometry edge case} (100\,mm deck with 75\,mm covers): not tested, because the harness rebuilt the inputs and overwrote the deck parameters (T9, harness defect).
   \item \textbf{Not executed:} 3D CAD rendering and plot widgets (an offscreen OpenGL context is not available), and the project-location map dialog.
   \item Report text was checked at the \LaTeX\ source level; no PDF-to-text tool was available in the environment.
 \end{itemize}

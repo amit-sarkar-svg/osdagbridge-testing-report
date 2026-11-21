@@ -1,0 +1,38 @@
+[
+ {
+  "case": "H_s20",
+  "span_m": 20.0,
+  "LL_Mz_per_girder_kNm": {
+   "G1": 546.4,
+   "G2": 573.8,
+   "G3": 573.8,
+   "G4": 546.4
+  },
+  "LL_Mz_sum_kNm": 2240.4,
+  "mu_applied_kNm": 1141.82
+ },
+ {
+  "case": "H_s30",
+  "span_m": 30.0,
+  "LL_Mz_per_girder_kNm": {
+   "G1": 781.6,
+   "G2": 826.6,
+   "G3": 826.6,
+   "G4": 781.6
+  },
+  "LL_Mz_sum_kNm": 3216.4,
+  "mu_applied_kNm": 2219.12
+ },
+ {
+  "case": "H_s40",
+  "span_m": 40.0,
+  "LL_Mz_per_girder_kNm": {
+   "G1": 797.1,
+   "G2": 775.5,
+   "G3": 775.5,
+   "G4": 797.1
+  },
+  "LL_Mz_sum_kNm": 3145.2,
+  "mu_applied_kNm": 3553.92
+ }
+]

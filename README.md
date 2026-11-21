@@ -8,7 +8,7 @@ Independent testing of the **short-span steel plate girder bridge module** of [O
 
 | Document | Description |
 |---|---|
-| [**report/report.pdf**](report/report.pdf) | Full testing report (PDF, v2.0, 21 Nov 2026) |
+| [**report/report.pdf**](report/report.pdf) | Full testing report (PDF, v2.1, 22 Nov 2026) |
 | [proofs/](proofs/) | One folder per issue: reproduction command, expected vs. actual, logs, screenshots, generated reports |
 | [test_log.md](test_log.md) | Every executed test: ID, exact parameters, expected, actual, result, evidence |
 | [notes/BUG_REPORT.md](notes/BUG_REPORT.md) | Working bug report with tiers and candidate status |
@@ -18,16 +18,27 @@ Independent testing of the **short-span steel plate girder bridge module** of [O
 
 | Metric | Value |
 |---|---|
-| Issues filed upstream | **23** |
+| Issues filed upstream | **26** |
+| Filed on 22 Nov 2026 | 3 (#211 – #213), all T1; #211 is **S1** (unconservative live load) |
 | Filed on 21 Nov 2026 | 5 (#206 – #210), all T1 (reproduced twice, fix proven) |
 | Root-cause analyses contributed to existing issues | 7 (incl. #135, #88, #20, #19, #42) |
 | Automated extreme-value cases (validators, layout, loader) | 1,966 executed, all oracles satisfied |
-| Upstream issues screened for duplicates | 124 issues + 80 PRs |
+| Upstream issues screened for duplicates | all 210 issues (open and closed) before #211 – #213 |
 
 ## Issues filed
 
 **Tier:** T1 confirmed (2 fresh-process reproductions) · T2 likely · T3 static · T5 install · T6 docs · T7 maybe intended  
 **Severity:** S1 wrong engineering result / security · S2 crash or wrong behaviour with workaround · S3 cosmetic / low impact
+
+### Filed 22 November 2026
+
+| Issue | Title | Category | Tier | Sev. | State | Proof |
+|---|---|---|---|---|---|---|
+| [#211](https://github.com/Nidhikhare12/OsdagBridge/issues/211) | [Bug/Analysis] Design live load is taken from static vehicles parked at x = 0, never at the critical position — girder live-load moment underestimated (≈ 14 % lower ULS moment on a 40 m span) | Analysis | T1 | **S1** | open | [`proofs/211_static_vehicles_fixed_at_x0`](proofs/211_static_vehicles_fixed_at_x0/) |
+| [#212](https://github.com/Nidhikhare12/OsdagBridge/issues/212) | [Bug/Report] generate_report returns an older PDF as the new report when compilation fails (success is judged only by "a file with that name exists") | Report | T1 | S2 | open | [`proofs/212_stale_pdf_returned_as_success`](proofs/212_stale_pdf_returned_as_success/) |
+| [#213](https://github.com/Nidhikhare12/OsdagBridge/issues/213) | [Bug/Design] Bearing-zone web buckling check (Cl. 509.7.3.1) reports a capacity 69× the squash load — uses the stiffener's inertia and an uncapped Euler stress, so it always passes | Design check | T1 | S2 | open | [`proofs/213_web_buckling_exceeds_squash_load`](proofs/213_web_buckling_exceeds_squash_load/) |
+
+How these were found: a hand moving-load calculation and a span metamorphic test (20 → 30 → 40 m must not reduce the live-load moment) for #211; a fault-injection test (LaTeX unavailable) for #212; a physics oracle (no compressive capacity may exceed the squash load A·fy/γm0) for #213.
 
 ### Filed 21 November 2026
 
@@ -80,6 +91,9 @@ Earlier comment drafts (format: target issue · audit ref · draft · status):
 
 ## Documented but not filed
 
+- **Extra evidence for #174 (load-combination factors not applied):** for the 20 m case, `BASIC_1` (1.35 DL) and `BASIC_4` (1.0 DL) give the same moment (1092.872 kNm). `mu_applied` = 1141.8 kNm, against about 1705 kNm by hand. Source: `test_log.md` row X3-05; the saved state (`dictionaries/s12/H_s20`, 3.4 MB) is kept local.
+- **Extra evidence for #104 (reactions table empty):** the data behind the table is wrong too. For every load case the left reaction equals minus the right, and only interior girders are summed (`results_data.py:964-983`). Script: `scripts/proof_reactions_report.py`.
+
 - **P6-014 (T2)** — `validate_additional_inputs` accepts NaN/inf for ALL 17 keys in `_ADDITIONAL_KEYS` (`typical_section.girder_spacing=nan`, `typical_section.no_of_girders=inf`, ...); root cause `validator.py:174` `_to_float` + always-False NaN comparisons. Draft: `notes/issue_drafts/24_validate_additional_inputs_accepts_nan_inf.md`; evidence `test_cases/os_sweep_results.csv` (9299-case sweep).
 - **P6-016 (T3)** — `saveOSI_inputs` overwrites existing files silently, no confirmation dialog (`template_page.py:811-819`).
 
@@ -92,7 +106,9 @@ Earlier comment drafts (format: target issue · audit ref · draft · status):
 | L3 | `.osi` loader incl. parser hazards (alias bomb, deep nesting, BOM, YAML 1.1 booleans) | 700 cases, no crash/hang |
 | L4 | Design pipeline corner sweep (`scripts/l4_corners.py`) | in progress — see report §5 and `evidence/xrun/l4_corners.jsonl` |
 | L5 | Repeated runs / state | #135 root-caused; sequence runs being repeated after a harness fix |
-| L6 | PDF report: free text, file names, injection attempt, design log | #208, #210; injection correctly escaped |
+| L6 | PDF report: free text, file names, injection attempt, design log, LaTeX unavailable | #208, #210, #212; injection correctly escaped |
+| H | Hand calculations and physics oracles: moving load vs span, squash-load limit, combination factors | #211 (S1), #213; extra evidence for #174, #104 |
+| M | Metamorphic: span 20/30/40 m, carriageway 4.25–7.50 m in 0.25 m steps | #211; lane sweep never gives zero LL (correct) |
 | L7 | Desktop input dock (offscreen Qt) | #206, #207; non-numeric typing correctly blocked |
 | L8 | CLI entry point | stub (known #101) |
 | S | bandit, ruff, pip-audit, targeted grep | no high-severity finding |

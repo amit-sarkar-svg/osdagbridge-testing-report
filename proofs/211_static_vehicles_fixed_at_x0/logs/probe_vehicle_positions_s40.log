@@ -1,0 +1,8 @@
+LOG Seismic inputs: DL=3299.7 kN  Governing LL=0.0 kN
+LOG Governing LL: Case2 1xClass70R  (max |Mz_i| = 1106.32 kNm)
+LOG Created: ACCIDENTAL_2: 1.0DL + 1.0DW + 0.75LL           DL=1.0  barge_impact(no lc)  live_load leading
+LOG Live + impact ≤ L/800 = 50.00 mm
+LOG Impact factor (IF)     : 1.100  [IRC 6:2017 Cl.208]
+SPAN 40.0
+CASE Case1 2xClassA                           n_pts= 32 x_range=[0.6, 20.3] total_kN=1086.9
+CASE Case2 1xClass70R                         n_pts= 14 x_range=[0.81, 13.75] total_kN=981.0

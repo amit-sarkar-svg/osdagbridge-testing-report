@@ -1,0 +1,4 @@
+LOG Governing LL: Case2 1xClass70R  (max |Mz_i| = 1106.32 kNm)
+SPAN 40.0
+CASE Case1 2xClassA                           n_pts= 32 x_range=[0.6, 20.3] total_kN=1086.9
+CASE Case2 1xClass70R                         n_pts= 14 x_range=[0.81, 13.75] total_kN=981.0
