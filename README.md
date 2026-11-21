@@ -18,12 +18,12 @@ Independent testing of the **short-span steel plate girder bridge module** of [O
 
 | Metric | Value |
 |---|---|
-| Issues filed upstream | **26** |
-| Filed on 22 Nov 2026 | 3 (#211 – #213), all T1; #211 is **S1** (unconservative live load) |
+| Issues filed upstream | **28** |
+| Filed on 22 Nov 2026 | 5 (#211 – #213, #215, #216), all T1; #211 is **S1**, #215 is an S1 candidate |
 | Filed on 21 Nov 2026 | 5 (#206 – #210), all T1 (reproduced twice, fix proven) |
 | Root-cause analyses contributed to existing issues | 7 (incl. #135, #88, #20, #19, #42) |
 | Automated extreme-value cases (validators, layout, loader) | 1,966 executed, all oracles satisfied |
-| Upstream issues screened for duplicates | all 210 issues (open and closed) before #211 – #213 |
+| Upstream issues screened for duplicates | all issues (open and closed) before each filing; 4 more leads found to be duplicates (#113, #148, #141/#86, #43) |
 
 ## Issues filed
 
@@ -36,9 +36,17 @@ Independent testing of the **short-span steel plate girder bridge module** of [O
 |---|---|---|---|---|---|---|
 | [#211](https://github.com/Nidhikhare12/OsdagBridge/issues/211) | [Bug/Analysis] Design live load is taken from static vehicles parked at x = 0, never at the critical position — girder live-load moment underestimated (≈ 14 % lower ULS moment on a 40 m span) | Analysis | T1 | **S1** | open | [`proofs/211_static_vehicles_fixed_at_x0`](proofs/211_static_vehicles_fixed_at_x0/) |
 | [#212](https://github.com/Nidhikhare12/OsdagBridge/issues/212) | [Bug/Report] generate_report returns an older PDF as the new report when compilation fails (success is judged only by "a file with that name exists") | Report | T1 | S2 | open | [`proofs/212_stale_pdf_returned_as_success`](proofs/212_stale_pdf_returned_as_success/) |
+| [#215](https://github.com/Nidhikhare12/OsdagBridge/issues/215) | [Bug/Design] Cross-bracing design forces are read from the horizontal force Vz, so every gravity load (DL, LL) contributes 0 — bracing is sized for 1–3 kN of seismic/wind only | Design | T1 | **S1?** | open | [`proofs/215_bracing_forces_ignore_gravity_loads`](proofs/215_bracing_forces_ignore_gravity_loads/) |
+| [#216](https://github.com/Nidhikhare12/OsdagBridge/issues/216) | [Bug/Report] Cross-bracing report tables contradict themselves: KL/r is not KL ÷ r_min (2306 / 8.0 = 288 > 250 printed as 121.9 PASS) and UR is not Demand ÷ Capacity | Report | T1 | S2 | open | [`proofs/216_bracing_report_tables_contradict`](proofs/216_bracing_report_tables_contradict/) |
 | [#213](https://github.com/Nidhikhare12/OsdagBridge/issues/213) | [Bug/Design] Bearing-zone web buckling check (Cl. 509.7.3.1) reports a capacity 69× the squash load — uses the stiffener's inertia and an uncapped Euler stress, so it always passes | Design check | T1 | S2 | open | [`proofs/213_web_buckling_exceeds_squash_load`](proofs/213_web_buckling_exceeds_squash_load/) |
 
-How these were found: a hand moving-load calculation and a span metamorphic test (20 → 30 → 40 m must not reduce the live-load moment) for #211; a fault-injection test (LaTeX unavailable) for #212; a physics oracle (no compressive capacity may exceed the squash load A·fy/γm0) for #213.
+**Screenshots of #215 / #216** (pages of OsdagBridge's own generated report):
+
+| #215: all governing cases are seismic, 1–3 kN | #216: KL/r and UR contradict the printed columns |
+|---|---|
+| ![215](proofs/215_bracing_forces_ignore_gravity_loads/screenshots/report_capacity_summary_forces_from_EQ_only.png) | ![216](proofs/216_bracing_report_tables_contradict/screenshots/report_slenderness_table_KL_r_mismatch.png) |
+
+How these were found: a hand moving-load calculation and a span metamorphic test (20 → 30 → 40 m must not reduce the live-load moment) for #211; a fault-injection test (LaTeX unavailable) for #212; a physics oracle (no compressive capacity may exceed the squash load A·fy/γm0) for #213; a load-path check (do gravity loads reach the cross-bracing design?) and a fix-proof monkeypatch for #215; an arithmetic oracle on the printed tables (KL/r = KL ÷ r, UR = D ÷ C) for #216.
 
 ### Filed 21 November 2026
 
@@ -90,6 +98,14 @@ Earlier comment drafts (format: target issue · audit ref · draft · status):
 | [#19](https://github.com/Nidhikhare12/OsdagBridge/issues/19) OSI load does not restore `_material_custom_fields` | P2-005 (T4) | [05_comment_19_material_custom_fields_not_restored.md](notes/issue_drafts/05_comment_19_material_custom_fields_not_restored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
 
 ## Documented but not filed
+
+- **Confirmed duplicates (22 Nov, round 2):** before filing, each lead was screened against all upstream issues, and four were already reported:
+  - #113: deck-edge lines get the full girder section. Fix proof: `mu_applied` 1141.8 → 1689.1 kNm when the edge lines are softened (`scripts/probe_edge_beam_share.py`).
+  - #148: Ecm passed in GPa, so αe = 6061 (`scripts/probe_deck_modular_ratio.py`).
+  - #141 / #86: wind exposed height is 0.25 m and the wind input keys are not read.
+  - #43: the bracing design dicts hard-code E 250.
+
+  See `test_log.md` X4 rows.
 
 - **Extra evidence for #174 (load-combination factors not applied):** for the 20 m case, `BASIC_1` (1.35 DL) and `BASIC_4` (1.0 DL) give the same moment (1092.872 kNm). `mu_applied` = 1141.8 kNm, against about 1705 kNm by hand. Source: `test_log.md` row X3-05; the saved state (`dictionaries/s12/H_s20`, 3.4 MB) is kept local.
 - **Extra evidence for #104 (reactions table empty):** the data behind the table is wrong too. For every load case the left reaction equals minus the right, and only interior girders are summed (`results_data.py:964-983`). Script: `scripts/proof_reactions_report.py`.

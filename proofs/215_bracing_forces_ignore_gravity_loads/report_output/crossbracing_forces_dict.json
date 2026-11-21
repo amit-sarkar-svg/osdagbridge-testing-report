@@ -1,0 +1,50 @@
+{
+ "brace_type": "X",
+ "top_chord": true,
+ "bottom_chord": true,
+ "geometry": {
+  "brace_type": "X",
+  "top_chord": true,
+  "bottom_chord": true,
+  "girder_spacing_m": 2.1,
+  "brace_height_m": 0.952,
+  "girder_depth_m": 1.12,
+  "diagonal_length_m": 2.3057,
+  "horiz_proj_m": 2.1,
+  "alpha_deg": 24.39,
+  "cb_spacing_m": 3.0,
+  "depth_ratio": 0.85
+ },
+ "pairs": {
+  "G1-G2": {
+   "diag_tension_kN": 1.026,
+   "diag_tension_gov_lc": "1.5 EQ (a)",
+   "diag_compression_kN": 3.068,
+   "diag_compression_gov_lc": "1.5 EQ (b)",
+   "chord_tension_kN": 0.935,
+   "chord_tension_gov_lc": "1.5 EQ (a)",
+   "chord_compression_kN": 2.794,
+   "chord_compression_gov_lc": "1.5 EQ (b)"
+  },
+  "G2-G3": {
+   "diag_tension_kN": 1.412,
+   "diag_tension_gov_lc": "1.5 EQ (a)",
+   "diag_compression_kN": 0.161,
+   "diag_compression_gov_lc": "1.5 EQ (a)",
+   "chord_tension_kN": 1.286,
+   "chord_tension_gov_lc": "1.5 EQ (a)",
+   "chord_compression_kN": 0.147,
+   "chord_compression_gov_lc": "1.5 EQ (a)"
+  },
+  "G3-G4": {
+   "diag_tension_kN": 3.226,
+   "diag_tension_gov_lc": "1.5 EQ (b)",
+   "diag_compression_kN": 0.384,
+   "diag_compression_gov_lc": "WL Transverse",
+   "chord_tension_kN": 2.938,
+   "chord_tension_gov_lc": "1.5 EQ (b)",
+   "chord_compression_kN": 0.349,
+   "chord_compression_gov_lc": "WL Transverse"
+  }
+ }
+}

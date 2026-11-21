@@ -37,3 +37,10 @@
 | X3-07 | 2026-11-21 | lane sweep | cw 4.25..7.5 step 0.25, span 25 + median | LL never 0 | LL 366 kNm (1 lane) -> 845 (2 lanes) at 5.3 m; never 0 | PASS T8 | dictionaries/s12/LW_* | - |
 | X3-08 | 2026-11-21 | deck geometry edge | deck 100 mm, covers 75/75 | - | params overwritten by harness build (250/50) | T9 harness | dictionaries/s12/DE_* | - |
 | X3-09 | 2026-11-21 | 22.4 kN/m SW fallback, deflection 2 values, fatigue FAIL | - | - | known | T4 | - | #179, #114, #147 |
+| X4-01 | 2026-11-22 | grillage edge lines | H_s20 | girders carry wL^2/8 | edge lines carry 1/3; soft-edge fix: mu_applied 1141.8->1689.1 | T4 duplicate #113 | scripts/probe_edge_beam_share.py | #113 (comment material) |
+| X4-02 | 2026-11-22 | deck SLS modular ratio | H_s20 | alpha_e = Es/Ecm ~ 6 | alpha_e 6061 (Ecm in GPa); fix: sigma_c 2.49->9.84 MPa, wk 0.198->0.263 | T4 duplicate #148 | scripts/probe_deck_modular_ratio.py | #148 |
+| X4-03 | 2026-11-22 | wind A1 / input keys | H_s20 | barrier + girder in A1; user wind inputs used | exposed height 0.25 m; ai keys not found | T4 duplicates #141, #86 | evidence/tmp/H_s20_stdout.log | #141, #86 |
+| X4-04 | 2026-11-22 | girder design formulas (section props, Vn, Vcr, Kv, M-V, bearing stiffener crushing/contact/column) | H_s20 | hand values | all match | PASS | dictionaries/s12/H_s20/state.json | - |
+| X4-05 | 2026-11-22 | cross-bracing design forces | H_s20 | gravity loads contribute (docstring: vertical shear) | Vz=0 for SW/DD/DL/LL; forces 0.16-3.23 kN from EQ/WL; Vy fix: 60.25 kN vs 19.39 kN capacity | FAIL T1 S1-candidate (#215) | proofs/215_bracing_forces_ignore_gravity_loads | draft 38 |
+| X4-06 | 2026-11-22 | report cross-bracing tables | H_s20 | KL/r = KL/r_min; UR = D/C | 2306/8.0=288>250 printed 121.9 PASS; UR 0.280 vs 0.158 | FAIL T1 S2 (#216) | proofs/216_bracing_report_tables_contradict | draft 39 |
+| X4-07 | 2026-11-22 | cross-bracing material | H_s20 | E 350A used | design dicts hard-code E 250 (fcd 81.82 matches fy 250) | T4 duplicate #43 | crossbracingforces.py / connect.py | #43 |

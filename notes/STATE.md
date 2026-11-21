@@ -1,4 +1,5 @@
 # QA STATE — X3 (2026-11-21, dev@d74f56d)
+X4 (2026-11-22, oracles round 2): filed as #215 (S1-candidate bracing forces ignore gravity, draft 38) and #216 (S2 bracing report tables contradict, draft 39); duplicates confirmed: #113, #148, #141/#86, #43. Proof folders proofs/215_*, proofs/216_*.
 X3 (sections 1+2): filed 2026-11-22 as #211 (S1 static vehicles at x=0, draft 35), #212 (S2 stale PDF, draft 36), #213 (S2 web buckling > squash load, draft 37); proofs/211_*, 212_*, 213_*. Batch: scripts/batch_design.py test_cases/generated/s12_cases.json dictionaries/s12 (20/20 ok; DE_* invalid: params overwritten). L4 sweep paused at 16/32 (resumable). Committed and pushed to main 2026-11-22 (dictionaries/s12 kept local, 63 MB).
 
 UPDATE 2026-11-21 late: issues #206-#210 filed by user (drafts 30-34). proofs/ folder per issue (README+scripts+logs+screens). report/report.tex restructured v2.0 (sections/ includes; l4 counts via scripts/make_l4_counts.py; compile: cd report && pdflatex -output-directory=build report.tex x2; cp build/report.pdf .). README rewritten (backup notes/README_v1_backup.md).

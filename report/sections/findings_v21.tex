@@ -69,6 +69,45 @@ Program's own $f_{cd}$ for the web strut, $KL/r = 331$ & 14.7\,MPa $\Rightarrow$
 
 \textbf{Expected:} a capacity not above the squash load; with the program's own function the unstiffened web fails, consistent with a bearing stiffener being provided. \quad \textbf{Impact:} the value is reported (design-check list and output dictionary) but does not drive another decision, because bearing stiffeners are checked separately. Reproduced twice.
 
+
+% ---- 215
+\subsection{\issue{215} --- Cross-bracing design forces ignore every gravity load}
+\textbf{Severity / tier:} \sevH\ candidate / T1. \quad \textbf{Proof:} \proof{215\_bracing\_forces\_ignore\_gravity\_loads/}
+
+\textbf{Description.} \texttt{CrossBracingForces} reads the design force from the \emph{Vz} component of the transverse grillage members (\texttt{crossbracingforces.py:333}). Gravity loads act in y (\texttt{analyser.py:1454}), so Vz is exactly zero for self-weight, deck, dead and live load. The module's own docstring says that the chord force is ``the full vertical shear'' (line 38). The report text claims ``DL + LL + WL''.
+
+\begin{center}\begin{tabular}{@{}lrr@{}}
+\toprule
+Load case (span 20\,m) & max $|V_z|$ (used) & max $|V_y|$ (vertical) \\
+\midrule
+1.0 DL & 0.00\,kN & 18.55\,kN \\
+1.0 LL & 0.00\,kN & 44.28\,kN \\
+BASIC\_1 & 0.35\,kN & 53.96\,kN \\
+\bottomrule
+\end{tabular}\end{center}
+
+\textbf{Fix proof:} reading the vertical shear instead (test-only monkeypatch) raises the G1-G2 diagonal compression from 3.07\,kN (1.5\,EQ) to 60.25\,kN (ACCIDENTAL\_1). The 40$\times$40$\times$3 strut now selected has a capacity of 19.39\,kN; the design then selects 50$\times$50$\times$6. Reproduced in three fresh processes.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.48\linewidth]{../proofs/215_bracing_forces_ignore_gravity_loads/screenshots/report_capacity_summary_forces_from_EQ_only.png}\hfill
+\includegraphics[width=0.48\linewidth]{../proofs/215_bracing_forces_ignore_gravity_loads/screenshots/report_capacity_summary_AFTER_vy_fix.png}
+\caption{OsdagBridge report, Cross Bracing Capacity Summary. Left: current program (all governing cases 1.5\,EQ, 1.4--3.2\,kN). Right: same model with the vertical shear (60.2\,kN, sections resized).}
+\end{figure}
+
+% ---- 216
+\subsection{\issue{216} --- Cross-bracing report tables contradict themselves}
+\textbf{Severity / tier:} \sevM\ / T1. \quad \textbf{Proof:} \proof{216\_bracing\_report\_tables\_contradict/}
+
+\textbf{Description.} The slenderness table prints the geometric length as KL (\texttt{report\_generator.py:617--627}) next to the design's KL/r (\texttt{:580--587}). With the $r_{min} = 8.0$\,mm printed one table earlier, the diagonal gives $2306/8.0 = 288 > 250$, printed as 121.9 --- PASS; the top chord gives $2100/8.0 = 262.5$, printed as 111.0. The capacity table prints the module's efficiency as UR: 0.280 for $3.068/19.39 = 0.158$. The chapter was identical in two fresh runs.
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.48\linewidth]{../proofs/216_bracing_report_tables_contradict/screenshots/report_slenderness_table_KL_r_mismatch.png}\hfill
+\includegraphics[width=0.48\linewidth]{../proofs/216_bracing_report_tables_contradict/screenshots/report_capacity_summary_UR_mismatch.png}
+\caption{OsdagBridge report pages 30--31: slenderness table (left) and capacity summary (right).}
+\end{figure}
+
+\paragraph{Duplicates found in this round.} Four further leads were confirmed by measurement but were already reported: \issue{113} (edge lines modelled as girders; softening them raises \texttt{mu\_applied} from 1141.8 to 1689.1\,kNm), \issue{148} (Ecm in GPa, $\alpha_e = 6061$), \issue{141}/\issue{86} (wind area and input keys), \issue{43} (bracing grade fixed at E\,250).
+
 \subsection{Extra evidence for existing issues}
 \begin{itemize}[nosep]
   \item \issue{174} (combination factors): for the 20\,m case \texttt{BASIC\_1} (1.35\,DL) and \texttt{BASIC\_4} (1.0\,DL) give the same moment, 1092.872\,kNm; \texttt{mu\_applied} is 1141.8\,kNm against about 1705\,kNm by hand.
