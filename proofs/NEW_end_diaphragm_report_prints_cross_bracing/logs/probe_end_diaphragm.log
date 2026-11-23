@@ -1,0 +1,14 @@
+--- run 1
+ED_DESIGNS {'G1-G2': [], 'G2-G3': [], 'G3-G4': []}
+EDGE_ELEMENTS start 5 end 5 not_in_members 0 unmapped 4 mapped {'G1-G2': 2, 'G2-G3': 2, 'G3-G4': 2}
+LC 1.0 DL          end-edge max|Vz|=0.000 kN  max|Vy|=69.037 kN
+LC 1.0 LL          end-edge max|Vz|=0.000 kN  max|Vy|=63.105 kN
+LC 1.0 WL          end-edge max|Vz|=1.047 kN  max|Vy|=6.693 kN
+LC WL Transverse   end-edge max|Vz|=1.029 kN  max|Vy|=0.000 kN
+--- run 2
+ED_DESIGNS {'G1-G2': [], 'G2-G3': [], 'G3-G4': []}
+EDGE_ELEMENTS start 5 end 5 not_in_members 0 unmapped 4 mapped {'G1-G2': 2, 'G2-G3': 2, 'G3-G4': 2}
+LC 1.0 DL          end-edge max|Vz|=0.000 kN  max|Vy|=69.037 kN
+LC 1.0 LL          end-edge max|Vz|=0.000 kN  max|Vy|=63.105 kN
+LC 1.0 WL          end-edge max|Vz|=1.047 kN  max|Vy|=6.693 kN
+LC WL Transverse   end-edge max|Vz|=1.029 kN  max|Vy|=0.000 kN

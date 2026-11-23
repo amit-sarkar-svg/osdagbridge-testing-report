@@ -1,4 +1,7 @@
 # QA STATE — X3 (2026-11-21, dev@d74f56d)
+X7 (2026-11-24): filed as #315 (M-V interaction fed plastic Vd, draft 43) and #316 (longitudinal shear VL, draft 44). Drafts 41/42 filed upstream as #312/#313; proof folders renamed. NOT committed.
+X6 (2026-11-24): filed as #312 (S1-candidate SIDL never enters DL combination, draft 41) and #313 (S2 beta_b precedence, draft 42). Draft 40 re-scoped: the skew-0 half is now #257 (filed upstream 2026-11-23); the report-substitution half stands. Upstream now has issues up to #310 - re-screen every lead. NOT committed.
+X5 (2026-11-22): NEW S2 report End Diaphragm chapter reprints cross-bracing tables (draft 40, proofs/NEW_end_diaphragm_report_prints_cross_bracing); latent T3 tension-section reporting; ED never designed at skew 0 (root #215). NOT committed.
 X4 (2026-11-22, oracles round 2): filed as #215 (S1-candidate bracing forces ignore gravity, draft 38) and #216 (S2 bracing report tables contradict, draft 39); duplicates confirmed: #113, #148, #141/#86, #43. Proof folders proofs/215_*, proofs/216_*.
 X3 (sections 1+2): filed 2026-11-22 as #211 (S1 static vehicles at x=0, draft 35), #212 (S2 stale PDF, draft 36), #213 (S2 web buckling > squash load, draft 37); proofs/211_*, 212_*, 213_*. Batch: scripts/batch_design.py test_cases/generated/s12_cases.json dictionaries/s12 (20/20 ok; DE_* invalid: params overwritten). L4 sweep paused at 16/32 (resumable). Committed and pushed to main 2026-11-22 (dictionaries/s12 kept local, 63 MB).
 

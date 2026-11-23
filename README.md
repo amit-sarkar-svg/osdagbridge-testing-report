@@ -18,17 +18,35 @@ Independent testing of the **short-span steel plate girder bridge module** of [O
 
 | Metric | Value |
 |---|---|
-| Issues filed upstream | **28** |
+| Issues filed upstream | **32** |
+| Filed on 24 Nov 2026 | 4 (#312, #313, #315, #316), all T1; #312 is an S1 candidate |
 | Filed on 22 Nov 2026 | 5 (#211 – #213, #215, #216), all T1; #211 is **S1**, #215 is an S1 candidate |
 | Filed on 21 Nov 2026 | 5 (#206 – #210), all T1 (reproduced twice, fix proven) |
 | Root-cause analyses contributed to existing issues | 7 (incl. #135, #88, #20, #19, #42) |
 | Automated extreme-value cases (validators, layout, loader) | 1,966 executed, all oracles satisfied |
-| Upstream issues screened for duplicates | all issues (open and closed) before each filing; 4 more leads found to be duplicates (#113, #148, #141/#86, #43) |
+| Upstream issues screened for duplicates | all issues (open and closed) before each filing; 7 more leads found to be duplicates (#113, #148, #141/#86, #43, #134, #257) |
 
 ## Issues filed
 
 **Tier:** T1 confirmed (2 fresh-process reproductions) · T2 likely · T3 static · T5 install · T6 docs · T7 maybe intended  
 **Severity:** S1 wrong engineering result / security · S2 crash or wrong behaviour with workaround · S3 cosmetic / low impact
+
+### Filed 24 November 2026
+
+| Issue | Title | Category | Tier | Sev. | State | Proof |
+|---|---|---|---|---|---|---|
+| [#312](https://github.com/Nidhikhare12/OsdagBridge/issues/312) | [Bug/Analysis] Crash barrier, railing and median loads never enter the DL combination (create_sidl_combination is never called), so they are missing from every ULS/SLS combination and from the seismic mass | Analysis | T1 | **S1?** | open | [`proofs/312_sidl_missing_from_dead_load_combination`](proofs/312_sidl_missing_from_dead_load_combination/) |
+| [#313](https://github.com/Nidhikhare12/OsdagBridge/issues/313) | [Bug/Design] Operator precedence in cl_8_2_1_2_design_bending_strength makes beta_b always 1.0, so Semi-Compact and Slender girders are given the full plastic moment | Design | T1 | S2 | open | [`proofs/313_beta_b_precedence_plastic_moment`](proofs/313_beta_b_precedence_plastic_moment/) |
+| [#315](https://github.com/Nidhikhare12/OsdagBridge/issues/315) | [Bug/Design] M-V interaction is fed the plastic shear capacity instead of the governing shear buckling resistance, so high shear never reduces the moment capacity | Design | T1 | S2 | open | [`proofs/315_mv_interaction_uses_plastic_shear`](proofs/315_mv_interaction_uses_plastic_shear/) |
+| [#316](https://github.com/Nidhikhare12/OsdagBridge/issues/316) | [Bug/Design] Longitudinal shear VL (Cl.606.4.1) takes A·ȳ about the plastic neutral axis but divides by the elastic composite inertia — deck transverse reinforcement 29 % low | Design | T1 | S2 | open | [`proofs/316_longitudinal_shear_plastic_vs_elastic_na`](proofs/316_longitudinal_shear_plastic_vs_elastic_na/) |
+
+**Screenshots of #312 / #315** (pages of OsdagBridge's own generated report, as shipped vs with the fix applied):
+
+| #312: every girder demand is under-stated | #315: shear utilisation 0.76, yet "High Shear Condition? No" |
+|---|---|
+| ![312](proofs/312_sidl_missing_from_dead_load_combination/screenshots/overall_summary_shipped_vs_sidl_fixed.png) | ![315](proofs/315_mv_interaction_uses_plastic_shear/screenshots/interaction_table_shipped_vs_governing_Vd.png) |
+
+How these were found: a load-path audit of the dead-load combination for #312; an AST sweep of the whole source for the `x == A or B` operator-precedence bug class for #313; a code-consistency oracle (the shear check and the interaction must use the same design shear strength) for #315; and a dimensional-consistency oracle (A, ȳ and I in a shear-flow formula must belong to the same section) for #316.
 
 ### Filed 22 November 2026
 
@@ -98,6 +116,8 @@ Earlier comment drafts (format: target issue · audit ref · draft · status):
 | [#19](https://github.com/Nidhikhare12/OsdagBridge/issues/19) OSI load does not restore `_material_custom_fields` | P2-005 (T4) | [05_comment_19_material_custom_fields_not_restored.md](notes/issue_drafts/05_comment_19_material_custom_fields_not_restored.md) | Prepared 2026-11-15; upstream posting pending confirmation |
 
 ## Documented but not filed
+
+- **Report's End Diaphragm chapter reprints the cross-bracing tables** (draft 40, `proofs/NEW_end_diaphragm_report_prints_cross_bracing`): `chap5.py:1464/1474/1485` insert `cb_*` content, so at skew 10° the report prints the bracing's 4.664 kN where the end diaphragm's own result is 6.684 kN. The related "never designed at skew 0°" half was filed upstream by another tester as #257, so only the report half remains.
 
 - **Confirmed duplicates (22 Nov, round 2):** before filing, each lead was screened against all upstream issues, and four were already reported:
   - #113: deck-edge lines get the full girder section. Fix proof: `mu_applied` 1141.8 → 1689.1 kNm when the edge lines are softened (`scripts/probe_edge_beam_share.py`).

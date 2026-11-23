@@ -1,0 +1,4 @@
+PATCH none Mu 2235.12 Vu 334.56 Mb_stage1 492.356 Mb 4466.939 max_dcr 2.7036 FAIL
+RESULT evidence/tmp/mv_none/report_none.pdf
+PATCH mv Mu 2235.12 Vu 334.56 Mb_stage1 492.356 Mb 4466.939 max_dcr 2.7036 FAIL
+RESULT evidence/tmp/mv_mv/report_mv.pdf

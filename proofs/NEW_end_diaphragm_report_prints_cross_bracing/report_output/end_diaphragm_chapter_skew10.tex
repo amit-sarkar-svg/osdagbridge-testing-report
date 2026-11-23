@@ -1,0 +1,78 @@
+\section{End Diaphragm Design}
+\label{sec:end-diaphragm}
+% ===========================
+
+End diaphragms at the supports transfer transverse loads to the bearings, restrain the bottom flanges against lateral displacement, and maintain the girder cross-section geometry during construction and in service. They are designed per IS~800:2007 and IRC~24:2010 Cl.~507.
+
+\vspace{1em}
+
+\vspace{0.4em}
+\noindent
+\setlength{\tabcolsep}{4pt}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+
+\begin{longtable}{|C{2.0cm}|L{2.0cm}|L{2.2cm}|C{2.5cm}|C{2.0cm}|C{2.0cm}|}
+\caption{\textbf{End Diaphragm --- Connection and Section Properties}}
+\hline
+\textbf{Panel} & \textbf{Member} & \textbf{Connection} & \textbf{Section} & \textbf{$A_g$ (mm²)} & \textbf{$r_{min}$ (mm)} \\[6pt]
+\hline
+\multirow{2}{*}{\makecell{G1-G2}} & Diagonal & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\multirow{2}{*}{\makecell{G1-G2}} & Top / Bottom chord & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\hline
+\multirow{2}{*}{\makecell{G2-G3}} & Diagonal & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\multirow{2}{*}{\makecell{G2-G3}} & Top / Bottom chord & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\hline
+\multirow{2}{*}{\makecell{G3-G4}} & Diagonal & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\multirow{2}{*}{\makecell{G3-G4}} & Top / Bottom chord & Bolted & 40 x 40 x 3 & 237.0 & 8.0 \\[6pt]\cline{2-6}
+\hline
+\end{longtable}
+\noindent\textit{Note: $A_g$ = gross cross-sectional area; $r_{min}$ = minimum radius of gyration.}
+
+\vspace{1em}
+\begin{longtable}{|C{2.2cm}|L{2.2cm}|L{2.5cm}|C{2.5cm}|C{2.5cm}|>{\centering\arraybackslash}p{3.6cm}|}
+\caption{\textbf{End Diaphragm --- Slenderness Ratio Check (IS~800 Cl.~3.8 )}}
+\hline
+\textbf{Panel} & \textbf{Member} & \textbf{Nature} & \textbf{Eff.\ Length $KL$ (mm)} & \textbf{$KL/r$} & \textbf{Limit / Status} \\[6pt]
+\hline
+\multirow{3}{*}{\makecell{G1-G2}} & Diagonal & C & 2306 & 121.9 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Top chord & C & 2100 & 111.0 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Bottom chord & T & 2100 & 111.0 & 400 --- \textcolor{black}{PASS} \\[6pt]
+\hline
+\multirow{3}{*}{\makecell{G2-G3}} & Diagonal & C & 2306 & 121.9 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Top chord & C & 2100 & 111.0 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Bottom chord & T & 2100 & 111.0 & 400 --- \textcolor{black}{PASS} \\[6pt]
+\hline
+\multirow{3}{*}{\makecell{G3-G4}} & Diagonal & C & 2306 & 121.9 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Top chord & C & 2100 & 111.0 & 250 --- \textcolor{black}{PASS} \\[6pt]
+\cline{2-6}
+ & Bottom chord & T & 2100 & 111.0 & 400 --- \textcolor{black}{PASS} \\[6pt]
+\hline
+\end{longtable}
+\noindent\textit{Note:  3. Limit = 250 for compression members, 400 for tension members. $K = 1.0$ for members with both ends pinned.}
+
+\vspace{1em}
+
+\begin{longtable}{|C{2.0cm}|L{1.8cm}|C{2.2cm}|C{3.0cm}|C{1.8cm}|C{1.8cm}|C{1.2cm}|C{1.8cm}|}
+\caption{\textbf{End Diaphragm Design --- Capacity Summary}}
+\hline
+\textbf{Panel} & \textbf{Member} & \textbf{Section} & \textbf{Governing LC} & \textbf{Demand (kN)} & \textbf{Capacity (kN)} & \textbf{UR} & \textbf{Status} \\[6pt]
+\hline
+\multirow{2}{*}{\makecell{G1-G2}} & Diagonal & 40 x 40 x 3 & 1.5 EQ (b) & 4.664 & 19.390 & 0.430 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+ & Chord & 40 x 40 x 3 & 1.5 EQ (b) & 4.248 & 22.140 & 0.390 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+\hline
+\multirow{2}{*}{\makecell{G2-G3}} & Diagonal & 40 x 40 x 3 & 1.5 EQ (b) & 2.691 & 45.000 & 0.060 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+ & Chord & 40 x 40 x 3 & 1.5 EQ (b) & 2.451 & 45.000 & 0.050 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+\hline
+\multirow{2}{*}{\makecell{G3-G4}} & Diagonal & 40 x 40 x 3 & 1.5 EQ (b) & 3.709 & 45.000 & 0.080 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+ & Chord & 40 x 40 x 3 & 1.5 EQ (b) & 3.378 & 45.000 & 0.080 & \textcolor{black}{PASS} \\[6pt]\cline{2-8}
+\hline
+\end{longtable}
+\noindent\textit{Note: Designed per IS 800 Cl. 7 (compression) and Cl. 6 (tension). OsdagBridge cross-bracing module used.}
+
+% ===========================

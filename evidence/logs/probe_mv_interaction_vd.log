@@ -1,0 +1,24 @@
+### run 1 (as shipped)
+MODE ORIGINAL | span 25.0 cw 7.5
+SHEAR Vu=334.56  Vcr(buckling, governing)=443.02  Vd(plastic)=1989.86  0.6Vcr=265.8  0.6Vd=1193.9  high-shear per IS800=True
+INTERACTION beta=0.0  Md=7022.18  Mdv=7022.18  Mu=2235.12
+CHECK ULS Flexure            D=2235.12    C=7022.18     dcr=0.3183   PASS
+CHECK ULS Shear Buckling     D=334.56     C=443.02      dcr=0.7552   PASS
+CHECK M-V Interaction        D=2235.12    C=7022.18     dcr=0.3183   PASS
+OVERALL max_dcr 2.7036 FAIL
+### run 2 (as shipped, fresh process)
+MODE ORIGINAL | span 25.0 cw 7.5
+SHEAR Vu=334.56  Vcr(buckling, governing)=443.02  Vd(plastic)=1989.86  0.6Vcr=265.8  0.6Vd=1193.9  high-shear per IS800=True
+INTERACTION beta=0.0  Md=7022.18  Mdv=7022.18  Mu=2235.12
+CHECK ULS Flexure            D=2235.12    C=7022.18     dcr=0.3183   PASS
+CHECK ULS Shear Buckling     D=334.56     C=443.02      dcr=0.7552   PASS
+CHECK M-V Interaction        D=2235.12    C=7022.18     dcr=0.3183   PASS
+OVERALL max_dcr 2.7036 FAIL
+### fix proof
+MODE FIXED | span 25.0 cw 7.5
+SHEAR Vu=334.56  Vcr(buckling, governing)=443.02  Vd(plastic)=1989.86  0.6Vcr=265.8  0.6Vd=1193.9  high-shear per IS800=True
+INTERACTION beta=0.2605  Md=7022.18  Mdv=6052.79  Mu=2235.12
+CHECK ULS Flexure            D=2235.12    C=7022.18     dcr=0.3183   PASS
+CHECK ULS Shear Buckling     D=334.56     C=443.02      dcr=0.7552   PASS
+CHECK M-V Interaction        D=2235.12    C=6052.79     dcr=0.3693   PASS
+OVERALL max_dcr 2.7036 FAIL

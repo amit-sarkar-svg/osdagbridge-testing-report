@@ -1,0 +1,6 @@
+PATCH none Mu 1141.82 Vu 183.5 Mb_stage1 304.745 Mb 2316.411 max_dcr 2.2086 FAIL
+RESULT evidence/tmp/rep_none/report_none.pdf
+PATCH sidl Mu 1211.25 Vu 193.99 Mb_stage1 304.745 Mb 2316.411 max_dcr 2.3489 FAIL
+RESULT evidence/tmp/rep_sidl/report_sidl.pdf
+PATCH betab Mu 1141.82 Vu 183.5 Mb_stage1 271.275 Mb 2061.998 max_dcr 2.2086 FAIL
+RESULT evidence/tmp/rep_betab/report_betab.pdf

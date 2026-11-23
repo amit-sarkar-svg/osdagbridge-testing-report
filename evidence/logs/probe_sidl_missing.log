@@ -1,0 +1,45 @@
+### SIDL — run 1 (original)
+MODE ORIGINAL | params {'skew_angle': 0.0, 'footpath': 'None', 'include_median': 'No', 'design_mode': 'Optimized', 'span': 20.0, 'carriageway_width': 7.5}
+sidl_combination is None: True
+SUBCASE self_weight_load_case              97.9 kN
+SUBCASE deck_load_case                   1062.5 kN
+SUBCASE footpath_load_case           -
+SUBCASE crash_barrier_load_case           261.6 kN
+SUBCASE railing_load_case            -
+SUBCASE median_load_case             -
+SUBCASE sidl_combination             -
+SUBCASE dead_load_combination            1160.4 kN
+GIRDER G1 {'SW': 40.568, 'DD': 442.78, '1.0 DW': 85.014, 'Crash barrier load': 69.677, '1.0 DL': 483.348, '1.0 DL + 1.0 LL': 1029.747}
+CHECK  1.0 DL (483.348) - (SW+DD) (483.348) = 0.0 kNm
+DESIGN mu_applied 1141.82 Vu 183.5 M_sls 1092.87 delta_total 21.522 max_dcr 2.2086 status FAIL
+LOG Seismic inputs: DL=1364.4 kN  Governing LL=0.0 kN
+### SIDL — run 2 (original, fresh process)
+MODE ORIGINAL | params {'skew_angle': 0.0, 'footpath': 'None', 'include_median': 'No', 'design_mode': 'Optimized', 'span': 20.0, 'carriageway_width': 7.5}
+sidl_combination is None: True
+SUBCASE self_weight_load_case              97.9 kN
+SUBCASE deck_load_case                   1062.5 kN
+SUBCASE footpath_load_case           -
+SUBCASE crash_barrier_load_case           261.6 kN
+SUBCASE railing_load_case            -
+SUBCASE median_load_case             -
+SUBCASE sidl_combination             -
+SUBCASE dead_load_combination            1160.4 kN
+GIRDER G1 {'SW': 40.568, 'DD': 442.78, '1.0 DW': 85.014, 'Crash barrier load': 69.677, '1.0 DL': 483.348, '1.0 DL + 1.0 LL': 1029.747}
+CHECK  1.0 DL (483.348) - (SW+DD) (483.348) = 0.0 kNm
+DESIGN mu_applied 1141.82 Vu 183.5 M_sls 1092.87 delta_total 21.522 max_dcr 2.2086 status FAIL
+LOG Seismic inputs: DL=1364.4 kN  Governing LL=0.0 kN
+### SIDL — fix proof
+MODE FIXED | params {'skew_angle': 0.0, 'footpath': 'None', 'include_median': 'No', 'design_mode': 'Optimized', 'span': 20.0, 'carriageway_width': 7.5}
+sidl_combination is None: False
+SUBCASE self_weight_load_case              97.9 kN
+SUBCASE deck_load_case                   1062.5 kN
+SUBCASE footpath_load_case           -
+SUBCASE crash_barrier_load_case           261.6 kN
+SUBCASE railing_load_case            -
+SUBCASE median_load_case             -
+SUBCASE sidl_combination                  261.6 kN
+SUBCASE dead_load_combination            1422.0 kN
+GIRDER G1 {'SW': 40.568, 'DD': 442.78, '1.0 DW': 85.014, 'Crash barrier load': 69.677, '1.0 DL': 553.025, '1.0 DL + 1.0 LL': 1099.301}
+CHECK  1.0 DL (553.025) - (SW+DD) (483.348) = 69.677 kNm
+DESIGN mu_applied 1211.25 Vu 193.99 M_sls 1162.3 delta_total 22.959 max_dcr 2.3489 status FAIL
+LOG Seismic inputs: DL=1626.0 kN  Governing LL=0.0 kN

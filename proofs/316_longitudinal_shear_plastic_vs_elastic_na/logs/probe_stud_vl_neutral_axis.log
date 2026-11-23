@@ -1,0 +1,15 @@
+### run 1 (as shipped)
+MODE ORIGINAL | span 20.0 cw 7.5
+GEOM xu(plastic)=207.598  elastic NA y_top=274.748  t_slab=250.0  beff=2100.0  Ic=11719028660
+VL   116.913 N/mm   stud spacing sl1(ULS)=1631.35  governing=303.81  provided=303.81
+DECK transverse shear VL=116.913 kN/m  Vrd=999.28  Ast_req=0.585 cm2/m  Ast_prov=11.379980345177437  ur=0.117
+### run 2 (as shipped, fresh process)
+MODE ORIGINAL | span 20.0 cw 7.5
+GEOM xu(plastic)=207.598  elastic NA y_top=274.748  t_slab=250.0  beff=2100.0  Ic=11719028660
+VL   116.913 N/mm   stud spacing sl1(ULS)=1631.35  governing=303.81  provided=303.81
+DECK transverse shear VL=116.913 kN/m  Vrd=999.28  Ast_req=0.585 cm2/m  Ast_prov=11.379980345177437  ur=0.117
+### fix proof (elastic NA, n floored at 7.5)
+MODE FIXED | span 20.0 cw 7.5
+GEOM xu(plastic)=207.598  elastic NA y_top=274.748  t_slab=250.0  beff=2100.0  Ic=11719028660
+VL   164.136 N/mm   stud spacing sl1(ULS)=1162.00  governing=303.81  provided=303.81
+DECK transverse shear VL=164.136 kN/m  Vrd=999.28  Ast_req=0.821 cm2/m  Ast_prov=11.379980345177437  ur=0.1643

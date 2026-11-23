@@ -1,0 +1,8 @@
+PARAMS {'geometry.skew_angle': 10.0, 'geometry.footpath': 'None', 'geometry.include_median': 'No', 'geometry.design_mode': 'Optimized', 'geometry.span': 20.0, 'geometry.carriageway_width': 7.5}
+ED_FORCES {"pairs": {"G1-G2": {"diag_tension_kN": 1.524, "diag_tension_gov_lc": "EQ_X", "diag_compression_kN": 6.684, "diag_compression_gov_lc": "1.5 EQ (b)", "chord_tension_kN": 1.388, "chord_tension_gov_lc": "EQ_X", "chord_compression_kN": 6.088, "chord_compression_gov_lc": "1.5 EQ (b)"}, "G2-G3": {"diag_tension_kN": 0.414, "diag_tension_gov_lc": "EQ_X", "diag_compression_kN": 3.281, "diag_compression_gov_lc": "1.5 EQ (b)", "chord_tension_kN": 0.378, "chord_tension_gov_lc": "EQ_X", "chord_compression_kN": 2.989, "chord_compression_gov_lc": "1.5 EQ (b)"}, "G3-G4": {"diag_tension_kN": 0.019, "diag_tensi
+ED_DESIGNS {'G1-G2': ['diagonal', 'chord'], 'G2-G3': ['diagonal', 'chord'], 'G3-G4': ['diagonal', 'chord']}
+EDGE_ELEMENTS start 5 end 5 not_in_members 0 unmapped 4 mapped {'G1-G2': 2, 'G2-G3': 2, 'G3-G4': 2}
+LC 1.0 DL          end-edge max|Vz|=0.000 kN  max|Vy|=68.555 kN
+LC 1.0 LL          end-edge max|Vz|=0.000 kN  max|Vy|=64.562 kN
+LC 1.0 WL          end-edge max|Vz|=1.068 kN  max|Vy|=6.809 kN
+LC WL Transverse   end-edge max|Vz|=1.072 kN  max|Vy|=0.000 kN
